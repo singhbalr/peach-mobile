@@ -17,7 +17,7 @@ const SearchScreen: React.FC<SearchScreenProps> = () => {
   return (
     <View style={styles.container}>
       <Text h1 color={colors.text}>
-        Search
+        Clinical Report
       </Text>
     </View>
   );

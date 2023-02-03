@@ -1,11 +1,11 @@
 // ? Screens
 export const PRIVATESCREENS = {
   ROOT: "PrivateRoutes",
-  HOME: "Home",
-  SEARCH: "Search",
-  NOTIFICATION: "Notification",
-  PROFILE: "Profile",
-  DETAIL: "Detail",
+  REWARD_CENTER: "Reward Center",
+  CLINICAL_REPORT: "Clinical Report",
+  DASHBOARD: "Dashboard",
+  CONTRIBUTE_DATA: "Contribute Data",
+  // DETAIL: "Detail",
 };
 
 export const PUBLICSCREENS = {

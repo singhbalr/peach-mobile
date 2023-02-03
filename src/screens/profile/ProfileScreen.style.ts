@@ -26,5 +26,9 @@ export default (theme: ExtendedTheme) => {
       textAlign: "center",
       fontWeight: "bold",
     },
+    input: {
+      width: "100%",
+      backgroundColor: "#FFFFFF",
+    },
   });
 };

@@ -10,6 +10,8 @@ import { isAndroid } from "@freakycoder/react-native-helpers";
 import { Provider } from "react-redux";
 import { store, persistor } from "./src/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { Provider as PaperProvider } from "react-native-paper";
+import { theme } from "./src/shared/theme/paperTheme";
 LogBox.ignoreAllLogs();
 
 const App = () => {
@@ -32,7 +34,9 @@ const App = () => {
     <>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Navigation />
+          <PaperProvider theme={theme}>
+            <Navigation />
+          </PaperProvider>
         </PersistGate>
       </Provider>
     </>

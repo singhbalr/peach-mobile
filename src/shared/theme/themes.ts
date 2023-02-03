@@ -1,7 +1,7 @@
 import { DefaultTheme, ExtendedTheme } from "@react-navigation/native";
 
 export const palette = {
-  primary: "#0564d4",
+  primary: "#E16B8C",
   secondary: "#ff6a00",
   background: "#f6f8fa",
   white: "#fff",

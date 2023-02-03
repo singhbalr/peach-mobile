@@ -8,6 +8,7 @@ import createStyles from "./ProfileScreen.style";
 import Text from "@shared-components/text-wrapper/TextWrapper";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../auth/rx/reducer";
+import PIbutton from "@shared-components/buttons/Pbutton";
 interface ProfileScreenProps {}
 
 const ProfileScreen: React.FC<ProfileScreenProps> = () => {
@@ -16,18 +17,16 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const styles = useMemo(() => createStyles(theme), [theme]);
   const dispatch = useDispatch();
 
-  const handleLogin = () => {
+  const handleLogout = () => {
     dispatch(setLogout());
   };
 
   return (
     <View style={styles.container}>
       <Text h1 color={colors.text}>
-        Profile
+        Contribute Data
       </Text>
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Logout</Text>
-      </TouchableOpacity>
+      <PIbutton onPress={handleLogout} text="Logout" />
     </View>
   );
 };

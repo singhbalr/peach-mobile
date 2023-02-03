@@ -45,9 +45,6 @@ const Navigation = () => {
               name={PRIVATESCREENS.ROOT}
               component={PrivateRoutes}
             />
-            <Stack.Screen name={PRIVATESCREENS.DETAIL}>
-              {(props) => <DetailScreen {...props} />}
-            </Stack.Screen>
           </>
         ) : (
           <Stack.Screen name={PUBLICSCREENS.ROOT} component={PublicRoutes} />

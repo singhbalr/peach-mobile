@@ -28,20 +28,20 @@ const PrivateRoutes = () => {
   ) => {
     let iconName = "home";
     switch (route.name) {
-      case PRIVATESCREENS.HOME:
-        iconName = focused ? "home" : "home-outline";
+      case PRIVATESCREENS.REWARD_CENTER:
+        iconName = focused ? "ios-gift" : "ios-gift-outline";
         break;
-      case PRIVATESCREENS.SEARCH:
-        iconName = focused ? "search" : "search-outline";
+      case PRIVATESCREENS.CLINICAL_REPORT:
+        iconName = focused ? "ios-medical" : "ios-medical-outline";
         break;
-      case PRIVATESCREENS.NOTIFICATION:
-        iconName = focused ? "notifications" : "notifications-outline";
+      case PRIVATESCREENS.DASHBOARD:
+        iconName = focused ? "ios-home" : "ios-home-outline";
         break;
-      case PRIVATESCREENS.PROFILE:
-        iconName = focused ? "person" : "person-outline";
+      case PRIVATESCREENS.CONTRIBUTE_DATA:
+        iconName = focused ? "list-circle" : "list-circle-outline";
         break;
       default:
-        iconName = focused ? "home" : "home-outline";
+        iconName = focused ? "ios-gift" : "ios-gift-outline";
         break;
     }
     return <Icon name={iconName} type="Ionicons" size={size} color={color} />;
@@ -59,13 +59,19 @@ const PrivateRoutes = () => {
         },
       })}
     >
-      <Tab.Screen name={PRIVATESCREENS.HOME} component={HomeScreen} />
-      <Tab.Screen name={PRIVATESCREENS.SEARCH} component={SearchScreen} />
+      <Tab.Screen name={PRIVATESCREENS.REWARD_CENTER} component={HomeScreen} />
       <Tab.Screen
-        name={PRIVATESCREENS.NOTIFICATION}
+        name={PRIVATESCREENS.CLINICAL_REPORT}
+        component={SearchScreen}
+      />
+      <Tab.Screen
+        name={PRIVATESCREENS.DASHBOARD}
         component={NotificationScreen}
       />
-      <Tab.Screen name={PRIVATESCREENS.PROFILE} component={ProfileScreen} />
+      <Tab.Screen
+        name={PRIVATESCREENS.CONTRIBUTE_DATA}
+        component={ProfileScreen}
+      />
     </Tab.Navigator>
   );
 };

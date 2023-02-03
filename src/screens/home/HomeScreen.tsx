@@ -37,59 +37,59 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   /*                               Render Methods                               */
   /* -------------------------------------------------------------------------- */
 
-  const MenuButton = () => (
-    <RNBounceable>
-      <Icon name="menu" type="Ionicons" color={colors.iconBlack} size={30} />
-    </RNBounceable>
-  );
+  // const MenuButton = () => (
+  //   <RNBounceable>
+  //     <Icon name="menu" type="Ionicons" color={colors.iconBlack} size={30} />
+  //   </RNBounceable>
+  // );
 
-  const Header = () => (
-    <View style={styles.header}>
-      <MenuButton />
-      <Image
-        resizeMode="cover"
-        source={{ uri: profileURI }}
-        style={styles.profilePicImageStyle}
-      />
-    </View>
-  );
+  // const Header = () => (
+  //   <View style={styles.header}>
+  //     <MenuButton />
+  //   </View>
+  // );
 
-  const List = () => (
-    <View style={styles.listContainer}>
-      <FlatList
-        data={MockData}
-        renderItem={({ item }) => (
-          <CardItem data={item} onPress={handleItemPress} />
-        )}
-      />
-    </View>
-  );
+  // const List = () => (
+  //   <View style={styles.listContainer}>
+  //     <FlatList
+  //       data={MockData}
+  //       renderItem={({ item }) => (
+  //         <CardItem data={item} onPress={handleItemPress} />
+  //       )}
+  //     />
+  //   </View>
+  // );
 
-  const Welcome = () => (
-    <>
-      <Text h1 bold color={colors.text}>
-        Hello Kuray
-      </Text>
-      <Text
-        fontFamily={fonts.montserrat.lightItalic}
-        color={colors.placeholder}
-      >
-        Welcome Back
-      </Text>
-    </>
-  );
+  // const Welcome = () => (
+  //   <>
+  //     <Text h1 bold color={colors.text}>
+  //       Hello Kuray
+  //     </Text>
+  //     <Text
+  //       fontFamily={fonts.montserrat.lightItalic}
+  //       color={colors.placeholder}
+  //     >
+  //       Welcome Back
+  //     </Text>
+  //   </>
+  // );
 
-  const Content = () => (
-    <View style={styles.contentContainer}>
-      <Welcome />
-      <List />
-    </View>
-  );
+  // const Content = () => (
+  //   <View style={styles.contentContainer}>
+  //     <Welcome />
+  //     <List />
+  //   </View>
+  // );
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
-      <Content />
+      {/* <Header />
+      <Content /> */}
+      <View>
+        <Text h1 color={colors.text}>
+          Reward Center
+        </Text>
+      </View>
     </SafeAreaView>
   );
 };
