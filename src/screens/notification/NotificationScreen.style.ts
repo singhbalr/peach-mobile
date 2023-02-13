@@ -18,6 +18,9 @@ interface Style {
   listContainer: ViewStyle;
   profilePicImageStyle: ImageStyle;
   textContainer: ViewStyle;
+  overlay: ViewStyle;
+  overlayContainer: ViewStyle;
+  text: TextStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -71,6 +74,24 @@ export default (theme: ExtendedTheme) => {
     },
     textContainer: {
       alignSelf: "flex-start",
+    },
+    overlay: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 1,
+    },
+    overlayContainer: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    text: {
+      color: "white",
+      fontSize: 18,
+      fontWeight: "bold",
     },
   });
 };
