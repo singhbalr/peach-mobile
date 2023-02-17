@@ -10,21 +10,16 @@ import {
   View,
   Text,
 } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 type Props = {
   text: string;
-  //   plain?: boolean;
   disabled?: boolean;
-  //   isBlue?: boolean; // set TRUE to keep default style when disabled.
-  //   size?: "large" | "medium" | "small";
-  //   icon?: ImageSourcePropType;
-  //   rightIcon?: ImageSourcePropType;
   style?: StyleProp<ViewStyle>;
-  //   textStyle?: TextStyle;
-  //   btnRightIconStyle?: StyleProp<ImageStyle>;
   testID?: string;
   accessibilityLabel?: string;
   onPress?: () => void;
+  type: "primary" | "secondary";
 };
 
 type ComponentType = React.FC<Props>;
@@ -38,10 +33,19 @@ const PIbutton: ComponentType = (props) => {
         mode="contained"
         onPress={props.onPress}
         buttonColor={componentTheme.buttonColor}
-        textColor={componentTheme.textColor}
+        textColor={
+          props.type === "primary"
+            ? componentTheme.textColorPrimary
+            : componentTheme.textColorSecondary
+        }
         contentStyle={styles.contentStyle}
         labelStyle={styles.textStyle}
-        style={styles.buttonStyle}
+        style={[
+          props.type === "primary"
+            ? styles.buttonStylePrimary
+            : styles.buttonStyleSecondary,
+          props.style,
+        ]}
       >
         <Text style={styles.buttonText}>{props.text}</Text>
       </Button>
@@ -50,19 +54,33 @@ const PIbutton: ComponentType = (props) => {
 };
 const styles = StyleSheet.create({
   contentStyle: {
-    // width: "80%",
     justifyContent: "center",
     alignSelf: "center",
   },
   textStyle: {
     textAlign: "center",
+    justifyContent: "center",
+    width: "72%",
   },
   buttonContainer: {
-    width: "65%",
     marginTop: 15,
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
   },
-  buttonStyle: {
-    borderRadius: 13,
+  buttonStyleSecondary: {
+    borderRadius: 5,
+    backgroundColor: "#7BA23F",
+    color: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#000000",
+  },
+  buttonStylePrimary: {
+    borderRadius: 5,
+    backgroundColor: "#FFFFFF",
+    color: "#7BA23F",
+    borderWidth: 1,
+    borderColor: "#000000",
   },
   buttonText: {
     fontSize: 16,
@@ -70,6 +88,7 @@ const styles = StyleSheet.create({
 });
 const componentTheme = {
   buttonColor: "#373C38",
-  textColor: "#FFFFFF",
+  textColorPrimary: "#7BA23F",
+  textColorSecondary: "#FFFFFF",
 };
 export default PIbutton;

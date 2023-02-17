@@ -1,0 +1,1994 @@
+[
+  {
+    "_id": "63ecc01e4f00a9e0ce562aea",
+    "name": "hair",
+    "medicalReport": [
+      {
+        "id": "63ecc01edfa24d2b014b7996",
+        "fileName": "hair_clinical_report_0",
+        "fromData": "Medical Institution 0",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e5c72531cde06b934",
+        "fileName": "eye_clinical_report_1",
+        "fromData": "Medical Institution 1",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e8448a9d85b394991",
+        "fileName": "hair_clinical_report_2",
+        "fromData": "Medical Institution 2",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ef8b086728ed999fe",
+        "fileName": "nose_clinical_report_3",
+        "fromData": "Medical Institution 3",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e2da39dd6d4e5d282",
+        "fileName": "eye_clinical_report_4",
+        "fromData": "Medical Institution 4",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e80f7e568ddd94de6",
+        "fileName": "nose_clinical_report_5",
+        "fromData": "Medical Institution 5",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01ef926c30a281a8021",
+        "fileName": "brain_clinical_report_6",
+        "fromData": "Medical Institution 6",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ef42210dc9777355a",
+        "fileName": "eye_clinical_report_7",
+        "fromData": "Medical Institution 7",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e56af6f802bee6cc7",
+        "fileName": "ears_clinical_report_8",
+        "fromData": "Medical Institution 8",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ea07034909fed194b",
+        "fileName": "nose_clinical_report_9",
+        "fromData": "Medical Institution 9",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e0d43cf9c170501c6",
+        "fileName": "nose_clinical_report_10",
+        "fromData": "Medical Institution 10",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e1ff9cf6834407fa5",
+        "fileName": "ears_clinical_report_11",
+        "fromData": "Medical Institution 11",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01eb853fa3b5998da4e",
+        "fileName": "eye_clinical_report_12",
+        "fromData": "Medical Institution 12",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e725ab96504e94771",
+        "fileName": "ears_clinical_report_13",
+        "fromData": "Medical Institution 13",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e890b318c98b0ddc5",
+        "fileName": "brain_clinical_report_14",
+        "fromData": "Medical Institution 14",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e1b5f616e4b14065d",
+        "fileName": "nose_clinical_report_15",
+        "fromData": "Medical Institution 15",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01eb33b19a475212486",
+        "fileName": "eye_clinical_report_16",
+        "fromData": "Medical Institution 16",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e850370094354890f",
+        "fileName": "nose_clinical_report_17",
+        "fromData": "Medical Institution 17",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ef575a533ecdb7e87",
+        "fileName": "eye_clinical_report_18",
+        "fromData": "Medical Institution 18",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01eb2073ee140c346f9",
+        "fileName": "ears_clinical_report_19",
+        "fromData": "Medical Institution 19",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      }
+    ]
+  },
+  {
+    "_id": "63ecc01e9b6b19e4c74568ec",
+    "name": "hair",
+    "medicalReport": [
+      {
+        "id": "63ecc01eb635214e2b9a4b4d",
+        "fileName": "eye_clinical_report_0",
+        "fromData": "Medical Institution 0",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01edb52c7ab4a34808b",
+        "fileName": "eye_clinical_report_1",
+        "fromData": "Medical Institution 1",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e3d4b79cb1253b5a0",
+        "fileName": "brain_clinical_report_2",
+        "fromData": "Medical Institution 2",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e93a0cbdefc2887eb",
+        "fileName": "brain_clinical_report_3",
+        "fromData": "Medical Institution 3",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e1190bf2d81f23a72",
+        "fileName": "ears_clinical_report_4",
+        "fromData": "Medical Institution 4",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01ead21c411a2fc6409",
+        "fileName": "nose_clinical_report_5",
+        "fromData": "Medical Institution 5",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e7d6b2221f143aac3",
+        "fileName": "ears_clinical_report_6",
+        "fromData": "Medical Institution 6",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e07c28ab89967a612",
+        "fileName": "eye_clinical_report_7",
+        "fromData": "Medical Institution 7",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e7623491c6bf1cc43",
+        "fileName": "hair_clinical_report_8",
+        "fromData": "Medical Institution 8",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e1e8d5da68fabd20c",
+        "fileName": "ears_clinical_report_9",
+        "fromData": "Medical Institution 9",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e9e73766b13d71c8d",
+        "fileName": "nose_clinical_report_10",
+        "fromData": "Medical Institution 10",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01ebdfaef7accbcf3f9",
+        "fileName": "nose_clinical_report_11",
+        "fromData": "Medical Institution 11",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01ebc9ee4081ff58e99",
+        "fileName": "hair_clinical_report_12",
+        "fromData": "Medical Institution 12",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ec70c158a9dd5e884",
+        "fileName": "brain_clinical_report_13",
+        "fromData": "Medical Institution 13",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01ee5b0234e806ce4ba",
+        "fileName": "brain_clinical_report_14",
+        "fromData": "Medical Institution 14",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e0074801fb1a3f34f",
+        "fileName": "eye_clinical_report_15",
+        "fromData": "Medical Institution 15",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01ebd2fa7ad16f33ab8",
+        "fileName": "brain_clinical_report_16",
+        "fromData": "Medical Institution 16",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e61e6f81eae21188d",
+        "fileName": "brain_clinical_report_17",
+        "fromData": "Medical Institution 17",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01eebf35d157f6f9658",
+        "fileName": "brain_clinical_report_18",
+        "fromData": "Medical Institution 18",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e3bf947fa55f82de6",
+        "fileName": "brain_clinical_report_19",
+        "fromData": "Medical Institution 19",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      }
+    ]
+  },
+  {
+    "_id": "63ecc01e63f45cc2d832eb7c",
+    "name": "nose",
+    "medicalReport": [
+      {
+        "id": "63ecc01e5fbd5d0ddea8128e",
+        "fileName": "hair_clinical_report_0",
+        "fromData": "Medical Institution 0",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e62a6733253b3cf77",
+        "fileName": "hair_clinical_report_1",
+        "fromData": "Medical Institution 1",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e6e0031abbc33383b",
+        "fileName": "nose_clinical_report_2",
+        "fromData": "Medical Institution 2",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e454827e33c9352f7",
+        "fileName": "brain_clinical_report_3",
+        "fromData": "Medical Institution 3",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01ea8d6ff06bd80eff5",
+        "fileName": "brain_clinical_report_4",
+        "fromData": "Medical Institution 4",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01ea269fc4790ecc25f",
+        "fileName": "nose_clinical_report_5",
+        "fromData": "Medical Institution 5",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e3fceb39d44bb103a",
+        "fileName": "hair_clinical_report_6",
+        "fromData": "Medical Institution 6",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e2f11a1204a814af0",
+        "fileName": "ears_clinical_report_7",
+        "fromData": "Medical Institution 7",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e4c5fd82c7e2457d2",
+        "fileName": "eye_clinical_report_8",
+        "fromData": "Medical Institution 8",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01ef7d3d395be95b4f3",
+        "fileName": "eye_clinical_report_9",
+        "fromData": "Medical Institution 9",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e637a566edb4be981",
+        "fileName": "hair_clinical_report_10",
+        "fromData": "Medical Institution 10",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01ef3d894cf0447e65d",
+        "fileName": "eye_clinical_report_11",
+        "fromData": "Medical Institution 11",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e204680369986aa31",
+        "fileName": "ears_clinical_report_12",
+        "fromData": "Medical Institution 12",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e5a49aa5c1257017b",
+        "fileName": "eye_clinical_report_13",
+        "fromData": "Medical Institution 13",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ee31648382e318321",
+        "fileName": "brain_clinical_report_14",
+        "fromData": "Medical Institution 14",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e7fc1f1aae1b56999",
+        "fileName": "brain_clinical_report_15",
+        "fromData": "Medical Institution 15",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01ea621add04445d0b9",
+        "fileName": "hair_clinical_report_16",
+        "fromData": "Medical Institution 16",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01eabf6be2b1d7ed080",
+        "fileName": "eye_clinical_report_17",
+        "fromData": "Medical Institution 17",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e6278e4d98e1144f5",
+        "fileName": "ears_clinical_report_18",
+        "fromData": "Medical Institution 18",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e98b423dc5681ba23",
+        "fileName": "hair_clinical_report_19",
+        "fromData": "Medical Institution 19",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      }
+    ]
+  },
+  {
+    "_id": "63ecc01ed75ad42a75130f4f",
+    "name": "hair",
+    "medicalReport": [
+      {
+        "id": "63ecc01e7805e32d1292c31f",
+        "fileName": "eye_clinical_report_0",
+        "fromData": "Medical Institution 0",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e971b7f6875b416de",
+        "fileName": "ears_clinical_report_1",
+        "fromData": "Medical Institution 1",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e302be5b4f5577c7f",
+        "fileName": "ears_clinical_report_2",
+        "fromData": "Medical Institution 2",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ed7a0ecff7e982c7c",
+        "fileName": "ears_clinical_report_3",
+        "fromData": "Medical Institution 3",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e5c737299365cad22",
+        "fileName": "eye_clinical_report_4",
+        "fromData": "Medical Institution 4",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e8c98a91e8caf1472",
+        "fileName": "eye_clinical_report_5",
+        "fromData": "Medical Institution 5",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e7f66522eeeb229a4",
+        "fileName": "ears_clinical_report_6",
+        "fromData": "Medical Institution 6",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e5fc405b9b5fdcb09",
+        "fileName": "ears_clinical_report_7",
+        "fromData": "Medical Institution 7",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e2131be2723f4210e",
+        "fileName": "brain_clinical_report_8",
+        "fromData": "Medical Institution 8",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e4202c8e3b5ef9d4e",
+        "fileName": "brain_clinical_report_9",
+        "fromData": "Medical Institution 9",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e90f19a848e05166f",
+        "fileName": "hair_clinical_report_10",
+        "fromData": "Medical Institution 10",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01eed57e4b40e269588",
+        "fileName": "eye_clinical_report_11",
+        "fromData": "Medical Institution 11",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01ed0cae203b3553e3a",
+        "fileName": "hair_clinical_report_12",
+        "fromData": "Medical Institution 12",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e39e67ea5b2ddce72",
+        "fileName": "eye_clinical_report_13",
+        "fromData": "Medical Institution 13",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01ead4ee49fd20c2d12",
+        "fileName": "eye_clinical_report_14",
+        "fromData": "Medical Institution 14",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e6e0e8d0527cdce06",
+        "fileName": "brain_clinical_report_15",
+        "fromData": "Medical Institution 15",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e35b76481ea0407dc",
+        "fileName": "brain_clinical_report_16",
+        "fromData": "Medical Institution 16",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e91a60062431a2214",
+        "fileName": "hair_clinical_report_17",
+        "fromData": "Medical Institution 17",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e5ce99fed3c8be69f",
+        "fileName": "nose_clinical_report_18",
+        "fromData": "Medical Institution 18",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ec03f665881caa181",
+        "fileName": "eye_clinical_report_19",
+        "fromData": "Medical Institution 19",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      }
+    ]
+  },
+  {
+    "_id": "63ecc01e18f348f2fdf52572",
+    "name": "hair",
+    "medicalReport": [
+      {
+        "id": "63ecc01e4189bbd43137beb4",
+        "fileName": "brain_clinical_report_0",
+        "fromData": "Medical Institution 0",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e9ffecf40013fa4c3",
+        "fileName": "nose_clinical_report_1",
+        "fromData": "Medical Institution 1",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e76bcc2e701bf97d1",
+        "fileName": "eye_clinical_report_2",
+        "fromData": "Medical Institution 2",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01eb4407d537ad33460",
+        "fileName": "eye_clinical_report_3",
+        "fromData": "Medical Institution 3",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e77b0e3f2c781a28a",
+        "fileName": "ears_clinical_report_4",
+        "fromData": "Medical Institution 4",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ee5c8aa00e7e2f3ef",
+        "fileName": "eye_clinical_report_5",
+        "fromData": "Medical Institution 5",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e15446278e2ed1725",
+        "fileName": "eye_clinical_report_6",
+        "fromData": "Medical Institution 6",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01ed2044f9f79bc32ec",
+        "fileName": "ears_clinical_report_7",
+        "fromData": "Medical Institution 7",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e0c756f65f0f3e295",
+        "fileName": "hair_clinical_report_8",
+        "fromData": "Medical Institution 8",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e290b90e70896aacd",
+        "fileName": "brain_clinical_report_9",
+        "fromData": "Medical Institution 9",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e7a9b7e540b59cc0d",
+        "fileName": "eye_clinical_report_10",
+        "fromData": "Medical Institution 10",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e68f45a5a83002ccb",
+        "fileName": "ears_clinical_report_11",
+        "fromData": "Medical Institution 11",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01eb25db47c59d3192c",
+        "fileName": "hair_clinical_report_12",
+        "fromData": "Medical Institution 12",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e4c73b0b2401fd55c",
+        "fileName": "eye_clinical_report_13",
+        "fromData": "Medical Institution 13",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01eb74025bd71f07a13",
+        "fileName": "brain_clinical_report_14",
+        "fromData": "Medical Institution 14",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e546848eea67caef1",
+        "fileName": "nose_clinical_report_15",
+        "fromData": "Medical Institution 15",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e5b89a9d449cd7505",
+        "fileName": "ears_clinical_report_16",
+        "fromData": "Medical Institution 16",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e85909310c440d012",
+        "fileName": "ears_clinical_report_17",
+        "fromData": "Medical Institution 17",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01effabad4a6bd07677",
+        "fileName": "eye_clinical_report_18",
+        "fromData": "Medical Institution 18",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01ef3b616df59392c47",
+        "fileName": "ears_clinical_report_19",
+        "fromData": "Medical Institution 19",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      }
+    ]
+  },
+  {
+    "_id": "63ecc01e11d1f34fab0defd2",
+    "name": "ears",
+    "medicalReport": [
+      {
+        "id": "63ecc01ed9412a9ad2780cc4",
+        "fileName": "ears_clinical_report_0",
+        "fromData": "Medical Institution 0",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e25c0795c5ae7122c",
+        "fileName": "brain_clinical_report_1",
+        "fromData": "Medical Institution 1",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e714d53dce5738be8",
+        "fileName": "brain_clinical_report_2",
+        "fromData": "Medical Institution 2",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01ebfdf3795f0aae8be",
+        "fileName": "ears_clinical_report_3",
+        "fromData": "Medical Institution 3",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ea7a3b865fe495be0",
+        "fileName": "eye_clinical_report_4",
+        "fromData": "Medical Institution 4",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01ed24f205f17559db2",
+        "fileName": "ears_clinical_report_5",
+        "fromData": "Medical Institution 5",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01eaafdb0ebe22f67b2",
+        "fileName": "eye_clinical_report_6",
+        "fromData": "Medical Institution 6",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e07adc3cf63bc87d7",
+        "fileName": "brain_clinical_report_7",
+        "fromData": "Medical Institution 7",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e93a400ed7a012598",
+        "fileName": "nose_clinical_report_8",
+        "fromData": "Medical Institution 8",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e166bb120442cace5",
+        "fileName": "eye_clinical_report_9",
+        "fromData": "Medical Institution 9",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e3c9beb7c9d493763",
+        "fileName": "hair_clinical_report_10",
+        "fromData": "Medical Institution 10",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e6058806a4a600365",
+        "fileName": "eye_clinical_report_11",
+        "fromData": "Medical Institution 11",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ea6811648b8d3b662",
+        "fileName": "eye_clinical_report_12",
+        "fromData": "Medical Institution 12",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e8f408a4916963421",
+        "fileName": "hair_clinical_report_13",
+        "fromData": "Medical Institution 13",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e9cd1c63946c6abe5",
+        "fileName": "brain_clinical_report_14",
+        "fromData": "Medical Institution 14",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e906b9649d9d3fe90",
+        "fileName": "brain_clinical_report_15",
+        "fromData": "Medical Institution 15",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01ebbf4115eb0baa4c0",
+        "fileName": "nose_clinical_report_16",
+        "fromData": "Medical Institution 16",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e38e8c753b5aa8214",
+        "fileName": "ears_clinical_report_17",
+        "fromData": "Medical Institution 17",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e4e4752efdd15069b",
+        "fileName": "brain_clinical_report_18",
+        "fromData": "Medical Institution 18",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e40c530eb5ec0297f",
+        "fileName": "nose_clinical_report_19",
+        "fromData": "Medical Institution 19",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      }
+    ]
+  },
+  {
+    "_id": "63ecc01ed9faf69dc758ef76",
+    "name": "hair",
+    "medicalReport": [
+      {
+        "id": "63ecc01e8e407d86dd0b70a1",
+        "fileName": "eye_clinical_report_0",
+        "fromData": "Medical Institution 0",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e19842c2602bf5c5f",
+        "fileName": "nose_clinical_report_1",
+        "fromData": "Medical Institution 1",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e05686c635c6a5262",
+        "fileName": "hair_clinical_report_2",
+        "fromData": "Medical Institution 2",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01ea66ca3824cf030d8",
+        "fileName": "eye_clinical_report_3",
+        "fromData": "Medical Institution 3",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01ee2450b830d50b368",
+        "fileName": "hair_clinical_report_4",
+        "fromData": "Medical Institution 4",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e6daf6ea7f641839c",
+        "fileName": "hair_clinical_report_5",
+        "fromData": "Medical Institution 5",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e024168b1cb1af80e",
+        "fileName": "nose_clinical_report_6",
+        "fromData": "Medical Institution 6",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e7d246c72bf58660e",
+        "fileName": "ears_clinical_report_7",
+        "fromData": "Medical Institution 7",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e12d7b5f0be96daf7",
+        "fileName": "eye_clinical_report_8",
+        "fromData": "Medical Institution 8",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01eaedff9be4416c634",
+        "fileName": "brain_clinical_report_9",
+        "fromData": "Medical Institution 9",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e0307a6e01f48b193",
+        "fileName": "eye_clinical_report_10",
+        "fromData": "Medical Institution 10",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e467e7789cda7e7ad",
+        "fileName": "eye_clinical_report_11",
+        "fromData": "Medical Institution 11",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ebc0c7d231e832ac1",
+        "fileName": "ears_clinical_report_12",
+        "fromData": "Medical Institution 12",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e4a794b8aae81bd38",
+        "fileName": "hair_clinical_report_13",
+        "fromData": "Medical Institution 13",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01ed6191fe5e564d6b7",
+        "fileName": "brain_clinical_report_14",
+        "fromData": "Medical Institution 14",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e6ae7ffb63d814b5e",
+        "fileName": "eye_clinical_report_15",
+        "fromData": "Medical Institution 15",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ef27b855e44ff7e0d",
+        "fileName": "brain_clinical_report_16",
+        "fromData": "Medical Institution 16",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01eb2778edf061b460c",
+        "fileName": "ears_clinical_report_17",
+        "fromData": "Medical Institution 17",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01ec087afbba492f12d",
+        "fileName": "eye_clinical_report_18",
+        "fromData": "Medical Institution 18",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e7d55c1d846359258",
+        "fileName": "nose_clinical_report_19",
+        "fromData": "Medical Institution 19",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      }
+    ]
+  },
+  {
+    "_id": "63ecc01e11b65115a78e416f",
+    "name": "nose",
+    "medicalReport": [
+      {
+        "id": "63ecc01e9000842f07a75f7e",
+        "fileName": "hair_clinical_report_0",
+        "fromData": "Medical Institution 0",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e28d7ca988a0151bc",
+        "fileName": "hair_clinical_report_1",
+        "fromData": "Medical Institution 1",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e1141588344a9c1ee",
+        "fileName": "ears_clinical_report_2",
+        "fromData": "Medical Institution 2",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ef3ec1133c5f86e98",
+        "fileName": "eye_clinical_report_3",
+        "fromData": "Medical Institution 3",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e9e573cbe37e20082",
+        "fileName": "brain_clinical_report_4",
+        "fromData": "Medical Institution 4",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01edbc3fe06ae7bec21",
+        "fileName": "brain_clinical_report_5",
+        "fromData": "Medical Institution 5",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e028bd021915d5f2e",
+        "fileName": "ears_clinical_report_6",
+        "fromData": "Medical Institution 6",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01eb1096e99262f7fb0",
+        "fileName": "ears_clinical_report_7",
+        "fromData": "Medical Institution 7",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01ebe3fe574364395b0",
+        "fileName": "ears_clinical_report_8",
+        "fromData": "Medical Institution 8",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01eb377dfe69377572e",
+        "fileName": "hair_clinical_report_9",
+        "fromData": "Medical Institution 9",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e4e167eaeb6f19431",
+        "fileName": "nose_clinical_report_10",
+        "fromData": "Medical Institution 10",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01ef35f040038cb9de7",
+        "fileName": "hair_clinical_report_11",
+        "fromData": "Medical Institution 11",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e4dbcba6aedaf5f19",
+        "fileName": "eye_clinical_report_12",
+        "fromData": "Medical Institution 12",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01ea2565c855ba4b0d7",
+        "fileName": "eye_clinical_report_13",
+        "fromData": "Medical Institution 13",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e9d1ef7ac8965c399",
+        "fileName": "hair_clinical_report_14",
+        "fromData": "Medical Institution 14",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e32824bc7c11ffc79",
+        "fileName": "nose_clinical_report_15",
+        "fromData": "Medical Institution 15",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e2bf5bf8536cae39a",
+        "fileName": "eye_clinical_report_16",
+        "fromData": "Medical Institution 16",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01ed6d6017aff325f17",
+        "fileName": "hair_clinical_report_17",
+        "fromData": "Medical Institution 17",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e29d0dc3ffc7c1ebe",
+        "fileName": "eye_clinical_report_18",
+        "fromData": "Medical Institution 18",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e646930344d44591e",
+        "fileName": "nose_clinical_report_19",
+        "fromData": "Medical Institution 19",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      }
+    ]
+  },
+  {
+    "_id": "63ecc01e9ca08d7679d8d099",
+    "name": "hair",
+    "medicalReport": [
+      {
+        "id": "63ecc01e4f85feb48a9cf20a",
+        "fileName": "brain_clinical_report_0",
+        "fromData": "Medical Institution 0",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e57e1c87c9adf282a",
+        "fileName": "eye_clinical_report_1",
+        "fromData": "Medical Institution 1",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e1a1d3d92fc1e3dc7",
+        "fileName": "brain_clinical_report_2",
+        "fromData": "Medical Institution 2",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01edebe1cf88d276841",
+        "fileName": "ears_clinical_report_3",
+        "fromData": "Medical Institution 3",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ec2f244ce175b5cf1",
+        "fileName": "eye_clinical_report_4",
+        "fromData": "Medical Institution 4",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e05d32861ca6fa96a",
+        "fileName": "hair_clinical_report_5",
+        "fromData": "Medical Institution 5",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e8cc0ff11fd98ff5d",
+        "fileName": "eye_clinical_report_6",
+        "fromData": "Medical Institution 6",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01eb160fa55a4629677",
+        "fileName": "nose_clinical_report_7",
+        "fromData": "Medical Institution 7",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e42ead78b9fb79e91",
+        "fileName": "nose_clinical_report_8",
+        "fromData": "Medical Institution 8",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e73f53fbbc4f113c1",
+        "fileName": "hair_clinical_report_9",
+        "fromData": "Medical Institution 9",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ecd6d01a9badb214f",
+        "fileName": "ears_clinical_report_10",
+        "fromData": "Medical Institution 10",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e9ec4ffa96ace7f01",
+        "fileName": "ears_clinical_report_11",
+        "fromData": "Medical Institution 11",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e44ef4014e4df972d",
+        "fileName": "brain_clinical_report_12",
+        "fromData": "Medical Institution 12",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e7948688116a00bf5",
+        "fileName": "ears_clinical_report_13",
+        "fromData": "Medical Institution 13",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01ecef7ac2648d70a6d",
+        "fileName": "eye_clinical_report_14",
+        "fromData": "Medical Institution 14",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e02b070fa1ede2742",
+        "fileName": "brain_clinical_report_15",
+        "fromData": "Medical Institution 15",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e27fc7427da90579a",
+        "fileName": "eye_clinical_report_16",
+        "fromData": "Medical Institution 16",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01ece843a7bd586f87c",
+        "fileName": "brain_clinical_report_17",
+        "fromData": "Medical Institution 17",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e510e5e43e6367e7c",
+        "fileName": "eye_clinical_report_18",
+        "fromData": "Medical Institution 18",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e0973dcd50e259af7",
+        "fileName": "ears_clinical_report_19",
+        "fromData": "Medical Institution 19",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      }
+    ]
+  },
+  {
+    "_id": "63ecc01eda43ff6ab5d9771b",
+    "name": "hair",
+    "medicalReport": [
+      {
+        "id": "63ecc01edb03b18228247976",
+        "fileName": "ears_clinical_report_0",
+        "fromData": "Medical Institution 0",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01ef0120f76a0bc26cc",
+        "fileName": "brain_clinical_report_1",
+        "fromData": "Medical Institution 1",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01eca53adeea66cc819",
+        "fileName": "hair_clinical_report_2",
+        "fromData": "Medical Institution 2",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e250bcc59ce49b504",
+        "fileName": "brain_clinical_report_3",
+        "fromData": "Medical Institution 3",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e64f838e1af89fc1f",
+        "fileName": "brain_clinical_report_4",
+        "fromData": "Medical Institution 4",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e027a52988cb9f8fe",
+        "fileName": "nose_clinical_report_5",
+        "fromData": "Medical Institution 5",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e501a3192d761e66d",
+        "fileName": "ears_clinical_report_6",
+        "fromData": "Medical Institution 6",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01ec45d59bc86530a1b",
+        "fileName": "hair_clinical_report_7",
+        "fromData": "Medical Institution 7",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e7affab7331868b7a",
+        "fileName": "nose_clinical_report_8",
+        "fromData": "Medical Institution 8",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e0df835d7395da931",
+        "fileName": "nose_clinical_report_9",
+        "fromData": "Medical Institution 9",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ece360ff81e7c5cb6",
+        "fileName": "ears_clinical_report_10",
+        "fromData": "Medical Institution 10",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01eac4847790907cdf0",
+        "fileName": "nose_clinical_report_11",
+        "fromData": "Medical Institution 11",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01ea32101a75b2c179e",
+        "fileName": "nose_clinical_report_12",
+        "fromData": "Medical Institution 12",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01eeb9751c46e629d82",
+        "fileName": "eye_clinical_report_13",
+        "fromData": "Medical Institution 13",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ef3b2e02e962daa40",
+        "fileName": "nose_clinical_report_14",
+        "fromData": "Medical Institution 14",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e156f4c27e2552882",
+        "fileName": "eye_clinical_report_15",
+        "fromData": "Medical Institution 15",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e2bb89d642bac7527",
+        "fileName": "hair_clinical_report_16",
+        "fromData": "Medical Institution 16",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e05cd45e772110f64",
+        "fileName": "eye_clinical_report_17",
+        "fromData": "Medical Institution 17",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01edea49f75c0e25b60",
+        "fileName": "brain_clinical_report_18",
+        "fromData": "Medical Institution 18",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e330a6a08c2845518",
+        "fileName": "brain_clinical_report_19",
+        "fromData": "Medical Institution 19",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      }
+    ]
+  },
+  {
+    "_id": "63ecc01ea3a7fa3180530593",
+    "name": "hair",
+    "medicalReport": [
+      {
+        "id": "63ecc01e2d68b5bec1e75370",
+        "fileName": "nose_clinical_report_0",
+        "fromData": "Medical Institution 0",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e64428a9f3451291f",
+        "fileName": "brain_clinical_report_1",
+        "fromData": "Medical Institution 1",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01efbda87f0a1f1667a",
+        "fileName": "hair_clinical_report_2",
+        "fromData": "Medical Institution 2",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ee7772a7320b6482e",
+        "fileName": "hair_clinical_report_3",
+        "fromData": "Medical Institution 3",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01eb896349194e3886f",
+        "fileName": "nose_clinical_report_4",
+        "fromData": "Medical Institution 4",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e2a0ea8dda66083a9",
+        "fileName": "hair_clinical_report_5",
+        "fromData": "Medical Institution 5",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e6cd9701a38598096",
+        "fileName": "hair_clinical_report_6",
+        "fromData": "Medical Institution 6",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e0ca6cfd999b1bc1e",
+        "fileName": "hair_clinical_report_7",
+        "fromData": "Medical Institution 7",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01eb5026f0d4ba4bdcd",
+        "fileName": "ears_clinical_report_8",
+        "fromData": "Medical Institution 8",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e225e45d47c4240a5",
+        "fileName": "eye_clinical_report_9",
+        "fromData": "Medical Institution 9",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e073c5aaaf65f5864",
+        "fileName": "nose_clinical_report_10",
+        "fromData": "Medical Institution 10",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e9fc693cbc1ef291b",
+        "fileName": "nose_clinical_report_11",
+        "fromData": "Medical Institution 11",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01ec2666b13eb70561c",
+        "fileName": "brain_clinical_report_12",
+        "fromData": "Medical Institution 12",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ebc59dadfc338bc8c",
+        "fileName": "eye_clinical_report_13",
+        "fromData": "Medical Institution 13",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e87cf0fe672adc309",
+        "fileName": "hair_clinical_report_14",
+        "fromData": "Medical Institution 14",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e97d0977fbee2e385",
+        "fileName": "brain_clinical_report_15",
+        "fromData": "Medical Institution 15",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01edde0152452365587",
+        "fileName": "eye_clinical_report_16",
+        "fromData": "Medical Institution 16",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e869b7ff36a81abc6",
+        "fileName": "brain_clinical_report_17",
+        "fromData": "Medical Institution 17",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e4d94bc782126dcc1",
+        "fileName": "brain_clinical_report_18",
+        "fromData": "Medical Institution 18",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e0f01d8d3e837315c",
+        "fileName": "brain_clinical_report_19",
+        "fromData": "Medical Institution 19",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      }
+    ]
+  },
+  {
+    "_id": "63ecc01ec1e6a77395635f14",
+    "name": "ears",
+    "medicalReport": [
+      {
+        "id": "63ecc01ecb6c3e085c743657",
+        "fileName": "brain_clinical_report_0",
+        "fromData": "Medical Institution 0",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e792005ebd2d8506b",
+        "fileName": "ears_clinical_report_1",
+        "fromData": "Medical Institution 1",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e5fc452abc1c69a45",
+        "fileName": "brain_clinical_report_2",
+        "fromData": "Medical Institution 2",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e32804bcca070c86d",
+        "fileName": "eye_clinical_report_3",
+        "fromData": "Medical Institution 3",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01ebfd8735c0c92d922",
+        "fileName": "nose_clinical_report_4",
+        "fromData": "Medical Institution 4",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01ef029302ce54351dd",
+        "fileName": "nose_clinical_report_5",
+        "fromData": "Medical Institution 5",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01ed0eb8f602ba2f408",
+        "fileName": "ears_clinical_report_6",
+        "fromData": "Medical Institution 6",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01ed06ca9dcaadc8ad2",
+        "fileName": "hair_clinical_report_7",
+        "fromData": "Medical Institution 7",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01e72811083d799c5b9",
+        "fileName": "eye_clinical_report_8",
+        "fromData": "Medical Institution 8",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      },
+      {
+        "id": "63ecc01e648d8971a775dc74",
+        "fileName": "hair_clinical_report_9",
+        "fromData": "Medical Institution 9",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e458cf73f480b3f03",
+        "fileName": "nose_clinical_report_10",
+        "fromData": "Medical Institution 10",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e990e5bc5d7f5ecc3",
+        "fileName": "ears_clinical_report_11",
+        "fromData": "Medical Institution 11",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01e9336781b7e8b7f1d",
+        "fileName": "nose_clinical_report_12",
+        "fromData": "Medical Institution 12",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01ea0181f212ea74f2a",
+        "fileName": "hair_clinical_report_13",
+        "fromData": "Medical Institution 13",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "JPEG"
+      },
+      {
+        "id": "63ecc01eea67e6641f24666d",
+        "fileName": "hair_clinical_report_14",
+        "fromData": "Medical Institution 14",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e6d1081ab6b0b8156",
+        "fileName": "brain_clinical_report_15",
+        "fromData": "Medical Institution 15",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e14f4fb2076e1ced8",
+        "fileName": "nose_clinical_report_16",
+        "fromData": "Medical Institution 16",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01e8f357c8f459574ef",
+        "fileName": "ears_clinical_report_17",
+        "fromData": "Medical Institution 17",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PNG"
+      },
+      {
+        "id": "63ecc01effd6de14ef9e415e",
+        "fileName": "ears_clinical_report_18",
+        "fromData": "Medical Institution 18",
+        "receivedFrom": "2023-01-5",
+        "type": "imaging",
+        "fileType": "TXT"
+      },
+      {
+        "id": "63ecc01ee5ede3c453aa0fee",
+        "fileName": "eye_clinical_report_19",
+        "fromData": "Medical Institution 19",
+        "receivedFrom": "2023-01-5",
+        "type": "report",
+        "fileType": "PDF"
+      }
+    ]
+  }
+]

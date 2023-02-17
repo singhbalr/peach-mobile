@@ -5,6 +5,7 @@ import Icon from "react-native-dynamic-vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as NavigationService from "react-navigation-helpers";
 import RNBounceable from "@freakycoder/react-native-bounceable";
+import { ScreenWidth } from "@freakycoder/react-native-helpers";
 /**
  * ? Local Imports
  */

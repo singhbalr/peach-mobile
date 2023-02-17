@@ -4,7 +4,7 @@ import Body from "../../../assets/dashboard/body.svg";
 
 interface BodyOverlayProps {
   bodyparts: object;
-  onListSelect(arg0: string): void;
+  onListSelect(arg0: string, arg1: string): void;
   selectedBodyParts: string;
 }
 
@@ -23,7 +23,9 @@ const BodyOverlay: React.FC<BodyOverlayProps> = (props) => {
                 <TouchableOpacity
                   key={index}
                   style={styles.leftView}
-                  onPress={() => props.onListSelect(value.name)}
+                  onPress={() =>
+                    props.onListSelect(value.name, value.medicalReport)
+                  }
                 >
                   <View>
                     <Text>{value.name}</Text>
@@ -43,7 +45,9 @@ const BodyOverlay: React.FC<BodyOverlayProps> = (props) => {
                 <TouchableOpacity
                   key={index}
                   style={styles.rightView}
-                  onPress={() => props.onListSelect(value.name)}
+                  onPress={() =>
+                    props.onListSelect(value.name, value.medicalReport)
+                  }
                 >
                   <View>
                     <Text>{value.name}</Text>

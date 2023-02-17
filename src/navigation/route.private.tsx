@@ -2,6 +2,7 @@ import React from "react";
 import { useColorScheme } from "react-native";
 import Icon from "react-native-dynamic-vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 /**
  * ? Local & Shared Imports
  */
@@ -12,10 +13,10 @@ import HomeScreen from "@screens/home/HomeScreen";
 import SearchScreen from "@screens/search/SearchScreen";
 import ProfileScreen from "@screens/profile/ProfileScreen";
 import NotificationScreen from "@screens/notification/NotificationScreen";
-
+import MedicalRecordScreen from "@screens/medicalRecord/MedicalRecordScreen";
 // ? If you want to use stack or tab or both
 const Tab = createBottomTabNavigator();
-
+const Stack = createStackNavigator();
 const PrivateRoutes = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === "dark";
@@ -47,32 +48,37 @@ const PrivateRoutes = () => {
     return <Icon name={iconName} type="Ionicons" size={size} color={color} />;
   };
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarIcon: ({ focused, color, size }) =>
-          renderTabIcon(route, focused, color, size),
-        tabBarActiveTintColor: palette.primary,
-        tabBarInactiveTintColor: "gray",
-        tabBarStyle: {
-          backgroundColor: isDarkMode ? palette.black : palette.white,
-        },
-      })}
-    >
-      <Tab.Screen name={PRIVATESCREENS.REWARD_CENTER} component={HomeScreen} />
-      <Tab.Screen
-        name={PRIVATESCREENS.CLINICAL_REPORT}
-        component={SearchScreen}
-      />
-      <Tab.Screen
-        name={PRIVATESCREENS.DASHBOARD}
-        component={NotificationScreen}
-      />
-      <Tab.Screen
-        name={PRIVATESCREENS.CONTRIBUTE_DATA}
-        component={ProfileScreen}
-      />
-    </Tab.Navigator>
+    <>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) =>
+            renderTabIcon(route, focused, color, size),
+          tabBarActiveTintColor: palette.primary,
+          tabBarInactiveTintColor: "gray",
+          tabBarStyle: {
+            backgroundColor: isDarkMode ? palette.black : palette.white,
+          },
+        })}
+      >
+        <Tab.Screen
+          name={PRIVATESCREENS.REWARD_CENTER}
+          component={HomeScreen}
+        />
+        <Tab.Screen
+          name={PRIVATESCREENS.CLINICAL_REPORT}
+          component={SearchScreen}
+        />
+        <Tab.Screen
+          name={PRIVATESCREENS.DASHBOARD}
+          component={NotificationScreen}
+        />
+        <Tab.Screen
+          name={PRIVATESCREENS.CONTRIBUTE_DATA}
+          component={ProfileScreen}
+        />
+      </Tab.Navigator>
+    </>
   );
 };
 export default PrivateRoutes;

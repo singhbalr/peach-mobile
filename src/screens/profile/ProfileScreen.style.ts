@@ -1,10 +1,12 @@
 import { ExtendedTheme } from "@react-navigation/native";
-import { ViewStyle, StyleSheet } from "react-native";
-
+import { ViewStyle, StyleSheet, View, TextStyle } from "react-native";
+import { ScreenWidth } from "@freakycoder/react-native-helpers";
 interface Style {
   container: ViewStyle;
   button: ViewStyle;
   buttonText: ViewStyle;
+  header: ViewStyle;
+  headerText: TextStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -13,8 +15,7 @@ export default (theme: ExtendedTheme) => {
     container: {
       flex: 1,
       backgroundColor: colors.background,
-      alignItems: "center",
-      justifyContent: "center",
+      paddingHorizontal: 20,
     },
     button: {
       backgroundColor: "blue",
@@ -26,9 +27,16 @@ export default (theme: ExtendedTheme) => {
       textAlign: "center",
       fontWeight: "bold",
     },
-    input: {
-      width: "100%",
-      backgroundColor: "#FFFFFF",
+    header: {
+      width: ScreenWidth * 0.9,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "flex-start",
+      marginBottom: 20,
+    },
+    headerText: {
+      fontSize: 18,
+      lineHeight: 19,
     },
   });
 };
