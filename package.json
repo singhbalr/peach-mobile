@@ -3,6 +3,7 @@
   "version": "3.4.0",
   "description": "React Native Template/Boilerplate for awesome applications, using Typescript with a lot of built-in ready features.",
   "dependencies": {
+    "@apollo/client": "^3.7.9",
     "@freakycoder/react-native-bounceable": "^1.0.3",
     "@freakycoder/react-native-custom-text": "0.1.2",
     "@freakycoder/react-native-helpers": "^1.0.2",
@@ -16,6 +17,7 @@
     "axios": "^0.27.2",
     "axios-hooks": "^3.1.4",
     "events": "^3.3.0",
+    "graphql": "^16.6.0",
     "react": "18.2.0",
     "react-native": "0.69.4",
     "react-native-dynamic-vector-icons": "^1.2.0",
@@ -34,7 +36,8 @@
     "react-redux": "^8.0.5",
     "redux-flipper": "^2.0.2",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.4.2"
+    "redux-thunk": "^2.4.2",
+    "subscriptions-transport-ws": "^0.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",

@@ -12,11 +12,61 @@ import { store, persistor } from "./src/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./src/shared/theme/paperTheme";
+import {
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+  ApolloProvider,
+  split,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { WebSocketLink } from "@apollo/client/link/ws";
+import { getMainDefinition } from "@apollo/client/utilities";
 LogBox.ignoreAllLogs();
 
 const App = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === "dark";
+
+  const WS_URL = "localhost:3544";
+
+  const wsLink = new WebSocketLink({
+    uri: `ws://${WS_URL}/graphql`,
+    options: {
+      reconnect: true,
+    },
+  });
+
+  const httpLink = createHttpLink({
+    uri: `http://${WS_URL}/graphql`,
+  });
+
+  const authLink = setContext((_, { headers }) => {
+    const token = false;
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    };
+  });
+
+  const splitLink = split(
+    ({ query }) => {
+      const definition = getMainDefinition(query);
+      return (
+        definition.kind === "OperationDefinition" &&
+        definition.operation === "subscription"
+      );
+    },
+    wsLink,
+    authLink.concat(httpLink),
+  );
+
+  const client = new ApolloClient({
+    link: splitLink,
+    cache: new InMemoryCache(),
+  });
 
   React.useEffect(() => {
     StatusBar.setBarStyle(isDarkMode ? "light-content" : "dark-content");
@@ -35,7 +85,9 @@ const App = () => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <PaperProvider theme={theme}>
-            <Navigation />
+            <ApolloProvider client={client}>
+              <Navigation />
+            </ApolloProvider>
           </PaperProvider>
         </PersistGate>
       </Provider>
