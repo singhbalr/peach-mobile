@@ -19,7 +19,7 @@ type Props = {
   testID?: string;
   accessibilityLabel?: string;
   onPress?: () => void;
-  type: "primary" | "secondary";
+  type?: "primary" | "secondary";
 };
 
 type ComponentType = React.FC<Props>;

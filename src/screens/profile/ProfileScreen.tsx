@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { View, TouchableOpacity, Text } from "react-native";
+import {View, TouchableOpacity, Text, Image} from "react-native";
 import { useTheme, useIsFocused } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-dynamic-vector-icons";
@@ -203,115 +203,167 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   // eslint-disable-next-line react/no-unstable-nested-components
   const OpportunityCard = () => {
     return (
-      <View
-        style={{
-          borderWidth: 1,
-          borderRadius: 5,
-          borderColor: "#000000",
-          width: ScreenWidth * 0.9,
-          padding: 15,
-          marginBottom: 10,
-        }}
-      >
+      <TouchableOpacity onPress={() => handleItemPress("Opportunity Record")}>
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: 15,
+            borderRadius: 15,
+            backgroundColor: "#ffffff",
+            width: ScreenWidth * 0.9,
+            padding: 15,
+            margin: 10,
           }}
         >
-          <Text>expired in 2023-03-01 (48 days left) </Text>
-          <TouchableOpacity
-            onPress={() => handleItemPress("Opportunity Record")}
-          >
-            <Text style={{ fontSize: 14, fontWeight: "500", color: "#7BA23F" }}>
-              Read more
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            flexDirection: "column",
-            justifyContent: "center",
-            marginBottom: 15,
-          }}
-        >
-          <Text style={{ fontSize: 18, fontWeight: "600", marginBottom: 15 }}>
-            Support colorectal screening to save lives{" "}
-          </Text>
-          <Text style={{ fontSize: 14, fontWeight: "400", color: "#1C1C1C" }}>
-            Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac aliquet odio mattis.
-          </Text>
-        </View>
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
-          <Icon
-            name={"gift"}
-            type="AntDesign"
-            color={colors.iconBlack}
-            size={30}
-          />
-          {/* reward component */}
           <View
             style={{
-              borderRadius: 1,
               flexDirection: "row",
-              alignItems: "center",
-              padding: 5,
+              justifyContent: "space-between",
             }}
           >
-            <View
-              style={{
-                backgroundColor: "#7BA23F",
-                borderTopStartRadius: 5,
-                borderBottomStartRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text style={{ color: "#FFFFFF" }}>2 dose</Text>
+            <View>
+              <Image
+                source={require("../../assets/contribute-data/sample-image-list-1.png")}
+                style={{
+                  width: 115,
+                  height: 155,
+                }}
+              />
+              <View
+                style={{
+                  backgroundColor: "#383D39",
+                  borderRadius: 8,
+                  paddingHorizontal: 10,
+                  paddingVertical: 4,
+                  position: "absolute",
+                  bottom: 9,
+                  left: 7,
+                }}
+              >
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: 11,
+                    fontWeight: "900",
+                  }}
+                >
+                  10 Days left
+                </Text>
+              </View>
             </View>
             <View
               style={{
-                backgroundColor: "#B5CAA0",
-                borderTopEndRadius: 5,
-                borderBottomEndRadius: 5,
-                padding: 5,
+                marginLeft: 15,
+                marginRight: 15,
+                flex: 1,
+                flexDirection: "column",
               }}
             >
-              <Text>Shingrix vaccine</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              borderRadius: 1,
-              flexDirection: "row",
-              alignItems: "center",
-              padding: 5,
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: "#7BA23F",
-                borderTopStartRadius: 5,
-                borderBottomStartRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text style={{ color: "#FFFFFF" }}>100 HKD</Text>
-            </View>
-            <View
-              style={{
-                backgroundColor: "#B5CAA0",
-                borderTopEndRadius: 5,
-                borderBottomEndRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text>K11 Musea</Text>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: "600",
+                  marginBottom: 15,
+                  color: "#383D39",
+                }}
+              >
+                Support colorectal screening to save lives{" "}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  source={require("../../assets/contribute-data/reward-icon.png")}
+                  style={{
+                    width: 16,
+                    height: 16,
+                  }}
+                />
+                <View
+                  style={{
+                    marginBottom: 0,
+                  }}
+                >
+                  <Text
+                    style={{
+                      marginLeft: 4,
+                      lineHeight: 17,
+                      fontWeight: "700",
+                      fontSize: 11,
+                      alignItems: "center",
+                      color: "#D1AE6C",
+                    }}
+                  >
+                    Reward
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "column",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontWeight: "600",
+                      fontSize: 14,
+                      color: "#606461",
+                      lineHeight: 21,
+                    }}
+                  >
+                    2 doses
+                  </Text>
+                  <Text
+                    style={{
+                      fontWeight: "600",
+                      fontSize: 10,
+                      color: "#888B88",
+                      lineHeight: 21,
+                    }}
+                  >
+                    Shingrix Vaccine
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "column",
+                    marginLeft: 13,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontWeight: "600",
+                      fontSize: 14,
+                      color: "#606461",
+                      lineHeight: 21,
+                    }}
+                  >
+                    HK$100
+                  </Text>
+                  <Text
+                    style={{
+                      fontWeight: "600",
+                      fontSize: 10,
+                      color: "#888B88",
+                      marginRight: 5,
+                    }}
+                  >
+                    K11 Musea cash coupon
+                  </Text>
+                </View>
+              </View>
             </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
   // eslint-disable-next-line react/no-unstable-nested-components
@@ -635,7 +687,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Contribute Data</Text>
+        <Text style={styles.headerText}>Contributions</Text>
+        <Text style={styles.headerInfo}>Contribute Data Now to Get Rewards</Text>
       </View>
       <View
         style={{

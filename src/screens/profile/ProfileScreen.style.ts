@@ -7,6 +7,7 @@ interface Style {
   buttonText: ViewStyle;
   header: ViewStyle;
   headerText: TextStyle;
+  headerInfo: TextStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -29,14 +30,23 @@ export default (theme: ExtendedTheme) => {
     },
     header: {
       width: ScreenWidth * 0.9,
-      flexDirection: "row",
-      alignItems: "center",
+      flexDirection: "column",
+      alignItems: "flex-start",
       justifyContent: "flex-start",
       marginBottom: 20,
     },
     headerText: {
       fontSize: 18,
       lineHeight: 19,
+      color: "#383D39",
+      fontWeight: "700",
+    },
+    headerInfo: {
+      fontSize: 13,
+      lineHeight: 19,
+      marginTop: 5,
+      color: "#606461",
+      fontWeight: "400",
     },
   });
 };
