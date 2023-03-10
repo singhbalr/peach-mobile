@@ -32,8 +32,8 @@ interface ProfileScreenProps {}
 
 const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   //TO BE REFACTOR
-  const PATIENT_APPROVED_TRANSACTION_ID = "6404c1ac79e1302362924b15";
-  const PATIENT_ID = "6400f4fde5a8cc3d77993d81";
+  const PATIENT_APPROVED_TRANSACTION_ID = "640a0a2284947b59273ea03d";
+  const PATIENT_ID = "6409ffecd48bc34d50258d7c";
   //
 
   const isFocused = useIsFocused();
@@ -44,30 +44,46 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const [activeTab, setActiveTab] = useState("Screen1");
   const [showNotification, setShowNotification] = useState(false);
   const [doctorRequest, setDoctorRequest] = useState([]);
-  const [getDoctorRequest, { data, loading, error }] =
-    useMutation(GET_DOCTOR_REQUEST);
-  const [
-    updateTransaction,
-    { transactionData, transactionLoading, transactionError },
-  ] = useMutation(UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID);
+  const [getDoctorRequest] = useMutation(GET_DOCTOR_REQUEST);
+
+  const [updateTransaction] = useMutation(
+    UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
+  );
 
   const { _a, _b, _c } = useSubscription(TRANSACTION_UPDATED_SUBSCRIPTION, {
-    onData: ({ data }) => {
-      if (data) {
-        console.log(data);
-      }
+    onData: async ({ data }) => {
+      console.log(data);
+      // if (data) {
+      //   const transactionTypeText =
+      //     data.transactionUpdated.patient.transaction_id[0].transaction_type
+      //       .transaction_type_text;
+      //   if (transactionTypeText === "DOCTOR_REQUEST") {
+      //     console.log("validated");
+      //     setShowNotification(true);
+      //     setTimeout(() => {
+      //       setShowNotification(false);
+      //     }, 5000);
+      //     await callGraphQlAPI();
+      //   }
+      // }
     },
   });
 
   const { _aa, _bb, _cc } = useSubscription(NEW_TRANSACTION, {
     onData: async ({ data }) => {
+      console.log(data.data.newTransaction);
       if (data) {
-        setShowNotification(true);
-
-        setTimeout(() => {
-          setShowNotification(false);
-        }, 5000);
-        await callGraphQlAPI();
+        const transactionTypeText =
+          data.data.newTransaction.patient.transaction_id[0].transaction_type
+            .transaction_type_text;
+        if (transactionTypeText === "DOCTOR_REQUEST") {
+          console.log("validated");
+          setShowNotification(true);
+          setTimeout(() => {
+            setShowNotification(false);
+          }, 5000);
+          await callGraphQlAPI();
+        }
       }
     },
   });
@@ -91,36 +107,41 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   };
 
   const callGraphQlAPI = async () => {
-    getDoctorRequest({
-      variables: {
-        input: {
-          // eslint-disable-next-line camelcase
-          patient_id: PATIENT_ID,
+    try {
+      const { data } = await getDoctorRequest({
+        variables: {
+          input: {
+            // eslint-disable-next-line camelcase
+            patient_id: PATIENT_ID,
+          },
         },
-      },
-    });
-
-    if (data) {
+      });
       setDoctorRequest([]);
       setDoctorRequest(data.getTransactionByPatientId);
-      console.log("API CALLED");
+      return data;
+    } catch (error) {
+      throw new Error(`Could not fetch doctor list by id: ${error.message}`);
     }
   };
 
   const approveRequest = async (transaction_id: string) => {
     console.log(transaction_id);
 
-    updateTransaction({
-      variables: {
-        updateTransactionId: transaction_id,
-        input: {
-          transaction_type_id: PATIENT_APPROVED_TRANSACTION_ID,
+    try {
+      const { data } = await updateTransaction({
+        variables: {
+          updateTransactionId: transaction_id,
+          input: {
+            transaction_type_id: PATIENT_APPROVED_TRANSACTION_ID,
+          },
         },
-      },
-    });
+      });
 
-    if (transactionData) {
-      await callGraphQlAPI();
+      if (data) {
+        await callGraphQlAPI();
+      }
+    } catch (error) {
+      throw new Error(`Could not fetch doctor list by id: ${error.message}`);
     }
   };
 

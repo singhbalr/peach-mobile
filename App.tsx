@@ -28,17 +28,17 @@ const App = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === "dark";
 
-  const WS_URL = "localhost:3544";
+  const WS_URL = "peach-bio-api-testing.wistkey.com";
 
   const wsLink = new WebSocketLink({
-    uri: `ws://${WS_URL}/graphql`,
+    uri: `wss://${WS_URL}/graphql`,
     options: {
       reconnect: true,
     },
   });
 
   const httpLink = createHttpLink({
-    uri: `http://${WS_URL}/graphql`,
+    uri: `https://${WS_URL}/graphql`,
   });
 
   const authLink = setContext((_, { headers }) => {
