@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 // import type { RootState } from "../../redux/store";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setPassword, setUsername, setLoggedInState } from "./rx/reducer";
 import Icon from "react-native-vector-icons/Ionicons";
 
 import PInput from "@shared-components/input/PInput";
 import PIbutton from "@shared-components/buttons/Pbutton";
-import { authBiometrics } from "../../shared/sensors/Biometric";
+// import { authBiometrics } from "../../shared/sensors/Biometric";
 interface Props {}
 
 const LoginScreen: React.FC<Props> = () => {
@@ -19,15 +19,15 @@ const LoginScreen: React.FC<Props> = () => {
   //   const username = useSelector((state: RootState) => state.auth.username);
   const dispatch = useDispatch();
 
-  const handleBiometric = async () => {
-    const res = await authBiometrics();
-    if (res) {
-      // setStep(2)
-      dispatch(setLoggedInState(true));
-    } else {
-      dispatch(setLoggedInState(false));
-    }
-  };
+  // const handleBiometric = async () => {
+  //   const res = await authBiometrics();
+  //   if (res) {
+  //     // setStep(2)
+  //     dispatch(setLoggedInState(true));
+  //   } else {
+  //     dispatch(setLoggedInState(false));
+  //   }
+  // };
 
   const handleLogin = () => {
     // Perform validation for username or email
@@ -106,11 +106,11 @@ const LoginScreen: React.FC<Props> = () => {
       <View style={styles.loginContainer}>
         <PIbutton onPress={handleLogin} text="Login" />
       </View>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={handleBiometric}>
-          <Icon name={"finger-print"} size={37} />
-        </TouchableOpacity>
-      </View>
+      {/*<View style={styles.container}>*/}
+      {/*  <TouchableOpacity onPress={handleBiometric}>*/}
+      {/*    <Icon name={"finger-print"} size={37} />*/}
+      {/*  </TouchableOpacity>*/}
+      {/*</View>*/}
     </>
   );
 };

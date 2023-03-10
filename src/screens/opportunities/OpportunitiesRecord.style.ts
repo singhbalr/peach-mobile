@@ -54,8 +54,10 @@ export default (theme: ExtendedTheme) => {
       marginBottom: 20,
     },
     headerText: {
-      fontSize: 18,
+      fontSize: 14,
       lineHeight: 19,
+      fontWeight: "600",
+      textAlign: "center",
     },
     contentContainer: {
       flex: 1,

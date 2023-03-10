@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect, useState } from "react";
-import { View, ScrollView, Image, TouchableOpacity, Text } from "react-native";
+import {View, ScrollView, Image, TouchableOpacity, Text, StyleSheet} from "react-native";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-dynamic-vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -56,22 +56,43 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
     return (
       <View
         style={{
-          borderWidth: 1,
-          borderRadius: 5,
-          borderColor: "#000000",
           width: ScreenWidth * 0.9,
-          padding: 15,
           marginBottom: 10,
         }}
       >
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: 15,
+            marginBottom: 10,
           }}
         >
-          <Text>expired in 2023-03-01 (48 days left) </Text>
+          <Image
+            source={require("../../assets/contribute-data/sample-image-detail-1.png")}
+            style={{
+              width: 323,
+              height: 184,
+            }}
+          />
+          <View
+            style={{
+              backgroundColor: "#383D39",
+              borderRadius: 8,
+              paddingHorizontal: 10,
+              paddingVertical: 4,
+              position: "absolute",
+              bottom: 9,
+              left: 7,
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                fontSize: 11,
+                fontWeight: "900",
+              }}
+            >
+              10 Days left
+            </Text>
+          </View>
         </View>
         <View
           style={{
@@ -80,81 +101,135 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             marginBottom: 15,
           }}
         >
-          <Text style={{ fontSize: 18, fontWeight: "600", marginBottom: 15 }}>
+          <Text
+            style={{
+              fontSize: 22,
+              fontWeight: "700",
+              marginBottom: 16,
+              color: "#383D39",
+            }}
+          >
             Support colorectal screening to save lives{" "}
           </Text>
-          <Text style={{ fontSize: 14, fontWeight: "400", color: "#1C1C1C" }}>
-            Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac aliquet odio mattis.
+          <View
+            style={{
+              borderBottomColor: "#BABCB7",
+              borderBottomWidth: StyleSheet.hairlineWidth,
+              marginBottom: 16,
+            }}
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginBottom: 14,
+          }}
+        >
+          <Text
+            style={{
+              color: "#383D39",
+              fontSize: 18,
+              fontWeight: "600",
+            }}
+          >
+            Data to be shared
+          </Text>
+          <Text
+            style={{
+              color: "#7BA040",
+              fontSize: 13,
+              fontWeight: "500",
+            }}
+          >
+            Privacy Policy &gt;
           </Text>
         </View>
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
-          <Icon
-            name={"gift"}
-            type="AntDesign"
-            color={colors.iconBlack}
-            size={30}
-          />
-          {/* reward component */}
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            backgroundColor: "#efefef",
+            borderRadius: 15,
+            padding: 15,
+          }}
+        >
           <View
             style={{
-              borderRadius: 1,
               flexDirection: "row",
-              alignItems: "center",
-              padding: 5,
             }}
           >
-            <View
-              style={{
-                backgroundColor: "#7BA23F",
-                borderTopStartRadius: 5,
-                borderBottomStartRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text style={{ color: "#FFFFFF" }}>2 dose</Text>
-            </View>
-            <View
-              style={{
-                backgroundColor: "#B5CAA0",
-                borderTopEndRadius: 5,
-                borderBottomEndRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text>Shingrix vaccine</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              borderRadius: 1,
-              flexDirection: "row",
-              alignItems: "center",
-              padding: 5,
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: "#7BA23F",
-                borderTopStartRadius: 5,
-                borderBottomStartRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text style={{ color: "#FFFFFF" }}>100 HKD</Text>
-            </View>
-            <View
-              style={{
-                backgroundColor: "#B5CAA0",
-                borderTopEndRadius: 5,
-                borderBottomEndRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text>K11 Musea</Text>
-            </View>
+            <Text>asd</Text>
+            <Text>asd</Text>
           </View>
         </View>
+        {/*<View style={{ flexDirection: "row", justifyContent: "center" }}>*/}
+        {/*  <Icon*/}
+        {/*    name={"gift"}*/}
+        {/*    type="AntDesign"*/}
+        {/*    color={colors.iconBlack}*/}
+        {/*    size={30}*/}
+        {/*  />*/}
+        {/*  /!* reward component *!/*/}
+        {/*  <View*/}
+        {/*    style={{*/}
+        {/*      borderRadius: 1,*/}
+        {/*      flexDirection: "row",*/}
+        {/*      alignItems: "center",*/}
+        {/*      padding: 5,*/}
+        {/*    }}*/}
+        {/*  >*/}
+        {/*    <View*/}
+        {/*      style={{*/}
+        {/*        backgroundColor: "#7BA23F",*/}
+        {/*        borderTopStartRadius: 5,*/}
+        {/*        borderBottomStartRadius: 5,*/}
+        {/*        padding: 5,*/}
+        {/*      }}*/}
+        {/*    >*/}
+        {/*      <Text style={{ color: "#FFFFFF" }}>2 dose</Text>*/}
+        {/*    </View>*/}
+        {/*    <View*/}
+        {/*      style={{*/}
+        {/*        backgroundColor: "#B5CAA0",*/}
+        {/*        borderTopEndRadius: 5,*/}
+        {/*        borderBottomEndRadius: 5,*/}
+        {/*        padding: 5,*/}
+        {/*      }}*/}
+        {/*    >*/}
+        {/*      <Text>Shingrix vaccine</Text>*/}
+        {/*    </View>*/}
+        {/*  </View>*/}
+        {/*  <View*/}
+        {/*    style={{*/}
+        {/*      borderRadius: 1,*/}
+        {/*      flexDirection: "row",*/}
+        {/*      alignItems: "center",*/}
+        {/*      padding: 5,*/}
+        {/*    }}*/}
+        {/*  >*/}
+        {/*    <View*/}
+        {/*      style={{*/}
+        {/*        backgroundColor: "#7BA23F",*/}
+        {/*        borderTopStartRadius: 5,*/}
+        {/*        borderBottomStartRadius: 5,*/}
+        {/*        padding: 5,*/}
+        {/*      }}*/}
+        {/*    >*/}
+        {/*      <Text style={{ color: "#FFFFFF" }}>100 HKD</Text>*/}
+        {/*    </View>*/}
+        {/*    <View*/}
+        {/*      style={{*/}
+        {/*        backgroundColor: "#B5CAA0",*/}
+        {/*        borderTopEndRadius: 5,*/}
+        {/*        borderBottomEndRadius: 5,*/}
+        {/*        padding: 5,*/}
+        {/*      }}*/}
+        {/*    >*/}
+        {/*      <Text>K11 Musea</Text>*/}
+        {/*    </View>*/}
+        {/*  </View>*/}
+        {/*</View>*/}
       </View>
     );
   };
@@ -361,9 +436,8 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <MenuButton></MenuButton>
-
-        <Text style={styles.headerText}>Opportunity Record</Text>
+        <MenuButton />
+        <Text style={styles.headerText}>Colorectal Screening</Text>
       </View>
       <View>
         <OpportunityCard />
