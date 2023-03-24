@@ -51,6 +51,26 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
       />
     </RNBounceable>
   );
+
+  const dataReceiver = [
+    {
+      title: "Data Purpose",
+      content:
+        "The Data Receiver is developing a new blood-based colorectal cancer detection test and intends to identity" +
+        " not fewer than 500 high-risk individuals for mid or long term follow-up study",
+    },
+    {
+      title: "Data Accessibility",
+      content:
+        "Access to your data will be terminated in 48 months after you have contributed your data.",
+    },
+    {
+      title: "How do I withdraw?",
+      content:
+        "You can withdraw your data contribution only if you have not redeemed the rewards.",
+    },
+  ];
+
   // eslint-disable-next-line react/no-unstable-nested-components
   const OpportunityCard = () => {
     return (
@@ -75,12 +95,12 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           <View
             style={{
               backgroundColor: "#383D39",
-              borderRadius: 8,
-              paddingHorizontal: 10,
+              // borderRadius: 8,
+              // paddingHorizontal: 10,
               paddingVertical: 4,
               position: "absolute",
               bottom: 9,
-              left: 7,
+              // left: 7,
             }}
           >
             <Text
@@ -147,11 +167,10 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         </View>
         <View
           style={{
-            flex: 1,
-            flexDirection: "row",
             backgroundColor: "#efefef",
             borderRadius: 15,
-            padding: 15,
+            padding: 19,
+            marginBottom: 20,
           }}
         >
           <View
@@ -159,10 +178,258 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               flexDirection: "row",
             }}
           >
-            <Text>asd</Text>
-            <Text>asd</Text>
+            <Image
+              source={require("../../assets/contribute-data/info-icon.png")}
+              style={{
+                marginTop: 5,
+                width: 9,
+                height: 9,
+              }}
+            />
+            <Text
+              style={{
+                marginHorizontal: 10,
+              }}
+            >
+              Your name, phone number, date of birth and the first 4 digits of
+              your Hong Kong Identity Card number.
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+            }}
+          >
+            <Image
+              source={require("../../assets/contribute-data/clinical-record-icon.png")}
+              style={{
+                marginTop: 5,
+                width: 9,
+                height: 9,
+              }}
+            />
+            <Text
+              style={{
+                marginHorizontal: 10,
+              }}
+            >
+              The data stored in the informatics system of the Connected Clinics, Hospitals and Labs.
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+            }}
+          >
+            <Image
+              source={require("../../assets/contribute-data/iot-icon.png")}
+              style={{
+                marginTop: 5,
+                width: 9,
+                height: 9,
+              }}
+            />
+            <Text
+              style={{
+                marginHorizontal: 10,
+              }}
+            >
+              The data stored in the informatics system of the Connected Wearable Devices.
+            </Text>
           </View>
         </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: 15,
+          }}
+        >
+          <Image
+            source={require("../../assets/contribute-data/reward-icon.png")}
+            style={{
+              width: 20,
+              height: 20,
+              alignItems: "center",
+            }}
+          />
+          <View
+            style={{
+              marginBottom: 0,
+            }}
+          >
+            <Text
+              style={{
+                marginLeft: 4,
+                lineHeight: 17,
+                fontWeight: "600",
+                fontSize: 18,
+                alignItems: "center",
+                color: "#D1AE6C",
+              }}
+            >
+              Reward
+            </Text>
+          </View>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "column",
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "600",
+                fontSize: 22,
+                color: "#606461",
+                lineHeight: 21,
+              }}
+            >
+              2 doses
+            </Text>
+            <Text
+              style={{
+                fontWeight: "600",
+                fontSize: 13,
+                color: "#888B88",
+                lineHeight: 21,
+              }}
+            >
+              Shingrix Vaccine
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "column",
+              marginLeft: 36,
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "600",
+                fontSize: 22,
+                color: "#606461",
+                lineHeight: 21,
+              }}
+            >
+              HK$100
+            </Text>
+            <Text
+              style={{
+                fontWeight: "600",
+                fontSize: 13,
+                color: "#888B88",
+                lineHeight: 21,
+              }}
+            >
+              K11 Musea cash coupon
+            </Text>
+          </View>
+        </View>
+        <View
+          style={{
+            marginTop: 15,
+            marginBottom: 16,
+          }}
+        >
+          <Text>
+            You will be entitled to one coupon for two doses of the Shingrix Vaccine Free, and a HK$100 K11
+            Musea cash coupon.
+          </Text>
+        </View>
+        <View
+          style={{
+            borderBottomColor: "#BABCB7",
+            borderBottomWidth: StyleSheet.hairlineWidth,
+            marginBottom: 16,
+          }}
+        />
+        <View>
+          <Text
+            style={{
+              fontWeight: "600",
+              fontSize: 18,
+              marginBottom: 19,
+              color: "#383D39",
+            }}
+          >
+            More Information
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 13,
+              fontWeight: "400",
+              color: "#888B88",
+              marginBottom: 13,
+            }}
+          >
+            Data Receiver
+          </Text>
+          <TouchableOpacity>
+            <Text
+              style={{
+                fontSize: 13,
+                fontWeight: "500",
+                color: "#7BA040",
+                marginBottom: 13,
+                lineHeight: 19,
+              }}
+            >
+              Prenetics Limited &gt;
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {dataReceiver.map((item, key) => (
+          <View key={"data-receiver-" + key}>
+            <View
+              style={{
+                borderBottomColor: "#BABCB7",
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                marginBottom: 16,
+              }}
+            />
+
+            <View
+              style={{
+                marginBottom: 24,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 13,
+                  fontWeight: "400",
+                  color: "#888B88",
+                  marginBottom: 10,
+                }}
+              >
+                {item.title}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 13,
+                  fontWeight: "400",
+                  lineHeight: 19,
+                  color: "#383D39",
+                }}
+              >
+                {item.content}
+              </Text>
+            </View>
+          </View>
+        ))}
         {/*<View style={{ flexDirection: "row", justifyContent: "center" }}>*/}
         {/*  <Icon*/}
         {/*    name={"gift"}*/}
@@ -439,106 +706,18 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         <MenuButton />
         <Text style={styles.headerText}>Colorectal Screening</Text>
       </View>
+      <View
+        style={{
+          marginBottom: 26,
+        }}
+      >
+        <ScrollView
+          showsVerticalScrollIndicator={false}>
+          <OpportunityCard />
+        </ScrollView>
+      </View>
       <View>
-        <OpportunityCard />
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          alignContent: "center",
-          marginTop: 10,
-          marginBottom: 20,
-        }}
-      >
-        <Text style={{ fontWeight: "700", fontSize: 17 }}>Quota : </Text>
-
-        <LinePercentage
-          percentage={80}
-          color={"#000000"}
-          width={150}
-          height={10}
-        />
-        <Text style={{ fontWeight: "700", fontSize: 17 }}>10 Left </Text>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-around",
-          alignItems: "center",
-          height: 35,
-          borderColor: "#000000",
-          marginBottom: 30,
-          width: ScreenWidth * 0.9,
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => handleTabPress("Purpose")}
-          style={[
-            borderStyle1(),
-            { flex: 1, justifyContent: "center", alignItems: "center" },
-          ]}
-        >
-          <Text
-            style={{
-              fontWeight: activeTab === "Purpose" ? "bold" : "normal",
-              color: activeTab === "Purpose" ? "#FFFFFF" : "#000000",
-            }}
-          >
-            Purpose
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => handleTabPress("Data")}
-          style={[
-            borderStyle2(),
-            { flex: 1, justifyContent: "center", alignItems: "center" },
-          ]}
-        >
-          <Text
-            style={{
-              fontWeight: activeTab === "Data" ? "bold" : "normal",
-              color: activeTab === "Data" ? "#FFFFFF" : "#000000",
-            }}
-          >
-            Data
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => handleTabPress("Receiver")}
-          style={[
-            borderStyle3(),
-            { flex: 1, justifyContent: "center", alignItems: "center" },
-          ]}
-        >
-          <Text
-            style={{
-              fontWeight: activeTab === "Receiver" ? "bold" : "normal",
-              color: activeTab === "Receiver" ? "#FFFFFF" : "#000000",
-            }}
-          >
-            Receiver
-          </Text>
-        </TouchableOpacity>
-      </View>
-      {renderTab()}
-      <View
-        style={{
-          alignItems: "flex-end",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignContent: "center",
-        }}
-      >
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <PIbutton
-            text={"Accept"}
-            type={"primary"}
-            onPress={handleItemPress}
-          />
-        </View>
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <PIbutton text={"Close"} type={"secondary"} />
-        </View>
+        <Text>asd</Text>
       </View>
     </SafeAreaView>
   );

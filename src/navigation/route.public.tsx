@@ -12,7 +12,12 @@ const Stack = createStackNavigator();
 
 const PublicRoutes = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        cardStyle: { backgroundColor: "#7ba23f" },
+      }}
+    >
       <Stack.Screen name={PUBLICSCREENS.LOGINSCREEN} component={LoginScreen} />
     </Stack.Navigator>
   );

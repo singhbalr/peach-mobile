@@ -62,14 +62,9 @@ const LoginScreen: React.FC<Props> = () => {
   return (
     <>
       <View style={styles.containerLogo}>
-        <Text style={styles.loginLogo}>Peach</Text>
-        <Text style={styles.loginLogo}>Bioverse</Text>
+        <Text style={styles.loginLogo}>Login</Text>
       </View>
       <View style={styles.container}>
-        <View style={styles.locationContainer}>
-          <Icon name={"ios-location-sharp"} size={17} />
-          <Text style={styles.locationText}>Bali, Indonesia</Text>
-        </View>
         <View style={styles.inputContainer}>
           <PInput
             style={styles.input}
@@ -104,7 +99,26 @@ const LoginScreen: React.FC<Props> = () => {
         </View>
       </View>
       <View style={styles.loginContainer}>
-        <PIbutton onPress={handleLogin} text="Login" />
+        <PIbutton
+          onPress={handleLogin}
+          text="Login"
+          type="primary"
+          style={{
+            backgroundColor: "white",
+            borderRadius: 45,
+            borderColor: "white",
+          }}
+        />
+        <PIbutton
+          onPress={handleLogin}
+          text="Login with Face ID"
+          type="secondary"
+          style={{
+            backgroundColor: "white",
+            borderRadius: 45,
+            borderColor: "white",
+          }}
+        />
       </View>
       {/*<View style={styles.container}>*/}
       {/*  <TouchableOpacity onPress={handleBiometric}>*/}
@@ -121,19 +135,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
-    backgroundColor: "#FFFFFF",
   },
   containerLogo: {
     flex: 2,
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "flex-end",
     padding: 20,
-    backgroundColor: "#FFFFFF",
     paddingBottom: 50,
+    backgroundColor: "yellow",
   },
   input: {
     width: "100%",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#B5CAA0",
+    color: "#606461",
   },
   inputContainer: {
     alignItems: "center",
@@ -144,34 +158,25 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 40,
     marginBottom: 15,
-    backgroundColor: "white",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    borderRadius: 29,
   },
   passwordContainer: {
     flexDirection: "row",
+    marginTop: 15,
   },
   secureTextIcon: {
     justifyContent: "center",
     position: "absolute",
-    alignSelf: "flex-end",
-    right: 0,
-    paddingBottom: 15,
+    alignSelf: "center",
+    right: 5,
   },
   forgotPasswordLabel: {
-    alignSelf: "flex-end",
-    marginTop: 10,
+    alignSelf: "center",
+    marginTop: 15,
   },
   forgotText: {
-    fontSize: 10,
-    fontWeight: "400",
+    fontSize: 12,
+    fontWeight: "500",
+    color: "#ECF1E8",
   },
   locationContainer: {
     flexDirection: "row",
@@ -182,13 +187,14 @@ const styles = StyleSheet.create({
     fontSize: 11,
   },
   loginLogo: {
-    fontSize: 50,
+    fontSize: 22,
+    color: "white",
+    fontWeight: "700",
   },
   loginContainer: {
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FFFFFF",
     paddingTop: 1,
     flex: 1,
   },

@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   buttonStyleSecondary: {
     borderRadius: 5,
-    backgroundColor: "#7BA23F",
+    backgroundColor: "#91AD70",
     color: "#FFFFFF",
     borderWidth: 1,
     borderColor: "#000000",
@@ -89,6 +89,6 @@ const styles = StyleSheet.create({
 const componentTheme = {
   buttonColor: "#373C38",
   textColorPrimary: "#7BA23F",
-  textColorSecondary: "#FFFFFF",
+  textColorSecondary: "#91AD70",
 };
 export default PIbutton;

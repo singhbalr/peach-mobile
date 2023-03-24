@@ -17,6 +17,7 @@ export default (theme: ExtendedTheme) => {
       flex: 1,
       backgroundColor: colors.background,
       paddingHorizontal: 20,
+      marginTop: 20,
     },
     button: {
       backgroundColor: "blue",
