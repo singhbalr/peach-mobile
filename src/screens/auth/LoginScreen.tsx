@@ -62,8 +62,7 @@ const LoginScreen: React.FC<Props> = () => {
   return (
     <>
       <View style={styles.containerLogo}>
-        <Text style={styles.loginLogo}>Peach</Text>
-        <Text style={styles.loginLogo}>Bioverse</Text>
+        <Text style={styles.loginLogo}>Login</Text>
       </View>
       <View style={styles.container}>
         <View style={styles.locationContainer}>
@@ -121,14 +120,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
-    backgroundColor: "#FFFFFF",
   },
   containerLogo: {
     flex: 2,
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "flex-end",
     padding: 20,
-    backgroundColor: "#FFFFFF",
     paddingBottom: 50,
   },
   input: {
@@ -182,13 +179,14 @@ const styles = StyleSheet.create({
     fontSize: 11,
   },
   loginLogo: {
-    fontSize: 50,
+    fontSize: 22,
+    color: "white",
+    fontWeight: "700",
   },
   loginContainer: {
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FFFFFF",
     paddingTop: 1,
     flex: 1,
   },
