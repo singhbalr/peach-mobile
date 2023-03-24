@@ -21,7 +21,7 @@
     "react": "18.2.0",
     "react-native": "0.69.4",
     "react-native-dynamic-vector-icons": "^1.2.0",
-    "react-native-flipper": "^0.177.0",
+    "react-native-flipper": "0.164.0",
     "react-native-gesture-handler": "^2.5.0",
     "react-native-localization": "^2.3.1",
     "react-native-paper": "^5.1.4",
