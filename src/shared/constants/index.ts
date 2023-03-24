@@ -1,10 +1,10 @@
 // ? Screens
 export const PRIVATESCREENS = {
   ROOT: "PrivateRoutes",
-  REWARD_CENTER: "Reward Center",
+  REWARD_CENTER: "Rewards",
   CLINICAL_REPORT: "Clinical Report",
-  DASHBOARD: "Dashboard",
-  CONTRIBUTE_DATA: "Contribute Data",
+  DASHBOARD: "Your Bioverse",
+  CONTRIBUTE_DATA: "Contributions",
   MEDICAL_RECORD: "Medical Record",
   MEDICAL_FILE_VIEWER: "Medical File Viewer",
   OPPORTUNITY_RECORD: "Opportunity Record",

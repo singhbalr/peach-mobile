@@ -21,7 +21,6 @@ export default (theme: ExtendedTheme) => {
       flex: 1,
       alignItems: "center",
       backgroundColor: colors.background,
-      justifyContent: "center"
     },
     titleTextStyle: {
       fontSize: 32,

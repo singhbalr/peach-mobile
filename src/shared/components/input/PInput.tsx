@@ -32,9 +32,10 @@ const PInput: ComponentType = (props) => {
 };
 const styles = StyleSheet.create({
   underlineStyle: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#373C38",
+    // borderBottomWidth: 1,
+    // borderBottomColor: "#373C38",
     alignItems: "center",
+    borderRadius: 12,
   },
 });
 export default PInput;

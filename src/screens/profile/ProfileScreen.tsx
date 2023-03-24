@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from "react";
-import {View, TouchableOpacity, Text, Image} from "react-native";
+import {View, TouchableOpacity, Text, Image, ScrollView} from "react-native";
 import { useTheme, useIsFocused } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-dynamic-vector-icons";
@@ -29,6 +29,19 @@ import {
 import Notification from "@shared-components/notification/notification";
 
 interface ProfileScreenProps {}
+
+interface RewardProps {
+  title: string;
+  detail: string;
+}
+
+interface OpportunityProps {
+  img: any;
+  daysLeft: string;
+  title: string;
+  reward?: undefined | RewardProps[];
+  additionalRewards?: undefined | RewardProps[];
+}
 
 const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   //TO BE REFACTOR
@@ -147,12 +160,67 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
 
   // eslint-disable-next-line react/no-unstable-nested-components
   const Screen1 = () => {
+    const opportunityData: OpportunityProps[] = [
+      {
+        img: require("../../assets/contribute-data/sample-image-list-1.png"),
+        daysLeft: "10 Days left",
+        title: "Support colorectal screening to save lives",
+        reward: [
+          {
+            title: "2 doses",
+            detail: "Shingrix Vaccine",
+          },
+          {
+            title: "HK$100",
+            detail: "K11 Musea cash coupon",
+          },
+        ],
+      },
+      {
+        img: require("../../assets/contribute-data/sample-image-list-1.png"),
+        daysLeft: "30 Days Left",
+        title: "Useful health info selected for you",
+        reward: [
+          {
+            title: "HK$50",
+            detail: "K11 Musea cash coupon",
+          },
+        ],
+      },
+      {
+        img: require("../../assets/contribute-data/sample-image-list-1.png"),
+        daysLeft: "30 Days Left",
+        title: "Join the fight against the hepatitis B virus",
+        reward: [
+          {
+            title: "HK$125",
+            detail: "K11 Musea cash coupon",
+          },
+        ],
+      },
+      {
+        img: require("../../assets/contribute-data/sample-image-list-1.png"),
+        daysLeft: "30 Days Left",
+        title:
+          "Enable better insurance coverage for people with cardiovascular disease risks",
+        reward: [
+          {
+            title: "HK$150",
+            detail: "K11 Musea cash coupon",
+          },
+        ],
+      },
+    ];
+
     return (
       <View
         style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}
       >
-        <OpportunityCard />
-        <OpportunityCard />
+        <ScrollView>
+          {opportunityData.map((item, key) => (
+            <OpportunityCard key={`opportunity-card-${key}`} {...item} />
+          ))}
+        </ScrollView>
       </View>
     );
   };
@@ -200,8 +268,9 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       />
     );
   };
+
   // eslint-disable-next-line react/no-unstable-nested-components
-  const OpportunityCard = () => {
+  const OpportunityCard = (opportunityData: OpportunityProps) => {
     return (
       <TouchableOpacity onPress={() => handleItemPress("Opportunity Record")}>
         <View
@@ -221,7 +290,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           >
             <View>
               <Image
-                source={require("../../assets/contribute-data/sample-image-list-1.png")}
+                source={opportunityData.img}
                 style={{
                   width: 115,
                   height: 155,
@@ -245,7 +314,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                     fontWeight: "900",
                   }}
                 >
-                  10 Days left
+                  {opportunityData.daysLeft}
                 </Text>
               </View>
             </View>
@@ -265,7 +334,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                   color: "#383D39",
                 }}
               >
-                Support colorectal screening to save lives{" "}
+                {opportunityData.title}
               </Text>
               <View
                 style={{
@@ -295,7 +364,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                       color: "#D1AE6C",
                     }}
                   >
-                    Reward
+                    {opportunityData.reward ? "Reward" : "Additional Reward"}
                   </Text>
                 </View>
               </View>
@@ -305,60 +374,36 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                   flexDirection: "row",
                 }}
               >
-                <View
-                  style={{
-                    flexDirection: "column",
-                  }}
-                >
-                  <Text
+                {opportunityData.reward?.map((item, key) => (
+                  <View
+                    key={`reward-item-${key}`}
                     style={{
-                      fontWeight: "600",
-                      fontSize: 14,
-                      color: "#606461",
-                      lineHeight: 21,
+                      flex: 1,
+                      flexDirection: "column",
                     }}
                   >
-                    2 doses
-                  </Text>
-                  <Text
-                    style={{
-                      fontWeight: "600",
-                      fontSize: 10,
-                      color: "#888B88",
-                      lineHeight: 21,
-                    }}
-                  >
-                    Shingrix Vaccine
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: "column",
-                    marginLeft: 13,
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontWeight: "600",
-                      fontSize: 14,
-                      color: "#606461",
-                      lineHeight: 21,
-                    }}
-                  >
-                    HK$100
-                  </Text>
-                  <Text
-                    style={{
-                      fontWeight: "600",
-                      fontSize: 10,
-                      color: "#888B88",
-                      marginRight: 5,
-                    }}
-                  >
-                    K11 Musea cash coupon
-                  </Text>
-                </View>
+                    <Text
+                      style={{
+                        fontWeight: "600",
+                        fontSize: 14,
+                        color: "#606461",
+                        lineHeight: 21,
+                      }}
+                    >
+                      {item.title}
+                    </Text>
+                    <Text
+                      style={{
+                        fontWeight: "600",
+                        fontSize: 10,
+                        color: "#888B88",
+                        marginRight: 5,
+                      }}
+                    >
+                      {item.detail}
+                    </Text>
+                  </View>
+                ))}
               </View>
             </View>
           </View>
@@ -684,72 +729,105 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     }
   };
 
+  const tabList = [
+    {
+      screenName: "Screen1",
+      title: "Opportunities",
+    },
+    {
+      screenName: "Screen3",
+      title: "Followup Requests",
+    },
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Contributions</Text>
-        <Text style={styles.headerInfo}>Contribute Data Now to Get Rewards</Text>
+        <View
+          style={{
+            flexDirection: "row",
+          }}
+        >
+          <View>
+            <Text style={styles.headerText}>Contributions</Text>
+            <View
+              style={{
+                flexDirection: "row",
+              }}
+            >
+              <Text style={styles.headerInfo}>
+                Contribute Data Now to Get Rewards
+              </Text>
+              <Image
+                source={require("../../assets/contribute-data/question-mark-icon.png")}
+                style={{
+                  width: 14,
+                  height: 14,
+                  marginLeft: 4,
+                }}
+              />
+            </View>
+          </View>
+          <Image
+            source={require("../../assets/contribute-data/menu-add.png")}
+            style={{
+              width: 16,
+              height: 16,
+              marginLeft: 30,
+            }}
+          />
+          <Image
+            source={require("../../assets/contribute-data/menu-icon.png")}
+            style={{
+              width: 16,
+              height: 16,
+              marginLeft: 30,
+            }}
+          />
+        </View>
       </View>
       <View
         style={{
-          flexDirection: "row",
-          justifyContent: "space-around",
-          alignItems: "center",
-          height: 35,
-          borderWidth: 1,
-          borderRadius: 5,
-          borderColor: "#000000",
-          marginBottom: 30,
+          marginBottom: 26,
+          // borderBottomWidth: 2,
+          // borderBottomColor: "#BABCB7",
         }}
       >
-        <TouchableOpacity
-          onPress={async () => handleTabPress("Screen1")}
-          style={[
-            borderStyle1(),
-            { flex: 1, justifyContent: "center", alignItems: "center" },
-          ]}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          snapToAlignment="center"
         >
-          <Text
-            style={{
-              fontWeight: activeTab === "Screen1" ? "bold" : "normal",
-              color: activeTab === "Screen1" ? "#FFFFFF" : "#000000",
-            }}
-          >
-            Opportunities
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={async () => handleTabPress("Screen2")}
-          style={[
-            borderStyle2(),
-            { flex: 1, justifyContent: "center", alignItems: "center" },
-          ]}
-        >
-          <Text
-            style={{
-              fontWeight: activeTab === "Screen2" ? "bold" : "normal",
-              color: activeTab === "Screen2" ? "#FFFFFF" : "#000000",
-            }}
-          >
-            Shared Data
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={async () => handleTabPress("Screen3")}
-          style={[
-            borderStyle3(),
-            { flex: 1, justifyContent: "center", alignItems: "center" },
-          ]}
-        >
-          <Text
-            style={{
-              fontWeight: activeTab === "Screen3" ? "bold" : "normal",
-              color: activeTab === "Screen3" ? "#FFFFFF" : "#000000",
-            }}
-          >
-            Follow On Request
-          </Text>
-        </TouchableOpacity>
+          {tabList.map((item, key) => (
+            <TouchableOpacity
+              key={"navigation-tab-" + key}
+              onPress={async () => handleTabPress(item.screenName)}
+            >
+              <View
+                style={{
+                  justifyContent: "center",
+                  height: 40,
+                  borderBottomWidth: 2,
+                  borderBottomColor:
+                    activeTab === item.screenName ? "#7BA040" : "#BABCB7",
+                  marginRight: 38,
+                }}
+              >
+                <Text
+                  style={{
+                    fontWeight: "600",
+                    color:
+                      activeTab === item.screenName ? "#7BA040" : "#BABCB7",
+                    fontSize: 13,
+                    lineHeight: 20,
+                  }}
+                >
+                  {item.title}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </View>
       {renderScreen(activeTab)}
       <Notification
