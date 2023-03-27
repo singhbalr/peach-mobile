@@ -15,4 +15,5 @@ export const PRIVATESCREENS = {
 export const PUBLICSCREENS = {
   ROOT: "PublicRoutes",
   LOGINSCREEN: "LoginScreen",
+  ONBOARDING: "Onboarding",
 };
