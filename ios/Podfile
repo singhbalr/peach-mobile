@@ -18,7 +18,7 @@ target 'peachmobile' do
     # to enable hermes on iOS, change `false` to `true` and then install pods
     :hermes_enabled => flags[:hermes_enabled],
     :fabric_enabled => flags[:fabric_enabled],
-    :flipper_configuration => FlipperConfiguration.enabled,
+    :flipper_configuration => FlipperConfiguration.enabled(["Debug"], {'Flipper' => '0.164.0'}),
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
@@ -29,6 +29,19 @@ target 'peachmobile' do
   end
 
   post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if target.respond_to?(:product_type) and target.product_type == "com.apple.product-type.bundle"
+        target.build_configurations.each do |config|
+            config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+            config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
+        end
+      end
+      if target.name.start_with?('Flipper')
+        target.build_configurations.each do |config|
+          config.build_settings['VALID_ARCHS'] = 'arm64 arm64e'
+        end
+      end
+    end
     react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end

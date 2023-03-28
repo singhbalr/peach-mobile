@@ -5,12 +5,16 @@ interface AuthState {
   password: string;
   isLoggedIn: boolean;
   token: string;
+  patientId: string;
+  patientDetails: any;
 }
 const initialState = {
   username: "",
   password: "",
   isLoggedIn: false,
   token: "",
+  patientId: "",
+  patientDetails: {},
 };
 const authSlice = createSlice({
   name: "auth",
@@ -27,6 +31,12 @@ const authSlice = createSlice({
     },
     setToken: (state: AuthState, action: { payload: string }) => {
       state.token = action.payload;
+    },
+    setPatientId: (state: AuthState, action: { payload: string }) => {
+      state.patientId = action.payload;
+    },
+    setPatientDetails: (state: AuthState, action: { payload: any }) => {
+      state.patientDetails = action.payload;
     },
     setLogout: () => initialState,
   },
@@ -54,6 +64,15 @@ interface SetTokenAction {
   payload: string;
 }
 
+interface SetPatientIdAction {
+  type: string;
+  payload: string;
+}
+interface SetPatientDetails {
+  type: string;
+  payload: any;
+}
+
 interface setLogoutAction {}
 
 type AuthActions =
@@ -61,7 +80,9 @@ type AuthActions =
   | SetPasswordAction
   | SetLoggedInStateAction
   | SetTokenAction
-  | setLogoutAction;
+  | setLogoutAction
+  | SetPatientDetails
+  | SetPatientIdAction;
 
 export const {
   setUsername,
@@ -69,4 +90,6 @@ export const {
   setLoggedInState,
   setToken,
   setLogout,
+  setPatientId,
+  setPatientDetails,
 } = authSlice.actions;
