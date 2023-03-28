@@ -172,7 +172,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     padding: 20,
     paddingBottom: 50,
-    backgroundColor: "yellow",
   },
   input: {
     width: "100%",

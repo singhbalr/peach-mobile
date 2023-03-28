@@ -18,7 +18,6 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       flex: 1,
-      alignItems: "center",
       backgroundColor: colors.background,
     },
     titleTextStyle: {
