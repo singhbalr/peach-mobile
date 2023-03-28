@@ -165,3 +165,69 @@ export const UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID = gql`
     }
   }
 `;
+
+export const PATIENT_LOGIN = gql`
+  mutation PatientLogin($input: PatientCredential) {
+    patientLogin(input: $input) {
+      token
+      data {
+        _id
+        created_at
+        deleted_at
+        medical_record {
+          _id
+          created_at
+          deleted_at
+          is_patient_accessible
+          updated_at
+          medical_record_file {
+            _id
+            created_at
+            deleted_at
+            file_metadata {
+              _id
+              body_part
+              page
+              medical_record_file_id
+              created_at
+              updated_at
+              deleted_at
+            }
+            medical_record_file_description
+            medical_record_file_link
+            medical_record_file_link_text
+            medical_record_file_name
+            medical_record_file_type
+            medical_record_id
+            updated_at
+            medical_record_file_type_id {
+              _id
+              file_type
+              file_type_text
+              created_at
+              updated_at
+              deleted_at
+            }
+          }
+        }
+        patient_address
+        patient_age
+        patient_city
+        patient_date_of_birth
+        patient_email
+        patient_gender
+        patient_height
+        patient_identification_number
+        patient_last_name
+        patient_name
+        patient_password
+        patient_phone
+        patient_state
+        patient_wallet_id
+        patient_weight
+        patient_zipcode
+        updated_at
+      }
+    }
+  }
+`;

@@ -1,11 +1,18 @@
 import React, { useMemo, useState } from "react";
-import { View, FlatList, Image, TouchableWithoutFeedback } from "react-native";
+import {
+  View,
+  FlatList,
+  Image,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+} from "react-native";
 import { useTheme } from "@react-navigation/native";
 // import Icon from "react-native-dynamic-vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RNBounceable from "@freakycoder/react-native-bounceable";
 import Icon from "react-native-dynamic-vector-icons";
 import * as NavigationService from "react-navigation-helpers";
+import { useDispatch } from "react-redux";
 /**
  * ? Local Imports
  */
@@ -13,6 +20,7 @@ import * as NavigationService from "react-navigation-helpers";
 import createStyles from "./NotificationScreen.style";
 import DashboardBody from "./component/DashboardBody";
 import BodyOverlay from "./component/BodyOverlay";
+import { setPassword, setUsername, setLoggedInState } from "../auth/rx/reducer";
 // import MockData from "./mock/MockData";
 // import CardItem from "./components/card-item/CardItem";
 
@@ -38,10 +46,16 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const styles = useMemo(() => createStyles(theme), [theme]);
   const [showOverlay, setShowOverlay] = useState(true);
   const [currentBody, setCurrentBody] = useState("");
-
+  const dispatch = useDispatch();
   /* -------------------------------------------------------------------------- */
   /*                               Render Methods                               */
   /* -------------------------------------------------------------------------- */
+
+  const handleLogout = async () => {
+    dispatch(setUsername(""));
+    dispatch(setPassword(""));
+    dispatch(setLoggedInState(false));
+  };
 
   const MenuButton = () => (
     <RNBounceable>
@@ -57,12 +71,14 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
         <Text>Peach Bio's User</Text>
       </View>
       <View style={{ flexGrow: 10 }} />
-      <Icon
-        name={"md-notifications-outline"}
-        type="Ionicons"
-        color={colors.iconBlack}
-        size={30}
-      />
+      <TouchableOpacity onPress={handleLogout}>
+        <Icon
+          name={"md-notifications-outline"}
+          type="Ionicons"
+          color={colors.iconBlack}
+          size={30}
+        />
+      </TouchableOpacity>
     </View>
   );
   const onBodyPartsPress = (parts: string) => {

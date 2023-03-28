@@ -30,6 +30,7 @@ const Navigation = () => {
   const isDarkMode = scheme === "dark";
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   React.useEffect((): any => {
+    console.log("REACT NAVIGATION");
     return () => (isReadyRef.current = false);
   }, []);
 

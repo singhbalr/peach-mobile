@@ -2,11 +2,17 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 // import type { RootState } from "../../redux/store";
 import { useDispatch } from "react-redux";
-import { setPassword, setUsername, setLoggedInState } from "./rx/reducer";
+import {
+  setUsername,
+  setLoggedInState,
+  setPatientId,
+  setPatientDetails,
+} from "./rx/reducer";
 import Icon from "react-native-vector-icons/Ionicons";
-
+import { useMutation, useSubscription } from "@apollo/client";
 import PInput from "@shared-components/input/PInput";
 import PIbutton from "@shared-components/buttons/Pbutton";
+import { PATIENT_LOGIN } from "../../connection/mutation";
 // import { authBiometrics } from "../../shared/sensors/Biometric";
 interface Props {}
 
@@ -16,6 +22,7 @@ const LoginScreen: React.FC<Props> = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isUserValid, setIsUserValid] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [patientLoginMutation] = useMutation(PATIENT_LOGIN);
   //   const username = useSelector((state: RootState) => state.auth.username);
   const dispatch = useDispatch();
 
@@ -29,7 +36,7 @@ const LoginScreen: React.FC<Props> = () => {
   //   }
   // };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // Perform validation for username or email
     if (!username.includes("@") && !username.includes(".")) {
       return;
@@ -38,10 +45,29 @@ const LoginScreen: React.FC<Props> = () => {
     if (password.length < 8) {
       return;
     }
-    // Perform login logic
-    dispatch(setUsername(username));
-    dispatch(setPassword(password));
-    dispatch(setLoggedInState(true));
+
+    const { data } = await patientLoginMutation({
+      variables: {
+        input: {
+          // eslint-disable-next-line camelcase
+          patient_email: username,
+          patient_password: password,
+        },
+      },
+    });
+
+    if (data.patientLogin.data != null) {
+      console.log(data);
+      const { patient_email, _id } = data.patientLogin.data;
+      console.log(data.patientLogin);
+      console.log(data.patientLogin.data);
+      dispatch(setUsername(patient_email));
+      dispatch(setPatientId(_id));
+      dispatch(setPatientDetails(data.patientLogin.data));
+      dispatch(setLoggedInState(true));
+    }
+
+    // // // Perform login logic
   };
   useEffect(() => {
     if (!username.includes("@") && !username.includes(".")) {
@@ -58,6 +84,10 @@ const LoginScreen: React.FC<Props> = () => {
     }
     setIsPasswordValid(true);
   }, [password]);
+
+  useEffect(() => {
+    console.log("RENDER");
+  }, []);
 
   return (
     <>
