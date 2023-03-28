@@ -109,18 +109,11 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       </View>
       {showOverlay && (
         <View style={styles.overlay}>
-          <BlurView
-            style={styles.overlayContainer}
-            blurType="light"
-            blurAmount={5}
-            reducedTransparencyFallbackColor="white"
-          >
-            <BodyOverlay
-              bodyparts={bodyList}
-              selectedBodyParts={currentBody}
-              onListSelect={onListSelect}
-            />
-          </BlurView>
+          <BodyOverlay
+            bodyparts={bodyList}
+            selectedBodyParts={currentBody}
+            onListSelect={onListSelect}
+          />
         </View>
       )}
     </SafeAreaView>
