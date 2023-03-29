@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import PIbutton from "@shared-components/buttons/Pbutton";
 import { PUBLICSCREENS } from "@shared-constants";
 
@@ -17,7 +17,7 @@ const Onboarding: React.FC<Props> = () => {
     <>
       <View style={styles.container}>
         <Text style={styles.title}>Welcome to Peach Bioverse</Text>
-        <Image 
+        <Image
             source={require("../../assets/contribute-data/onboarding-1.png")}
             style={{
                 marginTop: 50,
@@ -28,7 +28,7 @@ const Onboarding: React.FC<Props> = () => {
             }}
         />
         <Text style={styles.subTitle}>Explore and Contribute your health data to build a healthy future</Text>
-        <PIbutton 
+        <PIbutton
             text="Explore to share"
             type="secondary"
             style={{

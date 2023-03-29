@@ -1,10 +1,10 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, {useMemo, useState, useEffect, createRef} from "react";
 import {View, TouchableOpacity, Text, Image, ScrollView} from "react-native";
 import { useTheme, useIsFocused } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-dynamic-vector-icons";
 import * as NavigationService from "react-navigation-helpers";
-import {} from "@react-navigation/native";
+import Drawer from "react-native-drawer";
 
 /**
  * ? Local Imports
@@ -17,7 +17,7 @@ import { setLogout } from "../auth/rx/reducer";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import PIbutton from "@shared-components/buttons/Pbutton";
-import { useMutation, useSubscription } from "@apollo/client";
+import {useMutation, useQuery, useSubscription} from "@apollo/client";
 import {
   GET_DOCTOR_REQUEST,
   UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
@@ -27,18 +27,24 @@ import {
   NEW_TRANSACTION,
 } from "../../connection/subscription";
 import Notification from "@shared-components/notification/notification";
+import { GET_ALL_OPPORTUNITY } from "../../connection/query";
+import moment from "moment";
 
 interface ProfileScreenProps {}
 
 interface RewardProps {
-  title: string;
+  reward_name: string;
   detail: string;
+  reward_amount: string;
 }
 
 interface OpportunityProps {
+  _id: string;
+  opportunity_picture_banner: string;
   img: any;
   daysLeft: string;
-  title: string;
+  opportunity_name: string;
+  opportunity_data_accesibility_duration: number;
   reward?: undefined | RewardProps[];
   additionalRewards?: undefined | RewardProps[];
 }
@@ -58,6 +64,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [doctorRequest, setDoctorRequest] = useState([]);
   const [getDoctorRequest] = useMutation(GET_DOCTOR_REQUEST);
+  const {loading, error, data} = useQuery(GET_ALL_OPPORTUNITY);
 
   const [updateTransaction] = useMutation(
     UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
@@ -217,9 +224,12 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
         style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}
       >
         <ScrollView>
-          {opportunityData.map((item, key) => (
+          {data?.opportunities?.map((item: any, key: any) => (
             <OpportunityCard key={`opportunity-card-${key}`} {...item} />
           ))}
+          {/*{opportunityData.map((item, key) => (*/}
+          {/*  <OpportunityCard key={`opportunity-card-${key}`} {...item} />*/}
+          {/*))}*/}
         </ScrollView>
       </View>
     );
@@ -269,10 +279,17 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     );
   };
 
+  const calculateDateDiff = (date: moment.MomentInput) => {
+    const now = moment();
+    const event = moment(date, "x");
+
+    return event.diff(now, "days");
+  };
+
   // eslint-disable-next-line react/no-unstable-nested-components
   const OpportunityCard = (opportunityData: OpportunityProps) => {
     return (
-      <TouchableOpacity onPress={() => handleItemPress("Opportunity Record")}>
+      <TouchableOpacity onPress={() => handleItemPress(opportunityData._id)}>
         <View
           style={{
             borderRadius: 15,
@@ -290,7 +307,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           >
             <View>
               <Image
-                source={opportunityData.img}
+                source={{uri: opportunityData?.opportunity_picture_banner}}
                 style={{
                   width: 115,
                   height: 155,
@@ -314,7 +331,9 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                     fontWeight: "900",
                   }}
                 >
-                  {opportunityData.daysLeft}
+                  {calculateDateDiff(
+                    opportunityData.opportunity_data_accesibility_duration,
+                  )} Days
                 </Text>
               </View>
             </View>
@@ -334,7 +353,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                   color: "#383D39",
                 }}
               >
-                {opportunityData.title}
+                {opportunityData.opportunity_name}
               </Text>
               <View
                 style={{
@@ -390,7 +409,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                         lineHeight: 21,
                       }}
                     >
-                      {item.title}
+                      HK${item.reward_amount}
                     </Text>
                     <Text
                       style={{
@@ -400,7 +419,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                         marginRight: 5,
                       }}
                     >
-                      {item.detail}
+                      {item.reward_name}
                     </Text>
                   </View>
                 ))}
