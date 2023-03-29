@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React, { useMemo, useState } from "react";
 import {
   View,
@@ -52,17 +53,19 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   /* -------------------------------------------------------------------------- */
 
   const handleLogout = async () => {
-    // dispatch(setUsername(""));
-    // dispatch(setPassword(""));
-    // dispatch(setLoggedInState(false));
-    NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA);
+    dispatch(setUsername(""));
+    dispatch(setPassword(""));
+    dispatch(setLoggedInState(false));
   };
 
   const MenuButton = () => (
-    <RNBounceable>
+    <RNBounceable onPress={goToSharedData}>
       <Icon name="menu" type="Ionicons" color={colors.iconBlack} size={30} />
     </RNBounceable>
   );
+  const goToSharedData = () => {
+    NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA);
+  };
 
   const Header = () => (
     <View style={styles.header}>
