@@ -231,6 +231,78 @@ export const PATIENT_LOGIN = gql`
     }
   }
 `;
+
+export const GET_REWARDS_BY_PATIENT_ID = gql`
+  mutation GetPatientReward($reward: PatientRewardPatientId!) {
+    getPatientReward(reward: $reward) {
+      _id
+      created_at
+      deleted_at
+      is_redeemed
+      updated_at
+      opportunity {
+        _id
+        created_at
+        deleted_at
+        opportunity_data_accesibility_duration
+        opportunity_description
+        opportunity_is_closed
+        opportunity_expiration
+        opportunity_medical_record_accesibility_duration
+        opportunity_name
+        opportunity_picture_banner
+        opportunity_purpose
+        opportunity_quota_count
+        opportunity_type_id {
+          updated_at
+          opportunity_type
+          opportunity_type_text
+          deleted_at
+          _id
+          created_at
+        }
+        opportunity_withdraw_data_rules
+        organization_id
+        updated_at
+        reward {
+          _id
+          created_at
+          deleted_at
+          opportunity_id
+          reward_name
+          reward_amount
+          reward_type
+          updated_at
+          reward_type_description {
+            _id
+            created_at
+            deleted_at
+            reward_type
+            reward_type_text
+            updated_at
+          }
+        }
+      }
+      organization {
+        _id
+        organization_name
+        organization_wallet_id
+        organization_age
+        organization_address
+        organization_city
+        organization_state
+        organization_zipcode
+        organization_phone
+        organization_email
+        organization_password
+        created_at
+        updated_at
+        deleted_at
+      }
+    }
+  }
+`;
+
 export const GET_SHARED_DATA = gql`
   mutation GetSharedDataByPatient($input: PatientID!) {
     getSharedDataByPatient(input: $input) {
