@@ -1,25 +1,22 @@
-import React, { useMemo, useState } from "react";
-import {
-  View,
-  Image,
-  Dimensions,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
-import { useTheme } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ScreenWidth } from "@freakycoder/react-native-helpers";
+/* eslint-disable react/no-unstable-nested-components */
+import React, {useEffect, useMemo, useState} from "react";
+import {Dimensions, Image, ScrollView, TouchableOpacity, View,} from "react-native";
+import {useTheme} from "@react-navigation/native";
+import {SafeAreaView} from "react-native-safe-area-context";
+import {ScreenWidth} from "@freakycoder/react-native-helpers";
+import {useMutation} from "@apollo/client";
+import {useSelector} from "react-redux";
 /**
  * ? Local Imports
  */
 import createStyles from "./HomeScreen.style";
+import {GET_REWARDS_BY_PATIENT_ID} from "../../connection/mutation";
 /**
  * ? Shared Imports
  */
 import Text from "@shared-components/text-wrapper/TextWrapper";
-import { Button } from "react-native-paper";
-import * as NavigationService from "react-navigation-helpers";
-import { PRIVATESCREENS } from "@shared-constants";
+import {Button} from "react-native-paper";
+import {RootState} from "redux/store";
 
 interface HomeScreenProps {}
 
@@ -45,7 +42,25 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     height: Dimensions.get("window").height,
   };
   const [activeTab, setActiveTab] = useState("Screen1");
+  const [rewardList, setRewardList] = useState([]);
 
+  const [getRewards] = useMutation(GET_REWARDS_BY_PATIENT_ID);
+  const patientId = useSelector((state: RootState) => state.auth.patientId);
+  useEffect(() => {
+    loadRewards();
+  }, []);
+
+  const loadRewards = async () => {
+    const { data } = await getRewards({
+      variables: {
+        reward: {
+          is_redeemed: activeTab === "Screen1" ? false : true,
+          patient_id: patientId,
+        },
+      },
+    });
+    setRewardList(data.getPatientReward);
+  };
   /* -------------------------------------------------------------------------- */
   /*                               Render Methods                               */
   /* -------------------------------------------------------------------------- */
@@ -96,11 +111,24 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   const handleTabPress = async (tabName: string) => {
     setActiveTab(() => {
-      const newCount = tabName;
-      // if (newCount === "Screen3") {
-      //   callGraphQlAPI();
-      // }
-      return newCount;
+      return tabName;
+    });
+    await loadRewards();
+  };
+
+  const calculateDateDiff = (date: moment.MomentInput) => {
+    const now = moment();
+    const event = moment(date, "x");
+
+    return event.diff(now, "days");
+  };
+
+  const renderRewardList = () => {
+    return rewardList?.map((item, key) => {
+      console.log(item);
+      return (
+        <AvailableCard key={`opportunity-card-${key}`} patientReward={item} />
+      );
     });
   };
 
@@ -110,7 +138,8 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     });
   };
 
-  const AvailableCard = (availableDataProps: AvailableDataProps) => {
+  const AvailableCard = (props: any) => {
+    const { patientReward } = props;
     return (
       <TouchableOpacity onPress={() => handleItemPress("Opportunity Record")}>
         <View
@@ -130,7 +159,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           >
             <View>
               <Image
-                source={availableDataProps.img}
+                source={patientReward.opportunity.opportunity_picture_banner}
                 style={{
                   width: 115,
                   height: 155,
@@ -154,7 +183,10 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                     fontWeight: "900",
                   }}
                 >
-                  {availableDataProps.daysLeft}
+                  {calculateDateDiff(
+                    patientReward.opportunity.opportunity_expiration,
+                  )}{" "}
+                  Days
                 </Text>
               </View>
             </View>
@@ -175,7 +207,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                   color: "#383D39",
                 }}
               >
-                {availableDataProps.title}
+                {patientReward.opportunity.opportunity_name}
               </Text>
               <View
                 style={{
@@ -205,7 +237,9 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                       color: "#D1AE6C",
                     }}
                   >
-                    {availableDataProps.reward ? "Reward" : "Additional Reward"}
+                    {patientReward.opportunity.reward
+                      ? "Reward"
+                      : "Additional Reward"}
                   </Text>
                 </View>
               </View>
@@ -215,7 +249,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                   flexDirection: "row",
                 }}
               >
-                {availableDataProps.reward?.map((item, key) => (
+                {patientReward.opportunity.reward?.map((item, key) => (
                   <View
                     key={`reward-item-${key}`}
                     style={{
@@ -231,7 +265,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                         lineHeight: 21,
                       }}
                     >
-                      {item.title}
+                      {item.reward_name}
                     </Text>
                     <Text
                       style={{
@@ -241,7 +275,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                         marginRight: 5,
                       }}
                     >
-                      {item.detail}
+                      {item.reward_amount}
                     </Text>
                   </View>
                 ))}
@@ -296,11 +330,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           backgroundColor: colors.secondaryBackground,
         }}
       >
-        <ScrollView>
-          {availableData.map((item, key) => (
-            <AvailableCard key={`opportunity-card-${key}`} {...item} />
-          ))}
-        </ScrollView>
+        <ScrollView>{renderRewardList()}</ScrollView>
       </View>
     );
   };

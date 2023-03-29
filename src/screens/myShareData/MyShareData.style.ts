@@ -1,6 +1,6 @@
 import { ExtendedTheme } from "@react-navigation/native";
 
-import { ViewStyle, StyleSheet, View, TextStyle, } from "react-native";
+import { ViewStyle, StyleSheet, View, TextStyle } from "react-native";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 interface Style {
   container: ViewStyle;
@@ -18,7 +18,7 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: colors.secondaryBackground,
       paddingHorizontal: 20,
       marginTop: 20,
     },
