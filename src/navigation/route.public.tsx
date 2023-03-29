@@ -19,7 +19,7 @@ const PublicRoutes = () => {
         cardStyle: { backgroundColor: "#7ba23f" },
       }}
     >
-      <Stack.Screen name={PUBLICSCREENS.ONBOARDING} component={Onboarding}/>
+      <Stack.Screen name={PUBLICSCREENS.ONBOARDING} component={Onboarding} />
       <Stack.Screen name={PUBLICSCREENS.LOGINSCREEN} component={LoginScreen} />
     </Stack.Navigator>
   );
