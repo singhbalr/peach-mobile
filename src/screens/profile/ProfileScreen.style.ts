@@ -15,7 +15,7 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       flex: 1,
-      backgroundColor: colors.background,
+      backgroundColor: colors.secondaryBackground,
       paddingHorizontal: 20,
       marginTop: 20,
     },
