@@ -1,5 +1,5 @@
 import React from "react";
-import {Image, useColorScheme} from "react-native";
+import { Image, useColorScheme } from "react-native";
 import Icon from "react-native-dynamic-vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -14,6 +14,7 @@ import SearchScreen from "@screens/search/SearchScreen";
 import ProfileScreen from "@screens/profile/ProfileScreen";
 import NotificationScreen from "@screens/notification/NotificationScreen";
 import MedicalRecordScreen from "@screens/medicalRecord/MedicalRecordScreen";
+import MyShareData from "@screens/myShareData/MyShareData";
 // ? If you want to use stack or tab or both
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();

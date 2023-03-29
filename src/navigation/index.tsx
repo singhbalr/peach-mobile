@@ -14,6 +14,8 @@ import MedicalRecordScreen from "@screens/medicalRecord/MedicalRecordScreen";
 import MedicalFileViewer from "@screens/medicalRecord/MedicalFileViewer";
 import OpportunityRecordScreen from "@screens/opportunities/OpportunitiesRecord";
 import OpportunitiesSuccess from "@screens/opportunities/OpportunitiesSuccess";
+import MyShareData from "@screens/myShareData/MyShareData";
+
 // ? Routes
 import PrivateRoutes from "./route.private";
 
@@ -42,7 +44,12 @@ const Navigation = () => {
       }}
       theme={isDarkMode ? DarkTheme : LightTheme}
     >
-      <Stack.Navigator screenOptions={{ headerShown: false, cardStyle: { backgroundColor: "white" } }}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          cardStyle: { backgroundColor: "white" },
+        }}
+      >
         {isLoggedIn ? (
           <>
             <Stack.Screen
@@ -64,6 +71,10 @@ const Navigation = () => {
             <Stack.Screen
               name={PRIVATESCREENS.OPPORTUNITY_SUCCESS_SCREEN}
               component={OpportunitiesSuccess}
+            />
+            <Stack.Screen
+              name={PRIVATESCREENS.MY_SHARE_DATA}
+              component={MyShareData}
             />
           </>
         ) : (
