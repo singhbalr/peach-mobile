@@ -18,6 +18,8 @@ import createStyles from "./HomeScreen.style";
  */
 import Text from "@shared-components/text-wrapper/TextWrapper";
 import { Button } from "react-native-paper";
+import * as NavigationService from "react-navigation-helpers";
+import { PRIVATESCREENS } from "@shared-constants";
 
 interface HomeScreenProps {}
 
@@ -102,11 +104,15 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     });
   };
 
+  const handleItemPress = (OpportunityRecord: string | number) => {
+    NavigationService.push(PRIVATESCREENS.AVAILABLE_REWARD_DETAIL_SCREEN, {
+      OpportunityRecord,
+    });
+  };
+
   const AvailableCard = (availableDataProps: AvailableDataProps) => {
     return (
-      <TouchableOpacity
-      // onPress={() => handleItemPress("Opportunity Record")}
-      >
+      <TouchableOpacity onPress={() => handleItemPress("Opportunity Record")}>
         <View
           style={{
             borderRadius: 15,
@@ -299,11 +305,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     );
   };
 
-  const renderScreen = (activeTab: string) => {
+  const renderScreen = () => {
     switch (activeTab) {
       case "Screen1":
         return <Screen1 />;
     }
+
+    return false;
   };
 
   const tabList = [
@@ -425,7 +433,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           ))}
         </ScrollView>
       </View>
-      {renderScreen(activeTab)}
+      {renderScreen()}
     </SafeAreaView>
   );
 };

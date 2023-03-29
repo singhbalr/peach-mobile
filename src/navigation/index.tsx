@@ -65,6 +65,10 @@ const Navigation = () => {
               name={PRIVATESCREENS.OPPORTUNITY_SUCCESS_SCREEN}
               component={OpportunitiesSuccess}
             />
+            <Stack.Screen
+              name={PRIVATESCREENS.AVAILABLE_REWARD_DETAIL_SCREEN}
+              component={OpportunitiesSuccess}
+            />
           </>
         ) : (
           <Stack.Screen name={PUBLICSCREENS.ROOT} component={PublicRoutes} />

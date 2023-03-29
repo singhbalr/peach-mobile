@@ -8,7 +8,8 @@ export const PRIVATESCREENS = {
   MEDICAL_RECORD: "Medical Record",
   MEDICAL_FILE_VIEWER: "Medical File Viewer",
   OPPORTUNITY_RECORD: "Opportunity Record",
-  OPPORTUNITY_SUCCESS_SCREEN: "Opportunity Success Screen"
+  OPPORTUNITY_SUCCESS_SCREEN: "Opportunity Success Screen",
+  AVAILABLE_REWARD_DETAIL_SCREEN: "Available Reward Detail Screen",
   // DETAIL: "Detail",
 };
 
