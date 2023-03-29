@@ -8,7 +8,8 @@ export const PRIVATESCREENS = {
   MEDICAL_RECORD: "Medical Record",
   MEDICAL_FILE_VIEWER: "Medical File Viewer",
   OPPORTUNITY_RECORD: "Opportunity Record",
-  OPPORTUNITY_SUCCESS_SCREEN: "Opportunity Success Screen"
+  OPPORTUNITY_SUCCESS_SCREEN: "Opportunity Success Screen",
+  MY_SHARE_DATA: "MyShareData",
   // DETAIL: "Detail",
 };
 
@@ -16,4 +17,5 @@ export const PUBLICSCREENS = {
   ROOT: "PublicRoutes",
   LOGINSCREEN: "LoginScreen",
   ONBOARDING: "Onboarding",
+  MY_SHARE_DATA: "MyShareData",
 };

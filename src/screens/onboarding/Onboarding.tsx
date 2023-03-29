@@ -3,13 +3,14 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import PIbutton from "@shared-components/buttons/Pbutton";
 import { PUBLICSCREENS } from "@shared-constants";
+
 interface Props {}
 
 const Onboarding: React.FC<Props> = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation(); // get navigation object
 
   const handleExplorePress = () => {
-    navigation.navigate(PUBLICSCREENS.LOGINSCREEN);
+    navigation.navigate(PUBLICSCREENS.LOGINSCREEN); // navigate to login screen
   };
 
   return (
@@ -37,6 +38,7 @@ const Onboarding: React.FC<Props> = () => {
                 marginTop: 20
             }}
             onPress={handleExplorePress}
+          
         />
       </View>
     </>
