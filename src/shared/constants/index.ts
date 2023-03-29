@@ -8,8 +8,9 @@ export const PRIVATESCREENS = {
   MEDICAL_RECORD: "Medical Record",
   MEDICAL_FILE_VIEWER: "Medical File Viewer",
   OPPORTUNITY_RECORD: "Opportunity Record",
-  OPPORTUNITY_SUCCESS_SCREEN: "Opportunity Success Screen"
+  OPPORTUNITY_SUCCESS_SCREEN: "Opportunity Success Screen",
   // DETAIL: "Detail",
+  BIOVERSE_DETAIL_SCREEN: "BioverseDetailScreen"
 };
 
 export const PUBLICSCREENS = {

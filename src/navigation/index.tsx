@@ -14,6 +14,7 @@ import MedicalRecordScreen from "@screens/medicalRecord/MedicalRecordScreen";
 import MedicalFileViewer from "@screens/medicalRecord/MedicalFileViewer";
 import OpportunityRecordScreen from "@screens/opportunities/OpportunitiesRecord";
 import OpportunitiesSuccess from "@screens/opportunities/OpportunitiesSuccess";
+import BioverseDetailScreen from "@screens/bioverse/BioverseDetailScreen";
 // ? Routes
 import PrivateRoutes from "./route.private";
 
@@ -64,6 +65,10 @@ const Navigation = () => {
             <Stack.Screen
               name={PRIVATESCREENS.OPPORTUNITY_SUCCESS_SCREEN}
               component={OpportunitiesSuccess}
+            />
+            <Stack.Screen
+              name={PRIVATESCREENS.BIOVERSE_DETAIL_SCREEN}
+              component={BioverseDetailScreen}
             />
           </>
         ) : (
