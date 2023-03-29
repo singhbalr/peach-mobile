@@ -1,4 +1,4 @@
-import { ViewStyle, StyleSheet, TextStyle, ImageStyle } from "react-native";
+import {ViewStyle, StyleSheet, TextStyle, ImageStyle, Dimensions} from "react-native";
 import { ExtendedTheme } from "@react-navigation/native";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 
@@ -11,7 +11,8 @@ interface Style {
   contentContainer: ViewStyle;
   listContainer: ViewStyle;
   profilePicImageStyle: ImageStyle;
-  headerText: TextStyle
+  headerText: TextStyle;
+  pdf: ViewStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -67,6 +68,11 @@ export default (theme: ExtendedTheme) => {
       height: 50,
       width: 50,
       borderRadius: 30,
+    },
+    pdf: {
+      flex: 1,
+      width: Dimensions.get("window").width - 20,
+      height: Dimensions.get("window").height - 100,
     },
   });
 };
