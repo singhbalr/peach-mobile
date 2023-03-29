@@ -7,7 +7,6 @@ import { PUBLICSCREENS } from "@shared-constants";
 // ? Screens
 import LoginScreen from "@screens/auth/LoginScreen";
 import Onboarding from "@screens/onboarding/Onboarding";
-import MyShareData from "@screens/myShareData/MyShareData";
 
 // ? If you want to use stack or tab or both
 const Stack = createStackNavigator();
@@ -20,8 +19,7 @@ const PublicRoutes = () => {
         cardStyle: { backgroundColor: "#7ba23f" },
       }}
     >
-      <Stack.Screen name={PUBLICSCREENS.MY_SHARE_DATA} component={MyShareData}/>
-      <Stack.Screen name={PUBLICSCREENS.ONBOARDING} component={Onboarding}/>
+      <Stack.Screen name={PUBLICSCREENS.ONBOARDING} component={Onboarding} />
       <Stack.Screen name={PUBLICSCREENS.LOGINSCREEN} component={LoginScreen} />
     </Stack.Navigator>
   );

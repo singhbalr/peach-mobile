@@ -52,9 +52,10 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   /* -------------------------------------------------------------------------- */
 
   const handleLogout = async () => {
-    dispatch(setUsername(""));
-    dispatch(setPassword(""));
-    dispatch(setLoggedInState(false));
+    // dispatch(setUsername(""));
+    // dispatch(setPassword(""));
+    // dispatch(setLoggedInState(false));
+    NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA);
   };
 
   const MenuButton = () => (

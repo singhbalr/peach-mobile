@@ -17,5 +17,4 @@ export const PUBLICSCREENS = {
   ROOT: "PublicRoutes",
   LOGINSCREEN: "LoginScreen",
   ONBOARDING: "Onboarding",
-  MY_SHARE_DATA: "MyShareData",
 };

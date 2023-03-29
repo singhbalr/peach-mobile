@@ -231,3 +231,64 @@ export const PATIENT_LOGIN = gql`
     }
   }
 `;
+export const GET_SHARED_DATA = gql`
+  mutation GetSharedDataByPatient($input: PatientID!) {
+    getSharedDataByPatient(input: $input) {
+      _id
+      created_at
+      deleted_at
+      opportunity {
+        _id
+        created_at
+        deleted_at
+        opportunity_data_accesibility_duration
+        opportunity_description
+        opportunity_expiration
+        opportunity_is_closed
+        opportunity_medical_record_accesibility_duration
+        opportunity_name
+        opportunity_picture_banner
+        opportunity_purpose
+        opportunity_quota_count
+        opportunity_withdraw_data_rules
+        organization_id
+        updated_at
+        organization {
+          _id
+          organization_name
+          organization_wallet_id
+          organization_age
+          organization_address
+          organization_city
+          organization_state
+          organization_zipcode
+          organization_phone
+          organization_email
+          organization_password
+          created_at
+          updated_at
+          deleted_at
+        }
+        opportunity_type_id {
+          _id
+          opportunity_type
+          opportunity_type_text
+          created_at
+          updated_at
+          deleted_at
+        }
+      }
+      organization_id
+      transaction_hash
+      transaction_is_closed
+      updated_at
+      transaction_type {
+        _id
+        transaction_type_text
+        created_at
+        updated_at
+        deleted_at
+      }
+    }
+  }
+`;
