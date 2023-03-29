@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect } from "react";
-import { View, ScrollView, Image, TouchableOpacity, Text } from "react-native";
+import {View, ScrollView, Image, TouchableOpacity, Text, Dimensions} from "react-native";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-dynamic-vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -15,6 +15,7 @@ import MedicalRecordDummy from "";
  * ? Shared Imports
  */
 import fonts from "@fonts";
+import Pdf from "react-native-pdf";
 
 interface MedicalFileViewerProps {
   navigation: any;
@@ -29,6 +30,7 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
   const { fileObject } = props.route.params;
+  const source = require("../../assets/pdf-sample/sample1.pdf");
 
   const MenuButton = () => (
     <RNBounceable>
@@ -104,11 +106,31 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
         </View>
       </View>
       <View style={{}}>
-        <Image
-          style={{ width: ScreenWidth * 0.9 }}
-          resizeMode={"stretch"}
-          source={require("./../../assets/medical-record/MedicalRecordDummy.png")}
-        />
+        {fileObject.fileType === "PDF" ? (
+          <Pdf
+            trustAllCerts={false}
+            source={require("../../assets/pdf-sample/sample1.pdf")}
+            onLoadComplete={(numberOfPages,filePath) => {
+              console.log(`Number of pages: ${numberOfPages}`);
+            }}
+            onPageChanged={(page,numberOfPages) => {
+              console.log(`Current page: ${page}`);
+            }}
+            onError={(error) => {
+              console.log(error);
+            }}
+            onPressLink={(uri) => {
+              console.log(`Link pressed: ${uri}`);
+            }}
+            style={styles.pdf}
+          />
+        ) : (
+          <Image
+            style={{ width: ScreenWidth * 0.9 }}
+            resizeMode={"stretch"}
+            source={require("./../../assets/medical-record/MedicalRecordDummy.png")}
+          />
+        )}
       </View>
     </SafeAreaView>
   );
