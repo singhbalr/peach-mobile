@@ -18,7 +18,7 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       flex: 1,
-      backgroundColor: colors.background,
+      backgroundColor: colors.secondaryBackground,
     },
     titleTextStyle: {
       fontSize: 32,
