@@ -1,5 +1,12 @@
-import React, { useMemo, useEffect } from "react";
-import {View, ScrollView, Image, TouchableOpacity, Text, Dimensions} from "react-native";
+import React, { useMemo, useEffect, useRef } from "react";
+import {
+  View,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Text,
+  Dimensions,
+} from "react-native";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-dynamic-vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -29,8 +36,14 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
-  const { fileObject } = props.route.params;
+  // const { fileObject } = props.route.params;
   const source = require("../../assets/pdf-sample/sample1.pdf");
+  const pdfRef = useRef();
+
+  const handleLoadComplete = (numberOfPages, filePath) => {
+    console.log(`Number of pages: ${numberOfPages}`);
+    pdfRef.current && pdfRef.current.setPage("3");
+  };
 
   const MenuButton = () => (
     <RNBounceable>
@@ -44,7 +57,7 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
   );
 
   useEffect(() => {
-    console.log(fileObject);
+    // console.log(fileObject);
   }, []);
   return (
     <SafeAreaView style={styles.container}>
@@ -60,7 +73,8 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
         <View style={{ flex: 5, flexDirection: "column", paddingBottom: 20 }}>
           <View>
             <Text style={{ fontSize: 18, color: "#1C1C1C", fontWeight: "600" }}>
-              {fileObject.fileName}
+              {/* {fileObject.fileName} */}
+              {"HK-medical-record.pdf"}
             </Text>
           </View>
           <View
@@ -73,12 +87,14 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
             <View>
               <View>
                 <Text style={{ fontSize: 14, color: "#1C1C1C" }}>
-                  {fileObject.fromData}
+                  {/* {fileObject.fromData} */}
+                  {"HK-medical-record.pdf"}
                 </Text>
               </View>
               <View>
                 <Text style={{ fontSize: 14, color: "#1C1C1C" }}>
-                  {fileObject.receivedFrom}
+                  {/* {fileObject.receivedFrom} */}
+                  {"HK-medical-record.pdf"}
                 </Text>
               </View>
             </View>
@@ -99,21 +115,39 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
                   elevation: 5,
                 }}
               >
-                <Text> {fileObject.type} </Text>
+                <Text> PDF </Text>
               </View>
             </View>
           </View>
         </View>
       </View>
       <View style={{}}>
-        {fileObject.fileType === "PDF" ? (
+        <Pdf
+          trustAllCerts={false}
+          source={{
+            uri: "https://firebasestorage.googleapis.com/v0/b/peach-fb.appspot.com/o/Sample_TY01_body%20check%20report_for%20Wistkey.pdf?alt=media&token=92420f6f-619b-4aa2-a6a9-6efeea5e3f10",
+          }}
+          page={3}
+          onLoadComplete={handleLoadComplete}
+          onPageChanged={(page, numberOfPages) => {
+            console.log(`Current page: ${page}`);
+          }}
+          onError={(error) => {
+            console.log(error);
+          }}
+          onPressLink={(uri) => {
+            console.log(`Link pressed: ${uri}`);
+          }}
+          style={styles.pdf}
+        />
+        {/* {fileObject.fileType === "PDF" ? (
           <Pdf
             trustAllCerts={false}
             source={require("../../assets/pdf-sample/sample1.pdf")}
-            onLoadComplete={(numberOfPages,filePath) => {
+            onLoadComplete={(numberOfPages, filePath) => {
               console.log(`Number of pages: ${numberOfPages}`);
             }}
-            onPageChanged={(page,numberOfPages) => {
+            onPageChanged={(page, numberOfPages) => {
               console.log(`Current page: ${page}`);
             }}
             onError={(error) => {
@@ -130,7 +164,7 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
             resizeMode={"stretch"}
             source={require("./../../assets/medical-record/MedicalRecordDummy.png")}
           />
-        )}
+        )} */}
       </View>
     </SafeAreaView>
   );

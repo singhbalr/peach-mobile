@@ -364,3 +364,47 @@ export const GET_SHARED_DATA = gql`
     }
   }
 `;
+export const GET_MEDICAL_RECORD_BY_BODY_PART = gql`
+  mutation GetMedicalRecordFileByBodyTypeAndPatientId(
+    $record: SearchBodyType!
+  ) {
+    getMedicalRecordFileByBodyTypeAndPatientId(record: $record) {
+      _id
+      medical_record_file_description
+      medical_record_file_link
+      medical_record_file_link_text
+      medical_record_file_name
+      medical_record_file_type
+      medical_record_file_type_id {
+        updated_at
+        file_type_text
+        file_type
+        deleted_at
+        created_at
+        _id
+      }
+      updated_at
+      medical_record {
+        updated_at
+        deleted_at
+        created_at
+        _id
+        hospital_id {
+          _id
+          created_at
+          deleted_at
+          hospital_address
+          hospital_city
+          hospital_email
+          hospital_logo
+          hospital_name
+          hospital_phone
+          hospital_state
+          hospital_website
+          hospital_zipcode
+          updated_at
+        }
+      }
+    }
+  }
+`;
