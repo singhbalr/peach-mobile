@@ -1,5 +1,14 @@
+/* eslint-disable camelcase */
 import React, { useMemo, useEffect, useState } from "react";
-import {View, ScrollView, Image, TouchableOpacity, Text, StyleSheet} from "react-native";
+import {
+  View,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-dynamic-vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -9,6 +18,8 @@ import { ScreenWidth } from "@freakycoder/react-native-helpers";
 /**
  * ? Local Imports
  */
+import Popup from "../../components/PopupContribute";
+
 import createStyles from "./OpportunitiesRecord.style";
 import PIbutton from "@shared-components/buttons/Pbutton";
 
@@ -18,6 +29,20 @@ import PIbutton from "@shared-components/buttons/Pbutton";
 import { PRIVATESCREENS } from "@shared-constants";
 import fonts from "@fonts";
 import { FlatList } from "react-native-gesture-handler";
+import countDaysLeft from "components/countDayLeft";
+import {
+  CasePrivacyPolice1,
+  CasePrivacyPolice2,
+  CasePrivacyPolice3,
+  CasePrivacyPolice4,
+  CasePrivacyPolice5,
+} from "./privacyPoliceData";
+import { useMutation } from "@apollo/client";
+import { CREATE_TRANSACTION_ORGANIZATION } from "connection/mutation";
+import { useSelector } from "react-redux";
+import { RootState } from "redux/store";
+import Button from "components/button";
+import MyShareData from "@screens/myShareData/MyShareData";
 
 interface OpportunityRecordScreenProps {
   navigation: any;
@@ -33,8 +58,45 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
   const { medicalReport, parts } = props.route.params;
   const [activeTab, setActiveTab] = useState("Purpose");
   const handleItemPress = () => {
-    console.log("ACCEPTOPPRECORD");
     NavigationService.push(PRIVATESCREENS.OPPORTUNITY_SUCCESS_SCREEN);
+  };
+  const [popupVisible, setPopupVisible] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [createTransactionOrganizationMutation] = useMutation(
+    CREATE_TRANSACTION_ORGANIZATION,
+  );
+  const patientId = useSelector((state: RootState) => state.auth.patientId);
+
+  const detail: any = props.route.params.OpportunityRecord;
+
+  const isAppliedPatient = () => {
+    // detail.applied_patient.map((item: any) => {
+    //   if (item.patient._id == patientId) {
+    //     return true;
+    //   }
+    // });
+    // return false;
+    const found = detail.applied_patient.find(
+      (item: any) => item.patient._id == patientId,
+    );
+    return typeof found === "object" ? true : false;
+  };
+
+  console.log(isAppliedPatient(), "isAppliedPatient");
+
+  const dataSharPrivacyPolicy = () => {
+    switch (detail.opportunity_type_id.opportunity_type) {
+      case "PRODUCT_DEVELOPMENT":
+        return CasePrivacyPolice1;
+      case "PROMOTION":
+        return CasePrivacyPolice2;
+      case "PHARMA_RWD":
+        return CasePrivacyPolice3;
+      case "INSURANCE":
+        return CasePrivacyPolice4;
+      default:
+        return CasePrivacyPolice5;
+    }
   };
 
   /* -------------------------------------------------------------------------- */
@@ -42,7 +104,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
   /* -------------------------------------------------------------------------- */
   // eslint-disable-next-line react/no-unstable-nested-components
   const MenuButton = () => (
-    <RNBounceable>
+    <RNBounceable onPress={() => NavigationService.goBack()}>
       <Icon
         name="arrow-back"
         type="Ionicons"
@@ -86,21 +148,24 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           }}
         >
           <Image
-            source={require("../../assets/contribute-data/sample-image-detail-1.png")}
+            source={{
+              uri: detail.opportunity_picture_banner,
+            }}
             style={{
-              width: 323,
+              alignSelf: "stretch",
               height: 184,
+              borderRadius: 15,
             }}
           />
           <View
             style={{
               backgroundColor: "#383D39",
-              // borderRadius: 8,
-              // paddingHorizontal: 10,
+              borderRadius: 8,
+              paddingHorizontal: 9,
               paddingVertical: 4,
               position: "absolute",
-              bottom: 9,
-              // left: 7,
+              bottom: 15,
+              left: 16,
             }}
           >
             <Text
@@ -110,7 +175,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 fontWeight: "900",
               }}
             >
-              10 Days left
+              {countDaysLeft(detail.opportunity_expiration)} Days left
             </Text>
           </View>
         </View>
@@ -129,7 +194,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               color: "#383D39",
             }}
           >
-            Support colorectal screening to save lives{" "}
+            {detail.opportunity_name}
           </Text>
           <View
             style={{
@@ -173,70 +238,31 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             marginBottom: 20,
           }}
         >
-          <View
-            style={{
-              flexDirection: "row",
-            }}
-          >
-            <Image
-              source={require("../../assets/contribute-data/info-icon.png")}
+          {dataSharPrivacyPolicy().map((item, index) => (
+            <View
+              key={index}
               style={{
-                marginTop: 5,
-                width: 9,
-                height: 9,
-              }}
-            />
-            <Text
-              style={{
-                marginHorizontal: 10,
+                flexDirection: "row",
               }}
             >
-              Your name, phone number, date of birth and the first 4 digits of
-              your Hong Kong Identity Card number.
-            </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-            }}
-          >
-            <Image
-              source={require("../../assets/contribute-data/clinical-record-icon.png")}
-              style={{
-                marginTop: 5,
-                width: 9,
-                height: 9,
-              }}
-            />
-            <Text
-              style={{
-                marginHorizontal: 10,
-              }}
-            >
-              The data stored in the informatics system of the Connected Clinics, Hospitals and Labs.
-            </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-            }}
-          >
-            <Image
-              source={require("../../assets/contribute-data/iot-icon.png")}
-              style={{
-                marginTop: 5,
-                width: 9,
-                height: 9,
-              }}
-            />
-            <Text
-              style={{
-                marginHorizontal: 10,
-              }}
-            >
-              The data stored in the informatics system of the Connected Wearable Devices.
-            </Text>
-          </View>
+              {console.log(item.icon, "icon")}
+              <Image
+                source={item.icon}
+                style={{
+                  marginTop: 5,
+                  width: 9,
+                  height: 9,
+                }}
+              />
+              <Text
+                style={{
+                  marginHorizontal: 10,
+                }}
+              >
+                {item.desc}
+              </Text>
+            </View>
+          ))}
         </View>
         <View
           style={{
@@ -275,71 +301,62 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         <View
           style={{
             flexDirection: "row",
+            flexWrap: "wrap",
           }}
         >
-          <View
-            style={{
-              flexDirection: "column",
-            }}
-          >
-            <Text
+          {detail.reward.map((item: any, index: number) => (
+            <View
+              key={index}
               style={{
-                fontWeight: "600",
-                fontSize: 22,
-                color: "#606461",
-                lineHeight: 21,
+                flexDirection: "column",
+                marginLeft: 10,
+                marginBottom: 10,
               }}
             >
-              2 doses
-            </Text>
-            <Text
-              style={{
-                fontWeight: "600",
-                fontSize: 13,
-                color: "#888B88",
-                lineHeight: 21,
-              }}
-            >
-              Shingrix Vaccine
-            </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "column",
-              marginLeft: 36,
-            }}
-          >
-            <Text
-              style={{
-                fontWeight: "600",
-                fontSize: 22,
-                color: "#606461",
-                lineHeight: 21,
-              }}
-            >
-              HK$100
-            </Text>
-            <Text
-              style={{
-                fontWeight: "600",
-                fontSize: 13,
-                color: "#888B88",
-                lineHeight: 21,
-              }}
-            >
-              K11 Musea cash coupon
-            </Text>
-          </View>
+              <Text
+                style={{
+                  fontWeight: "600",
+                  fontSize: 22,
+                  color: "#606461",
+                  lineHeight: 21,
+                }}
+              >
+                {item.reward_amount}
+              </Text>
+              <Text
+                style={{
+                  fontWeight: "600",
+                  fontSize: 13,
+                  color: "#888B88",
+                  lineHeight: 21,
+                }}
+              >
+                {item.reward_type_description.reward_type_text}{" "}
+                {item.reward_name}
+              </Text>
+            </View>
+          ))}
         </View>
         <View
           style={{
-            marginTop: 15,
+            marginTop: 5,
             marginBottom: 16,
           }}
         >
-          <Text>
-            You will be entitled to one coupon for two doses of the Shingrix Vaccine Free, and a HK$100 K11
-            Musea cash coupon.
+          <Text
+            style={{
+              color: "#383D39",
+            }}
+          >
+            You will be entitled to{" "}
+            {detail.reward.map(
+              (item: any) =>
+                item.reward_amount +
+                " " +
+                item.reward_type_description.reward_type_text +
+                " " +
+                item.reward_name,
+            )}
           </Text>
         </View>
         <View
@@ -430,6 +447,12 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             </View>
           </View>
         ))}
+
+        <View
+          style={{
+            marginBottom: 20,
+          }}
+        />
         {/*<View style={{ flexDirection: "row", justifyContent: "center" }}>*/}
         {/*  <Icon*/}
         {/*    name={"gift"}*/}
@@ -698,27 +721,282 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
   useEffect(() => {
     console.log(parts);
     console.log(medicalReport);
+    console.log(patientId, "patientId");
   }, []);
 
+  const handleContributeNow = async () => {
+    setIsLoading(true);
+    const { data } = await createTransactionOrganizationMutation({
+      variables: {
+        input: {
+          transaction_type_id: "640a03b1c34e1f0ced078807",
+          organization_id: detail.organization._id,
+          transaction_is_closed: false,
+          patient_id: patientId,
+          opportunity_id: detail._id,
+        },
+      },
+    });
+
+    // console.log(data, "data");
+
+    // if (data.createTransactionOrganization) {
+    setPopupVisible(true);
+    // }
+
+    setIsLoading(false);
+    // console.log(data, "data");
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={{
+        ...styles.container,
+        backgroundColor: "white",
+      }}
+    >
       <View style={styles.header}>
         <MenuButton />
-        <Text style={styles.headerText}>Colorectal Screening</Text>
-      </View>
-      <View
-        style={{
-          marginBottom: 26,
-        }}
-      >
-        <ScrollView
-          showsVerticalScrollIndicator={false}>
-          <OpportunityCard />
-        </ScrollView>
+        <Text
+          style={{
+            ...styles.headerText,
+            textAlign: "center",
+            flex: 1,
+            marginRight: 20,
+          }}
+        >
+          Colorectal Screening
+        </Text>
       </View>
       <View>
-        <Text>asd</Text>
+        <ScrollView
+          style={{
+            paddingBottom: isAppliedPatient() ? 20 : 100,
+          }}
+          showsVerticalScrollIndicator={false}
+        >
+          <OpportunityCard />
+        </ScrollView>
+        {isAppliedPatient() ? null : (
+          <View
+            style={{
+              position: "absolute",
+              bottom: 0,
+              height: 130,
+              width: Dimensions.get("window").width,
+              backgroundColor: "white",
+              paddingVertical: 14,
+              paddingRight: 34,
+            }}
+          >
+            <Button
+              isLoading={isLoading}
+              onPress={handleContributeNow}
+              text="Contribute Now"
+              bgColor="#7BA040"
+              textColor="white"
+            />
+          </View>
+        )}
       </View>
+      <Popup
+        visible={popupVisible}
+        title={"Thank you for your contribution!"}
+        element={
+          <View
+            style={{
+              flex: 1,
+            }}
+          >
+            <View
+              style={{
+                padding: 10,
+                borderWidth: 0.75,
+                marginTop: 25,
+                borderRadius: 15,
+                // flex: 1,
+                borderColor: "#BABCB7",
+                width: 350,
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              <View
+                style={{
+                  position: "relative",
+                }}
+              >
+                <Image
+                  source={{
+                    uri: detail.opportunity_picture_banner,
+                  }}
+                  style={{
+                    height: 155,
+                    width: 115,
+                    borderRadius: 15,
+                    marginRight: 15,
+                  }}
+                />
+                <View
+                  style={{
+                    position: "absolute",
+                    bottom: 9,
+                    left: 7,
+                    borderRadius: 8,
+                    paddingVertical: 4,
+                    paddingHorizontal: 9,
+                    backgroundColor: "#383D39",
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 9,
+                      fontWeight: "900",
+                    }}
+                  >
+                    {countDaysLeft(detail.opportunity_expiration)} Days Left
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  width: 100,
+                  marginRight: 200,
+                }}
+              >
+                <Text
+                  style={{
+                    width: 200,
+                    fontWeight: "700",
+                    fontSize: 16,
+                    color: "#383D39",
+                  }}
+                >
+                  {detail.opportunity_name}
+                </Text>
+                <View
+                  style={{
+                    marginTop: 25,
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginBottom: 15,
+                  }}
+                >
+                  <Image
+                    source={require("../../assets/contribute-data/reward-icon.png")}
+                    style={{
+                      width: 20,
+                      height: 20,
+                      alignItems: "center",
+                    }}
+                  />
+                  <View
+                    style={{
+                      marginBottom: 0,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        marginLeft: 4,
+                        lineHeight: 17,
+                        fontWeight: "600",
+                        fontSize: 18,
+                        alignItems: "center",
+                        color: "#D1AE6C",
+                      }}
+                    >
+                      Reward
+                    </Text>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    width: 300,
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  {detail.reward.map((item: any, index: number) => (
+                    <View
+                      key={index}
+                      style={{
+                        width: 100,
+                        // backgroundColor: "red",
+                        display: "flex",
+                        flexDirection: "column",
+                        // marginRight: 10,
+                        marginBottom: 10,
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontWeight: "600",
+                          fontSize: 10,
+                          color: "#606461",
+                        }}
+                      >
+                        {item.reward_amount}
+                      </Text>
+                      <Text
+                        style={{
+                          fontWeight: "600",
+                          fontSize: 13,
+                          color: "#888B88",
+                        }}
+                      >
+                        {item.reward_type_description.reward_type_text}{" "}
+                        {item.reward_name}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              </View>
+            </View>
+            <View
+              style={{
+                marginVertical: 20,
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Image
+                source={require("../../assets/contribute-data/lock-icon.png")}
+                style={{
+                  width: 19,
+                  height: 24,
+                  marginRight: 20,
+                  alignItems: "center",
+                }}
+              />
+              <Text>
+                Your data is securely shared. Trace your data in My{" "}
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                  }}
+                >
+                  Shared Data.
+                </Text>
+              </Text>
+            </View>
+            <Button
+              isLoading={isLoading}
+              onPress={() =>
+                NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA)
+              }
+              text="My Shared Data"
+              bgColor="#7BA040"
+              textColor="white"
+            />
+          </View>
+        }
+        onPressList={() => {}}
+        onClose={() => {
+          setPopupVisible(false);
+        }}
+      />
     </SafeAreaView>
   );
 };

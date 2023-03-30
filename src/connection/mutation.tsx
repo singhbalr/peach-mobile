@@ -365,6 +365,18 @@ export const GET_SHARED_DATA = gql`
   }
 `;
 
+export const CREATE_TRANSACTION_ORGANIZATION = gql`
+  mutation CreateTransactionOrganization($input: TransactionInput!) {
+    createTransactionOrganization(input: $input) {
+      _id
+      created_at
+      deleted_at
+      organization_id
+      updated_at
+      transaction_hash
+    }
+  }
+`;
 export const REDEEM_REWARD = gql`
   mutation RedeemPatientReward($reward: PatientRewardInput!) {
     redeemPatientReward(reward: $reward) {
