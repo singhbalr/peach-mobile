@@ -12,6 +12,7 @@ export const PRIVATESCREENS = {
   MY_SHARE_DATA: "MyShareData",
   AVAILABLE_REWARD_DETAIL_SCREEN: "Available Reward Detail Screen",
   // DETAIL: "Detail",
+  BIOVERSE_DETAIL_SCREEN: "BioverseDetailScreen"
 };
 
 export const PUBLICSCREENS = {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, useColorScheme } from "react-native";
+import {Image, Platform, useColorScheme} from "react-native";
 import Icon from "react-native-dynamic-vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -15,6 +15,7 @@ import ProfileScreen from "@screens/profile/ProfileScreen";
 import NotificationScreen from "@screens/notification/NotificationScreen";
 import MedicalRecordScreen from "@screens/medicalRecord/MedicalRecordScreen";
 import MyShareData from "@screens/myShareData/MyShareData";
+import YourBioverseScreen from "@screens/bioverse/YourBioverseScreen";
 import RewardDetails from "@screens/home/RewardDetails";
 // ? If you want to use stack or tab or both
 const Tab = createBottomTabNavigator();
@@ -114,16 +115,23 @@ const PrivateRoutes = () => {
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) =>
             renderTabIcon(route, focused, color, size),
-          tabBarActiveTintColor: palette.primary,
+          tabBarActiveTintColor: palette.background,
           tabBarInactiveTintColor: "gray",
           tabBarStyle: {
             backgroundColor: isDarkMode ? palette.black : palette.white,
+            height: 83,
+            paddingTop: 18,
+            paddingBottom: Platform.OS === 'ios' ? 25 : 18,
+            paddingHorizontal: Platform.OS === 'ios' ? 16 : 10,
           },
+          tabBarIconStyle: {
+            marginBottom: 10
+          }
         })}
       >
         <Tab.Screen
           name={PRIVATESCREENS.DASHBOARD}
-          component={NotificationScreen}
+          component={YourBioverseScreen}
         />
         <Tab.Screen
           name={PRIVATESCREENS.CLINICAL_REPORT}
