@@ -364,3 +364,15 @@ export const GET_SHARED_DATA = gql`
     }
   }
 `;
+
+export const REDEEM_REWARD = gql`
+  mutation RedeemPatientReward($reward: PatientRewardInput!) {
+    redeemPatientReward(reward: $reward) {
+      _id
+      created_at
+      deleted_at
+      is_redeemed
+      updated_at
+    }
+  }
+`;
