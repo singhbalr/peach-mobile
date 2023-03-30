@@ -38,10 +38,11 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
       variables: {
         reward: {
           // eslint-disable-next-line camelcase
-          patient_reward_id: patientId,
+          patient_reward_id: detail?._id,
         },
       },
     });
+    console.log(data);
   };
 
   useEffect(() => {
