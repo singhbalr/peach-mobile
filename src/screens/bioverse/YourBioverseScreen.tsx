@@ -214,6 +214,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     flex: 1,
+    marginTop: 70
   },
   bodySvg: {
     flex: 1,

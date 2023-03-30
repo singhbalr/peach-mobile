@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
   container: {
     position: 'relative',
     width: '100%',
-    paddingTop: 74,
     paddingBottom: 20,
     paddingHorizontal: 35,
     color: '#fff',
