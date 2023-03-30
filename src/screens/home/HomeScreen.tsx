@@ -386,6 +386,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
+          backgroundColor: colors.background,
         }}
       >
         <View>
