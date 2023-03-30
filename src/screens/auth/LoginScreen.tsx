@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
 // import type { RootState } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import {
@@ -90,8 +90,21 @@ const LoginScreen: React.FC<Props> = () => {
   }, []);
 
   return (
-    <>
-      <View style={styles.containerLogo}>
+
+  <>
+    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+    
+    <View style={styles.logo}>
+        <Image 
+          source={require("../../assets/contribute-data/peach-logo.png")} 
+          style={{
+            marginTop: 70, 
+            marginLeft: 30,
+          }}
+        />
+    </View>
+
+    <View style={styles.containerLogo}>
         <Text style={styles.loginLogo}>Login</Text>
       </View>
       <View style={styles.container}>
@@ -137,60 +150,85 @@ const LoginScreen: React.FC<Props> = () => {
             backgroundColor: "white",
             borderRadius: 45,
             borderColor: "white",
+            marginBottom: 5,
+            padding: 7
           }}
         />
         <PIbutton
           onPress={handleLogin}
-          text="Login with Face ID"
+          text={ 
+            
+              <Text style={{color: 'white'}}>Login with Face ID</Text>
+            
+           }
           type="secondary"
           style={{
-            backgroundColor: "white",
+            backgroundColor: "#91AD70",
             borderRadius: 45,
             borderColor: "white",
+            opacity: 1,
+            padding: 7,
           }}
         />
+
+        <Text style={{fontSize: 14, color: "#ECF1E8", marginTop: 150}}>Don’t have an account ? Sign Up </Text>
       </View>
       {/*<View style={styles.container}>*/}
       {/*  <TouchableOpacity onPress={handleBiometric}>*/}
       {/*    <Icon name={"finger-print"} size={37} />*/}
       {/*  </TouchableOpacity>*/}
       {/*</View>*/}
-    </>
+
+    </ScrollView>
+  </>
+      
   );
 };
 
 const styles = StyleSheet.create({
+
+  scrollViewContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+  },
+
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
+    paddingTop: 5,
+    
   },
   containerLogo: {
-    flex: 2,
+    flex: 1,
     alignItems: "center",
     justifyContent: "flex-end",
-    padding: 20,
-    paddingBottom: 50,
+    padding: 30,
+    paddingBottom: 0,
+    marginTop: 20
   },
   input: {
     width: "100%",
     backgroundColor: "#B5CAA0",
     color: "#606461",
+    borderRadius: 10,
   },
   inputContainer: {
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
     width: "100%",
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    paddingBottom: 40,
-    marginBottom: 15,
+    paddingHorizontal: 15,
+    padding: 20,
+    paddingBottom: 5,
+    marginBottom: 10,
+    
+    
   },
   passwordContainer: {
     flexDirection: "row",
-    marginTop: 15,
+    marginTop: 20,
   },
   secureTextIcon: {
     justifyContent: "center",
@@ -203,7 +241,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   forgotText: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: "500",
     color: "#ECF1E8",
   },
@@ -219,14 +257,23 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: "white",
     fontWeight: "700",
+    marginTop: 40
   },
   loginContainer: {
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
     paddingTop: 1,
-    flex: 1,
+    flex: 4,
+    paddingBottom: 60,
+    marginBottom: 250,
+
   },
+  logo: {
+    padding: 3
+  }
+
+  
 });
 
 export default LoginScreen;
