@@ -14,6 +14,7 @@ import {} from "@react-navigation/native";
 import StepIndicator from "react-native-step-indicator";
 import { useMutation } from "@apollo/client";
 import { useSelector } from "react-redux";
+import Icon from "react-native-dynamic-vector-icons";
 /**
  * ? Local Imports
  */
@@ -77,37 +78,24 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
       "Track",
     ];
 
-    const customStyles = {
-      stepIndicatorSize: 25,
-      currentStepIndicatorSize: 30,
-      separatorStrokeWidth: 2,
-      currentStepStrokeWidth: 3,
-      stepStrokeCurrentColor: "#fe7013",
-      stepStrokeWidth: 3,
-      stepStrokeFinishedColor: "#fe7013",
-      stepStrokeUnFinishedColor: "#aaaaaa",
-      separatorFinishedColor: "#fe7013",
-      separatorUnFinishedColor: "#aaaaaa",
-      stepIndicatorFinishedColor: "#fe7013",
-      stepIndicatorUnFinishedColor: "#ffffff",
-      stepIndicatorCurrentColor: "#ffffff",
-      stepIndicatorLabelFontSize: 13,
-      currentStepIndicatorLabelFontSize: 13,
-      stepIndicatorLabelCurrentColor: "#fe7013",
-      stepIndicatorLabelFinishedColor: "#ffffff",
-      stepIndicatorLabelUnFinishedColor: "#aaaaaa",
-      labelColor: "#999999",
-      labelSize: 13,
-      currentStepLabelColor: "#fe7013",
-    };
-
     const [currentPosition, setCurrentPosition] = useState(0);
 
     const data = [
       {
-        label: "The data that you are contributing are being prepared",
-        date: "01/03/2023",
-        time: "10:30am",
+        label: (
+            <Text style={{color: "black"}}>
+                The data that you are contributing are{" "}
+                <Text style={{ fontWeight: "bold", color: "#7BA040"}}>
+                    being prepared 
+                </Text>
+            </Text>
+        ),
+        date: (
+            <Text style={{color:"black"}}>01/03/2023</Text>
+        ),
+        time: (
+            <Text style={{color:"black"}}>10:30am</Text>
+        ),
       },
       {
         label: "The prepared data is ready for sharing with requestor",
@@ -167,7 +155,7 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
                 fontSize: 14,
                 fontWeight: "700",
                 marginBottom: 5,
-                color: "#383D39",
+                color: "#7BA040",
               }}
             >
               {value.opportunity.organization.organization_name}
@@ -254,18 +242,28 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
           </View>
         </View>
 
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between" }}>
           <Text
             style={{
               fontSize: 16,
               fontWeight: "700",
               marginTop: 20,
               marginBottom: 5,
+              marginLeft: 10,
               color: "#000",
             }}
           >
             My Progress
           </Text>
+          <Image 
+            source={require("../../assets/contribute-data/angle_up_icon.png")}
+            style={{
+                marginTop: 17,
+                width: 30,
+                height: 30,
+                marginRight: 10,
+            }}
+           />
         </View>
 
         {/*Step Indicator */}
@@ -274,7 +272,7 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
           style={{
             flex: 1,
             backgroundColor: "#fff",
-            paddingHorizontal: 20,
+            paddingHorizontal: 5,
             marginTop: 20,
           }}
         >
@@ -283,57 +281,40 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
               padding: 10,
               paddingTop: 0,
               margin: 15,
-
+              marginLeft: 1,
               backgroundColor: "#fff",
             }}
           >
-            <StepIndicator
-              customStyles={customStyles}
-              currentPosition={currentPosition}
-              labels={labels}
-              direction="vertical"
-              renderLabel={({
-                position,
-                stepStatus,
-                label,
-                currentPosition,
-              }) => {
-                return (
-                  <View
-                    style={{
-                      marginTop: 40,
-                      padding: 10,
-                      paddingLeft: 5,
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontSize: 18,
-                        color: "black",
-                      }}
-                    >
-                      {data[position].label}
-                    </Text>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        color: "#000",
-                      }}
-                    >
-                      {data[position].date}
-                    </Text>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        color: "#000",
-                      }}
-                    >
-                      {data[position].time}
-                    </Text>
-                  </View>
-                );
-              }}
-            />
+            {data.map((val, i) => (
+                <View style={{flexDirection: 'row'}} key={i}>
+                    <View style={{marginRight: 10}}>
+                        <Text>{val.date}</Text>
+                        <Text>{val.time}</Text>
+                    </View>
+                    <View style={{alignItems: 'center'}}>
+                        <View style={{
+                                width: 15,
+                                height: 15,
+                                backgroundColor: '#7BA040',
+                                borderRadius: 7.5,
+                                marginHorizontal: 10
+                            }} />
+                            {i+1 !== data.length &&
+                            <View
+                                style={{
+                                    width: 5,
+                                    height: 50,
+                                    backgroundColor: '#7BA040'
+                                }}
+                            />
+                        }
+                    </View>
+                <Text style={{maxWidth: 160, marginLeft: 10}}>{val.label}</Text>
+            </View>
+        ))}
+
+
+
           </View>
         </View>
       </View>

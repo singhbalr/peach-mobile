@@ -16,6 +16,7 @@ import NotificationScreen from "@screens/notification/NotificationScreen";
 import MedicalRecordScreen from "@screens/medicalRecord/MedicalRecordScreen";
 import MyShareData from "@screens/myShareData/MyShareData";
 import YourBioverseScreen from "@screens/bioverse/YourBioverseScreen";
+import RewardDetails from "@screens/home/RewardDetails";
 // ? If you want to use stack or tab or both
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();

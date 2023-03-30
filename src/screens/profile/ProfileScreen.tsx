@@ -12,7 +12,7 @@ import Drawer from "react-native-drawer";
 import createStyles from "./ProfileScreen.style";
 // import Text from "@shared-components/text-wrapper/TextWrapper";
 import { PRIVATESCREENS } from "@shared-constants";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { setLogout } from "../auth/rx/reducer";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
@@ -29,6 +29,7 @@ import {
 import Notification from "@shared-components/notification/notification";
 import { GET_ALL_OPPORTUNITY } from "../../connection/query";
 import moment from "moment";
+import {RootState} from "../../redux/store";
 
 interface ProfileScreenProps {}
 
@@ -65,7 +66,6 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const [doctorRequest, setDoctorRequest] = useState([]);
   const [getDoctorRequest] = useMutation(GET_DOCTOR_REQUEST);
   const {loading, error, data} = useQuery(GET_ALL_OPPORTUNITY);
-
   const [updateTransaction] = useMutation(
     UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
   );
@@ -121,7 +121,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     dispatch(setLogout());
   };
   const handleItemPress = (OpportunityRecord: any) => {
-    NavigationService.push(PRIVATESCREENS.OPPORTUNITY_RECORD, {
+    NavigationService.push(PRIVATESCREENS.AVAILABLE_REWARD_DETAIL_SCREEN, {
       OpportunityRecord,
     });
   };

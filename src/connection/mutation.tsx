@@ -364,6 +364,19 @@ export const GET_SHARED_DATA = gql`
     }
   }
 `;
+
+export const REDEEM_REWARD = gql`
+  mutation RedeemPatientReward($reward: PatientRewardInput!) {
+    redeemPatientReward(reward: $reward) {
+      _id
+      created_at
+      deleted_at
+      is_redeemed
+      updated_at
+    }
+  }
+`;
+
 export const GET_MEDICAL_RECORD_BY_BODY_PART = gql`
   mutation GetMedicalRecordFileByBodyTypeAndPatientId(
     $record: SearchBodyType!
