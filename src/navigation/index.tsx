@@ -26,6 +26,7 @@ const Stack = createStackNavigator();
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import PublicRoutes from "./route.public";
+import RewardDetails from "@screens/home/RewardDetails";
 
 const Navigation = () => {
   const scheme = useColorScheme();
@@ -78,7 +79,7 @@ const Navigation = () => {
             />
             <Stack.Screen
               name={PRIVATESCREENS.AVAILABLE_REWARD_DETAIL_SCREEN}
-              component={OpportunitiesSuccess}
+              component={RewardDetails}
             />
           </>
         ) : (

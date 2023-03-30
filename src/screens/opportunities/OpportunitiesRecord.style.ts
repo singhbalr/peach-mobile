@@ -20,7 +20,7 @@ export default (theme: ExtendedTheme) => {
     container: {
       flex: 1,
       alignItems: "center",
-      backgroundColor: colors.background,
+      backgroundColor: colors.secondaryBackground,
     },
     titleTextStyle: {
       fontSize: 32,

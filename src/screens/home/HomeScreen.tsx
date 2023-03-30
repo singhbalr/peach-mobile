@@ -1,22 +1,31 @@
 /* eslint-disable react/no-unstable-nested-components */
-import React, {useEffect, useMemo, useState} from "react";
-import {Dimensions, Image, ScrollView, TouchableOpacity, View,} from "react-native";
-import {useTheme} from "@react-navigation/native";
-import {SafeAreaView} from "react-native-safe-area-context";
-import {ScreenWidth} from "@freakycoder/react-native-helpers";
-import {useMutation} from "@apollo/client";
-import {useSelector} from "react-redux";
+import React, { useEffect, useMemo, useState } from "react";
+import {
+  Dimensions,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useTheme } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ScreenWidth } from "@freakycoder/react-native-helpers";
+import { useMutation } from "@apollo/client";
+import { useSelector } from "react-redux";
+import * as NavigationService from "react-navigation-helpers";
 /**
  * ? Local Imports
  */
 import createStyles from "./HomeScreen.style";
-import {GET_REWARDS_BY_PATIENT_ID} from "../../connection/mutation";
+import { GET_REWARDS_BY_PATIENT_ID } from "../../connection/mutation";
 /**
  * ? Shared Imports
  */
 import Text from "@shared-components/text-wrapper/TextWrapper";
-import {Button} from "react-native-paper";
-import {RootState} from "redux/store";
+import { Button } from "react-native-paper";
+import { RootState } from "redux/store";
+import { PRIVATESCREENS } from "@shared-constants";
+import moment from "moment";
 
 interface HomeScreenProps {}
 
@@ -125,23 +134,31 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   const renderRewardList = () => {
     return rewardList?.map((item, key) => {
-      console.log(item);
-      return (
-        <AvailableCard key={`opportunity-card-${key}`} patientReward={item} />
-      );
+      if (item.opportunity) {
+        return (
+          <AvailableCard key={`opportunity-card-${key}`} patientReward={item} />
+        );
+      } else {
+        return <></>;
+      }
     });
   };
 
-  const handleItemPress = (OpportunityRecord: string | number) => {
+  const handleItemPress = (Reward: any) => {
     NavigationService.push(PRIVATESCREENS.AVAILABLE_REWARD_DETAIL_SCREEN, {
-      OpportunityRecord,
+      Reward,
     });
   };
 
   const AvailableCard = (props: any) => {
     const { patientReward } = props;
+
     return (
-      <TouchableOpacity onPress={() => handleItemPress("Opportunity Record")}>
+      <TouchableOpacity
+        onPress={() =>
+          handleItemPress(patientReward)
+        }
+      >
         <View
           style={{
             borderRadius: 15,
@@ -159,7 +176,9 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           >
             <View>
               <Image
-                source={patientReward.opportunity.opportunity_picture_banner}
+                source={{
+                  uri: patientReward.opportunity.opportunity_picture_banner,
+                }}
                 style={{
                   width: 115,
                   height: 155,
