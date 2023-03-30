@@ -15,7 +15,7 @@ import MedicalFileViewer from "@screens/medicalRecord/MedicalFileViewer";
 import OpportunityRecordScreen from "@screens/opportunities/OpportunitiesRecord";
 import OpportunitiesSuccess from "@screens/opportunities/OpportunitiesSuccess";
 import MyShareData from "@screens/myShareData/MyShareData";
-
+import BioverseDetailScreen from "@screens/bioverse/BioverseDetailScreen";
 // ? Routes
 import PrivateRoutes from "./route.private";
 
@@ -75,6 +75,10 @@ const Navigation = () => {
             <Stack.Screen
               name={PRIVATESCREENS.MY_SHARE_DATA}
               component={MyShareData}
+            />
+            <Stack.Screen
+              name={PRIVATESCREENS.BIOVERSE_DETAIL_SCREEN}
+              component={BioverseDetailScreen}
             />
           </>
         ) : (

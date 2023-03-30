@@ -11,6 +11,7 @@ export const PRIVATESCREENS = {
   OPPORTUNITY_SUCCESS_SCREEN: "Opportunity Success Screen",
   MY_SHARE_DATA: "MyShareData",
   // DETAIL: "Detail",
+  BIOVERSE_DETAIL_SCREEN: "BioverseDetailScreen"
 };
 
 export const PUBLICSCREENS = {
