@@ -15,6 +15,15 @@ const Onboarding: React.FC<Props> = () => {
 
   return (
     <>
+      <View style={styles.logo}>
+        <Image 
+          source={require("../../assets/contribute-data/peach-logo.png")} 
+          style={{
+            marginTop: 70, 
+            marginLeft: 30,
+          }}
+        />
+      </View>
       <View style={styles.container}>
         <Text style={styles.title}>Welcome to Peach Bioverse</Text>
         <Image
@@ -35,7 +44,8 @@ const Onboarding: React.FC<Props> = () => {
                 backgroundColor: "white",
                 borderRadius: 45,
                 borderColor: "white",
-                marginTop: 20
+                marginTop: 25,
+                padding: 7
             }}
             onPress={handleExplorePress}
           
@@ -51,6 +61,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         padding: 20,
+        paddingTop: 3,
+        marginBottom: 70
     },
     title: {
         fontSize: 24,
@@ -65,6 +77,9 @@ const styles = StyleSheet.create({
         marginLeft: 30,
         marginRight: 30,
         lineHeight: 30
+    },
+    logo: {
+      padding: 3
     }
 })
 
