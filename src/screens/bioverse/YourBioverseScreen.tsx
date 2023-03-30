@@ -1,11 +1,12 @@
-import React, { useState } from "react"
+import React, { createRef, useState } from "react"
 import {
   Image,
   StyleSheet,
   Text,
   View,
   ViewStyle,
-  Animated
+  Animated,
+  Dimensions
 } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import * as NavigationService from "react-navigation-helpers"
@@ -15,6 +16,10 @@ import Popup from "../../components/Popup"
 import MaleBodySvg from "../../assets/dashboard/male-body.svg"
 import ReportSvg from "../../assets/dashboard/report.svg"
 import { TouchableOpacity } from "react-native-gesture-handler"
+import Drawer from 'react-native-drawer'
+import Sidebar from '../../components/Sidebar'
+const { width } = Dimensions.get('window')
+
 interface HomeScreenProps {}
 interface ButtonProps {
   buttonText: string
@@ -47,6 +52,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     name: '',
     children: [],
   })
+  const drawer = createRef<React.ElementRef<typeof Drawer>>()
   const onPressList = () => {
     setPopupVisible(false)
     NavigationService.push(PRIVATESCREENS.BIOVERSE_DETAIL_SCREEN, {})
@@ -72,6 +78,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     inputRange: [0, 1],
     outputRange: [1, 2],
   });
+  
   const buttonList = [{
     name: 'Head & Neck',
     classname: 'buttonOne',
@@ -143,52 +150,49 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header titleText={"Your Bioverse"} subTitleText={"Explore your body anytime, anywhere."}></Header>
-      <View style={styles.bodyContainer}>
-        {
-          buttonList.map((item, index) => {
-            return (
-              <View key={item.name} style={styles[item.classname]}>
-                <BodyButton buttonText={item.name} reportCount={item.reportCount} onPress={() => {
-                  selectBodyParts(item)
-                }}></BodyButton>
-              </View>
-            )
-          })
-        }
-        {/* <View style={styles.buttonOne}>
-          <BodyButton buttonText={'Head & Neck'} reportCount={4} onPress={selectBodyParts}></BodyButton>
-        </View>
-        <View style={styles.buttonTwo}>
-          <BodyButton buttonText={'Thorax'} reportCount={4}></BodyButton>
-        </View>
-        <View style={styles.buttonThree}>
-          <BodyButton buttonText={'Upper Abdomen'}></BodyButton>
-        </View>
-        <View style={styles.buttonFour}>
-          <BodyButton buttonText={'Lower Abdomen'}></BodyButton>
-        </View>
-        <View style={styles.buttonFive}>
-          <BodyButton buttonText={'Limbs'}></BodyButton>
-        </View>
-        <View style={styles.buttonSix}>
-          <BodyButton buttonText={'Blood &\n Others'}></BodyButton>
-        </View> */}
-        <View style={styles.bodySvg}>
-          <MaleBodySvg height={460}></MaleBodySvg>
-        </View>
-      </View>
-      {
-        popupVisible && (
-          <View style={styles.bodyDetailView}>
-            {/* <Animated.Image
-              source={require("../../assets/dashboard/body-detail-1x.png")}
-              style={[styles.bodyDetailImage, { transform: [{ translateY }, { scale }] }]}
-            /> */}
-            <Image source={require("../../assets/dashboard/body-detail1.png")} style={styles.bodyDetailImage} resizeMode={'cover'}></Image>
+      <Drawer
+        ref={drawer}
+        type="overlay"
+        content={<Sidebar />}
+        openDrawerOffset={0.15 * width}
+        tapToClose={true}
+        side={'right'}
+        tweenHandler={ratio => ({
+          mainOverlay: {
+            opacity: ratio / 1.5,
+            backgroundColor: 'rgba(56, 61, 57, 1)',
+          },
+        })}
+      >
+        <Header titleText={"Your Bioverse"} subTitleText={"Explore your body anytime, anywhere."} drawer={drawer}></Header>
+        <View style={styles.bodyContainer}>
+          {
+            buttonList.map((item, index) => {
+              return (
+                <View key={item.name} style={styles[item.classname]}>
+                  <BodyButton buttonText={item.name} reportCount={item.reportCount} onPress={() => {
+                    selectBodyParts(item)
+                  }}></BodyButton>
+                </View>
+              )
+            })
+          }
+          <View style={styles.bodySvg}>
+            <MaleBodySvg height={460}></MaleBodySvg>
           </View>
-        )
-      }
+        </View>
+        {
+          popupVisible && (
+            <View style={styles.bodyDetailView}>
+              {/* <Animated.Image
+                source={require("../../assets/dashboard/body-detail-1x.png")}
+                style={[styles.bodyDetailImage, { transform: [{ translateY }, { scale }] }]}
+              /> */}
+              <Image source={require("../../assets/dashboard/body-detail1.png")} style={styles.bodyDetailImage} resizeMode={'cover'}></Image>
+            </View>
+          )
+        }
+      </Drawer>
       <Popup
         visible={popupVisible}
         title={activeItem.name}
