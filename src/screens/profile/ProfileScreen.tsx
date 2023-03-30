@@ -123,7 +123,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     dispatch(setLogout());
   };
   const handleItemPress = (OpportunityRecord: any) => {
-    NavigationService.push(PRIVATESCREENS.AVAILABLE_REWARD_DETAIL_SCREEN, {
+    NavigationService.push(PRIVATESCREENS.OPPORTUNITY_RECORD, {
       OpportunityRecord,
     });
 
