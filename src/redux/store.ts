@@ -4,7 +4,6 @@ import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const createDebugger = require("redux-flipper").default;
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
@@ -16,7 +15,7 @@ const persistConfig = {
 
 //   middleware.push(createDebugger);
 // }
-const middleware = [thunk, __DEV__ ? createDebugger() : ""];
+const middleware = [thunk];
 const rootReducer = combineReducers({
   auth: authReducer,
 });
