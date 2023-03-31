@@ -18,7 +18,7 @@ const { height } = Dimensions.get("window");
 type Props = {
   visible: boolean;
   title: string;
-  dataList: string[];
+  dataList?: string[];
   element?: ReactNode;
   onPressList: (e: Event, index: number) => void;
   onClose: () => void;
@@ -48,17 +48,13 @@ const Item: React.FC<ItemProps> = ({
       ]}
     >
       <View style={styles.itemView}>
-        {item.name === "Liver" && <LiverSvg style={styles.svgIcon}></LiverSvg>}
-        {item.name === "Pancreas" && (
-          <PancreasSvg style={styles.svgIcon}></PancreasSvg>
-        )}
-        {item.name === "Stomach" && (
-          <StomachSvg style={styles.svgIcon}></StomachSvg>
-        )}
+        {item.name === "Liver" && <LiverSvg style={styles.svgIcon} />}
+        {item.name === "Pancreas" && <PancreasSvg style={styles.svgIcon} />}
+        {item.name === "Stomach" && <StomachSvg style={styles.svgIcon} />}
         <Text>{item.name}</Text>
-        {item.reportCount > 0 && (
+        {Number(index) > 2 && item.reportCount > 0 && (
           <>
-            <ReportSvg style={styles.reportIcon}></ReportSvg>
+            <ReportSvg style={styles.reportIcon} />
             <Text style={styles.reportCount}>{item.reportCount}</Text>
           </>
         )}
@@ -71,33 +67,40 @@ const Header: React.FC<Props> = (props: Props) => {
   const { visible, title, dataList, onPressList, onClose, element } = props;
   return (
     <Modal animationType={"slide"} transparent={true} visible={visible}>
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.closeButtonContainer}
-          onPress={() => {
-            onClose();
-          }}
-        >
-          <View style={styles.closeButton} />
-        </TouchableOpacity>
-        <Text style={styles.title}>{title}</Text>
-        {element ? (
-          element
-        ) : (
-          <FlatList
-            data={dataList}
-            renderItem={({ item, index }) => (
-              <Item
-                item={item}
-                index={index}
-                length={dataList.length}
-                onPressList={onPressList}
-              />
-            )}
-            style={[styles.flatList]}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        )}
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "rgba(0,0,0,0.5)",
+        }}
+      >
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.closeButtonContainer}
+            onPress={() => {
+              onClose();
+            }}
+          >
+            <View style={styles.closeButton} />
+          </TouchableOpacity>
+          <Text style={styles.title}>{title}</Text>
+          {element ? (
+            element
+          ) : (
+            <FlatList
+              data={dataList}
+              renderItem={({ item, index }) => (
+                <Item
+                  item={item}
+                  index={index}
+                  length={dataList.length}
+                  onPressList={onPressList}
+                />
+              )}
+              style={[styles.flatList]}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          )}
+        </View>
       </View>
     </Modal>
   );
@@ -106,6 +109,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
@@ -113,8 +117,8 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     width: "100%",
-    maxHeight: height - 70,
-    minHeight: 400,
+    // maxHeight: height - 70,
+    // minHeight: 400,
     paddingTop: 50,
     paddingBottom: 40,
     paddingHorizontal: 35,
