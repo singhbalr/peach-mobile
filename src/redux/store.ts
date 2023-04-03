@@ -3,7 +3,6 @@ import authReducer from "../screens/auth/rx/reducer";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 const createDebugger = require("redux-flipper").default;
 const persistConfig = {
   key: "root",
