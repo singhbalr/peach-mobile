@@ -2,6 +2,7 @@ import "react-native-gesture-handler";
 import React from "react";
 import { StatusBar, useColorScheme, LogBox } from "react-native";
 import SplashScreen from "react-native-splash-screen";
+import "./src/assets/i18n/i18n";
 /**
  * ? Local Imports
  */

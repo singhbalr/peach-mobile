@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
-// import type { RootState } from "../../redux/store";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  Image,
+} from "react-native";
 import { useDispatch } from "react-redux";
 import {
   setUsername,
@@ -9,10 +15,12 @@ import {
   setPatientDetails,
 } from "./rx/reducer";
 import Icon from "react-native-vector-icons/Ionicons";
-import { useMutation, useSubscription } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import PInput from "@shared-components/input/PInput";
 import PIbutton from "@shared-components/buttons/Pbutton";
 import { PATIENT_LOGIN } from "../../connection/mutation";
+import { t } from "i18next";
+
 // import { authBiometrics } from "../../shared/sensors/Biometric";
 interface Props {}
 
@@ -51,6 +59,7 @@ const LoginScreen: React.FC<Props> = () => {
         input: {
           // eslint-disable-next-line camelcase
           patient_email: username,
+          // eslint-disable-next-line camelcase
           patient_password: password,
         },
       },
@@ -90,103 +99,102 @@ const LoginScreen: React.FC<Props> = () => {
   }, []);
 
   return (
-
-  <>
-    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-    
-    <View style={styles.logo}>
-        <Image 
-          source={require("../../assets/contribute-data/peach-logo.png")} 
-          style={{
-            marginTop: 70, 
-            marginLeft: 30,
-          }}
-        />
-    </View>
-
-    <View style={styles.containerLogo}>
-        <Text style={styles.loginLogo}>Login</Text>
-      </View>
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <PInput
-            style={styles.input}
-            value={username}
-            onChangeText={setUser}
-            secureTextEntry={false}
-            label={"Email"}
-            isValid={isUserValid}
+    <>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        <View style={styles.logo}>
+          <Image
+            source={require("../../assets/contribute-data/peach-logo.png")}
+            style={{
+              marginTop: 70,
+              marginLeft: 30,
+            }}
           />
-          <View style={styles.passwordContainer}>
+        </View>
+
+        <View style={styles.containerLogo}>
+          <Text style={styles.loginLogo}>{t("loginScreen.title")}</Text>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.inputContainer}>
             <PInput
               style={styles.input}
-              value={password}
-              onChangeText={setPass}
-              secureTextEntry={secureTextEntry}
-              label={"Password"}
-              isValid={isPasswordValid}
+              value={username}
+              onChangeText={setUser}
+              secureTextEntry={false}
+              label={t("loginScreen.emailInput")}
+              isValid={isUserValid}
             />
-            <TouchableOpacity
-              onPress={() => setSecureTextEntry(!secureTextEntry)}
-              style={styles.secureTextIcon}
-            >
-              <Icon
-                name={secureTextEntry ? "eye-off-outline" : "eye-outline"}
-                size={24}
+            <View style={styles.passwordContainer}>
+              <PInput
+                style={styles.input}
+                value={password}
+                onChangeText={setPass}
+                secureTextEntry={secureTextEntry}
+                label={t("loginScreen.passwordInput")}
+                isValid={isPasswordValid}
               />
+              <TouchableOpacity
+                onPress={() => setSecureTextEntry(!secureTextEntry)}
+                style={styles.secureTextIcon}
+              >
+                <Icon
+                  name={secureTextEntry ? "eye-off-outline" : "eye-outline"}
+                  size={24}
+                />
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={styles.forgotPasswordLabel}>
+              <Text style={styles.forgotText}>
+                {t("loginScreen.forgotPassword")}
+              </Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.forgotPasswordLabel}>
-            <Text style={styles.forgotText}>Forgot password?</Text>
-          </TouchableOpacity>
         </View>
-      </View>
-      <View style={styles.loginContainer}>
-        <PIbutton
-          onPress={handleLogin}
-          text="Login"
-          type="primary"
-          style={{
-            backgroundColor: "white",
-            borderRadius: 45,
-            borderColor: "white",
-            marginBottom: 5,
-            padding: 7
-          }}
-        />
-        <PIbutton
-          onPress={handleLogin}
-          text={ 
-            
-              <Text style={{color: 'white'}}>Login with Face ID</Text>
-            
-           }
-          type="secondary"
-          style={{
-            backgroundColor: "#91AD70",
-            borderRadius: 45,
-            borderColor: "white",
-            opacity: 1,
-            padding: 7,
-          }}
-        />
+        <View style={styles.loginContainer}>
+          <PIbutton
+            onPress={handleLogin}
+            text={t("loginScreen.loginBtn")}
+            type="primary"
+            style={{
+              backgroundColor: "white",
+              borderRadius: 45,
+              borderColor: "white",
+              marginBottom: 5,
+              padding: 7,
+            }}
+          />
+          <PIbutton
+            onPress={handleLogin}
+            text={
+              <Text style={{ color: "white" }}>
+                {t("loginScreen.loginWithFaceIDBtn")}
+              </Text>
+            }
+            type="secondary"
+            style={{
+              backgroundColor: "#91AD70",
+              borderRadius: 45,
+              borderColor: "white",
+              opacity: 1,
+              padding: 7,
+            }}
+          />
 
-        <Text style={{fontSize: 14, color: "#ECF1E8", marginTop: 150}}>Don’t have an account ? Sign Up </Text>
-      </View>
-      {/*<View style={styles.container}>*/}
-      {/*  <TouchableOpacity onPress={handleBiometric}>*/}
-      {/*    <Icon name={"finger-print"} size={37} />*/}
-      {/*  </TouchableOpacity>*/}
-      {/*</View>*/}
-
-    </ScrollView>
-  </>
-      
+          <Text style={{ fontSize: 14, color: "#ECF1E8", marginTop: 150 }}>
+            {t("loginScreen.signUp")}{" "}
+          </Text>
+        </View>
+        {/*<View style={styles.container}>*/}
+        {/*  <TouchableOpacity onPress={handleBiometric}>*/}
+        {/*    <Icon name={"finger-print"} size={37} />*/}
+        {/*  </TouchableOpacity>*/}
+        {/*</View>*/}
+      </ScrollView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-
   scrollViewContainer: {
     flexGrow: 1,
     justifyContent: "center",
@@ -198,7 +206,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
     paddingTop: 5,
-    
   },
   containerLogo: {
     flex: 1,
@@ -206,7 +213,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     padding: 30,
     paddingBottom: 0,
-    marginTop: 20
+    marginTop: 20,
   },
   input: {
     width: "100%",
@@ -223,8 +230,6 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 5,
     marginBottom: 10,
-    
-    
   },
   passwordContainer: {
     flexDirection: "row",
@@ -257,7 +262,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: "white",
     fontWeight: "700",
-    marginTop: 40
+    marginTop: 40,
   },
   loginContainer: {
     width: "100%",
@@ -267,13 +272,10 @@ const styles = StyleSheet.create({
     flex: 4,
     paddingBottom: 60,
     marginBottom: 250,
-
   },
   logo: {
-    padding: 3
-  }
-
-  
+    padding: 3,
+  },
 });
 
 export default LoginScreen;

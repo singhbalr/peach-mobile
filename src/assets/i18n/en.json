@@ -1,0 +1,13 @@
+{
+  "translation": {
+    "loginScreen": {
+      "title": "Login",
+      "emailInput": "Email",
+      "passwordInput": "Password",
+      "forgotPassword": "Forgot password?",
+      "loginBtn": "Login",
+      "loginWithFaceIDBtn": "Login with Face ID",
+      "signUp": "Don’t have an account ? Sign Up"
+    }
+  }
+}
