@@ -29,7 +29,7 @@ import {
 import Notification from "@shared-components/notification/notification";
 import { GET_ALL_OPPORTUNITY } from "../../connection/query";
 import moment from "moment";
-import countDaysLeft from "components/countDayLeft";
+import countDaysLeft from "../../components/countDayLeft";
 
 interface ProfileScreenProps {}
 

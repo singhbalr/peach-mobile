@@ -29,7 +29,8 @@ import PIbutton from "@shared-components/buttons/Pbutton";
 import { PRIVATESCREENS } from "@shared-constants";
 import fonts from "@fonts";
 import { FlatList } from "react-native-gesture-handler";
-import countDaysLeft from "components/countDayLeft";
+import countDaysLeft from "../../components/countDayLeft";
+
 import {
   CasePrivacyPolice1,
   CasePrivacyPolice2,
