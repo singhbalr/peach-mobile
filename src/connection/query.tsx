@@ -5,7 +5,9 @@ export const GET_ALL_OPPORTUNITY = gql`
     opportunities {
       _id
       applied_patient {
-        _id
+        patient {
+          _id
+        }
       }
       organization {
         _id

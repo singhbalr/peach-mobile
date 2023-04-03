@@ -83,19 +83,15 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
     const data = [
       {
         label: (
-            <Text style={{color: "black"}}>
-                The data that you are contributing are{" "}
-                <Text style={{ fontWeight: "bold", color: "#7BA040"}}>
-                    being prepared 
-                </Text>
+          <Text style={{ color: "black" }}>
+            The data that you are contributing are{" "}
+            <Text style={{ fontWeight: "bold", color: "#7BA040" }}>
+              being prepared
             </Text>
+          </Text>
         ),
-        date: (
-            <Text style={{color:"black"}}>01/03/2023</Text>
-        ),
-        time: (
-            <Text style={{color:"black"}}>10:30am</Text>
-        ),
+        date: <Text style={{ color: "black" }}>01/03/2023</Text>,
+        time: <Text style={{ color: "black" }}>10:30am</Text>,
       },
       {
         label: "The prepared data is ready for sharing with requestor",
@@ -128,7 +124,7 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
       >
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Image
-            source={value.opportunity.opportunity_picture_banner}
+            source={{ uri: value.opportunity.opportunity_picture_banner }}
             style={{
               width: 100,
               height: 80,
@@ -242,7 +238,13 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
           </View>
         </View>
 
-        <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between" }}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
           <Text
             style={{
               fontSize: 16,
@@ -255,15 +257,15 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
           >
             My Progress
           </Text>
-          <Image 
+          <Image
             source={require("../../assets/contribute-data/angle_up_icon.png")}
             style={{
-                marginTop: 17,
-                width: 30,
-                height: 30,
-                marginRight: 10,
+              marginTop: 17,
+              width: 30,
+              height: 30,
+              marginRight: 10,
             }}
-           />
+          />
         </View>
 
         {/*Step Indicator */}
@@ -286,35 +288,36 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
             }}
           >
             {data.map((val, i) => (
-                <View style={{flexDirection: 'row'}} key={i}>
-                    <View style={{marginRight: 10}}>
-                        <Text>{val.date}</Text>
-                        <Text>{val.time}</Text>
-                    </View>
-                    <View style={{alignItems: 'center'}}>
-                        <View style={{
-                                width: 15,
-                                height: 15,
-                                backgroundColor: '#7BA040',
-                                borderRadius: 7.5,
-                                marginHorizontal: 10
-                            }} />
-                            {i+1 !== data.length &&
-                            <View
-                                style={{
-                                    width: 5,
-                                    height: 50,
-                                    backgroundColor: '#7BA040'
-                                }}
-                            />
-                        }
-                    </View>
-                <Text style={{maxWidth: 160, marginLeft: 10}}>{val.label}</Text>
-            </View>
-        ))}
-
-
-
+              <View style={{ flexDirection: "row" }} key={i}>
+                <View style={{ marginRight: 10 }}>
+                  <Text>{val.date}</Text>
+                  <Text>{val.time}</Text>
+                </View>
+                <View style={{ alignItems: "center" }}>
+                  <View
+                    style={{
+                      width: 15,
+                      height: 15,
+                      backgroundColor: "#7BA040",
+                      borderRadius: 7.5,
+                      marginHorizontal: 10,
+                    }}
+                  />
+                  {i + 1 !== data.length && (
+                    <View
+                      style={{
+                        width: 5,
+                        height: 50,
+                        backgroundColor: "#7BA040",
+                      }}
+                    />
+                  )}
+                </View>
+                <Text style={{ maxWidth: 160, marginLeft: 10 }}>
+                  {val.label}
+                </Text>
+              </View>
+            ))}
           </View>
         </View>
       </View>

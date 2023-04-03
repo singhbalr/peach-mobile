@@ -1,5 +1,5 @@
-import React, {useMemo, useState, useEffect, createRef} from "react";
-import {View, TouchableOpacity, Text, Image, ScrollView} from "react-native";
+import React, { useMemo, useState, useEffect, createRef } from "react";
+import { View, TouchableOpacity, Text, Image, ScrollView } from "react-native";
 import { useTheme, useIsFocused } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-dynamic-vector-icons";
@@ -12,12 +12,12 @@ import Drawer from "react-native-drawer";
 import createStyles from "./ProfileScreen.style";
 // import Text from "@shared-components/text-wrapper/TextWrapper";
 import { PRIVATESCREENS } from "@shared-constants";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../auth/rx/reducer";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import PIbutton from "@shared-components/buttons/Pbutton";
-import {useMutation, useQuery, useSubscription} from "@apollo/client";
+import { useMutation, useQuery, useSubscription } from "@apollo/client";
 import {
   GET_DOCTOR_REQUEST,
   UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
@@ -29,7 +29,7 @@ import {
 import Notification from "@shared-components/notification/notification";
 import { GET_ALL_OPPORTUNITY } from "../../connection/query";
 import moment from "moment";
-import {RootState} from "../../redux/store";
+import countDaysLeft from "../../components/countDayLeft";
 
 interface ProfileScreenProps {}
 
@@ -43,6 +43,7 @@ interface OpportunityProps {
   _id: string;
   opportunity_picture_banner: string;
   img: any;
+  opportunity_expiration: string;
   daysLeft: string;
   opportunity_name: string;
   opportunity_data_accesibility_duration: number;
@@ -65,7 +66,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [doctorRequest, setDoctorRequest] = useState([]);
   const [getDoctorRequest] = useMutation(GET_DOCTOR_REQUEST);
-  const {loading, error, data} = useQuery(GET_ALL_OPPORTUNITY);
+  const { loading, error, data } = useQuery(GET_ALL_OPPORTUNITY);
+
   const [updateTransaction] = useMutation(
     UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
   );
@@ -121,9 +123,11 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     dispatch(setLogout());
   };
   const handleItemPress = (OpportunityRecord: any) => {
-    NavigationService.push(PRIVATESCREENS.AVAILABLE_REWARD_DETAIL_SCREEN, {
+    NavigationService.push(PRIVATESCREENS.OPPORTUNITY_RECORD, {
       OpportunityRecord,
     });
+
+    console.log(OpportunityRecord, "OpportunityRecord");
   };
 
   const callGraphQlAPI = async () => {
@@ -289,7 +293,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   // eslint-disable-next-line react/no-unstable-nested-components
   const OpportunityCard = (opportunityData: OpportunityProps) => {
     return (
-      <TouchableOpacity onPress={() => handleItemPress(opportunityData._id)}>
+      <TouchableOpacity onPress={() => handleItemPress(opportunityData)}>
         <View
           style={{
             borderRadius: 15,
@@ -307,7 +311,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           >
             <View>
               <Image
-                source={{uri: opportunityData?.opportunity_picture_banner}}
+                source={{ uri: opportunityData?.opportunity_picture_banner }}
                 style={{
                   width: 115,
                   height: 155,
@@ -331,9 +335,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                     fontWeight: "900",
                   }}
                 >
-                  {calculateDateDiff(
-                    opportunityData.opportunity_data_accesibility_duration,
-                  )} Days
+                  {countDaysLeft(opportunityData.opportunity_expiration)} Days
                 </Text>
               </View>
             </View>
