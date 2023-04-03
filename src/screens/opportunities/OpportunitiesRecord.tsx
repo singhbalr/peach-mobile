@@ -15,6 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import * as NavigationService from "react-navigation-helpers";
 import RNBounceable from "@freakycoder/react-native-bounceable";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
+import { t } from "i18next";
 /**
  * ? Local Imports
  */
@@ -117,20 +118,17 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
 
   const dataReceiver = [
     {
-      title: "Data Purpose",
-      content:
-        "The Data Receiver is developing a new blood-based colorectal cancer detection test and intends to identity" +
-        " not fewer than 500 high-risk individuals for mid or long term follow-up study",
+      title: t("OpportunitiesRecord.data-title1"),
+      content: t("OpportunitiesRecord.data-content1"),
+        
     },
     {
-      title: "Data Accessibility",
-      content:
-        "Access to your data will be terminated in 48 months after you have contributed your data.",
+      title: t("OpportunitiesRecord.data-title2"),
+      content: t("OpportunitiesRecord.data-content2"),
     },
     {
-      title: "How do I withdraw?",
-      content:
-        "You can withdraw your data contribution only if you have not redeemed the rewards.",
+      title: t("OpportunitiesRecord.data-title3"),
+      content: t("OpportunitiesRecord.data-content3"),
     },
   ];
 
@@ -176,7 +174,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 fontWeight: "900",
               }}
             >
-              {countDaysLeft(detail.opportunity_expiration)} Days left
+              {countDaysLeft(detail.opportunity_expiration)} {t("OpportunitiesRecord.days-left")}
             </Text>
           </View>
         </View>
@@ -219,7 +217,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               fontWeight: "600",
             }}
           >
-            Data to be shared
+            {t("OpportunitiesRecord.data-shared")}
           </Text>
           <Text
             style={{
@@ -228,7 +226,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               fontWeight: "500",
             }}
           >
-            Privacy Policy &gt;
+            {t("OpportunitiesRecord.privacy-policy")} &gt;
           </Text>
         </View>
         <View
@@ -295,7 +293,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 color: "#D1AE6C",
               }}
             >
-              Reward
+              {t("OpportunitiesRecord.reward")}
             </Text>
           </View>
         </View>
@@ -376,7 +374,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               color: "#383D39",
             }}
           >
-            More Information
+            {t("OpportunitiesRecord.more-information")}
           </Text>
         </View>
         <View
@@ -393,7 +391,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               marginBottom: 13,
             }}
           >
-            Data Receiver
+            {t("OpportunitiesRecord.data-receiver")}
           </Text>
           <TouchableOpacity>
             <Text
@@ -405,7 +403,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 lineHeight: 19,
               }}
             >
-              Prenetics Limited &gt;
+              {t("OpportunitiesRecord.prenetics-limited")} &gt;
             </Text>
           </TouchableOpacity>
         </View>
@@ -537,12 +535,10 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         }}
       >
         <Text style={{ fontSize: 16, marginBottom: 10, fontWeight: "500" }}>
-          intended use of your data :
+          {t("OpportunitiesRecord.text1")}
         </Text>
         <Text style={{ fontSize: 16, marginBottom: 10 }}>
-          The Data Receiver is developing a new blood-based colorectal cancer
-          detection test and intends to identity not fewer than 500 high-risk
-          individuals for mid or long term follow-up study
+          {t("OpportunitiesRecord.data-content1")}
         </Text>
       </View>
     );
@@ -559,27 +555,25 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         }}
       >
         <Text style={{ fontSize: 16, marginBottom: 10, fontWeight: "500" }}>
-          Your following data will be shared if you accept :
+          {t("OpportunitiesRecord.text2")}
         </Text>
         <Text style={{ fontSize: 16, marginBottom: 10 }}>
-          -The raw sequence data of your germ-line genetic sequence.
+          {t("OpportunitiesRecord.text3")}
         </Text>
         <Text style={{ fontSize: 16, marginBottom: 10 }}>
-          - The data stored in the informatics system of the Connected Clinics,
-          Hospitals and Labs.
+          {t("OpportunitiesRecord.text4")}
         </Text>
         <Text style={{ fontSize: 16, marginBottom: 10 }}>
-          - The data stored in the informatics system of the Connected Wearable
-          Devices.
+          {t("OpportunitiesRecord.text5")}
         </Text>
         <Text style={{ fontSize: 16, marginBottom: 10, fontWeight: "500" }}>
-          The Data Receiver will not know your personal identity.
+          {t("OpportunitiesRecord.text6")}
         </Text>
         <Text style={{ fontSize: 16, marginBottom: 10 }}>
-          data accessible duration :
+          {t("OpportunitiesRecord.text7")}
         </Text>
         <Text style={{ fontSize: 16, marginBottom: 10 }}>
-          48 months after you have contributed your data.
+          {t("OpportunitiesRecord.text8")}
         </Text>
       </View>
     );
@@ -603,22 +597,19 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             marginBottom: 30,
           }}
         >
-          Prenetics
+          {t("OpportunitiesRecord.prenetics")}
         </Text>
 
         <View>
           <Text style={{ fontSize: 16, marginBottom: 20 }}>
-            Data Receiver : Prenetics Limited
+            {t("OpportunitiesRecord.data-receiver")} : {t("OpportunitiesRecord.prenetics-limited")}
           </Text>
           <Text style={{ fontSize: 16, marginBottom: 20 }}>
-            Prenetics&apos; mission is to bring health closer to people, by
-            decentralizing health care, and focusing on the comprehensive
-            testing capabilities covering prevention, diagnostics, and
-            personalized care.
+            {t("OpportunitiesRecord.text9")}
           </Text>
           <Text style={{ fontSize: 16, marginBottom: 10 }}>
-            Its company website is:{" "}
-            <Text style={{ color: "#7BA23F" }}>https://www.prenetics.com</Text>
+              {t("OpportunitiesRecord.text11")}{" "}
+            <Text style={{ color: "#7BA23F" }}>{t("OpportunitiesRecord.text10")}</Text>
           </Text>
         </View>
       </View>
@@ -856,7 +847,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                       fontWeight: "900",
                     }}
                   >
-                    {countDaysLeft(detail.opportunity_expiration)} Days Left
+                    {countDaysLeft(detail.opportunity_expiration)} {t("OpportunitiesRecord.days-left")}
                   </Text>
                 </View>
               </View>
@@ -907,7 +898,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                         color: "#D1AE6C",
                       }}
                     >
-                      Reward
+                      {t("OpportunitiesRecord.reward")}
                     </Text>
                   </View>
                 </View>
@@ -972,13 +963,13 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 }}
               />
               <Text>
-                Your data is securely shared. Trace your data in My{" "}
+                {t("OpportunitiesRecord.text12")}{" "}
                 <Text
                   style={{
                     fontWeight: "bold",
                   }}
                 >
-                  Shared Data.
+                  {t("OpportunitiesRecord.text13")}
                 </Text>
               </Text>
             </View>
@@ -987,7 +978,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               onPress={() =>
                 NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA)
               }
-              text="My Shared Data"
+              text={t("OpportunitiesRecord.text14")}
               bgColor="#7BA040"
               textColor="white"
             />

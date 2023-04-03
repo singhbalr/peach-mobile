@@ -5,6 +5,7 @@ import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-dynamic-vector-icons";
 import * as NavigationService from "react-navigation-helpers";
 import Drawer from "react-native-drawer";
+import { t } from "i18next";
 
 /**
  * ? Local Imports
@@ -175,49 +176,48 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       {
         img: require("../../assets/contribute-data/sample-image-list-1.png"),
         daysLeft: "10 Days left",
-        title: "Support colorectal screening to save lives",
+        title: t("ProfileScreen.opportunity-title1"),
         reward: [
           {
-            title: "2 doses",
-            detail: "Shingrix Vaccine",
+            title: t("ProfileScreen.reward-title1"),
+            detail: t("ProfileScreen.reward-detail1"),
           },
           {
-            title: "HK$100",
-            detail: "K11 Musea cash coupon",
-          },
-        ],
-      },
-      {
-        img: require("../../assets/contribute-data/sample-image-list-1.png"),
-        daysLeft: "30 Days Left",
-        title: "Useful health info selected for you",
-        reward: [
-          {
-            title: "HK$50",
-            detail: "K11 Musea cash coupon",
+            title: t("ProfileScreen.reward-title2"),
+            detail: t("ProfileScreen.reward-detail2"),
           },
         ],
       },
       {
         img: require("../../assets/contribute-data/sample-image-list-1.png"),
         daysLeft: "30 Days Left",
-        title: "Join the fight against the hepatitis B virus",
+        title: t("ProfileScreen.opportunity-title2"),
         reward: [
           {
-            title: "HK$125",
-            detail: "K11 Musea cash coupon",
+            title: t("ProfileScreen.reward-title3"),
+            detail: t("ProfileScreen.reward-detail3"),
           },
         ],
       },
       {
         img: require("../../assets/contribute-data/sample-image-list-1.png"),
         daysLeft: "30 Days Left",
-        title:
-          "Enable better insurance coverage for people with cardiovascular disease risks",
+        title: t("ProfileScreen.opportunity-title3"),
         reward: [
           {
-            title: "HK$150",
-            detail: "K11 Musea cash coupon",
+            title: t("ProfileScreen.reward-title4"),
+            detail: t("ProfileScreen.reward-detail4"),
+          },
+        ],
+      },
+      {
+        img: require("../../assets/contribute-data/sample-image-list-1.png"),
+        daysLeft: "30 Days Left",
+        title: t("ProfileScreen.opportunity-title4"),
+        reward: [
+          {
+            title: t("ProfileScreen.reward-title5"),
+            detail: t("ProfileScreen.reward-detail5"),
           },
         ],
       },
@@ -452,10 +452,10 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
             marginBottom: 15,
           }}
         >
-          <Text>shared until 2023-03-01 </Text>
+          <Text>{t("ProfileScreen.text1")} </Text>
           <TouchableOpacity>
             <Text style={{ fontSize: 14, fontWeight: "500", color: "#7BA23F" }}>
-              Securely Shared
+              {t("ProfileScreen.text2")}
             </Text>
           </TouchableOpacity>
         </View>
@@ -467,7 +467,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           }}
         >
           <Text style={{ fontSize: 18, fontWeight: "600", marginBottom: 15 }}>
-            Support colorectal screening to save lives{" "}
+            {t("ProfileScreen.text3")}{" "}
           </Text>
         </View>
         <View style={{ flexDirection: "row", justifyContent: "center" }}>
@@ -494,7 +494,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 padding: 5,
               }}
             >
-              <Text style={{ color: "#FFFFFF" }}>2 dose</Text>
+              <Text style={{ color: "#FFFFFF" }}>{t("ProfileScreen.text4")}</Text>
             </View>
             <View
               style={{
@@ -504,7 +504,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 padding: 5,
               }}
             >
-              <Text>Shingrix vaccine</Text>
+              <Text>{t("ProfileScreen.text5")}</Text>
             </View>
           </View>
           <View
@@ -523,7 +523,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 padding: 5,
               }}
             >
-              <Text style={{ color: "#FFFFFF" }}>100 HKD</Text>
+              <Text style={{ color: "#FFFFFF" }}>{t("ProfileScreen.text6")}</Text>
             </View>
             <View
               style={{
@@ -533,7 +533,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 padding: 5,
               }}
             >
-              <Text>K11 Musea</Text>
+              <Text>{t("ProfileScreen.text7")}</Text>
             </View>
           </View>
         </View>
@@ -585,7 +585,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                     : "#000000",
               }}
             >
-              Accept Request
+              {t("ProfileScreen.text8")}
             </Text>
           </TouchableOpacity>
         </View>
@@ -753,11 +753,11 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const tabList = [
     {
       screenName: "Screen1",
-      title: "Opportunities",
+      title: t("ProfileScreen.tab-title1"),
     },
     {
       screenName: "Screen3",
-      title: "Followup Requests",
+      title: t("ProfileScreen.tab-title2"),
     },
   ];
 
@@ -770,14 +770,14 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           }}
         >
           <View>
-            <Text style={styles.headerText}>Contributions</Text>
+            <Text style={styles.headerText}>{t("ProfileScreen.title")}</Text>
             <View
               style={{
                 flexDirection: "row",
               }}
             >
               <Text style={styles.headerInfo}>
-                Contribute Data Now to Get Rewards
+                {t("ProfileScreen.subtitle")}
               </Text>
               <Image
                 source={require("../../assets/contribute-data/question-mark-icon.png")}

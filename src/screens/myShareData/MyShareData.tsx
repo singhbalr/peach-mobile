@@ -15,6 +15,7 @@ import StepIndicator from "react-native-step-indicator";
 import { useMutation } from "@apollo/client";
 import { useSelector } from "react-redux";
 import Icon from "react-native-dynamic-vector-icons";
+import { t } from "i18next";
 /**
  * ? Local Imports
  */
@@ -84,9 +85,9 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
       {
         label: (
           <Text style={{ color: "black" }}>
-            The data that you are contributing are{" "}
+            {t("MyShareData.label1")}{" "}
             <Text style={{ fontWeight: "bold", color: "#7BA040" }}>
-              being prepared
+              {t("MyShareData.label1-1")}
             </Text>
           </Text>
         ),
@@ -94,22 +95,22 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
         time: <Text style={{ color: "black" }}>10:30am</Text>,
       },
       {
-        label: "The prepared data is ready for sharing with requestor",
+        label: t("MyShareData.label2"),
         date: "01/03/2023",
         time: "10:30am",
       },
       {
-        label: "Sharing now through safe communications channel",
+        label: t("MyShareData.label3"),
         date: "01/03/2023",
         time: "10:30am",
       },
       {
-        label: "You can now track the usage of the contributed data",
+        label: t("MyShareData.label4"),
         date: "01/03/2023",
         time: "10:30am",
       },
       {
-        label: "Your reward is received",
+        label: t("MyShareData.label5"),
         date: "01/03/2023",
         time: "10:30am",
       },
@@ -210,8 +211,7 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
                 marginHorizontal: 10,
               }}
             >
-              The data stored in the informatics system of the Connected
-              Clinics, Hospitals and Labs.
+              {t("MyShareData.text1")}
             </Text>
           </View>
           <View
@@ -232,8 +232,7 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
                 marginHorizontal: 10,
               }}
             >
-              The data stored in the informatics system of the Connected
-              Wearable Devices.
+              {t("MyShareData.text2")}
             </Text>
           </View>
         </View>
@@ -255,7 +254,7 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
               color: "#000",
             }}
           >
-            My Progress
+            {t("MyShareData.text3")}
           </Text>
           <Image
             source={require("../../assets/contribute-data/angle_up_icon.png")}
@@ -365,7 +364,7 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
           }}
         >
           <View>
-            <Text style={styles.headerText}>My Share Data</Text>
+            <Text style={styles.headerText}>{t("MyShareData.text4")}</Text>
           </View>
           <Image
             source={require("../../assets/contribute-data/menu-add.png")}
