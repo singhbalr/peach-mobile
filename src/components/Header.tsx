@@ -1,11 +1,12 @@
-import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import React, { createRef } from 'react'
+import { View, StyleSheet, Text, Dimensions, TouchableOpacity } from 'react-native'
 import InfoSvg from "../assets/dashboard/info.svg"
 import MenuSvg from "../assets/dashboard/menu.svg"
 
 type Props = {
   titleText: string
-  subTitleText?: string
+  subTitleText?: string,
+  drawer?: any,
 }
 // props: [propsType: defaultValue] props introduce
 // props.titleText: [String] header title
@@ -14,7 +15,10 @@ const Header: React.FC<Props> = (props: Props) => {
   const {
     titleText,
     subTitleText,
+    drawer
   } = props
+
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -23,7 +27,13 @@ const Header: React.FC<Props> = (props: Props) => {
         </Text>
         <View style={styles.buttonContainer}>
           <InfoSvg style={[styles.icon, styles.infoIcon]}></InfoSvg>
-          <MenuSvg style={[styles.icon, styles.menuIcon]}></MenuSvg>
+          <TouchableOpacity
+            onPress={() => {
+              drawer.current?.open()
+            }}
+          >
+            <MenuSvg style={[styles.icon, styles.menuIcon]}></MenuSvg>
+          </TouchableOpacity>
         </View>
       </View>
       <Text style={styles.subTitle}>
@@ -42,7 +52,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 35,
     color: '#fff',
     backgroundColor: '#fafafa',
-    zIndex: 1,
+    // zIndex: 1,
   },
   topContainer: {
     flexDirection: 'row',

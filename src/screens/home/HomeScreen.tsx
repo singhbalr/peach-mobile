@@ -154,11 +154,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     const { patientReward } = props;
 
     return (
-      <TouchableOpacity
-        onPress={() =>
-          handleItemPress(patientReward)
-        }
-      >
+      <TouchableOpacity onPress={() => handleItemPress(patientReward)}>
         <View
           style={{
             borderRadius: 15,
@@ -311,7 +307,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                     paddingHorizontal: 16,
                   }}
                 >
-                  REDEEM
+                  {patientReward.is_redeemed === true ? "REDEEMED" : "REDEEM"}
                 </Button>
               </View>
             </View>
@@ -354,10 +350,45 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     );
   };
 
+  const Screen2 = () => {
+    const availableData: AvailableDataProps[] = [
+      {
+        img: require("../../assets/contribute-data/sample-image-list-1.png"),
+        daysLeft: "10 Days left",
+        title: "Support colorectal screening to save lives",
+        reward: [
+          {
+            title: "2 doses",
+            detail: "Shingrix Vaccine",
+          },
+          {
+            title: "HK$100",
+            detail: "K11 Musea cash coupon",
+          },
+        ],
+      },
+    ];
+
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "flex-start",
+          alignItems: "center",
+          backgroundColor: colors.secondaryBackground,
+        }}
+      >
+        <ScrollView>{renderRewardList()}</ScrollView>
+      </View>
+    );
+  };
+
   const renderScreen = () => {
     switch (activeTab) {
       case "Screen1":
         return <Screen1 />;
+      case "Screen2":
+        return <Screen2 />;
     }
 
     return false;
@@ -386,6 +417,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
+          backgroundColor: colors.background,
         }}
       >
         <View>
