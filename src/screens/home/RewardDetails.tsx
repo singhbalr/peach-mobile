@@ -19,6 +19,7 @@ import { useMutation } from "@apollo/client";
 import { REDEEM_REWARD } from "../../connection/mutation";
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
+import { t } from "i18next";
 
 interface RewardDetailsScreenProps {
   navigation: any;
@@ -65,7 +66,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <MenuButton />
-        <Text style={styles.headerText}>Colorectal Screening</Text>
+        <Text style={styles.headerText}>{t("RewardDetails.title")}</Text>
       </View>
       <View
         style={{
@@ -147,7 +148,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         color: "#383D39",
                       }}
                     >
-                      Support colorectal screening to save lives{" "}
+                     {t("RewardDetails.title-content")}{" "}
                     </Text>
                     <View
                       style={{
@@ -187,7 +188,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                           color: "#D1AE6C",
                         }}
                       >
-                        Reward
+                        {t("RewardDetails.reward")}
                       </Text>
                     </View>
                   </View>
@@ -241,7 +242,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                       lineHeight: 21,
                     }}
                   >
-                    Terms & Conditions
+                    {t("RewardDetails.terms")}
                   </Text>
                   <View
                     style={{
@@ -263,10 +264,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         {"\u2022"}
                       </Text>
                       <Text>
-                        The Data Receiver is developing a new blood-based
-                        colorectal cancer detection test and intends to identity
-                        not fewer than 500 high-risk individuals for mid or long
-                        term follow-up study
+                        {t("RewardDetails.text")}
                       </Text>
                     </View>
                     <View
@@ -282,10 +280,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         {"\u2022"}
                       </Text>
                       <Text>
-                        The Data Receiver is developing a new blood-based
-                        colorectal cancer detection test and intends to identity
-                        not fewer than 500 high-risk individuals for mid or long
-                        term follow-up study
+                        {t("RewardDetails.text")}
                       </Text>
                     </View>
                   </View>

@@ -42,6 +42,97 @@
       "name21": "semen",
       "name22": "skin"
       
+    },
+    "ProfileScreen": {
+      "title": "Contributions",
+      "subtitle": "Contribute Data Now to Get Rewards",
+      "tab-title1": "Opportunities",
+      "tab-title2": "Followup Requests",
+      "opportunity-title1": "Support colorectal screening to save lives",
+      "opportunity-title2": "Useful health info selected for you",
+      "opportunity-title3": "Join the fight against the hepatitis B virus",
+      "opportunity-title4": "Enable better insurance coverage for people with cardiovascular disease risks",
+      "reward-title1": "2 doses",
+      "reward-detail1": "Shingrix Vaccine",
+      "reward-title2": "HK$100",
+      "reward-detail2": "K11 Musea cash coupon",
+      "reward-title3": "HK$50",
+      "reward-detail3": "K11 Musea cash coupon",
+      "reward-title4": "HK$125",
+      "reward-detail4": "K11 Musea cash coupon",
+      "reward-title5": "HK$150",
+      "reward-detail5": "K11 Musea cash coupon",
+      "text1": "shared until 2023-03-01",
+      "text2": "Securely Shared",
+      "text3": "Support colorectal screening to save lives",
+      "text4": "2 dose",
+      "text5": "Shingrix vaccine",
+      "text6": "100 HKD",
+      "text7": "K11 Musea",
+      "text8": "Accept Request"
+    },
+    "OpportunitiesRecord": {
+      "data-title1": "Data Purpose",
+      "data-content1": "The Data Receiver is developing a new blood-based colorectal cancer detection test and intends to identity not fewer than 500 high-risk individuals for mid or long term follow-up study",
+      "data-title2": "Data Accessibility",
+      "data-content2": "Access to your data will be terminated in 48 months after you have contributed your data.",
+      "data-title3": "How do I withdraw?",
+      "data-content3": "You can withdraw your data contribution only if you have not redeemed the rewards.",
+      "days-left": "Days left",
+      "data-shared": "Data to be shared",
+      "privacy-policy": "Privacy Policy",
+      "reward": "Reward",
+      "more-information": "More Information",
+      "data-receiver": "Data Receiver",
+      "prenetics-limited": "Prenetics Limited",
+      "prenetics": "Prenetics",
+
+      "text1": "intended use of your data :",
+      "text2": "Your following data will be shared if you accept :",
+      "text3": "-The raw sequence data of your germ-line genetic sequence.",
+      "text4": "- The data stored in the informatics system of the Connected Clinics, Hospitals and Labs.",
+      "text5": "- The data stored in the informatics system of the Connected Wearable Devices.",
+      "text6": "The Data Receiver will not know your personal identity.",
+      "text7": "data accessible duration :",
+      "text8": "48 months after you have contributed your data.",
+
+      "text9": "Prenetics&apos; mission is to bring health closer to people, by decentralizing health care, and focusing on the comprehensive testing capabilities covering prevention, diagnostics, and personalized care.",
+      "text10": "https://www.prenetics.com",
+      "text11": "Its company website is:",
+      "text12": "Your data is securely shared. Trace your data in My",
+      "text13": "Shared Data.",
+      "text14": "My Shared Data"
+    },
+    "OpportunitiesSuccess": {
+      "text1": "congratulations! you just received a reward. Go to Reward Centor to redeem it.",
+      "text2": "Shingrix vaccine",
+      "text3": "2 dose"
+    },
+    "MedicalRecordScreen": {
+      "text1": "Clinical Records"
+    },
+    "MyShareData": {
+      "label1": "The data that you are contributing are",
+      "label1-1": "being prepared",
+      "label2": "The prepared data is ready for sharing with requestor",
+      "label3": "Sharing now through safe communications channel",
+      "label4": "You can now track the usage of the contributed data",
+      "label5": "Your reward is received",
+      "text1": "The data stored in the informatics system of the Connected Clinics, Hospitals and Labs.",
+      "text2": "The data stored in the informatics system of the Connected Wearable Devices.",
+      "text3": "My Progress",
+      "text4": "My Share Data"
+    },
+    "RewardDetails": {
+      "title": "Colorectal Screening",
+      "title-content": "Support colorectal screening to save lives",
+      "reward": "Reward",
+      "terms": "Terms & Conditions",
+      "text": "The Data Receiver is developing a new blood-based colorectal cancer detection test and intends to identity not fewer than 500 high-risk individuals for mid or long term follow-up study"
+
+    },
+    "SearchScreen": {
+      "text": "Clinical Report"
     }
   }
 }
