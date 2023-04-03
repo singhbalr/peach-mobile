@@ -6,7 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   Image,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 import { useDispatch } from "react-redux";
 import {
@@ -112,85 +112,87 @@ const LoginScreen: React.FC<Props> = () => {
           />
         </View>
 
-    <View style={styles.containerLogo}>
-        <Text style={styles.loginLogo}>{t("loginScreen.title")}</Text>
-      </View>
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <PInput
-            style={styles.input}
-            value={username}
-            onChangeText={setUser}
-            secureTextEntry={false}
-            label={t("loginScreen.emailInput")}
-            isValid={isUserValid}
-          />
-          <View style={styles.passwordContainer}>
+        <View style={styles.containerLogo}>
+          <Text style={styles.loginLogo}>{t("loginScreen.title")}</Text>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.inputContainer}>
             <PInput
               style={styles.input}
-              value={password}
-              onChangeText={setPass}
-              secureTextEntry={secureTextEntry}
-              label={t("loginScreen.passwordInput")}
-              isValid={isPasswordValid}
+              value={username}
+              onChangeText={setUser}
+              secureTextEntry={false}
+              label={t("loginScreen.emailInput")}
+              isValid={isUserValid}
             />
-            <TouchableOpacity
-              onPress={() => setSecureTextEntry(!secureTextEntry)}
-              style={styles.secureTextIcon}
-            >
-              <Icon
-                name={secureTextEntry ? "eye-off-outline" : "eye-outline"}
-                size={24}
+            <View style={styles.passwordContainer}>
+              <PInput
+                style={styles.input}
+                value={password}
+                onChangeText={setPass}
+                secureTextEntry={secureTextEntry}
+                label={t("loginScreen.passwordInput")}
+                isValid={isPasswordValid}
               />
+              <TouchableOpacity
+                onPress={() => setSecureTextEntry(!secureTextEntry)}
+                style={styles.secureTextIcon}
+              >
+                <Icon
+                  name={secureTextEntry ? "eye-off-outline" : "eye-outline"}
+                  size={24}
+                />
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={styles.forgotPasswordLabel}>
+              <Text style={styles.forgotText}>
+                {t("loginScreen.forgotPassword")}
+              </Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.forgotPasswordLabel}>
-            <Text style={styles.forgotText}>{t("loginScreen.forgotPassword")}</Text>
-          </TouchableOpacity>
         </View>
-      </View>
-      <KeyboardAvoidingView>
-        <View style={styles.loginContainer}>
-          <PIbutton
-            onPress={handleLogin}
-            text={t("loginScreen.loginBtn")}
-            type="primary"
-            style={{
-              backgroundColor: "white",
-              borderRadius: 45,
-              borderColor: "white",
-              marginBottom: 5,
-              padding: 7
-            }}
-          />
-          <PIbutton
-            onPress={handleLogin}
-            text={
-
-                <Text style={{color: 'white'}}>{t("loginScreen.loginWithFaceIDBtn")}</Text>
-
-            }
-            type="secondary"
-            style={{
-              backgroundColor: "#91AD70",
-              borderRadius: 45,
-              borderColor: "white",
-              opacity: 1,
-              padding: 7,
-            }}
-          />
-          <Text style={{fontSize: 14, color: "#ECF1E8", marginTop: 150}}>{t("loginScreen.signUp")}</Text>
-        </View>
-      </KeyboardAvoidingView>
-      {/*<View style={styles.container}>*/}
-      {/*  <TouchableOpacity onPress={handleBiometric}>*/}
-      {/*    <Icon name={"finger-print"} size={37} />*/}
-      {/*  </TouchableOpacity>*/}
-      {/*</View>*/}
-
-    </ScrollView>
-  </>
-
+        <KeyboardAvoidingView>
+          <View style={styles.loginContainer}>
+            <PIbutton
+              onPress={handleLogin}
+              text={t("loginScreen.loginBtn")}
+              type="primary"
+              style={{
+                backgroundColor: "white",
+                borderRadius: 45,
+                borderColor: "white",
+                marginBottom: 5,
+                padding: 7,
+              }}
+            />
+            <PIbutton
+              onPress={handleLogin}
+              text={
+                <Text style={{ color: "white" }}>
+                  {t("loginScreen.loginWithFaceIDBtn")}
+                </Text>
+              }
+              type="secondary"
+              style={{
+                backgroundColor: "#91AD70",
+                borderRadius: 45,
+                borderColor: "white",
+                opacity: 1,
+                padding: 7,
+              }}
+            />
+            <Text style={{ fontSize: 14, color: "#ECF1E8", marginTop: 150 }}>
+              {t("loginScreen.signUp")}
+            </Text>
+          </View>
+        </KeyboardAvoidingView>
+        {/*<View style={styles.container}>*/}
+        {/*  <TouchableOpacity onPress={handleBiometric}>*/}
+        {/*    <Icon name={"finger-print"} size={37} />*/}
+        {/*  </TouchableOpacity>*/}
+        {/*</View>*/}
+      </ScrollView>
+    </>
   );
 };
 
