@@ -22,7 +22,10 @@ import ReportSvg from "../../assets/dashboard/report.svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Drawer from "react-native-drawer";
 import Sidebar from "../../components/Sidebar";
+import { t } from "i18next";
+
 const { width } = Dimensions.get("window");
+
 
 interface HomeScreenProps {}
 interface ButtonProps {
@@ -136,93 +139,93 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   const buttonList = [
     {
-      name: "Head & Neck",
+      name: t("YourBioverseScreen.name1"),
       classname: "buttonOne",
       reportCount: 4,
       children: [],
     },
     {
-      name: "Thorax",
+      name: t("YourBioverseScreen.name2"),
       classname: "buttonTwo",
       reportCount: 4,
       children: [],
     },
     {
-      name: "Upper Abdomen",
+      name: t("YourBioverseScreen.name3"),
       classname: "buttonThree",
       reportCount: 0,
       children: [
         {
-          name: "Liver",
+          name: t("YourBioverseScreen.name7"),
           reportCount: 1,
         },
         {
-          name: "Pancreas",
+          name: t("YourBioverseScreen.name8"),
           reportCount: 0,
         },
         {
-          name: "Stomach",
+          name: t("YourBioverseScreen.name9"),
           reportCount: 0,
         },
         {
-          name: "Gallbladder",
+          name: t("YourBioverseScreen.name10"),
           reportCount: 0,
         },
         {
-          name: "Spleen",
+          name: t("YourBioverseScreen.name11"),
           reportCount: 0,
         },
       ],
     },
     {
-      name: "Lower Abdomen",
+      name: t("YourBioverseScreen.name4"),
       classname: "buttonFour",
       reportCount: 0,
       children: [],
     },
     {
-      name: "Limbs",
+      name: t("YourBioverseScreen.name5"),
       classname: "buttonFive",
       reportCount: 0,
       children: [],
     },
     {
-      name: "Blood & Others",
+      name: t("YourBioverseScreen.name6"),
       classname: "buttonSix",
       reportCount: 0,
       children: [
         {
-          name: "Blood",
+          name: t("YourBioverseScreen.name12"),
         },
         {
-          name: "Bones",
+          name: t("YourBioverseScreen.name13"),
         },
         {
-          name: "Genetics",
+          name: t("YourBioverseScreen.name14"),
         },
         {
-          name: "glands",
+          name: t("YourBioverseScreen.name15"),
         },
         {
-          name: "joints and bones (Other than limbs or ribs)",
+          name: t("YourBioverseScreen.name16"),
         },
         {
-          name: "lymph",
+          name: t("YourBioverseScreen.name17"),
         },
         {
-          name: "medication",
+          name: t("YourBioverseScreen.name18"),
         },
         {
-          name: "mental",
+          name: t("YourBioverseScreen.name19"),
         },
         {
-          name: "other bodily fluids",
+          name: t("YourBioverseScreen.name20"),
         },
         {
-          name: "semen",
+          name: t("YourBioverseScreen.name21"),
         },
         {
-          name: "skin",
+          name: t("YourBioverseScreen.name22"),
         },
       ],
     },
@@ -254,8 +257,8 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         })}
       >
         <Header
-          titleText={"Your Bioverse"}
-          subTitleText={"Explore your body anytime, anywhere."}
+          titleText={t("YourBioverseScreen.title")}
+          subTitleText={t("YourBioverseScreen.subtitle")}
           drawer={drawer}
         ></Header>
         <View style={styles.bodyContainer}>

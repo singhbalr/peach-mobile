@@ -8,6 +8,40 @@
       "loginBtn": "Login",
       "loginWithFaceIDBtn": "Login with Face ID",
       "signUp": "Don’t have an account ? Sign Up"
+    },
+    "OnBoarding": {
+      "title": "Welcome to Peach Bioverse",
+      "subtitle": "Explore and Contribute your health data to build a healthy future",
+      "titleButton": "Explore to share"
+    },
+    "YourBioverseScreen": {
+      "title": "Your Bioverse",
+      "subtitle": "Explore your body anytime, anywhere",
+      "name1": "Head & Neck",
+      "name2": "Thorax",
+      "name3": "Upper Abdomen",
+      "name4": "Lower Abdomen",
+      "name5": "Limbs",
+      "name6": "Blood & Others",
+      
+      "name7": "Liver",
+      "name8": "Pancreas",
+      "name9": "Stomach",
+      "name10": "Gallbladder",
+      "name11": "Spleen",
+
+      "name12": "Blood",
+      "name13": "Bones",
+      "name14": "Genetics",
+      "name15": "glands",
+      "name16": "joints and bones (Other than limbs or ribs)",
+      "name17": "lymph",
+      "name18": "medication",
+      "name19": "mental",
+      "name20": "other bodyly fluids",
+      "name21": "semen",
+      "name22": "skin"
+      
     }
   }
 }

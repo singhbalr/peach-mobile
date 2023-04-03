@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   Image,
+  KeyboardAvoidingView,
 } from "react-native";
 import { useDispatch } from "react-redux";
 import {
@@ -150,40 +151,41 @@ const LoginScreen: React.FC<Props> = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.loginContainer}>
-          <PIbutton
-            onPress={handleLogin}
-            text={t("loginScreen.loginBtn")}
-            type="primary"
-            style={{
-              backgroundColor: "white",
-              borderRadius: 45,
-              borderColor: "white",
-              marginBottom: 5,
-              padding: 7,
-            }}
-          />
-          <PIbutton
-            onPress={handleLogin}
-            text={
-              <Text style={{ color: "white" }}>
-                {t("loginScreen.loginWithFaceIDBtn")}
-              </Text>
-            }
-            type="secondary"
-            style={{
-              backgroundColor: "#91AD70",
-              borderRadius: 45,
-              borderColor: "white",
-              opacity: 1,
-              padding: 7,
-            }}
-          />
-
-          <Text style={{ fontSize: 14, color: "#ECF1E8", marginTop: 150 }}>
-            {t("loginScreen.signUp")}{" "}
-          </Text>
-        </View>
+        <KeyboardAvoidingView>
+          <View style={styles.loginContainer}>
+            <PIbutton
+              onPress={handleLogin}
+              text={t("loginScreen.loginBtn")}
+              type="primary"
+              style={{
+                backgroundColor: "white",
+                borderRadius: 45,
+                borderColor: "white",
+                marginBottom: 5,
+                padding: 7,
+              }}
+            />
+            <PIbutton
+              onPress={handleLogin}
+              text={
+                <Text style={{ color: "white" }}>
+                  {t("loginScreen.loginWithFaceIDBtn")}
+                </Text>
+              }
+              type="secondary"
+              style={{
+                backgroundColor: "#91AD70",
+                borderRadius: 45,
+                borderColor: "white",
+                opacity: 1,
+                padding: 7,
+              }}
+            />
+            <Text style={{ fontSize: 14, color: "#ECF1E8", marginTop: 150 }}>
+              {t("loginScreen.signUp")}
+            </Text>
+          </View>
+        </KeyboardAvoidingView>
         {/*<View style={styles.container}>*/}
         {/*  <TouchableOpacity onPress={handleBiometric}>*/}
         {/*    <Icon name={"finger-print"} size={37} />*/}
