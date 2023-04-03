@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, KeyboardAvoidingView } from "react-nativ
 import { useNavigation } from "@react-navigation/native";
 import PIbutton from "@shared-components/buttons/Pbutton";
 import { PUBLICSCREENS } from "@shared-constants";
+import { t } from "i18next";
 
 interface Props {}
 
@@ -25,7 +26,7 @@ const Onboarding: React.FC<Props> = () => {
         />
       </View>
       <View style={styles.container}>
-        <Text style={styles.title}>Welcome to Peach Bioverse</Text>
+        <Text style={styles.title}>{t("OnBoarding.title")}</Text>
         <Image
             source={require("../../assets/contribute-data/onboarding-1.png")}
             style={{
@@ -36,10 +37,10 @@ const Onboarding: React.FC<Props> = () => {
                 borderRadius: 25
             }}
         />
-        <Text style={styles.subTitle}>Explore and Contribute your health data to build a healthy future</Text>
+        <Text style={styles.subTitle}>{t("OnBoarding.subtitle")}</Text>
         <KeyboardAvoidingView>
           <PIbutton
-              text="Explore to share"
+              text={t("OnBoarding.titleButton")}
               type="secondary"
               style={{
                   backgroundColor: "white",
