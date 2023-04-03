@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image, KeyboardAvoidingView } from "react-native";
 // import type { RootState } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import {
@@ -141,38 +141,39 @@ const LoginScreen: React.FC<Props> = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.loginContainer}>
-        <PIbutton
-          onPress={handleLogin}
-          text="Login"
-          type="primary"
-          style={{
-            backgroundColor: "white",
-            borderRadius: 45,
-            borderColor: "white",
-            marginBottom: 5,
-            padding: 7
-          }}
-        />
-        <PIbutton
-          onPress={handleLogin}
-          text={ 
+      <KeyboardAvoidingView>
+        <View style={styles.loginContainer}>
+          <PIbutton
+            onPress={handleLogin}
+            text="Login"
+            type="primary"
+            style={{
+              backgroundColor: "white",
+              borderRadius: 45,
+              borderColor: "white",
+              marginBottom: 5,
+              padding: 7
+            }}
+          />
+          <PIbutton
+            onPress={handleLogin}
+            text={ 
             
-              <Text style={{color: 'white'}}>Login with Face ID</Text>
+                <Text style={{color: 'white'}}>Login with Face ID</Text>
             
-           }
-          type="secondary"
-          style={{
-            backgroundColor: "#91AD70",
-            borderRadius: 45,
-            borderColor: "white",
-            opacity: 1,
-            padding: 7,
-          }}
-        />
-
-        <Text style={{fontSize: 14, color: "#ECF1E8", marginTop: 150}}>Don’t have an account ? Sign Up </Text>
-      </View>
+            }
+            type="secondary"
+            style={{
+              backgroundColor: "#91AD70",
+              borderRadius: 45,
+              borderColor: "white",
+              opacity: 1,
+              padding: 7,
+            }}
+          />
+          <Text style={{fontSize: 14, color: "#ECF1E8", marginTop: 150}}>Don’t have an account ? Sign Up </Text>
+        </View>
+      </KeyboardAvoidingView>
       {/*<View style={styles.container}>*/}
       {/*  <TouchableOpacity onPress={handleBiometric}>*/}
       {/*    <Icon name={"finger-print"} size={37} />*/}
