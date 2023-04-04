@@ -2,11 +2,13 @@ import React, { createRef } from 'react'
 import { View, StyleSheet, Text, Dimensions, TouchableOpacity } from 'react-native'
 import InfoSvg from "../assets/dashboard/info.svg"
 import MenuSvg from "../assets/dashboard/menu.svg"
+import { useDispatch, useSelector } from 'react-redux'
+import { setSidebarState } from '@screens/auth/rx/reducer'
+import { RootState } from 'redux/store'
 
 type Props = {
   titleText: string
   subTitleText?: string,
-  drawer?: any,
 }
 // props: [propsType: defaultValue] props introduce
 // props.titleText: [String] header title
@@ -15,9 +17,9 @@ const Header: React.FC<Props> = (props: Props) => {
   const {
     titleText,
     subTitleText,
-    drawer
   } = props
-
+  const dispatch = useDispatch()
+  const sidebarState = useSelector((state: RootState) => state.auth.sidebarState)
 
   return (
     <View style={styles.container}>
@@ -29,7 +31,7 @@ const Header: React.FC<Props> = (props: Props) => {
           <InfoSvg style={[styles.icon, styles.infoIcon]}></InfoSvg>
           <TouchableOpacity
             onPress={() => {
-              drawer.current?.open()
+              dispatch(setSidebarState(true))
             }}
           >
             <MenuSvg style={[styles.icon, styles.menuIcon]}></MenuSvg>

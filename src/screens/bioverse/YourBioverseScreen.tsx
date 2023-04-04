@@ -6,7 +6,6 @@ import {
   View,
   ViewStyle,
   Animated,
-  Dimensions,
 } from "react-native";
 import { GET_MEDICAL_RECORD_BY_BODY_PART } from "../../connection/mutation";
 import { useMutation } from "@apollo/client";
@@ -20,12 +19,7 @@ import Popup from "../../components/Popup";
 import MaleBodySvg from "../../assets/dashboard/male-body.svg";
 import ReportSvg from "../../assets/dashboard/report.svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Drawer from "react-native-drawer";
-import Sidebar from "../../components/Sidebar";
 import { t } from "i18next";
-
-const { width } = Dimensions.get("window");
-
 
 interface HomeScreenProps {}
 interface ButtonProps {
@@ -242,57 +236,41 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Drawer
-        ref={drawer}
-        type="overlay"
-        content={<Sidebar />}
-        openDrawerOffset={0.15 * width}
-        tapToClose={true}
-        side={"right"}
-        tweenHandler={(ratio) => ({
-          mainOverlay: {
-            opacity: ratio / 1.5,
-            backgroundColor: "rgba(56, 61, 57, 1)",
-          },
+      <Header
+        titleText={t("YourBioverseScreen.title")}
+        subTitleText={t("YourBioverseScreen.subtitle")}
+      ></Header>
+      <View style={styles.bodyContainer}>
+        {buttonList.map((item, index) => {
+          return (
+            <View key={item.name} style={styles[item.classname]}>
+              <BodyButton
+                buttonText={item.name}
+                reportCount={item.reportCount}
+                onPress={() => {
+                  selectBodyParts(item);
+                }}
+              ></BodyButton>
+            </View>
+          );
         })}
-      >
-        <Header
-          titleText={t("YourBioverseScreen.title")}
-          subTitleText={t("YourBioverseScreen.subtitle")}
-          drawer={drawer}
-        ></Header>
-        <View style={styles.bodyContainer}>
-          {buttonList.map((item, index) => {
-            return (
-              <View key={item.name} style={styles[item.classname]}>
-                <BodyButton
-                  buttonText={item.name}
-                  reportCount={item.reportCount}
-                  onPress={() => {
-                    selectBodyParts(item);
-                  }}
-                ></BodyButton>
-              </View>
-            );
-          })}
-          <View style={styles.bodySvg}>
-            <MaleBodySvg height={460}></MaleBodySvg>
-          </View>
+        <View style={styles.bodySvg}>
+          <MaleBodySvg height={460}></MaleBodySvg>
         </View>
-        {popupVisible && (
-          <View style={styles.bodyDetailView}>
-            {/* <Animated.Image
-                source={require("../../assets/dashboard/body-detail-1x.png")}
-                style={[styles.bodyDetailImage, { transform: [{ translateY }, { scale }] }]}
-              /> */}
-            <Image
-              source={require("../../assets/dashboard/body-detail1.png")}
-              style={styles.bodyDetailImage}
-              resizeMode={"cover"}
-            ></Image>
-          </View>
-        )}
-      </Drawer>
+      </View>
+      {popupVisible && (
+        <View style={styles.bodyDetailView}>
+          {/* <Animated.Image
+              source={require("../../assets/dashboard/body-detail-1x.png")}
+              style={[styles.bodyDetailImage, { transform: [{ translateY }, { scale }] }]}
+            /> */}
+          <Image
+            source={require("../../assets/dashboard/body-detail1.png")}
+            style={styles.bodyDetailImage}
+            resizeMode={"cover"}
+          ></Image>
+        </View>
+      )}
       <Popup
         visible={popupVisible}
         title={activeItem.name}
@@ -311,6 +289,7 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 0,
     backgroundColor: "#fafafa",
   },
   bodyContainer: {

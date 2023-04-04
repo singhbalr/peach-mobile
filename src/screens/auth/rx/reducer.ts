@@ -7,6 +7,7 @@ interface AuthState {
   token: string;
   patientId: string;
   patientDetails: any;
+  sidebarState: boolean;
 }
 const initialState = {
   username: "",
@@ -15,6 +16,7 @@ const initialState = {
   token: "",
   patientId: "",
   patientDetails: {},
+  sidebarState: false
 };
 const authSlice = createSlice({
   name: "auth",
@@ -39,31 +41,29 @@ const authSlice = createSlice({
       state.patientDetails = action.payload;
     },
     setLogout: () => initialState,
+    setSidebarState: (state: AuthState, action: { payload: boolean }) => {
+      state.sidebarState = action.payload;
+    },
   },
 });
 
 export default authSlice.reducer;
-
 interface SetUsernameAction {
   type: string;
   payload: string;
 }
-
 interface SetPasswordAction {
   type: string;
   payload: string;
 }
-
 interface SetLoggedInStateAction {
   type: string;
   payload: boolean;
 }
-
 interface SetTokenAction {
   type: string;
   payload: string;
 }
-
 interface SetPatientIdAction {
   type: string;
   payload: string;
@@ -71,6 +71,10 @@ interface SetPatientIdAction {
 interface SetPatientDetails {
   type: string;
   payload: any;
+}
+interface SetSidebarStateAction {
+  type: string;
+  payload: boolean;
 }
 
 interface setLogoutAction {}
@@ -82,7 +86,8 @@ type AuthActions =
   | SetTokenAction
   | setLogoutAction
   | SetPatientDetails
-  | SetPatientIdAction;
+  | SetPatientIdAction
+  | SetSidebarStateAction;
 
 export const {
   setUsername,
@@ -92,4 +97,5 @@ export const {
   setLogout,
   setPatientId,
   setPatientDetails,
+  setSidebarState,
 } = authSlice.actions;
