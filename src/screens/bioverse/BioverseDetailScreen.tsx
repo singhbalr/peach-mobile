@@ -1,16 +1,18 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Navigation from "../../components/Navigation";
-import ClinicalSvg from "../../assets/dashboard/clinical.svg";
+import ClinicalSvg from "../../assets/icons/clinical.svg";
 import { SafeAreaView } from "react-native";
 import { PRIVATESCREENS } from "@shared-constants";
 import * as NavigationService from "react-navigation-helpers";
+import IconButton from "components/IconButton";
 const BioverseDetailScreen: React.FC = () => {
-  const handleItemPress = (OpportunityRecord: any) => {
+  const handleItemPress = () => {
     NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
-      OpportunityRecord,
+      activeIndex: 2
     });
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <Navigation titleText={"Liver"}></Navigation>
@@ -22,14 +24,9 @@ const BioverseDetailScreen: React.FC = () => {
         </View>
         <Text style={styles.greenText}>Medtimes</Text>
         <Text style={styles.subText}>Dr. Ho Wai Ming</Text>
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.5}
-          onPress={handleItemPress}
-        >
-          <ClinicalSvg></ClinicalSvg>
-          <Text style={styles.buttonText}>Clinical Record</Text>
-        </TouchableOpacity>
+        <View style={{flexDirection: 'row'}}>
+          <IconButton buttonIcon={<ClinicalSvg />} buttonText={'Clinical Record'} buttonStyle={{backgroundColor: '#F8F1F2'}} onPress={handleItemPress}></IconButton>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -42,12 +39,14 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     color: "#fff",
-    backgroundColor: "#fafafa",
+    backgroundColor: "#fff",
     zIndex: 1,
   },
   mainContainer: {
+    flex: 1,
     paddingVertical: 30,
     paddingHorizontal: 38,
+    backgroundColor: '#fafafa'
   },
   mainText: {
     fontSize: 18,

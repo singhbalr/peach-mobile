@@ -1,8 +1,8 @@
-import React from "react";
-import {Image, Platform, useColorScheme} from "react-native";
-import Icon from "react-native-dynamic-vector-icons";
+import React, { createRef } from "react";
+import {Image, Platform, Dimensions, useColorScheme} from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+import Drawer from 'react-native-drawer'
 /**
  * ? Local & Shared Imports
  */
@@ -10,19 +10,24 @@ import { PRIVATESCREENS } from "@shared-constants";
 import { palette } from "@theme/themes";
 // ? Screens
 import HomeScreen from "@screens/home/HomeScreen";
-import SearchScreen from "@screens/search/SearchScreen";
 import ProfileScreen from "@screens/profile/ProfileScreen";
-import NotificationScreen from "@screens/notification/NotificationScreen";
-import MedicalRecordScreen from "@screens/medicalRecord/MedicalRecordScreen";
-import MyShareData from "@screens/myShareData/MyShareData";
 import YourBioverseScreen from "@screens/bioverse/YourBioverseScreen";
-import RewardDetails from "@screens/home/RewardDetails";
+import ClinicalReport from "@screens/clinicalReport/ClinicalReport";
+import Sidebar from "../components/Sidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { setSidebarState } from "../screens/auth/rx/reducer";
+const { width } = Dimensions.get("window");
+
 // ? If you want to use stack or tab or both
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const PrivateRoutes = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === "dark";
+  const drawer = createRef<React.ElementRef<typeof Drawer>>()
+  const sidebarState = useSelector((state: RootState) => state.auth.sidebarState)
+  const dispatch = useDispatch()
 
   const renderTabIcon = (
     route: any,
@@ -42,7 +47,6 @@ const PrivateRoutes = () => {
             style={{
               width: 46,
               height: 28,
-              // backgroundColor: focused ? "#7BA040" : "#c8c7c7",
             }}
           />
         );
@@ -58,7 +62,6 @@ const PrivateRoutes = () => {
             style={{
               width: 20,
               height: 24,
-              // backgroundColor: focused ? "#7BA040" : "#c8c7c7",
             }}
           />
         );
@@ -74,7 +77,6 @@ const PrivateRoutes = () => {
             style={{
               width: 46,
               height: 28,
-              // backgroundColor: focused ? "#7BA040" : "#c8c7c7",
             }}
           />
         );
@@ -90,7 +92,6 @@ const PrivateRoutes = () => {
             style={{
               width: 24,
               height: 24,
-              // backgroundColor: focused ? "#7BA040" : "#c8c7c7",
             }}
           />
         );
@@ -102,21 +103,37 @@ const PrivateRoutes = () => {
             style={{
               width: 46,
               height: 28,
-              // backgroundColor: focused ? "#7BA040" : "#7BA040",
             }}
           />
         );
     }
   };
   return (
-    <>
+    <Drawer
+      ref={drawer}
+      open={sidebarState}
+      type="overlay"
+      content={<Sidebar />}
+      openDrawerOffset={0.15 * width}
+      tapToClose={true}
+      side={"right"}
+      onClose={() => {
+        dispatch(setSidebarState(false))
+      }}
+      tweenHandler={(ratio) => ({
+        mainOverlay: {
+          opacity: ratio / 1.5,
+          backgroundColor: "rgba(56, 61, 57, 1)",
+        },
+      })}
+    >
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) =>
             renderTabIcon(route, focused, color, size),
-          tabBarActiveTintColor: palette.background,
-          tabBarInactiveTintColor: "gray",
+          tabBarActiveTintColor: '#7BA040',
+          tabBarInactiveTintColor: "#888B88",
           tabBarStyle: {
             backgroundColor: isDarkMode ? palette.black : palette.white,
             height: 83,
@@ -135,7 +152,7 @@ const PrivateRoutes = () => {
         />
         <Tab.Screen
           name={PRIVATESCREENS.CLINICAL_REPORT}
-          component={SearchScreen}
+          component={ClinicalReport}
         />
         <Tab.Screen
           name={PRIVATESCREENS.CONTRIBUTE_DATA}
@@ -146,7 +163,7 @@ const PrivateRoutes = () => {
           component={HomeScreen}
         />
       </Tab.Navigator>
-    </>
+    </Drawer>
   );
 };
 export default PrivateRoutes;
