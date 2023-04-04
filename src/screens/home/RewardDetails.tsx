@@ -104,8 +104,10 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         uri: detail?.opportunity?.opportunity_picture_banner,
                       }}
                       style={{
-                        width: 323,
+                        width: 370,
                         height: 184,
+                        borderRadius: 15,
+                        
                       }}
                     />
                     <View
@@ -113,9 +115,13 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         backgroundColor: "#383D39",
                         // borderRadius: 8,
                         // paddingHorizontal: 10,
-                        paddingVertical: 4,
+                        paddingVertical: 3,
+                        paddingHorizontal: 15,
                         position: "absolute",
-                        bottom: 9,
+                        bottom: 10,
+                        marginBottom: 5,
+                        borderRadius: 5,
+                        marginLeft: 10
                         // left: 7,
                       }}
                     >
@@ -124,6 +130,8 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                           color: "white",
                           fontSize: 11,
                           fontWeight: "900",
+                          marginBottom: 3
+
                         }}
                       >
                         {calculateDateDiff(
@@ -146,6 +154,8 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         fontWeight: "700",
                         marginBottom: 16,
                         color: "#383D39",
+                        marginLeft: 5,
+                        marginRight: 5
                       }}
                     >
                      {t("RewardDetails.title-content")}{" "}
@@ -154,7 +164,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                       style={{
                         borderBottomColor: "#BABCB7",
                         borderBottomWidth: StyleSheet.hairlineWidth,
-                        marginBottom: 16,
+                        marginBottom: 10,
                       }}
                     />
                   </View>
@@ -170,6 +180,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                       style={{
                         width: 20,
                         height: 20,
+                        marginLeft: 5,
                         alignItems: "center",
                       }}
                     />
@@ -180,12 +191,13 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                     >
                       <Text
                         style={{
-                          marginLeft: 4,
+                          marginLeft: 8,
                           lineHeight: 17,
                           fontWeight: "600",
                           fontSize: 18,
                           alignItems: "center",
                           color: "#D1AE6C",
+                          marginTop: 5
                         }}
                       >
                         {t("RewardDetails.reward")}
@@ -240,6 +252,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                       fontSize: 18,
                       color: "#606461",
                       lineHeight: 21,
+                      marginLeft: 10
                     }}
                   >
                     {t("RewardDetails.terms")}
@@ -258,12 +271,17 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                     >
                       <Text
                         style={{
-                          marginRight: 5,
+                          marginRight: 2,
+                          marginLeft: 8
                         }}
                       >
                         {"\u2022"}
                       </Text>
-                      <Text>
+                      <Text style={{
+                          marginRight: 30,
+                          marginLeft: 10,
+                          marginBottom: 10
+                        }}>
                         {t("RewardDetails.text")}
                       </Text>
                     </View>
@@ -274,12 +292,17 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                     >
                       <Text
                         style={{
-                          marginRight: 5,
+                          marginRight: 2,
+                          marginLeft: 8
                         }}
                       >
                         {"\u2022"}
                       </Text>
-                      <Text>
+                      <Text style={{
+                          marginRight: 30,
+                          marginLeft: 10,
+                          marginBottom: 10
+                        }}>
                         {t("RewardDetails.text")}
                       </Text>
                     </View>

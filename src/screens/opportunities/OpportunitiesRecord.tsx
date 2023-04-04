@@ -152,6 +152,8 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             }}
             style={{
               alignSelf: "stretch",
+              marginLeft: 5,
+              marginRight: 5,
               height: 184,
               borderRadius: 15,
             }}
@@ -191,6 +193,8 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               fontWeight: "700",
               marginBottom: 16,
               color: "#383D39",
+              marginLeft: 10,
+              marginRight: 10
             }}
           >
             {detail.opportunity_name}
@@ -199,7 +203,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             style={{
               borderBottomColor: "#BABCB7",
               borderBottomWidth: StyleSheet.hairlineWidth,
-              marginBottom: 16,
+              marginBottom: 10,
             }}
           />
         </View>
@@ -207,14 +211,15 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            marginBottom: 14,
+            marginBottom: 25,
           }}
         >
           <Text
             style={{
               color: "#383D39",
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: "600",
+              marginLeft: 7
             }}
           >
             {t("OpportunitiesRecord.data-shared")}
@@ -224,6 +229,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               color: "#7BA040",
               fontSize: 13,
               fontWeight: "500",
+              marginRight: 10
             }}
           >
             {t("OpportunitiesRecord.privacy-policy")} &gt;
@@ -276,6 +282,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               width: 20,
               height: 20,
               alignItems: "center",
+              marginLeft: 5
             }}
           />
           <View
@@ -285,12 +292,13 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           >
             <Text
               style={{
-                marginLeft: 4,
+                marginLeft: 10,
                 lineHeight: 17,
                 fontWeight: "600",
                 fontSize: 18,
                 alignItems: "center",
                 color: "#D1AE6C",
+                marginTop: 5
               }}
             >
               {t("OpportunitiesRecord.reward")}
@@ -301,6 +309,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
+            marginLeft: 10
           }}
         >
           {detail.reward.map((item: any, index: number) => (
@@ -315,7 +324,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               <Text
                 style={{
                   fontWeight: "600",
-                  fontSize: 22,
+                  fontSize: 20,
                   color: "#606461",
                   lineHeight: 21,
                 }}
@@ -345,6 +354,8 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           <Text
             style={{
               color: "#383D39",
+              marginLeft: 20,
+              marginRight: 10
             }}
           >
             You will be entitled to{" "}
@@ -369,13 +380,32 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           <Text
             style={{
               fontWeight: "600",
-              fontSize: 18,
-              marginBottom: 19,
+              fontSize: 16,
+              marginBottom: 5,
               color: "#383D39",
+              marginLeft: 10
             }}
           >
             {t("OpportunitiesRecord.more-information")}
           </Text>
+        </View>
+        <View>
+          <PIbutton
+              text={
+                  <Text style={{ color: "white" }}>
+                    {t("OpportunitiesRecord.contribute")}
+                  </Text>
+                }
+              type="primary"
+              style={{
+                backgroundColor: "#7BA040",
+                borderRadius: 45,
+                borderColor: "white",
+                marginBottom: 25,
+                padding: 8,
+                
+              }}
+          />
         </View>
         <View
           style={{
@@ -389,6 +419,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               fontWeight: "400",
               color: "#888B88",
               marginBottom: 13,
+              marginLeft: 10
             }}
           >
             {t("OpportunitiesRecord.data-receiver")}
@@ -401,6 +432,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 color: "#7BA040",
                 marginBottom: 13,
                 lineHeight: 19,
+                marginRight: 10
               }}
             >
               {t("OpportunitiesRecord.prenetics-limited")} &gt;
@@ -414,7 +446,8 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               style={{
                 borderBottomColor: "#BABCB7",
                 borderBottomWidth: StyleSheet.hairlineWidth,
-                marginBottom: 16,
+                marginBottom: 15,
+                
               }}
             />
 
@@ -429,6 +462,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                   fontWeight: "400",
                   color: "#888B88",
                   marginBottom: 10,
+                  marginLeft: 10
                 }}
               >
                 {item.title}
@@ -439,6 +473,9 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                   fontWeight: "400",
                   lineHeight: 19,
                   color: "#383D39",
+                  marginLeft: 10,
+                  marginRight: 10
+                  
                 }}
               >
                 {item.content}
