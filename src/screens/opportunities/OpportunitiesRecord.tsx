@@ -120,7 +120,6 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
     {
       title: t("OpportunitiesRecord.data-title1"),
       content: t("OpportunitiesRecord.data-content1"),
-        
     },
     {
       title: t("OpportunitiesRecord.data-title2"),
@@ -176,7 +175,8 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 fontWeight: "900",
               }}
             >
-              {countDaysLeft(detail.opportunity_expiration)} {t("OpportunitiesRecord.days-left")}
+              {countDaysLeft(detail.opportunity_expiration)}{" "}
+              {t("OpportunitiesRecord.days-left")}
             </Text>
           </View>
         </View>
@@ -194,7 +194,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               marginBottom: 16,
               color: "#383D39",
               marginLeft: 10,
-              marginRight: 10
+              marginRight: 10,
             }}
           >
             {detail.opportunity_name}
@@ -219,7 +219,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               color: "#383D39",
               fontSize: 16,
               fontWeight: "600",
-              marginLeft: 7
+              marginLeft: 7,
             }}
           >
             {t("OpportunitiesRecord.data-shared")}
@@ -229,7 +229,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               color: "#7BA040",
               fontSize: 13,
               fontWeight: "500",
-              marginRight: 10
+              marginRight: 10,
             }}
           >
             {t("OpportunitiesRecord.privacy-policy")} &gt;
@@ -282,7 +282,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               width: 20,
               height: 20,
               alignItems: "center",
-              marginLeft: 5
+              marginLeft: 5,
             }}
           />
           <View
@@ -298,7 +298,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 fontSize: 18,
                 alignItems: "center",
                 color: "#D1AE6C",
-                marginTop: 5
+                marginTop: 5,
               }}
             >
               {t("OpportunitiesRecord.reward")}
@@ -309,7 +309,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
-            marginLeft: 10
+            marginLeft: 10,
           }}
         >
           {detail.reward.map((item: any, index: number) => (
@@ -355,7 +355,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             style={{
               color: "#383D39",
               marginLeft: 20,
-              marginRight: 10
+              marginRight: 10,
             }}
           >
             You will be entitled to{" "}
@@ -383,30 +383,28 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               fontSize: 16,
               marginBottom: 5,
               color: "#383D39",
-              marginLeft: 10
+              marginLeft: 10,
             }}
           >
             {t("OpportunitiesRecord.more-information")}
           </Text>
         </View>
-        <View>
-          <PIbutton
-              text={
-                  <Text style={{ color: "white" }}>
-                    {t("OpportunitiesRecord.contribute")}
-                  </Text>
-                }
-              type="primary"
-              style={{
-                backgroundColor: "#7BA040",
-                borderRadius: 45,
-                borderColor: "white",
-                marginBottom: 25,
-                padding: 8,
-                
-              }}
-          />
-        </View>
+        <PIbutton
+          text={
+            <Text style={{ color: "white" }}>
+              {t("OpportunitiesRecord.contribute")}
+            </Text>
+          }
+          type="primary"
+          onPress={handleContributeNow}
+          style={{
+            backgroundColor: "#7BA040",
+            borderRadius: 45,
+            borderColor: "white",
+            marginBottom: 25,
+            padding: 8,
+          }}
+        />
         <View
           style={{
             flexDirection: "row",
@@ -419,12 +417,16 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               fontWeight: "400",
               color: "#888B88",
               marginBottom: 13,
-              marginLeft: 10
+              marginLeft: 10,
             }}
           >
             {t("OpportunitiesRecord.data-receiver")}
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              NavigationService.push(PRIVATESCREENS.DATA_RECEIVER);
+            }}
+          >
             <Text
               style={{
                 fontSize: 13,
@@ -432,7 +434,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 color: "#7BA040",
                 marginBottom: 13,
                 lineHeight: 19,
-                marginRight: 10
+                marginRight: 10,
               }}
             >
               {t("OpportunitiesRecord.prenetics-limited")} &gt;
@@ -447,7 +449,6 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 borderBottomColor: "#BABCB7",
                 borderBottomWidth: StyleSheet.hairlineWidth,
                 marginBottom: 15,
-                
               }}
             />
 
@@ -462,7 +463,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                   fontWeight: "400",
                   color: "#888B88",
                   marginBottom: 10,
-                  marginLeft: 10
+                  marginLeft: 10,
                 }}
               >
                 {item.title}
@@ -474,8 +475,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                   lineHeight: 19,
                   color: "#383D39",
                   marginLeft: 10,
-                  marginRight: 10
-                  
+                  marginRight: 10,
                 }}
               >
                 {item.content}
@@ -639,14 +639,17 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
 
         <View>
           <Text style={{ fontSize: 16, marginBottom: 20 }}>
-            {t("OpportunitiesRecord.data-receiver")} : {t("OpportunitiesRecord.prenetics-limited")}
+            {t("OpportunitiesRecord.data-receiver")} :{" "}
+            {t("OpportunitiesRecord.prenetics-limited")}
           </Text>
           <Text style={{ fontSize: 16, marginBottom: 20 }}>
             {t("OpportunitiesRecord.text9")}
           </Text>
           <Text style={{ fontSize: 16, marginBottom: 10 }}>
-              {t("OpportunitiesRecord.text11")}{" "}
-            <Text style={{ color: "#7BA23F" }}>{t("OpportunitiesRecord.text10")}</Text>
+            {t("OpportunitiesRecord.text11")}{" "}
+            <Text style={{ color: "#7BA23F" }}>
+              {t("OpportunitiesRecord.text10")}
+            </Text>
           </Text>
         </View>
       </View>
@@ -755,22 +758,25 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
 
   const handleContributeNow = async () => {
     setIsLoading(true);
-    const { data } = await createTransactionOrganizationMutation({
-      variables: {
-        input: {
-          transaction_type_id: "640a03b1c34e1f0ced078807",
-          organization_id: detail.organization._id,
-          transaction_is_closed: false,
-          patient_id: patientId,
-          opportunity_id: detail._id,
-        },
-      },
-    });
+    setPopupVisible(true);
 
-    // console.log(data, "data");
+    try {
+      const { data } = await createTransactionOrganizationMutation({
+        variables: {
+          input: {
+            transaction_type_id: "640a03b1c34e1f0ced078807",
+            organization_id: detail.organization._id,
+            transaction_is_closed: false,
+            patient_id: patientId,
+            opportunity_id: detail._id,
+          },
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
 
     // if (data.createTransactionOrganization) {
-    setPopupVisible(true);
     // }
 
     setIsLoading(false);
@@ -884,7 +890,8 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                       fontWeight: "900",
                     }}
                   >
-                    {countDaysLeft(detail.opportunity_expiration)} {t("OpportunitiesRecord.days-left")}
+                    {countDaysLeft(detail.opportunity_expiration)}{" "}
+                    {t("OpportunitiesRecord.days-left")}
                   </Text>
                 </View>
               </View>

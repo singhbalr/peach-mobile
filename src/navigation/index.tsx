@@ -27,6 +27,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import PublicRoutes from "./route.public";
 import RewardDetails from "@screens/home/RewardDetails";
+import DataReceiver from "@screens/dataReceiver/DataReceiver";
 
 const Navigation = () => {
   const scheme = useColorScheme();
@@ -84,6 +85,10 @@ const Navigation = () => {
             <Stack.Screen
               name={PRIVATESCREENS.AVAILABLE_REWARD_DETAIL_SCREEN}
               component={RewardDetails}
+            />
+            <Stack.Screen
+              name={PRIVATESCREENS.DATA_RECEIVER}
+              component={DataReceiver}
             />
           </>
         ) : (
