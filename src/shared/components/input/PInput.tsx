@@ -22,6 +22,7 @@ const PInput: ComponentType = (props) => {
       value={props.value}
       label={props.label}
       underlineStyle={styles.underlineStyle}
+      underlineColor="transparent"
       mode={"flat"}
     />
   );
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 15,
     color: "#606461",
-    borderColor: "transparent"
+    borderColor: "transparent",
   },
 });
 export default PInput;
