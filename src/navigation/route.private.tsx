@@ -41,12 +41,12 @@ const PrivateRoutes = () => {
           <Image
             source={
               focused
-                ? require("../assets/navbar-icons/your-bioverse-focused.png")
-                : require("../assets/navbar-icons/your-bioverse.png")
+                ? require("../assets/navbar-icons/rewards-focused.png")
+                : require("../assets/navbar-icons/rewards.png")
             }
             style={{
-              width: 46,
-              height: 28,
+              width: 30,
+              height: 30,
             }}
           />
         );
