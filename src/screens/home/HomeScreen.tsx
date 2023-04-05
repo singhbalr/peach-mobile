@@ -161,7 +161,10 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             backgroundColor: "#ffffff",
             width: ScreenWidth * 0.9,
             padding: 15,
+            paddingTop: 0,
             margin: 10,
+            marginBottom: 30,
+            elevation: 1
           }}
         >
           <View
@@ -178,6 +181,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={{
                   width: 115,
                   height: 155,
+                  borderRadius: 15,
                 }}
               />
               <View
@@ -230,14 +234,14 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                   alignItems: "center",
                 }}
               >
-                <Image
+                {/*<Image
                   source={require("../../assets/contribute-data/reward-icon.png")}
                   style={{
                     width: 16,
                     height: 16,
                   }}
-                />
-                <View
+                />*/}
+                {/*<View
                   style={{
                     marginBottom: 0,
                   }}
@@ -256,7 +260,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                       ? "Reward"
                       : "Additional Reward"}
                   </Text>
-                </View>
+                </View>*/}
               </View>
               <View
                 style={{
@@ -305,9 +309,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                     marginTop: 10,
                     backgroundColor: "#ECF1E8",
                     paddingHorizontal: 16,
+                    
                   }}
                 >
-                  {patientReward.is_redeemed === true ? "REDEEMED" : "REDEEM"}
+                  <Text style={{ color: "#7BA040"}}>
+                    {patientReward.is_redeemed === true ? "REDEEMED" : "REDEEM"}
+                  </Text>
+                  
                 </Button>
               </View>
             </View>
@@ -447,6 +455,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
               style={{
                 flexDirection: "row",
                 marginLeft: 170,
+                marginTop: 10
               }}
             >
               <Image
@@ -454,7 +463,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={{
                   width: 16,
                   height: 16,
-                  marginLeft: 30,
+                  marginLeft: 20,
                 }}
               />
               <Image
@@ -476,6 +485,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           // borderBottomColor: "#BABCB7",
           paddingHorizontal: 20,
           backgroundColor: colors.secondaryBackground,
+          marginLeft: 15
         }}
       >
         <ScrollView

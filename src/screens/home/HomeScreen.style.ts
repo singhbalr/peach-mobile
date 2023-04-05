@@ -40,7 +40,7 @@ export default (theme: ExtendedTheme) => {
       },
     },
     buttonTextStyle: {
-      color: colors.white,
+      color: '#7BA040',
       fontWeight: "700",
     },
     header: {
