@@ -19,6 +19,7 @@ import { useMutation } from "@apollo/client";
 import { REDEEM_REWARD } from "../../connection/mutation";
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
+import { t } from "i18next";
 
 interface RewardDetailsScreenProps {
   navigation: any;
@@ -65,7 +66,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <MenuButton />
-        <Text style={styles.headerText}>Colorectal Screening</Text>
+        <Text style={styles.headerText}>{t("RewardDetails.title")}</Text>
       </View>
       <View
         style={{
@@ -103,8 +104,10 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         uri: detail?.opportunity?.opportunity_picture_banner,
                       }}
                       style={{
-                        width: 323,
+                        width: 370,
                         height: 184,
+                        borderRadius: 15,
+                        
                       }}
                     />
                     <View
@@ -112,9 +115,13 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         backgroundColor: "#383D39",
                         // borderRadius: 8,
                         // paddingHorizontal: 10,
-                        paddingVertical: 4,
+                        paddingVertical: 3,
+                        paddingHorizontal: 15,
                         position: "absolute",
-                        bottom: 9,
+                        bottom: 10,
+                        marginBottom: 5,
+                        borderRadius: 5,
+                        marginLeft: 10
                         // left: 7,
                       }}
                     >
@@ -123,6 +130,8 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                           color: "white",
                           fontSize: 11,
                           fontWeight: "900",
+                          marginBottom: 3
+
                         }}
                       >
                         {calculateDateDiff(
@@ -145,15 +154,17 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         fontWeight: "700",
                         marginBottom: 16,
                         color: "#383D39",
+                        marginLeft: 5,
+                        marginRight: 5
                       }}
                     >
-                      Support colorectal screening to save lives{" "}
+                     {t("RewardDetails.title-content")}{" "}
                     </Text>
                     <View
                       style={{
                         borderBottomColor: "#BABCB7",
                         borderBottomWidth: StyleSheet.hairlineWidth,
-                        marginBottom: 16,
+                        marginBottom: 10,
                       }}
                     />
                   </View>
@@ -169,6 +180,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                       style={{
                         width: 20,
                         height: 20,
+                        marginLeft: 5,
                         alignItems: "center",
                       }}
                     />
@@ -179,15 +191,16 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                     >
                       <Text
                         style={{
-                          marginLeft: 4,
+                          marginLeft: 8,
                           lineHeight: 17,
                           fontWeight: "600",
                           fontSize: 18,
                           alignItems: "center",
                           color: "#D1AE6C",
+                          marginTop: 5
                         }}
                       >
-                        Reward
+                        {t("RewardDetails.reward")}
                       </Text>
                     </View>
                   </View>
@@ -239,9 +252,10 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                       fontSize: 18,
                       color: "#606461",
                       lineHeight: 21,
+                      marginLeft: 10
                     }}
                   >
-                    Terms & Conditions
+                    {t("RewardDetails.terms")}
                   </Text>
                   <View
                     style={{
@@ -257,16 +271,18 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                     >
                       <Text
                         style={{
-                          marginRight: 5,
+                          marginRight: 2,
+                          marginLeft: 8
                         }}
                       >
                         {"\u2022"}
                       </Text>
-                      <Text>
-                        The Data Receiver is developing a new blood-based
-                        colorectal cancer detection test and intends to identity
-                        not fewer than 500 high-risk individuals for mid or long
-                        term follow-up study
+                      <Text style={{
+                          marginRight: 30,
+                          marginLeft: 10,
+                          marginBottom: 10
+                        }}>
+                        {t("RewardDetails.text")}
                       </Text>
                     </View>
                     <View
@@ -276,16 +292,18 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                     >
                       <Text
                         style={{
-                          marginRight: 5,
+                          marginRight: 2,
+                          marginLeft: 8
                         }}
                       >
                         {"\u2022"}
                       </Text>
-                      <Text>
-                        The Data Receiver is developing a new blood-based
-                        colorectal cancer detection test and intends to identity
-                        not fewer than 500 high-risk individuals for mid or long
-                        term follow-up study
+                      <Text style={{
+                          marginRight: 30,
+                          marginLeft: 10,
+                          marginBottom: 10
+                        }}>
+                        {t("RewardDetails.text")}
                       </Text>
                     </View>
                   </View>

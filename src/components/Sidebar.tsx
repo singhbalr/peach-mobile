@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Image,
   SafeAreaView,
@@ -11,6 +11,8 @@ import {
 import { ImageSource } from "react-native-vector-icons/Icon";
 import * as NavigationService from "react-navigation-helpers";
 import { PRIVATESCREENS } from "@shared-constants";
+import { RootState } from "redux/store";
+import { setSidebarState } from "@screens/auth/rx/reducer";
 import { setLogout } from "../screens/auth/rx/reducer";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,8 +22,9 @@ type ItemProps = {
   icon: ImageSource;
   title: string;
   length: number;
-  onPressList: (arg0: string, arg1: string | number) => void;
+  onPressList: (arg0: string | number) => void;
 };
+
 const Item: React.FC<ItemProps> = ({
   title,
   icon,
@@ -48,6 +51,9 @@ const Item: React.FC<ItemProps> = ({
 };
 const Sidebar: React.FC<Props> = (props: Props) => {
   const dispatch = useDispatch();
+  const sidebarState = useSelector(
+    (state: RootState) => state.auth.sidebarState,
+  );
   const navList = [
     {
       title: "Settings",
@@ -102,21 +108,19 @@ const Sidebar: React.FC<Props> = (props: Props) => {
         showsVerticalScrollIndicator={false}
         style={styles.scrollViewContainer}
       >
-        <View style={styles.contentView}>
-          {navList.map((item, index) => {
-            return (
-              <Item
-                key={`nav-item-${index}`}
-                index={index}
-                icon={item.icon}
-                title={item.title}
-                onPressList={() => {
-                  clickNavItem(item.command);
-                }}
-              />
-            );
-          })}
-        </View>
+        {navList.map((item, index) => {
+          return (
+            <Item
+              key={`nav-item-${index}`}
+              index={index}
+              icon={item.icon}
+              title={item.title}
+              onPressList={() => {
+                clickNavItem(item.command);
+              }}
+            />
+          );
+        })}
       </ScrollView>
     </SafeAreaView>
   );
@@ -126,13 +130,17 @@ export default Sidebar;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "100%",
+    height: "100%",
     justifyContent: "center",
     paddingTop: 82,
-    paddingLeft: 38,
-    paddingRight: 43,
     backgroundColor: "#fff",
     borderTopLeftRadius: 15,
     borderBottomLeftRadius: 15,
+  },
+  scrollViewContainer: {
+    paddingLeft: 38,
+    paddingRight: 43,
   },
   itemView: {
     borderBottomWidth: 1,

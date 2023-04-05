@@ -1,11 +1,12 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Navigation from "../../components/Navigation";
-import ClinicalSvg from "../../assets/dashboard/clinical.svg";
+import ClinicalSvg from "../../assets/icons/clinical.svg";
 import { SafeAreaView } from "react-native";
 import { PRIVATESCREENS } from "@shared-constants";
 import * as NavigationService from "react-navigation-helpers";
 import { formatUnixTimestamp } from "./../../utils/index";
+import IconButton from "components/IconButton";
 type Props = {
   navigation: any;
   route: any;
@@ -16,8 +17,11 @@ const BioverseDetailScreen: React.FC = (props: Props) => {
   const { bodyPart, records } = route.params;
 
   const handleItemPress = (fileRecord: any) => {
+    // NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
+    //   fileRecord,
+    // });
     NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
-      fileRecord,
+      activeIndex: 2,
     });
   };
 
@@ -98,12 +102,14 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     color: "#fff",
-    backgroundColor: "#fafafa",
+    backgroundColor: "#fff",
     zIndex: 1,
   },
   mainContainer: {
+    flex: 1,
     paddingVertical: 30,
     paddingHorizontal: 38,
+    backgroundColor: "#fafafa",
   },
   mainText: {
     fontSize: 18,

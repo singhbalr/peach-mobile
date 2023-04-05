@@ -18,6 +18,7 @@ import { PRIVATESCREENS } from "@shared-constants";
 import Text from "@shared-components/text-wrapper/TextWrapper";
 import fonts from "@fonts";
 import { FlatList } from "react-native-gesture-handler";
+import { t } from "i18next";
 
 interface MedicalRecordScreenProps {
   navigation: any;
@@ -63,7 +64,7 @@ const MedicalRecordScreen: React.FC<MedicalRecordScreenProps> = (props) => {
         {/* <Text h1 color={colors.text}>
           {parts}
         </Text> */}
-        <Text style={styles.headerText}>Clinical Records</Text>
+        <Text style={styles.headerText}>{t("MedicalRecordScreen.text1")}</Text>
       </View>
       <FlatList
         data={medicalReport}

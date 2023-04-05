@@ -6,6 +6,8 @@ import { useTheme } from "@react-navigation/native";
  */
 import createStyles from "./SearchScreen.style";
 import Text from "@shared-components/text-wrapper/TextWrapper";
+import { t } from "i18next";
+
 
 interface SearchScreenProps {}
 
@@ -17,7 +19,7 @@ const SearchScreen: React.FC<SearchScreenProps> = () => {
   return (
     <View style={styles.container}>
       <Text h1 color={colors.text}>
-        Clinical Report
+        {t("SearchScreen.text")}
       </Text>
     </View>
   );

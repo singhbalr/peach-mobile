@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import * as NavigationService from "react-navigation-helpers";
 import RNBounceable from "@freakycoder/react-native-bounceable";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
+import { t } from "i18next";
 /**
  * ? Local Imports
  */
@@ -61,8 +62,7 @@ const OpportunitiesSuccessScreen: React.FC<OpportunitiesSuccessScreenProps> = (
           <Text
             style={{ fontSize: 17, fontWeight: "400", textAlign: "center" }}
           >
-            congratulations! you just received a reward. Go to Reward Centor to
-            redeem it.
+            {t("OpportunitiesSuccess.text1")}
           </Text>
         </View>
         <View style={{ marginBottom: 50 }}>
@@ -82,7 +82,7 @@ const OpportunitiesSuccessScreen: React.FC<OpportunitiesSuccessScreenProps> = (
                 padding: 5,
               }}
             >
-              <Text style={{ color: "#FFFFFF" }}>2 dose</Text>
+              <Text style={{ color: "#FFFFFF" }}>{t("OpportunitiesSuccess.text3")}</Text>
             </View>
             <View
               style={{
@@ -92,7 +92,7 @@ const OpportunitiesSuccessScreen: React.FC<OpportunitiesSuccessScreenProps> = (
                 padding: 5,
               }}
             >
-              <Text>Shingrix vaccine</Text>
+              <Text>{t("OpportunitiesSuccess.text2")}</Text>
             </View>
           </View>
           <View
@@ -111,7 +111,7 @@ const OpportunitiesSuccessScreen: React.FC<OpportunitiesSuccessScreenProps> = (
                 padding: 5,
               }}
             >
-              <Text style={{ color: "#FFFFFF" }}>2 dose</Text>
+              <Text style={{ color: "#FFFFFF" }}>{t("OpportunitiesSuccess.text3")}</Text>
             </View>
             <View
               style={{
@@ -121,7 +121,7 @@ const OpportunitiesSuccessScreen: React.FC<OpportunitiesSuccessScreenProps> = (
                 padding: 5,
               }}
             >
-              <Text>Shingrix vaccine</Text>
+              <Text>{t("OpportunitiesSuccess.text2")}</Text>
             </View>
           </View>
         </View>

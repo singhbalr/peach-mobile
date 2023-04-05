@@ -1,27 +1,30 @@
-import {ViewStyle, StyleSheet, TextStyle, ImageStyle, Dimensions} from "react-native";
-import { ExtendedTheme } from "@react-navigation/native";
-import { ScreenWidth } from "@freakycoder/react-native-helpers";
+import { ViewStyle, StyleSheet, TextStyle, ImageStyle } from "react-native"
+import { ExtendedTheme } from "@react-navigation/native"
+import { ScreenWidth } from "@freakycoder/react-native-helpers"
 
 interface Style {
-  container: ViewStyle;
-  titleTextStyle: TextStyle;
-  buttonStyle: ViewStyle;
-  buttonTextStyle: TextStyle;
-  header: ViewStyle;
-  contentContainer: ViewStyle;
-  listContainer: ViewStyle;
-  profilePicImageStyle: ImageStyle;
-  headerText: TextStyle;
-  pdf: ViewStyle;
+  container: ViewStyle
+  titleTextStyle: TextStyle
+  buttonStyle: ViewStyle
+  buttonTextStyle: TextStyle
+  header: ViewStyle
+  contentContainer: ViewStyle
+  listContainer: ViewStyle
+  profilePicImageStyle: ImageStyle
+  headerText: TextStyle
+  pdf: ViewStyle
+  pagination: ViewStyle
+  currentPage: TextStyle
+  downloadView: ViewStyle
+  downloadText: ViewStyle
 }
 
 export default (theme: ExtendedTheme) => {
-  const { colors } = theme;
+  const { colors } = theme
   return StyleSheet.create<Style>({
     container: {
       flex: 1,
-      alignItems: "center",
-      backgroundColor: colors.background,
+      backgroundColor: '#fff',
     },
     titleTextStyle: {
       fontSize: 32,
@@ -71,8 +74,31 @@ export default (theme: ExtendedTheme) => {
     },
     pdf: {
       flex: 1,
-      width: Dimensions.get("window").width - 20,
-      height: Dimensions.get("window").height - 100,
+      paddingHorizontal: 22,
+      backgroundColor: '#383D39',
     },
-  });
-};
+    pagination: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingBottom: 10,
+      backgroundColor: '#383D39',
+    },
+    currentPage: {
+      fontSize: 13,
+      color: '#fff',
+      marginHorizontal: 40
+    },
+    downloadView: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 83,
+      backgroundColor: '#fff',
+    },
+    downloadText: {
+      fontSize: 10,
+      color: '#606461',
+      marginTop: 9
+    }
+  })
+}

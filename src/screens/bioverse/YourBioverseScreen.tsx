@@ -6,7 +6,6 @@ import {
   View,
   ViewStyle,
   Animated,
-  Dimensions,
 } from "react-native";
 import { GET_MEDICAL_RECORD_BY_BODY_PART } from "../../connection/mutation";
 import { useMutation } from "@apollo/client";
@@ -20,9 +19,7 @@ import Popup from "../../components/Popup";
 import MaleBodySvg from "../../assets/dashboard/male-body.svg";
 import ReportSvg from "../../assets/dashboard/report.svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Drawer from "react-native-drawer";
-import Sidebar from "../../components/Sidebar";
-const { width } = Dimensions.get("window");
+import { t } from "i18next";
 
 interface HomeScreenProps {}
 interface ButtonProps {
@@ -189,93 +186,93 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   const buttonList = [
     {
-      name: "Head & Neck",
+      name: t("YourBioverseScreen.name1"),
       classname: "buttonOne",
       reportCount: 4,
       children: [],
     },
     {
-      name: "Thorax",
+      name: t("YourBioverseScreen.name2"),
       classname: "buttonTwo",
       reportCount: 4,
       children: [],
     },
     {
-      name: "Upper Abdomen",
+      name: t("YourBioverseScreen.name3"),
       classname: "buttonThree",
       reportCount: 0,
       children: [
         {
-          name: "Liver",
+          name: t("YourBioverseScreen.name7"),
+          reportCount: 1,
+        },
+        {
+          name: t("YourBioverseScreen.name8"),
           reportCount: 0,
         },
         {
-          name: "Pancreas",
+          name: t("YourBioverseScreen.name9"),
           reportCount: 0,
         },
         {
-          name: "Stomach",
+          name: t("YourBioverseScreen.name10"),
           reportCount: 0,
         },
         {
-          name: "Gallbladder",
-          reportCount: 0,
-        },
-        {
-          name: "Spleen",
+          name: t("YourBioverseScreen.name11"),
           reportCount: 0,
         },
       ],
     },
     {
-      name: "Lower Abdomen",
+      name: t("YourBioverseScreen.name4"),
       classname: "buttonFour",
       reportCount: 0,
       children: [],
     },
     {
-      name: "Limbs",
+      name: t("YourBioverseScreen.name5"),
       classname: "buttonFive",
       reportCount: 0,
       children: [],
     },
     {
-      name: "Blood & Others",
+      name: t("YourBioverseScreen.name6"),
       classname: "buttonSix",
       reportCount: 0,
       children: [
         {
-          name: "Blood",
+          name: t("YourBioverseScreen.name12"),
         },
         {
-          name: "Bones",
+          name: t("YourBioverseScreen.name13"),
         },
         {
-          name: "Genetics",
+          name: t("YourBioverseScreen.name14"),
         },
         {
-          name: "glands",
+          name: t("YourBioverseScreen.name15"),
         },
         {
-          name: "joints and bones (Other than limbs or ribs)",
+          name: t("YourBioverseScreen.name16"),
         },
         {
-          name: "lymph",
+          name: t("YourBioverseScreen.name17"),
         },
         {
-          name: "medication",
+          name: t("YourBioverseScreen.name18"),
         },
         {
-          name: "mental",
+          name: t("YourBioverseScreen.name19"),
         },
         {
-          name: "other bodily fluids",
+          name: t("YourBioverseScreen.name20"),
         },
         {
-          name: "semen",
+          name: t("YourBioverseScreen.name21"),
         },
         {
-          name: "skin",
+          name: t("YourBioverseScreen.name22"),
         },
       ],
     },
@@ -292,57 +289,41 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Drawer
-        ref={drawer}
-        type="overlay"
-        content={<Sidebar />}
-        openDrawerOffset={0.15 * width}
-        tapToClose={true}
-        side={"right"}
-        tweenHandler={(ratio) => ({
-          mainOverlay: {
-            opacity: ratio / 1.5,
-            backgroundColor: "rgba(56, 61, 57, 1)",
-          },
+      <Header
+        titleText={t("YourBioverseScreen.title")}
+        subTitleText={t("YourBioverseScreen.subtitle")}
+      ></Header>
+      <View style={styles.bodyContainer}>
+        {buttonList.map((item, index) => {
+          return (
+            <View key={item.name} style={styles[item.classname]}>
+              <BodyButton
+                buttonText={item.name}
+                reportCount={item.reportCount}
+                onPress={() => {
+                  selectBodyParts(item);
+                }}
+              ></BodyButton>
+            </View>
+          );
         })}
-      >
-        <Header
-          titleText={"Your Bioverse"}
-          subTitleText={"Explore your body anytime, anywhere."}
-          drawer={drawer}
-        ></Header>
-        <View style={styles.bodyContainer}>
-          {buttonList.map((item, index) => {
-            return (
-              <View key={item.name} style={styles[item.classname]}>
-                <BodyButton
-                  buttonText={item.name}
-                  reportCount={item.reportCount}
-                  onPress={() => {
-                    selectBodyParts(item);
-                  }}
-                ></BodyButton>
-              </View>
-            );
-          })}
-          <View style={styles.bodySvg}>
-            <MaleBodySvg height={460}></MaleBodySvg>
-          </View>
+        <View style={styles.bodySvg}>
+          <MaleBodySvg height={460}></MaleBodySvg>
         </View>
-        {popupVisible && (
-          <View style={styles.bodyDetailView}>
-            {/* <Animated.Image
-                source={require("../../assets/dashboard/body-detail-1x.png")}
-                style={[styles.bodyDetailImage, { transform: [{ translateY }, { scale }] }]}
-              /> */}
-            <Image
-              source={require("../../assets/dashboard/body-detail1.png")}
-              style={styles.bodyDetailImage}
-              resizeMode={"cover"}
-            ></Image>
-          </View>
-        )}
-      </Drawer>
+      </View>
+      {popupVisible && (
+        <View style={styles.bodyDetailView}>
+          {/* <Animated.Image
+              source={require("../../assets/dashboard/body-detail-1x.png")}
+              style={[styles.bodyDetailImage, { transform: [{ translateY }, { scale }] }]}
+            /> */}
+          <Image
+            source={require("../../assets/dashboard/body-detail1.png")}
+            style={styles.bodyDetailImage}
+            resizeMode={"cover"}
+          ></Image>
+        </View>
+      )}
       <Popup
         fileRecordList={fileRecordList}
         visible={popupVisible}
@@ -362,6 +343,7 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 0,
     backgroundColor: "#fafafa",
   },
   bodyContainer: {
