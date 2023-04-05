@@ -21,6 +21,8 @@ import PIbutton from "@shared-components/buttons/Pbutton";
 import { useMutation, useQuery, useSubscription } from "@apollo/client";
 import {
   GET_DOCTOR_REQUEST,
+  GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID,
+  GET_MEDICAL_RECORD_BY_BODY_PART,
   UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
 } from "../../connection/mutation";
 import {
@@ -31,6 +33,7 @@ import Notification from "@shared-components/notification/notification";
 import { GET_ALL_OPPORTUNITY } from "../../connection/query";
 import moment from "moment";
 import countDaysLeft from "../../components/countDayLeft";
+import {RootState} from "../../redux/store";
 
 interface ProfileScreenProps {}
 
@@ -68,6 +71,28 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const [doctorRequest, setDoctorRequest] = useState([]);
   const [getDoctorRequest] = useMutation(GET_DOCTOR_REQUEST);
   const { loading, error, data } = useQuery(GET_ALL_OPPORTUNITY);
+  const patientId = useSelector((state: RootState) => state.auth.patientId);
+  const [getFollowUpRequestByPatientId] = useMutation(
+    GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID,
+  );
+  const fetchFollowUpRequest = async () => {
+    const { data } = await getFollowUpRequestByPatientId({
+      variables: {
+        input: {
+          patient_id: patientId,
+        },
+      },
+    });
+    console.log(data)
+  };
+
+  useEffect(() => {
+    switch (activeTab) {
+      case "Screen3":
+        fetchFollowUpRequest();
+        break;
+    }
+  }, [activeTab]);
 
   const [updateTransaction] = useMutation(
     UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
@@ -494,7 +519,9 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 padding: 5,
               }}
             >
-              <Text style={{ color: "#FFFFFF" }}>{t("ProfileScreen.text4")}</Text>
+              <Text style={{ color: "#FFFFFF" }}>
+                {t("ProfileScreen.text4")}
+              </Text>
             </View>
             <View
               style={{
@@ -523,7 +550,9 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 padding: 5,
               }}
             >
-              <Text style={{ color: "#FFFFFF" }}>{t("ProfileScreen.text6")}</Text>
+              <Text style={{ color: "#FFFFFF" }}>
+                {t("ProfileScreen.text6")}
+              </Text>
             </View>
             <View
               style={{
@@ -785,7 +814,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                   width: 14,
                   height: 14,
                   marginLeft: 4,
-                  marginTop: 9
+                  marginTop: 9,
                 }}
               />
             </View>
