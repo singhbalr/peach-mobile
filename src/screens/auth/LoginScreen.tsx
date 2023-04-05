@@ -184,6 +184,7 @@ const LoginScreen: React.FC<Props> = () => {
             <Text style={{ fontSize: 14, color: "#ECF1E8", marginTop: 150 }}>
               {t("loginScreen.signUp")}
             </Text>
+            
           </View>
         </KeyboardAvoidingView>
         {/*<View style={styles.container}>*/}
@@ -191,6 +192,10 @@ const LoginScreen: React.FC<Props> = () => {
         {/*    <Icon name={"finger-print"} size={37} />*/}
         {/*  </TouchableOpacity>*/}
         {/*</View>*/}
+        <Image
+          source={require("../../assets/contribute-data/wave.png")}
+          style={styles.backgroundImage}
+        />
       </ScrollView>
     </>
   );
@@ -200,6 +205,18 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     flexGrow: 1,
     justifyContent: "center",
+  },
+  backgroundImage: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    marginLeft: 0,
+    marginTop: 610,
+    width: 412,
+    zIndex: -1
+
   },
 
   container: {
@@ -215,7 +232,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     padding: 30,
     paddingBottom: 0,
-    marginTop: 20,
+    marginTop: 5,
   },
   input: {
     width: "100%",
@@ -270,7 +287,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: 1,
+    paddingTop: 0.5,
     flex: 4,
     paddingBottom: 60,
     marginBottom: 250,

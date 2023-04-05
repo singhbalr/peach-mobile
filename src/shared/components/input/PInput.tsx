@@ -21,10 +21,6 @@ const PInput: ComponentType = (props) => {
       secureTextEntry={props.secureTextEntry}
       value={props.value}
       label={props.label}
-      //   underlineColor={props.isValid ? "#373C38" : "red"}
-      //   activeUnderlineColor={props.isValid ? "#373C38" : "red"}
-      //   outlineColor={props.isValid ? "#373C38" : "red"}
-      //   activeOutlineColor={props.isValid ? "#373C38" : "red"}
       underlineStyle={styles.underlineStyle}
       mode={"flat"}
     />
@@ -32,10 +28,10 @@ const PInput: ComponentType = (props) => {
 };
 const styles = StyleSheet.create({
   underlineStyle: {
-    // borderBottomWidth: 1,
-    // borderBottomColor: "#373C38",
     alignItems: "center",
-    borderRadius: 12,
+    borderRadius: 15,
+    color: "#606461",
+    borderColor: "transparent"
   },
 });
 export default PInput;

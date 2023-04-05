@@ -171,7 +171,7 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
 
           <View
             style={{
-              backgroundColor: "#efefef",
+              backgroundColor: "#fafafa",
               borderRadius: 15,
               padding: 20,
               marginBottom: 10,

@@ -321,11 +321,15 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       <TouchableOpacity onPress={() => handleItemPress(opportunityData)}>
         <View
           style={{
-            borderRadius: 15,
-            backgroundColor: "#ffffff",
+            borderRadius: 20,
+            backgroundColor: "#FAFAFA",
             width: ScreenWidth * 0.9,
-            padding: 15,
+            padding: 10,
+            paddingTop: 0,
             margin: 10,
+            marginRight: 50,
+            paddingRight: 30,
+            elevation: 1
           }}
         >
           <View
@@ -340,6 +344,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 style={{
                   width: 115,
                   height: 155,
+                  borderRadius: 15,
+                  marginTop: 5
                 }}
               />
               <View
@@ -374,9 +380,10 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
             >
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: "600",
-                  marginBottom: 15,
+                  marginTop: 10,
+                  marginBottom: 20,
                   color: "#383D39",
                 }}
               >
@@ -839,7 +846,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       </View>
       <View
         style={{
-          marginBottom: 26,
+          marginBottom: 5,
           // borderBottomWidth: 2,
           // borderBottomColor: "#BABCB7",
         }}
