@@ -17,6 +17,7 @@ import Sidebar from "../components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { setSidebarState } from "../screens/auth/rx/reducer";
+import DataReceiver from "@screens/dataReceiver/DataReceiver";
 const { width } = Dimensions.get("window");
 
 // ? If you want to use stack or tab or both
