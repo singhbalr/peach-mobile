@@ -134,6 +134,18 @@
     },
     "SearchScreen": {
       "text": "Clinical Report"
+    },
+    "Sidebar": {
+      "Settings": "Settings",
+      "MyShareData": "My Share Data",
+      "Useful": "Useful Health Info",
+      "Support": "Support",
+      "LogOut": "Log Out"
+    },
+    "ClinicalReport": {
+      "DateBirth": "Date of Birth",
+      "ExistRecord": "Existing Record",
+      "Institutions": "Institutions"
     }
   }
 }
