@@ -14,3 +14,9 @@ export const calculateDateDiff = (date: moment.MomentInput) => {
 
   return event === null ? 0 : event.diff(now, "days");
 };
+
+export const formatUnixTimestamp = (timestamp: number) => {
+  const unixTimestamp = Math.floor(timestamp / 1000);
+  const date = moment.unix(unixTimestamp);
+  return date.format("DD MMM YYYY");
+};

@@ -209,6 +209,25 @@ export const PATIENT_LOGIN = gql`
               deleted_at
             }
           }
+          hospital_id {
+            _id
+            created_at
+            deleted_at
+            hospital_address
+            hospital_city
+            hospital_email
+            hospital_logo
+            hospital_name
+            hospital_phone
+            hospital_state
+            hospital_website
+            hospital_zipcode
+            updated_at
+          }
+          doctor_id {
+            doctor_name
+            doctor_last_name
+          }
         }
         patient_address
         patient_age

@@ -5,31 +5,87 @@ import ClinicalSvg from "../../assets/dashboard/clinical.svg";
 import { SafeAreaView } from "react-native";
 import { PRIVATESCREENS } from "@shared-constants";
 import * as NavigationService from "react-navigation-helpers";
-const BioverseDetailScreen: React.FC = () => {
-  const handleItemPress = (OpportunityRecord: any) => {
+import { formatUnixTimestamp } from "./../../utils/index";
+type Props = {
+  navigation: any;
+  route: any;
+};
+
+const BioverseDetailScreen: React.FC = (props: Props) => {
+  const { navigation, route } = props;
+  const { bodyPart, records } = route.params;
+
+  const handleItemPress = (fileRecord: any) => {
     NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
-      OpportunityRecord,
+      fileRecord,
     });
+  };
+
+  const returnIcon = (fileValue, fileIndex) => {
+    switch (fileValue.medical_record_file_type_id.file_type) {
+      case "CLINICAL_RECORD":
+        return (
+          <View style={styles.button} activeOpacity={0.5} key={fileIndex}>
+            <ClinicalSvg></ClinicalSvg>
+            <Text style={styles.buttonText}>
+              {fileValue.medical_record_file_type_id.file_type_text}
+            </Text>
+          </View>
+        );
+      case "GENETIC_DATA":
+        return (
+          <View style={styles.button} activeOpacity={0.5} key={fileIndex}>
+            <ClinicalSvg></ClinicalSvg>
+            <Text style={styles.buttonText}>
+              {fileValue.medical_record_file_type_id.file_type_text}
+            </Text>
+          </View>
+        );
+      case "MEDICAL_IMAGING":
+        return (
+          <View style={styles.button} activeOpacity={0.5} key={fileIndex}>
+            <ClinicalSvg></ClinicalSvg>
+            <Text style={styles.buttonText}>
+              {fileValue.medical_record_file_type_id.file_type_text}
+            </Text>
+          </View>
+        );
+      default:
+        break;
+    }
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Navigation titleText={"Liver"}></Navigation>
+      <Navigation titleText={bodyPart}></Navigation>
       <View style={styles.mainContainer}>
-        <Text style={styles.mainText}>1 Reports</Text>
-        <View style={styles.dateView}>
-          <Text style={styles.dateText}>25 Jul 2022</Text>
-          <View style={styles.dateLine}></View>
-        </View>
-        <Text style={styles.greenText}>Medtimes</Text>
-        <Text style={styles.subText}>Dr. Ho Wai Ming</Text>
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.5}
-          onPress={handleItemPress}
-        >
-          <ClinicalSvg></ClinicalSvg>
-          <Text style={styles.buttonText}>Clinical Record</Text>
-        </TouchableOpacity>
+        <Text style={styles.mainText}>
+          {records.length > 1
+            ? `${records.length} Reports`
+            : `${records.length} Report`}
+        </Text>
+        {records.map((value, index) => {
+          console.log(value);
+          return (
+            <TouchableOpacity
+              key={index}
+              onPress={() => handleItemPress(value)}
+            >
+              <View style={styles.dateView}>
+                <Text style={styles.dateText}>
+                  {formatUnixTimestamp(value.created_at)}
+                </Text>
+                <View style={styles.dateLine}></View>
+              </View>
+              <Text style={styles.greenText}>
+                ${value.hospital_id.hospital_name}
+              </Text>
+              <Text
+                style={styles.subText}
+              >{`Dr. ${value.doctor_id.doctor_name} ${value.doctor_id.doctor_last_name}`}</Text>
+              {returnIcon(value.medical_record_file[index], index)}
+            </TouchableOpacity>
+          );
+        })}
       </View>
     </SafeAreaView>
   );
