@@ -389,22 +389,6 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             {t("OpportunitiesRecord.more-information")}
           </Text>
         </View>
-        <PIbutton
-          text={
-            <Text style={{ color: "white" }}>
-              {t("OpportunitiesRecord.contribute")}
-            </Text>
-          }
-          type="primary"
-          onPress={handleContributeNow}
-          style={{
-            backgroundColor: "#7BA040",
-            borderRadius: 45,
-            borderColor: "white",
-            marginBottom: 25,
-            padding: 8,
-          }}
-        />
         <View
           style={{
             flexDirection: "row",
@@ -485,21 +469,20 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         ))}
         <View>
           <PIbutton
-              text={
-                  <Text style={{ color: "white" }}>
-                    {t("OpportunitiesRecord.contribute")}
-                  </Text>
-                }
-              type="primary"
-              style={{
-                backgroundColor: "#7BA040",
-                borderRadius: 45,
-                borderColor: "white",
-                marginBottom: 25,
-                padding: 8,
-
-
-              }}
+            text={
+              <Text style={{ color: "white" }}>
+                {t("OpportunitiesRecord.contribute")}
+              </Text>
+            }
+            onPress={handleContributeNow}
+            type="primary"
+            style={{
+              backgroundColor: "#7BA040",
+              borderRadius: 45,
+              borderColor: "white",
+              marginBottom: 25,
+              padding: 8,
+            }}
           />
         </View>
         <View
