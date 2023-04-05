@@ -237,7 +237,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         </View>
         <View
           style={{
-            backgroundColor: "#efefef",
+            backgroundColor: "#fafafa",
             borderRadius: 15,
             padding: 19,
             marginBottom: 20,
@@ -248,6 +248,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               key={index}
               style={{
                 flexDirection: "row",
+                
               }}
             >
               {console.log(item.icon, "icon")}
@@ -389,24 +390,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             {t("OpportunitiesRecord.more-information")}
           </Text>
         </View>
-        <View>
-          <PIbutton
-              text={
-                  <Text style={{ color: "white" }}>
-                    {t("OpportunitiesRecord.contribute")}
-                  </Text>
-                }
-              type="primary"
-              style={{
-                backgroundColor: "#7BA040",
-                borderRadius: 45,
-                borderColor: "white",
-                marginBottom: 25,
-                padding: 8,
-                
-              }}
-          />
-        </View>
+        
         <View
           style={{
             flexDirection: "row",
@@ -483,7 +467,25 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             </View>
           </View>
         ))}
-
+        <View>
+          <PIbutton
+              text={
+                  <Text style={{ color: "white" }}>
+                    {t("OpportunitiesRecord.contribute")}
+                  </Text>
+                }
+              type="primary"
+              style={{
+                backgroundColor: "#7BA040",
+                borderRadius: 45,
+                borderColor: "white",
+                marginBottom: 25,
+                padding: 8,
+                
+                
+              }}
+          />
+        </View>
         <View
           style={{
             marginBottom: 20,
