@@ -16,12 +16,12 @@ import Pdf from "react-native-pdf";
 import Navigation from "components/Navigation";
 import ButtonTabs from "components/ButtonTabs";
 
-interface MedicalFileViewerProps {
+interface ClinicalFileViewerProps {
   navigation: any;
   route: any;
 }
 
-const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
+const ClinicalFileViewer: React.FC<ClinicalFileViewerProps> = (props) => {
   //   const theme = useTheme()
   //   const { colors } = theme
   //   const styles = useMemo(() => createStyles(theme), [theme])
@@ -29,11 +29,9 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
   const { route } = props;
-  const { pageIndex, fileRecord } = route.params;
-
-  const activeTabsArray = fileRecord.medical_record_file.map(
-    (value, index) => value.medical_record_file_type_id.file_type,
-  );
+  const { pageIndex, fileRecord, medicalRecord } = route.params;
+  console.log(JSON.stringify(fileRecord));
+  const activeTabsArray = [fileRecord.medical_record_file_type_id.file_type];
 
   const pdfRef = createRef<React.ElementRef<typeof Pdf>>();
 
@@ -43,7 +41,7 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
   const [mrFile, setMrFile] = useState({});
 
   const getMedicalRecordFileWithType = (file_type: string) => {
-    const medicalRecordFiles = fileRecord.medical_record_file;
+    const medicalRecordFiles = medicalRecord.medical_record_file;
     for (const file of medicalRecordFiles) {
       const fileType = file.medical_record_file_type_id.file_type;
       if (fileType === file_type) {
@@ -52,15 +50,12 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
     }
     return null;
   };
-  const title = `Dr. ${fileRecord.doctor_id.doctor_name} ${fileRecord.doctor_id.doctor_last_name}`;
+  const title = `Dr. ${medicalRecord.doctor_id.doctor_name} ${medicalRecord.doctor_id.doctor_last_name}`;
   const clinicalData = getMedicalRecordFileWithType("CLINICAL_RECORD");
   const geneticData = getMedicalRecordFileWithType("GENETIC_DATA");
   const medicalImaging = getMedicalRecordFileWithType("MEDICAL_IMAGING");
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const handleLoadComplete = (numberOfPages, filePath) => {
-    pdfRef.current &&
-      pdfRef.current.setPage(parseInt(clinicalData.file_metadata[0].page));
-  };
+
   const togglePage = (num: number) => {
     if (
       (currentPage === 1 && num === -1) ||
@@ -85,9 +80,7 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
                   uri: clinicalData.medical_record_file_link,
                 }}
                 horizontal={true}
-                // page={currentPage}
                 enablePaging={true}
-                onLoadComplete={handleLoadComplete}
                 onPageChanged={(page, numberOfPages) => {
                   setCurrentPage(page);
                   setTotalPage(numberOfPages);
@@ -189,4 +182,4 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
   );
 };
 
-export default MedicalFileViewer;
+export default ClinicalFileViewer;

@@ -27,6 +27,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import PublicRoutes from "./route.public";
 import RewardDetails from "@screens/home/RewardDetails";
+import ClinicalFileViewer from "@screens/medicalRecord/ClinicalFileViewer";
 
 const Navigation = () => {
   const scheme = useColorScheme();
@@ -64,6 +65,10 @@ const Navigation = () => {
             <Stack.Screen
               name={PRIVATESCREENS.MEDICAL_FILE_VIEWER}
               component={MedicalFileViewer}
+            />
+            <Stack.Screen
+              name={PRIVATESCREENS.CLINICAL_FILE_VIEWER}
+              component={ClinicalFileViewer}
             />
             <Stack.Screen
               name={PRIVATESCREENS.OPPORTUNITY_RECORD}

@@ -71,28 +71,33 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   );
 
   const onPressList = (bodyPart: string) => {
-    console.log(bodyPart);
     const medicalFile = getMedicalRecordFileFromStore(bodyPart);
     const filteredData = getMedicalRecordFile(
       bodyPart.toLowerCase(),
       medicalFile,
     );
-    console.log(JSON.stringify(filteredData));
     setPopupVisible(false);
     NavigationService.push(PRIVATESCREENS.BIOVERSE_DETAIL_SCREEN, {
-      records: medicalFile,
+      records: filteredData,
       bodyPart: bodyPart,
     });
   };
 
-  const getMedicalRecordFile = (bodyPart, medicalFile) => {
-    return medicalFile.map((medicalFile) => {
-      const filteredFiles = medicalFile.medical_record_file.filter((file) => {
-        return file.file_metadata.some((meta) => {
-          return meta.body_part === bodyPart;
+  const getMedicalRecordFile = (bodyPart, medicalFiles) => {
+    return medicalFiles.map((record) => {
+      const filteredFiles = record.medical_record_file
+        .filter((file) => {
+          return file.file_metadata.some((meta) => {
+            return meta.body_part === bodyPart;
+          });
+        })
+        .map((file) => {
+          const filteredMetadata = file.file_metadata.filter((meta) => {
+            return meta.body_part === bodyPart;
+          });
+          return { ...file, file_metadata: filteredMetadata };
         });
-      });
-      return { ...medicalFile, medical_record_file: filteredFiles };
+      return { ...record, medical_record_file: filteredFiles };
     });
   };
 
@@ -102,23 +107,17 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     if (!Array.isArray(patientDetails.medical_record)) {
       return null; // Return null if medical_record is not an array
     }
-
     // Loop through each medical record file of the patient
     for (const medicalRecordFile of patientDetails.medical_record) {
-      // console.log(JSON.stringify(medicalRecordFile));
       // Check if the medical record file has file_metadata array
       if (Array.isArray(medicalRecordFile.medical_record_file)) {
         // Loop through each metadata of the medical record file
         for (const medicalRecord of medicalRecordFile.medical_record_file) {
-          console.log(medicalRecord);
           if (Array.isArray(medicalRecord.file_metadata)) {
             // Loop through each metadata of the medical record file
             for (const metadata of medicalRecord.file_metadata) {
               // Check if the metadata has a "body_part" field that contains "liver"
-
-              console.log(metadata.body_part === body_part.toLowerCase());
               if (metadata.body_part === body_part.toLowerCase()) {
-                // console.log(medicalRecord);
                 resultsArray.push(medicalRecordFile);
                 return resultsArray; // Return the medical record file that has "liver" in its metadata
               }
@@ -164,7 +163,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     for (const bodyPart of lowerBodyPart) {
       counts[bodyPart] = 0;
     }
-    console.log(counts);
 
     // Loop through each medical record file and increment the count for each body part
     for (const record of patientDetails.medical_record) {
@@ -177,7 +175,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       }
     }
     setFileRecordList(counts);
-    console.log(counts);
   };
 
   // useEffect(() => {

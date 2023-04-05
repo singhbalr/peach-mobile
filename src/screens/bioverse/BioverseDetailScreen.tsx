@@ -2,6 +2,8 @@ import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Navigation from "../../components/Navigation";
 import ClinicalSvg from "../../assets/icons/clinical.svg";
+import GeneticSvg from "../../assets/icons/genetic.svg";
+import MedicalSvg from "../../assets/icons/medical.svg";
 import { SafeAreaView } from "react-native";
 import { PRIVATESCREENS } from "@shared-constants";
 import * as NavigationService from "react-navigation-helpers";
@@ -15,13 +17,13 @@ type Props = {
 const BioverseDetailScreen: React.FC = (props: Props) => {
   const { navigation, route } = props;
   const { bodyPart, records } = route.params;
-
+  console.log("start records");
+  console.log(JSON.stringify(records));
+  console.log("end records");
   const handleItemPress = (fileRecord: any) => {
-    // NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
-    //   fileRecord,
-    // });
     NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
-      activeIndex: 2,
+      pageIndex: 2,
+      fileRecord,
     });
   };
 
@@ -29,27 +31,39 @@ const BioverseDetailScreen: React.FC = (props: Props) => {
     switch (fileValue.medical_record_file_type_id.file_type) {
       case "CLINICAL_RECORD":
         return (
-          <View style={styles.button} activeOpacity={0.5} key={fileIndex}>
+          <View
+            style={[styles.button, styles.clinicalSvg]}
+            activeOpacity={0.5}
+            key={fileIndex}
+          >
             <ClinicalSvg></ClinicalSvg>
-            <Text style={styles.buttonText}>
+            <Text style={styles.clinicalText}>
               {fileValue.medical_record_file_type_id.file_type_text}
             </Text>
           </View>
         );
       case "GENETIC_DATA":
         return (
-          <View style={styles.button} activeOpacity={0.5} key={fileIndex}>
-            <ClinicalSvg></ClinicalSvg>
-            <Text style={styles.buttonText}>
+          <View
+            style={[styles.button, styles.geneticSvg]}
+            activeOpacity={0.5}
+            key={fileIndex}
+          >
+            <GeneticSvg></GeneticSvg>
+            <Text style={styles.geneticText}>
               {fileValue.medical_record_file_type_id.file_type_text}
             </Text>
           </View>
         );
       case "MEDICAL_IMAGING":
         return (
-          <View style={styles.button} activeOpacity={0.5} key={fileIndex}>
-            <ClinicalSvg></ClinicalSvg>
-            <Text style={styles.buttonText}>
+          <View
+            style={[styles.button, styles.medicalSvg]}
+            activeOpacity={0.5}
+            key={fileIndex}
+          >
+            <MedicalSvg></MedicalSvg>
+            <Text style={styles.medicalText}>
               {fileValue.medical_record_file_type_id.file_type_text}
             </Text>
           </View>
@@ -68,7 +82,6 @@ const BioverseDetailScreen: React.FC = (props: Props) => {
             : `${records.length} Report`}
         </Text>
         {records.map((value, index) => {
-          console.log(value);
           return (
             <TouchableOpacity
               key={index}
@@ -86,7 +99,11 @@ const BioverseDetailScreen: React.FC = (props: Props) => {
               <Text
                 style={styles.subText}
               >{`Dr. ${value.doctor_id.doctor_name} ${value.doctor_id.doctor_last_name}`}</Text>
-              {returnIcon(value.medical_record_file[index], index)}
+              <View style={styles.tagContainer}>
+                {value.medical_record_file.map((record_file, index) =>
+                  returnIcon(record_file, index),
+                )}
+              </View>
             </TouchableOpacity>
           );
         })}
@@ -149,15 +166,39 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    width: 105,
+    width: 120,
     height: 30,
     paddingHorizontal: 12,
-    backgroundColor: "#F8F1F2",
     borderRadius: 30,
   },
-  buttonText: {
+  tagContainer: {
+    flexDirection: "row",
+  },
+  medicalSvg: {
+    color: "#66A3AF",
+    backgroundColor: "#eef2f3",
+  },
+  geneticSvg: {
+    color: "#7BA040",
+    backgroundColor: "#edf1e9",
+  },
+  clinicalSvg: {
+    color: "#F596AA",
+    backgroundColor: "#F8F1F2",
+  },
+  clinicalText: {
     fontSize: 10,
-    color: "#F196A8",
+    color: "#F596AA",
+    marginLeft: 4,
+  },
+  geneticText: {
+    fontSize: 10,
+    color: "#7BA040",
+    marginLeft: 4,
+  },
+  medicalText: {
+    fontSize: 10,
+    color: "#66A3AF",
     marginLeft: 4,
   },
 });

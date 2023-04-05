@@ -1,26 +1,100 @@
-import React from "react"
-import { View, StyleSheet, Text, Image } from "react-native"
-import Header from "../../components/Header"
-import { SafeAreaView } from "react-native"
-import { PRIVATESCREENS } from "@shared-constants"
-import * as NavigationService from "react-navigation-helpers"
-import ButtonTabs from "components/ButtonTabs"
-import InstitutionsSvg from "../../assets/icons/institutions.svg"
+import React from "react";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import Header from "../../components/Header";
+import { SafeAreaView } from "react-native";
+import { PRIVATESCREENS } from "@shared-constants";
+import * as NavigationService from "react-navigation-helpers";
+import ButtonTabs from "components/ButtonTabs";
+import InstitutionsSvg from "../../assets/icons/institutions.svg";
+import ClinicalSvg from "../../assets/icons/clinical.svg";
+import GeneticSvg from "../../assets/icons/genetic.svg";
+import MedicalSvg from "../../assets/icons/medical.svg";
+import { useSelector } from "react-redux";
+import { RootState } from "redux/store";
+import { formatUnixTimestamp, maskHKID } from "utils";
 const ClinicalReport: React.FC = () => {
-  const handleItemPress = () => {
-    NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
-      activeIndex: 2
-    })
-  }
-  const reportList = [{
-    date: '25 JUL 2022',
-    doctor: 'Dr. Ho Wai Ming',
-    buttonIndexs: [0, 1, 2] //Corresponding button： [0: Genetic Data, 1: Genetic Data, 2: Clinical Record]
-  }, {
-    date: '25 JUL 2022',
-    doctor: 'Dr. Ho Wai Ming',
-    buttonIndexs: [0, 2]
-  }]
+  // const handleItemPress = () => {
+  //   NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
+  //     activeIndex: 2,
+  //   });
+  // };
+  const handleItemPress = (fileRecord: any, medicalRecord: any) => {
+    NavigationService.push(PRIVATESCREENS.CLINICAL_FILE_VIEWER, {
+      pageIndex: 2,
+      fileRecord,
+      medicalRecord,
+    });
+  };
+
+  const patientDetails = useSelector(
+    (state: RootState) => state.auth.patientDetails,
+  );
+
+  const returnIcon = (fileValue, fileIndex) => {
+    switch (fileValue.medical_record_file_type_id.file_type) {
+      case "CLINICAL_RECORD":
+        return (
+          <View
+            style={[styles.button, styles.clinicalSvg]}
+            activeOpacity={0.5}
+            key={fileIndex}
+          >
+            <ClinicalSvg></ClinicalSvg>
+            <Text style={styles.clinicalText}>
+              {fileValue.medical_record_file_type_id.file_type_text}
+            </Text>
+          </View>
+        );
+      case "GENETIC_DATA":
+        return (
+          <View
+            style={[styles.button, styles.geneticSvg]}
+            activeOpacity={0.5}
+            key={fileIndex}
+          >
+            <GeneticSvg></GeneticSvg>
+            <Text style={styles.geneticText}>
+              {fileValue.medical_record_file_type_id.file_type_text}
+            </Text>
+          </View>
+        );
+      case "MEDICAL_IMAGING":
+        return (
+          <View
+            style={[styles.button, styles.medicalSvg]}
+            activeOpacity={0.5}
+            key={fileIndex}
+          >
+            <MedicalSvg></MedicalSvg>
+            <Text style={styles.medicalText}>
+              {fileValue.medical_record_file_type_id.file_type_text}
+            </Text>
+          </View>
+        );
+      default:
+        break;
+    }
+  };
+
+  const reportList = [
+    {
+      date: "25 JUL 2022",
+      doctor: "Dr. Ho Wai Ming",
+      buttonIndexs: [0, 1, 2], //Corresponding button： [0: Genetic Data, 1: Genetic Data, 2: Clinical Record]
+    },
+    {
+      date: "25 JUL 2022",
+      doctor: "Dr. Ho Wai Ming",
+      buttonIndexs: [0, 2],
+    },
+  ];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -28,16 +102,25 @@ const ClinicalReport: React.FC = () => {
       <View style={styles.mainContainer}>
         <View style={styles.infoContainer}>
           <View style={styles.topInfo}>
-            <Image source={require('../../assets/icons/user.png')} style={styles.userIcon}></Image>
-            <Text style={styles.username}>Alan Turing</Text>
+            <Image
+              source={require("../../assets/icons/user.png")}
+              style={styles.userIcon}
+            ></Image>
+            <Text
+              style={styles.username}
+            >{`${patientDetails.patient_name} ${patientDetails.patient_last_name}`}</Text>
           </View>
           <View style={styles.infoItem}>
             <Text style={styles.itemTitle}>HKID</Text>
-            <Text style={styles.itemValue}>Z123****</Text>
+            <Text style={styles.itemValue}>
+              {maskHKID(patientDetails.patient_identification_number)}
+            </Text>
           </View>
           <View style={styles.infoItem}>
             <Text style={styles.itemTitle}>Date of Birth</Text>
-            <Text style={styles.itemValue}>07 JUN 1954</Text>
+            <Text style={styles.itemValue}>
+              {formatUnixTimestamp(patientDetails.patient_date_of_birth)}
+            </Text>
           </View>
         </View>
         <View style={styles.reportTitle}>
@@ -47,32 +130,42 @@ const ClinicalReport: React.FC = () => {
             <Text style={styles.rightText}>Institutions</Text>
           </View>
         </View>
-        {
-          reportList.map((item, index) => {
-            return (
-              <View key={index} style={styles.reportItem}>
-                <View style={styles.dateView}>
-                  <Text style={styles.dateText}>{item.date}</Text>
-                  <View style={styles.dateLine}></View>
-                </View>
-                <Text style={styles.greenText}>Medtimes</Text>
-                <Text style={styles.subText}>{item.doctor}</Text>
-                <View style={styles.buttonList}>
-                  <ButtonTabs key={index + 99}  showAll={true} buttonIndexs={item.buttonIndexs} setIndex={(index) => {
-                    NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
-                      activeIndex: index
-                    });
-                  }}></ButtonTabs>
-                </View>
-              </View>
-            )
-          })
-        }
+        <ScrollView>
+          {patientDetails.medical_record.map((item, index) => {
+            {
+              return item.medical_record_file.map((data, dataIndex) => {
+                return (
+                  <TouchableOpacity
+                    key={dataIndex}
+                    style={styles.reportItem}
+                    onPress={() => handleItemPress(data, item)}
+                  >
+                    <View style={styles.dateView}>
+                      <Text style={styles.dateText}>
+                        {formatUnixTimestamp(item.created_at)}
+                      </Text>
+                      <View style={styles.dateLine}></View>
+                    </View>
+                    <Text style={styles.greenText}>
+                      {item.hospital_id.hospital_name}
+                    </Text>
+                    <Text
+                      style={styles.subText}
+                    >{`Dr. ${item.doctor_id.doctor_name} ${item.doctor_id.doctor_last_name}`}</Text>
+                    <View style={styles.tagContainer}>
+                      {returnIcon(data, dataIndex)}
+                    </View>
+                  </TouchableOpacity>
+                );
+              });
+            }
+          })}
+        </ScrollView>
       </View>
     </SafeAreaView>
-  )
-}
-export default ClinicalReport
+  );
+};
+export default ClinicalReport;
 
 const styles = StyleSheet.create({
   container: {
@@ -85,47 +178,47 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: '#fafafa'
+    backgroundColor: "#fafafa",
   },
   infoContainer: {
     paddingHorizontal: 36,
     paddingBottom: 24,
     borderBottomWidth: 1,
-    borderColor: '#BABCB7',
+    borderColor: "#BABCB7",
   },
   topInfo: {
-    flexDirection: 'row',
-    alignItems: 'center'
+    flexDirection: "row",
+    alignItems: "center",
   },
   userIcon: {
     width: 65,
     height: 65,
     marginRight: 18,
-    marginBottom: 16
+    marginBottom: 16,
   },
   username: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#383D39',
+    fontWeight: "bold",
+    color: "#383D39",
   },
   infoItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    height: 24
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: 24,
   },
   itemTitle: {
     fontSize: 13,
-    color: '#888B88',
+    color: "#888B88",
   },
   itemValue: {
     fontSize: 13,
-    color: '#383D39',
+    color: "#383D39",
   },
   reportTitle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 36,
     paddingTop: 27,
     paddingBottom: 22,
@@ -135,8 +228,8 @@ const styles = StyleSheet.create({
     color: "#000",
   },
   titleRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   rightText: {
     fontSize: 13,
@@ -145,7 +238,7 @@ const styles = StyleSheet.create({
   },
   reportItem: {
     paddingHorizontal: 36,
-    marginBottom: 20
+    marginBottom: 20,
   },
   dateView: {
     flexDirection: "row",
@@ -175,9 +268,48 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginBottom: 9,
   },
-  buttonList: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
+  tagContainer: {
+    flexDirection: "row",
   },
-})
+  medicalSvg: {
+    color: "#66A3AF",
+    backgroundColor: "#eef2f3",
+  },
+  geneticSvg: {
+    color: "#7BA040",
+    backgroundColor: "#edf1e9",
+  },
+  clinicalSvg: {
+    color: "#F596AA",
+    backgroundColor: "#F8F1F2",
+  },
+  clinicalText: {
+    fontSize: 10,
+    color: "#F596AA",
+    marginLeft: 4,
+  },
+  geneticText: {
+    fontSize: 10,
+    color: "#7BA040",
+    marginLeft: 4,
+  },
+  medicalText: {
+    fontSize: 10,
+    color: "#66A3AF",
+    marginLeft: 4,
+  },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 120,
+    height: 30,
+    paddingHorizontal: 12,
+    borderRadius: 30,
+  },
+  buttonList: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+});
