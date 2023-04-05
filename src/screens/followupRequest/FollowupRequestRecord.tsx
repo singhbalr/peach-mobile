@@ -21,15 +21,13 @@ import { t } from "i18next";
  */
 import Popup from "../../components/PopupContribute";
 
-import createStyles from "./OpportunitiesRecord.style";
+import createStyles from "./FollowupRequestRecord.style";
 import PIbutton from "@shared-components/buttons/Pbutton";
 
 /**
  * ? Shared Imports
  */
 import { PRIVATESCREENS } from "@shared-constants";
-import fonts from "@fonts";
-import { FlatList } from "react-native-gesture-handler";
 import countDaysLeft from "../../components/countDayLeft";
 
 import {
@@ -44,24 +42,21 @@ import { CREATE_TRANSACTION_ORGANIZATION } from "connection/mutation";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import Button from "components/button";
-import MyShareData from "@screens/myShareData/MyShareData";
+import FollowupRequestRecord from "@screens/followupRequest/FollowupRequestRecord";
 
-interface OpportunityRecordScreenProps {
+interface FollowupRequestRecordProps {
   navigation: any;
   route: any;
 }
 
-const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
-  props,
-) => {
+const FollowupRequestRecordScreen: React.FC<
+  FollowupRequestRecordScreenProps
+> = (props) => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
   const { medicalReport, parts } = props.route.params;
   const [activeTab, setActiveTab] = useState("Purpose");
-  const handleItemPress = () => {
-    NavigationService.push(PRIVATESCREENS.OPPORTUNITY_SUCCESS_SCREEN);
-  };
   const [popupVisible, setPopupVisible] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [createTransactionOrganizationMutation] = useMutation(
@@ -69,7 +64,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
   );
   const patientId = useSelector((state: RootState) => state.auth.patientId);
 
-  const detail: any = props.route.params.OpportunityRecord;
+  const detail: any = props.route.params.followupRequestData.opportunity;
 
   const isAppliedPatient = () => {
     // detail.applied_patient.map((item: any) => {
@@ -115,6 +110,154 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
       />
     </RNBounceable>
   );
+
+  const FollowUpRequestCard = (opportunity) => {
+    return (
+      <TouchableOpacity
+      // onPress={() => handleFollowupPress(followupRequest)}
+      >
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: "#BABCB7",
+            borderRadius: 20,
+            backgroundColor: "#FAFAFA",
+            width: ScreenWidth * 0.85,
+            padding: 10,
+            elevation: 1,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <View>
+              <Image
+                source={{ uri: opportunity?.opportunity_picture_banner }}
+                style={{
+                  width: 115,
+                  height: 155,
+                  borderRadius: 15,
+                }}
+              />
+              <View
+                style={{
+                  backgroundColor: "#383D39",
+                  borderRadius: 8,
+                  paddingHorizontal: 10,
+                  paddingVertical: 4,
+                  position: "absolute",
+                  bottom: 9,
+                  left: 7,
+                }}
+              >
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: 11,
+                    fontWeight: "900",
+                  }}
+                >
+                  {countDaysLeft(opportunity.opportunity_expiration)} Days
+                </Text>
+              </View>
+            </View>
+            <View
+              style={{
+                marginLeft: 15,
+                marginRight: 15,
+                flex: 1,
+                flexDirection: "column",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: "600",
+                  marginTop: 10,
+                  marginBottom: 20,
+                  color: "#383D39",
+                }}
+              >
+                {opportunity?.opportunity_name}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  source={require("../../assets/contribute-data/reward-icon.png")}
+                  style={{
+                    width: 16,
+                    height: 16,
+                  }}
+                />
+                <View
+                  style={{
+                    marginBottom: 0,
+                  }}
+                >
+                  <Text
+                    style={{
+                      marginLeft: 4,
+                      lineHeight: 17,
+                      fontWeight: "700",
+                      fontSize: 11,
+                      alignItems: "center",
+                      color: "#D1AE6C",
+                    }}
+                  >
+                    {opportunity?.reward ? "Reward" : "Additional Reward"}
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                }}
+              >
+                {opportunity?.reward?.map((item, key) => (
+                  <View
+                    key={`reward-item-${key}`}
+                    style={{
+                      flex: 1,
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontWeight: "600",
+                        fontSize: 14,
+                        color: "#606461",
+                        lineHeight: 21,
+                      }}
+                    >
+                      HK${item.reward_amount}
+                    </Text>
+                    <Text
+                      style={{
+                        fontWeight: "600",
+                        fontSize: 10,
+                        color: "#888B88",
+                        marginRight: 5,
+                      }}
+                    >
+                      {item.reward_name}
+                    </Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   const dataReceiver = [
     {
@@ -175,7 +318,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 fontWeight: "900",
               }}
             >
-              {countDaysLeft(detail.opportunity_expiration)}{" "}
+              {/*{countDaysLeft(detail.opportunity_expiration)}{" "}*/}
               {t("OpportunitiesRecord.days-left")}
             </Text>
           </View>
@@ -467,6 +610,25 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             </View>
           </View>
         ))}
+        <View
+          style={{
+            marginHorizontal: 10,
+            marginBottom: 10,
+            marginTop: 35,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: "600",
+              color: "#383D39",
+              marginBottom: 15,
+            }}
+          >
+            Related Opportunities
+          </Text>
+          <FollowUpRequestCard {...detail} />
+        </View>
         <View>
           <PIbutton
             text={
@@ -641,7 +803,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         <View>
           <Text style={{ fontSize: 16, marginBottom: 20 }}>
             {t("OpportunitiesRecord.data-receiver")} :{" "}
-            {t("OpportunitiesRecord.prenetics-limited")}
+            {t("OpportunitiesRecord.prenetics-limited")}asd
           </Text>
           <Text style={{ fontSize: 16, marginBottom: 20 }}>
             {t("OpportunitiesRecord.text9")}
@@ -891,7 +1053,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                       fontWeight: "900",
                     }}
                   >
-                    {countDaysLeft(detail.opportunity_expiration)}{" "}
+                    {/*{countDaysLeft(detail.opportunity_expiration)}{" "}*/}
                     {t("OpportunitiesRecord.days-left")}
                   </Text>
                 </View>
@@ -1038,4 +1200,4 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
   );
 };
 
-export default OpportunityRecordScreen;
+export default FollowupRequestRecordScreen;

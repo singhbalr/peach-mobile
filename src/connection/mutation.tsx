@@ -452,3 +452,86 @@ export const GET_MEDICAL_RECORD_BY_BODY_PART = gql`
     }
   }
 `;
+
+export const GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID = gql`
+  mutation GetFollowUpRequestByPatientId($input: PatientID!) {
+    getFollowUpRequestByPatientId(input: $input) {
+      _id
+      created_at
+      deleted_at
+      updated_at
+      transaction_type {
+        updated_at
+        transaction_type_text
+        deleted_at
+        created_at
+        _id
+      }
+      transaction_is_closed
+      transaction_hash
+      related_opportunity_id
+      opportunity {
+        _id
+        created_at
+        deleted_at
+        applied_patient {
+          _id
+        }
+        opportunity_data_accesibility_duration
+        opportunity_description
+        opportunity_expiration
+        opportunity_is_closed
+        opportunity_medical_record_accesibility_duration
+        opportunity_name
+        opportunity_picture_banner
+        opportunity_purpose
+        opportunity_quota_count
+        opportunity_type_id {
+          _id
+          created_at
+          deleted_at
+          opportunity_type
+          opportunity_type_text
+          updated_at
+        }
+        opportunity_withdraw_data_rules
+        organization_id
+        organization {
+          _id
+          created_at
+          deleted_at
+          organization_address
+          organization_age
+          organization_city
+          organization_email
+          organization_name
+          organization_password
+          organization_phone
+          organization_wallet_id
+          organization_state
+          organization_zipcode
+          updated_at
+        }
+        updated_at
+        reward {
+          _id
+          created_at
+          deleted_at
+          opportunity_id
+          reward_amount
+          reward_name
+          reward_type
+          updated_at
+          reward_type_description {
+            _id
+            created_at
+            deleted_at
+            reward_type
+            reward_type_text
+            updated_at
+          }
+        }
+      }
+    }
+  }
+`;

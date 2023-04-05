@@ -21,6 +21,8 @@ import PIbutton from "@shared-components/buttons/Pbutton";
 import { useMutation, useQuery, useSubscription } from "@apollo/client";
 import {
   GET_DOCTOR_REQUEST,
+  GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID,
+  GET_MEDICAL_RECORD_BY_BODY_PART,
   UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
 } from "../../connection/mutation";
 import {
@@ -31,6 +33,7 @@ import Notification from "@shared-components/notification/notification";
 import { GET_ALL_OPPORTUNITY } from "../../connection/query";
 import moment from "moment";
 import countDaysLeft from "../../components/countDayLeft";
+import { RootState } from "../../redux/store";
 
 interface ProfileScreenProps {}
 
@@ -68,6 +71,33 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const [doctorRequest, setDoctorRequest] = useState([]);
   const [getDoctorRequest] = useMutation(GET_DOCTOR_REQUEST);
   const { loading, error, data } = useQuery(GET_ALL_OPPORTUNITY);
+  const patientId = useSelector((state: RootState) => state.auth.patientId);
+  const [followUpRequest, setFollowUpRequest] = useState([]);
+  const [getFollowUpRequestByPatientId] = useMutation(
+    GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID,
+  );
+  const fetchFollowUpRequest = async () => {
+    try {
+      const { data } = await getFollowUpRequestByPatientId({
+        variables: {
+          input: {
+            patient_id: patientId,
+          },
+        },
+      });
+      setFollowUpRequest(data.getFollowUpRequestByPatientId);
+    } catch (err) {
+      console.log("Failed to fetch followup request by patient id", err);
+    }
+  };
+
+  useEffect(() => {
+    switch (activeTab) {
+      case "Screen3":
+        fetchFollowUpRequest();
+        break;
+    }
+  }, [activeTab]);
 
   const [updateTransaction] = useMutation(
     UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
@@ -130,6 +160,13 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
 
     console.log(OpportunityRecord, "OpportunityRecord");
   };
+  const handleFollowupPress = (followupRequestData: any) => {
+    NavigationService.push(PRIVATESCREENS.FOLLOWUP_REQUEST, {
+      followupRequestData,
+    });
+
+    console.log(followupRequestData, "followupRequest");
+  };
 
   const callGraphQlAPI = async () => {
     try {
@@ -172,57 +209,6 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
 
   // eslint-disable-next-line react/no-unstable-nested-components
   const Screen1 = () => {
-    const opportunityData: OpportunityProps[] = [
-      {
-        img: require("../../assets/contribute-data/sample-image-list-1.png"),
-        daysLeft: "10 Days left",
-        title: t("ProfileScreen.opportunity-title1"),
-        reward: [
-          {
-            title: t("ProfileScreen.reward-title1"),
-            detail: t("ProfileScreen.reward-detail1"),
-          },
-          {
-            title: t("ProfileScreen.reward-title2"),
-            detail: t("ProfileScreen.reward-detail2"),
-          },
-        ],
-      },
-      {
-        img: require("../../assets/contribute-data/sample-image-list-1.png"),
-        daysLeft: "30 Days Left",
-        title: t("ProfileScreen.opportunity-title2"),
-        reward: [
-          {
-            title: t("ProfileScreen.reward-title3"),
-            detail: t("ProfileScreen.reward-detail3"),
-          },
-        ],
-      },
-      {
-        img: require("../../assets/contribute-data/sample-image-list-1.png"),
-        daysLeft: "30 Days Left",
-        title: t("ProfileScreen.opportunity-title3"),
-        reward: [
-          {
-            title: t("ProfileScreen.reward-title4"),
-            detail: t("ProfileScreen.reward-detail4"),
-          },
-        ],
-      },
-      {
-        img: require("../../assets/contribute-data/sample-image-list-1.png"),
-        daysLeft: "30 Days Left",
-        title: t("ProfileScreen.opportunity-title4"),
-        reward: [
-          {
-            title: t("ProfileScreen.reward-title5"),
-            detail: t("ProfileScreen.reward-detail5"),
-          },
-        ],
-      },
-    ];
-
     return (
       <View
         style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}
@@ -254,7 +240,14 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       <View
         style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}
       >
-        {renderDoctorRequest()}
+        <ScrollView>
+          {followUpRequest?.map((item: any, key: any) => (
+            <FollowUpRequestCard
+              key={`followup-request-card-${key}`}
+              {...item}
+            />
+          ))}
+        </ScrollView>
       </View>
     );
   };
@@ -291,16 +284,172 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   };
 
   // eslint-disable-next-line react/no-unstable-nested-components
+  const FollowUpRequestCard = (followupRequest) => {
+    const { opportunity } = followupRequest;
+
+    return (
+      <TouchableOpacity onPress={() => handleFollowupPress(followupRequest)}>
+        <View
+          style={{
+            borderRadius: 20,
+            backgroundColor: "#FAFAFA",
+            width: ScreenWidth * 0.9,
+            padding: 10,
+            paddingTop: 0,
+            margin: 10,
+            marginRight: 50,
+            paddingRight: 30,
+            elevation: 1,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <View>
+              <Image
+                source={{ uri: opportunity?.opportunity_picture_banner }}
+                style={{
+                  width: 115,
+                  height: 155,
+                  borderRadius: 15,
+                  marginTop: 5,
+                }}
+              />
+              <View
+                style={{
+                  backgroundColor: "#383D39",
+                  borderRadius: 8,
+                  paddingHorizontal: 10,
+                  paddingVertical: 4,
+                  position: "absolute",
+                  bottom: 9,
+                  left: 7,
+                }}
+              >
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: 11,
+                    fontWeight: "900",
+                  }}
+                >
+                  {countDaysLeft(opportunity.opportunity_expiration)} Days
+                </Text>
+              </View>
+            </View>
+            <View
+              style={{
+                marginLeft: 15,
+                marginRight: 15,
+                flex: 1,
+                flexDirection: "column",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: "600",
+                  marginTop: 10,
+                  marginBottom: 20,
+                  color: "#383D39",
+                }}
+              >
+                {opportunity?.opportunity_name}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  source={require("../../assets/contribute-data/reward-icon.png")}
+                  style={{
+                    width: 16,
+                    height: 16,
+                  }}
+                />
+                <View
+                  style={{
+                    marginBottom: 0,
+                  }}
+                >
+                  <Text
+                    style={{
+                      marginLeft: 4,
+                      lineHeight: 17,
+                      fontWeight: "700",
+                      fontSize: 11,
+                      alignItems: "center",
+                      color: "#D1AE6C",
+                    }}
+                  >
+                    {opportunity?.reward ? "Reward" : "Additional Reward"}
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                }}
+              >
+                {opportunity?.reward?.map((item, key) => (
+                  <View
+                    key={`reward-item-${key}`}
+                    style={{
+                      flex: 1,
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontWeight: "600",
+                        fontSize: 14,
+                        color: "#606461",
+                        lineHeight: 21,
+                      }}
+                    >
+                      HK${item.reward_amount}
+                    </Text>
+                    <Text
+                      style={{
+                        fontWeight: "600",
+                        fontSize: 10,
+                        color: "#888B88",
+                        marginRight: 5,
+                      }}
+                    >
+                      {item.reward_name}
+                    </Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  // eslint-disable-next-line react/no-unstable-nested-components
   const OpportunityCard = (opportunityData: OpportunityProps) => {
     return (
       <TouchableOpacity onPress={() => handleItemPress(opportunityData)}>
         <View
           style={{
-            borderRadius: 15,
-            backgroundColor: "#ffffff",
+            borderRadius: 20,
+            backgroundColor: "#FAFAFA",
             width: ScreenWidth * 0.9,
-            padding: 15,
+            padding: 10,
+            paddingTop: 0,
             margin: 10,
+            marginRight: 50,
+            paddingRight: 30,
+            elevation: 1,
           }}
         >
           <View
@@ -315,6 +464,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 style={{
                   width: 115,
                   height: 155,
+                  borderRadius: 15,
+                  marginTop: 5,
                 }}
               />
               <View
@@ -349,9 +500,10 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
             >
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: "600",
-                  marginBottom: 15,
+                  marginTop: 10,
+                  marginBottom: 20,
                   color: "#383D39",
                 }}
               >
@@ -494,7 +646,9 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 padding: 5,
               }}
             >
-              <Text style={{ color: "#FFFFFF" }}>{t("ProfileScreen.text4")}</Text>
+              <Text style={{ color: "#FFFFFF" }}>
+                {t("ProfileScreen.text4")}
+              </Text>
             </View>
             <View
               style={{
@@ -523,7 +677,9 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 padding: 5,
               }}
             >
-              <Text style={{ color: "#FFFFFF" }}>{t("ProfileScreen.text6")}</Text>
+              <Text style={{ color: "#FFFFFF" }}>
+                {t("ProfileScreen.text6")}
+              </Text>
             </View>
             <View
               style={{
@@ -785,6 +941,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                   width: 14,
                   height: 14,
                   marginLeft: 4,
+                  marginTop: 9,
                 }}
               />
             </View>
@@ -794,7 +951,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
             style={{
               width: 16,
               height: 16,
-              marginLeft: 30,
+              marginLeft: 50,
             }}
           />
           <Image
@@ -809,7 +966,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       </View>
       <View
         style={{
-          marginBottom: 26,
+          marginBottom: 5,
           // borderBottomWidth: 2,
           // borderBottomColor: "#BABCB7",
         }}

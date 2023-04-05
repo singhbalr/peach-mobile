@@ -19,6 +19,7 @@ import MedicalSvg from "../../assets/icons/medical.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { formatUnixTimestamp, maskHKID } from "utils";
+import { t } from "i18next";
 const ClinicalReport: React.FC = () => {
   // const handleItemPress = () => {
   //   NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
@@ -117,17 +118,21 @@ const ClinicalReport: React.FC = () => {
             </Text>
           </View>
           <View style={styles.infoItem}>
-            <Text style={styles.itemTitle}>Date of Birth</Text>
+            <Text style={styles.itemTitle}>
+              {t("ClinicalReport.DateBirth")}
+            </Text>
             <Text style={styles.itemValue}>
               {formatUnixTimestamp(patientDetails.patient_date_of_birth)}
             </Text>
           </View>
         </View>
         <View style={styles.reportTitle}>
-          <Text style={styles.title}>Existing Record</Text>
+          <Text style={styles.title}>{t("ClinicalReport.ExistRecord")}</Text>
           <View style={styles.titleRight}>
             <InstitutionsSvg />
-            <Text style={styles.rightText}>Institutions</Text>
+            <Text style={styles.rightText}>
+              {t("ClinicalReport.Institutions")}
+            </Text>
           </View>
         </View>
         <ScrollView>
@@ -175,6 +180,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     backgroundColor: "#fff",
     zIndex: 1,
+    marginTop: 25,
   },
   mainContainer: {
     flex: 1,

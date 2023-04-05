@@ -17,6 +17,7 @@ import Sidebar from "../components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { setSidebarState } from "../screens/auth/rx/reducer";
+import DataReceiver from "@screens/dataReceiver/DataReceiver";
 const { width } = Dimensions.get("window");
 
 // ? If you want to use stack or tab or both
@@ -41,12 +42,12 @@ const PrivateRoutes = () => {
           <Image
             source={
               focused
-                ? require("../assets/navbar-icons/your-bioverse-focused.png")
-                : require("../assets/navbar-icons/your-bioverse.png")
+                ? require("../assets/navbar-icons/rewards-focused.png")
+                : require("../assets/navbar-icons/rewards.png")
             }
             style={{
-              width: 46,
-              height: 28,
+              width: 30,
+              height: 30,
             }}
           />
         );

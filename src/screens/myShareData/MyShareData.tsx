@@ -129,7 +129,12 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image
-              source={{ uri: value.opportunity.opportunity_picture_banner }}
+              source={
+                value.opportunity &&
+                value.opportunity.opportunity_picture_banner && {
+                  uri: value.opportunity.opportunity_picture_banner,
+                }
+              }
               style={{
                 width: 100,
                 height: 80,
@@ -168,7 +173,7 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
 
           <View
             style={{
-              backgroundColor: "#efefef",
+              backgroundColor: "#fafafa",
               borderRadius: 15,
               padding: 20,
               marginBottom: 10,
