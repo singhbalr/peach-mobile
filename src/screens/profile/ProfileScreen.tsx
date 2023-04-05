@@ -785,6 +785,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                   width: 14,
                   height: 14,
                   marginLeft: 4,
+                  marginTop: 9
                 }}
               />
             </View>
@@ -794,7 +795,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
             style={{
               width: 16,
               height: 16,
-              marginLeft: 30,
+              marginLeft: 50,
             }}
           />
           <Image

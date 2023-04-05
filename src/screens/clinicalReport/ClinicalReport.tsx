@@ -6,6 +6,7 @@ import { PRIVATESCREENS } from "@shared-constants"
 import * as NavigationService from "react-navigation-helpers"
 import ButtonTabs from "components/ButtonTabs"
 import InstitutionsSvg from "../../assets/icons/institutions.svg"
+import { t } from "i18next";
 const ClinicalReport: React.FC = () => {
   const handleItemPress = () => {
     NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
@@ -36,15 +37,15 @@ const ClinicalReport: React.FC = () => {
             <Text style={styles.itemValue}>Z123****</Text>
           </View>
           <View style={styles.infoItem}>
-            <Text style={styles.itemTitle}>Date of Birth</Text>
+            <Text style={styles.itemTitle}>{t("ClinicalReport.DateBirth")}</Text>
             <Text style={styles.itemValue}>07 JUN 1954</Text>
           </View>
         </View>
         <View style={styles.reportTitle}>
-          <Text style={styles.title}>Existing Record</Text>
+          <Text style={styles.title}>{t("ClinicalReport.ExistRecord")}</Text>
           <View style={styles.titleRight}>
             <InstitutionsSvg />
-            <Text style={styles.rightText}>Institutions</Text>
+            <Text style={styles.rightText}>{t("ClinicalReport.Institutions")}</Text>
           </View>
         </View>
         {
@@ -82,6 +83,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     backgroundColor: "#fff",
     zIndex: 1,
+    marginTop: 25
   },
   mainContainer: {
     flex: 1,
@@ -129,6 +131,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 36,
     paddingTop: 27,
     paddingBottom: 22,
+    
   },
   title: {
     fontSize: 18,
