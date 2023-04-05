@@ -6,6 +6,7 @@ import { PRIVATESCREENS } from "@shared-constants"
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
 import { setSidebarState } from '@screens/auth/rx/reducer'
+import { t } from "i18next";
 
 type Props = {
 }
@@ -35,27 +36,27 @@ const Sidebar: React.FC<Props> = (props: Props) => {
   const sidebarState = useSelector((state: RootState) => state.auth.sidebarState)
   const navList = [
     {
-      title: 'Settings',
+      title: t("Sidebar.Settings"),
       icon: require('../assets/sidebar/settings.png'),
       command: 'settings',
     },
     {
-      title: 'My Shared Data',
+      title: t("Sidebar.MyShareData"),
       icon: require('../assets/sidebar/bell.png'),
       command: 'sharedData',
     },
     {
-      title: 'Useful Health Info',
+      title: t("Sidebar.Useful"),
       icon: require('../assets/sidebar/info.png'),
       command: 'info',
     },
     {
-      title: 'Support',
+      title: t("Sidebar.Support"),
       icon: require('../assets/sidebar/support.png'),
       command: 'support',
     },
     {
-      title: 'Log Out',
+      title: t("Sidebar.LogOut"),
       icon: require('../assets/sidebar/logout.png'),
       command: 'logout',
     },

@@ -21,6 +21,7 @@ export default (theme: ExtendedTheme) => {
       flex: 1,
       alignItems: "center",
       backgroundColor: colors.secondaryBackground,
+      
     },
     titleTextStyle: {
       fontSize: 32,
@@ -61,6 +62,7 @@ export default (theme: ExtendedTheme) => {
     contentContainer: {
       flex: 1,
       marginTop: 16,
+      
     },
     listContainer: {
       marginTop: 8,
