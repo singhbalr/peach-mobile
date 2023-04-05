@@ -7,6 +7,7 @@ export const PRIVATESCREENS = {
   CONTRIBUTE_DATA: "Contributions",
   MEDICAL_RECORD: "Medical Record",
   MEDICAL_FILE_VIEWER: "Medical File Viewer",
+  CLINICAL_FILE_VIEWER: "Clinical File Viewer",
   OPPORTUNITY_RECORD: "Opportunity Record",
   OPPORTUNITY_SUCCESS_SCREEN: "Opportunity Success Screen",
   MY_SHARE_DATA: "MyShareData",

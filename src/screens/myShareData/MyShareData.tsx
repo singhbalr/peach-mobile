@@ -131,8 +131,10 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
             <Image
               source={
                 value.opportunity &&
-                value.opportunity.opportunity_picture_banner && 
-                { uri: value.opportunity.opportunity_picture_banner }}
+                value.opportunity.opportunity_picture_banner && {
+                  uri: value.opportunity.opportunity_picture_banner,
+                }
+              }
               style={{
                 width: 100,
                 height: 80,

@@ -8,30 +8,37 @@ import {
   Image,
   KeyboardAvoidingView,
 } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setUsername,
   setLoggedInState,
   setPatientId,
   setPatientDetails,
+  setMedicalRecord,
 } from "./rx/reducer";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useMutation } from "@apollo/client";
 import PInput from "@shared-components/input/PInput";
 import PIbutton from "@shared-components/buttons/Pbutton";
-import { PATIENT_LOGIN } from "../../connection/mutation";
+import {
+  PATIENT_LOGIN,
+  GET_MEDICAL_RECORD_BY_BODY_PART,
+} from "../../connection/mutation";
 import { t } from "i18next";
+import { RootState } from "redux/store";
 
 // import { authBiometrics } from "../../shared/sensors/Biometric";
 interface Props {}
 
 const LoginScreen: React.FC<Props> = () => {
-  const [username, setUser] = useState("");
-  const [password, setPass] = useState("");
+  const [username, setUser] = useState("patient@peachbioverse.com");
+  const [password, setPass] = useState("12341234");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isUserValid, setIsUserValid] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [patientLoginMutation] = useMutation(PATIENT_LOGIN);
+  const [getMedicalRecord] = useMutation(GET_MEDICAL_RECORD_BY_BODY_PART);
+  const [fileRecordList, setFileRecordList] = useState([]);
   //   const username = useSelector((state: RootState) => state.auth.username);
   const dispatch = useDispatch();
 
@@ -74,11 +81,59 @@ const LoginScreen: React.FC<Props> = () => {
       dispatch(setUsername(patient_email));
       dispatch(setPatientId(_id));
       dispatch(setPatientDetails(data.patientLogin.data));
+
+      await fetchAllMedicalRecord(_id);
+
       dispatch(setLoggedInState(true));
     }
-
-    // // // Perform login logic
   };
+
+  const fetchAllMedicalRecord = async (patientId: string) => {
+    const lowerBodyPart = [
+      "liver",
+      "pancreas",
+      "stomach",
+      "gallblader",
+      "spleen",
+    ]; //TODO: refactor this code to include all bodypart
+
+    try {
+      lowerBodyPart.map(async (value) => {
+        const { data } = await getMedicalRecord({
+          variables: {
+            record: {
+              body_type: value,
+              patient_id: patientId,
+            },
+          },
+        });
+        if (data) {
+          const fileRecord = {
+            [value]: data.getMedicalRecordFileByBodyTypeAndPatientId,
+          };
+          console.log(data);
+          setFileRecordList((prevState) => {
+            const existingIndex = prevState.findIndex(
+              (obj) => obj[value] !== undefined,
+            );
+            if (existingIndex !== -1) {
+              // If key already exists, replace the whole object
+              const newState = [...prevState];
+              newState[existingIndex] = fileRecord;
+              return newState;
+            } else {
+              // Otherwise, add the new object to the state
+              return [...prevState, fileRecord];
+            }
+          });
+          dispatch(setMedicalRecord(fileRecordList));
+        }
+      });
+    } catch (error) {
+      throw new Error(`Could not fetch doctor list by id: ${error.message}`);
+    }
+  };
+
   useEffect(() => {
     if (!username.includes("@") && !username.includes(".")) {
       setIsUserValid(false);

@@ -635,7 +635,7 @@
         "fromData": "Medical Institution 16",
         "receivedFrom": "2023-01-5",
         "type": "imaging",
-        "fileType": "PDF"
+        "fileType": ""
       },
       {
         "id": "63ecc01e91a60062431a2214",

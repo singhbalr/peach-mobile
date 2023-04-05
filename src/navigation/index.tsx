@@ -27,6 +27,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import PublicRoutes from "./route.public";
 import RewardDetails from "@screens/home/RewardDetails";
+import ClinicalFileViewer from "@screens/medicalRecord/ClinicalFileViewer";
 import DataReceiver from "@screens/dataReceiver/DataReceiver";
 import FollowupRequestRecordScreen from "@screens/followupRequest/FollowupRequestRecord";
 
@@ -66,6 +67,10 @@ const Navigation = () => {
             <Stack.Screen
               name={PRIVATESCREENS.MEDICAL_FILE_VIEWER}
               component={MedicalFileViewer}
+            />
+            <Stack.Screen
+              name={PRIVATESCREENS.CLINICAL_FILE_VIEWER}
+              component={ClinicalFileViewer}
             />
             <Stack.Screen
               name={PRIVATESCREENS.OPPORTUNITY_RECORD}

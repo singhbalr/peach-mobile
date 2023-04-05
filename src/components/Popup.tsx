@@ -20,6 +20,7 @@ type Props = {
   title: string;
   dataList: string[];
   element?: ReactNode;
+  fileRecordList: any;
   onPressList: (e: Event, index: number) => void;
   onClose: () => void;
 };
@@ -30,6 +31,7 @@ type ItemProps = {
   index: string | number;
   item: string;
   length: number;
+  fileRecordList: any;
   onPressList: (arg0: string, arg1: string | number) => void;
   onClose: () => void;
 };
@@ -37,6 +39,7 @@ const Item: React.FC<ItemProps> = ({
   index,
   item,
   length,
+  fileRecordList,
   onPressList,
 }: ItemProps) => {
   return (
@@ -56,10 +59,12 @@ const Item: React.FC<ItemProps> = ({
           <StomachSvg style={styles.svgIcon}></StomachSvg>
         )}
         <Text>{item.name}</Text>
-        {item.reportCount > 0 && (
+        {fileRecordList[item.name.toLowerCase()] > 0 && (
           <>
             <ReportSvg style={styles.reportIcon}></ReportSvg>
-            <Text style={styles.reportCount}>{item.reportCount}</Text>
+            <Text style={styles.reportCount}>
+              {fileRecordList[item.name.toLowerCase()]}
+            </Text>
           </>
         )}
       </View>
@@ -68,7 +73,15 @@ const Item: React.FC<ItemProps> = ({
   );
 };
 const Header: React.FC<Props> = (props: Props) => {
-  const { visible, title, dataList, onPressList, onClose, element } = props;
+  const {
+    visible,
+    title,
+    dataList,
+    onPressList,
+    onClose,
+    element,
+    fileRecordList,
+  } = props;
   return (
     <Modal animationType={"slide"} transparent={true} visible={visible}>
       <View style={styles.container}>
@@ -88,10 +101,11 @@ const Header: React.FC<Props> = (props: Props) => {
             data={dataList}
             renderItem={({ item, index }) => (
               <Item
+                fileRecordList={fileRecordList}
                 item={item}
                 index={index}
                 length={dataList.length}
-                onPressList={onPressList}
+                onPressList={() => onPressList(item.name)}
               />
             )}
             style={[styles.flatList]}

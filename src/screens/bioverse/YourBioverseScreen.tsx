@@ -54,16 +54,83 @@ const BodyButton: React.FC<ButtonProps> = (props) => {
 
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   const [popupVisible, setPopupVisible] = useState<boolean>(false);
-  const [fileRecordList, setFileRecordList] = useState([]);
+  const [fileRecordList, setFileRecordList] = useState({
+    gallbladder: 0,
+    liver: 0,
+    pancreas: 0,
+    spleen: 0,
+    stomach: 0,
+  });
   const [activeItem, setActiveItem] = useState<object>({
     name: "",
     children: [],
   });
   const drawer = createRef<React.ElementRef<typeof Drawer>>();
-  const onPressList = () => {
+  const patientDetails = useSelector(
+    (state: RootState) => state.auth.patientDetails,
+  );
+
+  const onPressList = (bodyPart: string) => {
+    const medicalFile = getMedicalRecordFileFromStore(bodyPart);
+    const filteredData = getMedicalRecordFile(
+      bodyPart.toLowerCase(),
+      medicalFile,
+    );
     setPopupVisible(false);
-    NavigationService.push(PRIVATESCREENS.BIOVERSE_DETAIL_SCREEN, {});
+    NavigationService.push(PRIVATESCREENS.BIOVERSE_DETAIL_SCREEN, {
+      records: filteredData,
+      bodyPart: bodyPart,
+    });
   };
+
+  const getMedicalRecordFile = (bodyPart, medicalFiles) => {
+    return medicalFiles.map((record) => {
+      const filteredFiles = record.medical_record_file
+        .filter((file) => {
+          return file.file_metadata.some((meta) => {
+            return meta.body_part === bodyPart;
+          });
+        })
+        .map((file) => {
+          const filteredMetadata = file.file_metadata.filter((meta) => {
+            return meta.body_part === bodyPart;
+          });
+          return { ...file, file_metadata: filteredMetadata };
+        });
+      return { ...record, medical_record_file: filteredFiles };
+    });
+  };
+
+  const getMedicalRecordFileFromStore = (body_part) => {
+    const resultsArray = [];
+    // Check if patientDetails has medical_record array
+    if (!Array.isArray(patientDetails.medical_record)) {
+      return null; // Return null if medical_record is not an array
+    }
+    // Loop through each medical record file of the patient
+    for (const medicalRecordFile of patientDetails.medical_record) {
+      // Check if the medical record file has file_metadata array
+      if (Array.isArray(medicalRecordFile.medical_record_file)) {
+        // Loop through each metadata of the medical record file
+        for (const medicalRecord of medicalRecordFile.medical_record_file) {
+          if (Array.isArray(medicalRecord.file_metadata)) {
+            // Loop through each metadata of the medical record file
+            for (const metadata of medicalRecord.file_metadata) {
+              // Check if the metadata has a "body_part" field that contains "liver"
+              if (metadata.body_part === body_part.toLowerCase()) {
+                resultsArray.push(medicalRecordFile);
+                return resultsArray; // Return the medical record file that has "liver" in its metadata
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Return null if no medical record file has "liver" in its metadata
+    return null;
+  };
+
   const selectBodyParts = (item: React.SetStateAction<object>) => {
     setPopupVisible(true);
     setActiveItem(item);
@@ -78,8 +145,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     }).start();
   };
   const patientId = useSelector((state: RootState) => state.auth.patientId);
-  const [getMedicalRecord] = useMutation(GET_MEDICAL_RECORD_BY_BODY_PART);
+
+  useEffect(() => {
+    fetchAllMedicalRecord();
+  }, []);
+
   const fetchAllMedicalRecord = async () => {
+    const counts = {};
     const lowerBodyPart = [
       "liver",
       "pancreas",
@@ -87,46 +159,24 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       "gallblader",
       "spleen",
     ]; //TODO: refactor this code to include all bodypart
-    const resultFileArray = [];
 
-    try {
-      lowerBodyPart.map(async (value, index) => {
-        const { data } = await getMedicalRecord({
-          variables: {
-            record: {
-              body_type: value,
-              patient_id: patientId,
-            },
-          },
-        });
-        if (data) {
-          const fileRecord = {
-            [value]: data.getMedicalRecordFileByBodyTypeAndPatientId,
-          };
-          console.log(data);
-          setFileRecordList((prevState) => {
-            const existingIndex = prevState.findIndex(
-              (obj) => obj[value] !== undefined,
-            );
-            if (existingIndex !== -1) {
-              // If key already exists, replace the whole object
-              const newState = [...prevState];
-              newState[existingIndex] = fileRecord;
-              return newState;
-            } else {
-              // Otherwise, add the new object to the state
-              return [...prevState, fileRecord];
-            }
-          });
-        }
-      });
-    } catch (error) {
-      throw new Error(`Could not fetch doctor list by id: ${error.message}`);
+    for (const bodyPart of lowerBodyPart) {
+      counts[bodyPart] = 0;
     }
+
+    // Loop through each medical record file and increment the count for each body part
+    for (const record of patientDetails.medical_record) {
+      for (const file of record.medical_record_file) {
+        for (const metadata of file.file_metadata) {
+          if (counts[metadata.body_part] !== undefined) {
+            counts[metadata.body_part]++;
+          }
+        }
+      }
+    }
+    setFileRecordList(counts);
   };
-  useEffect(() => {
-    fetchAllMedicalRecord();
-  }, []);
+
   // useEffect(() => {
   //   buttonList();
   // }, [fileRecordList]);
@@ -272,6 +322,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         </View>
       )}
       <Popup
+        fileRecordList={fileRecordList}
         visible={popupVisible}
         title={activeItem.name}
         dataList={activeItem.children}
