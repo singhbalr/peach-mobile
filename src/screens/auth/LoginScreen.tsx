@@ -184,7 +184,7 @@ const LoginScreen: React.FC<Props> = () => {
             <Text style={{ fontSize: 14, color: "#ECF1E8", marginTop: 150 }}>
               {t("loginScreen.signUp")}
             </Text>
-            
+
           </View>
         </KeyboardAvoidingView>
         {/*<View style={styles.container}>*/}
