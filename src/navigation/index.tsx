@@ -7,7 +7,7 @@ import { isReadyRef, navigationRef } from "react-navigation-helpers";
  * ? Local & Shared Imports
  */
 import { PRIVATESCREENS, PUBLICSCREENS } from "@shared-constants";
-import { LightTheme, DarkTheme, palette } from "@theme/themes";
+import { LightTheme, DarkTheme } from "@theme/themes";
 // ? Screens
 // import DetailScreen from "@screens/detail/DetailScreen";
 import MedicalRecordScreen from "@screens/medicalRecord/MedicalRecordScreen";
@@ -23,11 +23,12 @@ const Stack = createStackNavigator();
 
 //redux state checking for login
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import PublicRoutes from "./route.public";
 import RewardDetails from "@screens/home/RewardDetails";
 import DataReceiver from "@screens/dataReceiver/DataReceiver";
+import FollowupRequestRecordScreen from "@screens/followupRequest/FollowupRequestRecord";
 
 const Navigation = () => {
   const scheme = useColorScheme();
@@ -69,6 +70,10 @@ const Navigation = () => {
             <Stack.Screen
               name={PRIVATESCREENS.OPPORTUNITY_RECORD}
               component={OpportunityRecordScreen}
+            />
+            <Stack.Screen
+              name={PRIVATESCREENS.FOLLOWUP_REQUEST}
+              component={FollowupRequestRecordScreen}
             />
             <Stack.Screen
               name={PRIVATESCREENS.OPPORTUNITY_SUCCESS_SCREEN}
