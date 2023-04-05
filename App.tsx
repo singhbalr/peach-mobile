@@ -27,7 +27,7 @@ LogBox.ignoreAllLogs();
 
 const App = () => {
   const scheme = useColorScheme();
-  const isDarkMode = scheme === "dark";
+  const isDarkMode = scheme === "light";
 
   const WS_URL = "peach-bio-api-testing.wistkey.com";
 
