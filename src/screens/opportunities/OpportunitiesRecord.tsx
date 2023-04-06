@@ -116,20 +116,21 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
   const dataReceiver = [
     {
       title: t("OpportunitiesRecord.data-title1"),
-      content: t("OpportunitiesRecord.data-content1"),
+      content: detail.opportunity_purpose ?? "-",
     },
     {
       title: t("OpportunitiesRecord.data-title2"),
-      content: t("OpportunitiesRecord.data-content2"),
+      content: detail.opportunity_data_accesibility_duration ?? "-",
     },
     {
       title: t("OpportunitiesRecord.data-title3"),
-      content: t("OpportunitiesRecord.data-content3"),
+      content: detail?.opportunity_withdraw_data_rules ?? "-",
     },
   ];
 
   // eslint-disable-next-line react/no-unstable-nested-components
   const OpportunityCard = () => {
+    console.log("opportunity_withdraw_data_rules", detail.opportunity_withdraw_data_rules)
     return (
       <View
         style={{
