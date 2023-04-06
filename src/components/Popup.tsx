@@ -49,6 +49,7 @@ const Item: React.FC<ItemProps> = ({
         styles.itemContainer,
         index === length - 1 ? { borderBottomWidth: 0 } : {},
       ]}
+      disabled={!fileRecordList[item.name.toLowerCase()] > 0}
     >
       <View style={styles.itemView}>
         {item.name === "Liver" && <LiverSvg style={styles.svgIcon}></LiverSvg>}
