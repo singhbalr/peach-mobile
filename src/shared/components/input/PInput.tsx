@@ -1,6 +1,6 @@
 import React from "react";
-import { useTheme, TextInput } from "react-native-paper";
-import { StyleProp, ViewStyle, StyleSheet, View } from "react-native";
+import { TextInput } from "react-native-paper";
+import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 type Props = {
   onChangeText: (arg0: string) => void;
   secureTextEntry: boolean;
@@ -12,12 +12,16 @@ type Props = {
 type ComponentType = React.FC<Props>;
 
 const PInput: ComponentType = (props) => {
-  const theme = useTheme();
-
   return (
     <TextInput
       onChangeText={props.onChangeText}
       style={props.style}
+      contentStyle={{
+        backgroundColor: '#B5CAA0',
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#7BA040'
+      }}
       secureTextEntry={props.secureTextEntry}
       value={props.value}
       label={props.label}

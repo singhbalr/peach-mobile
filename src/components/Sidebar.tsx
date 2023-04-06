@@ -1,37 +1,25 @@
-import React from "react";
-import {
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { ImageSource } from "react-native-vector-icons/Icon";
-import * as NavigationService from "react-navigation-helpers";
-import { PRIVATESCREENS } from "@shared-constants";
-import { RootState } from "redux/store";
-import { setSidebarState } from "@screens/auth/rx/reducer";
+import React from 'react'
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ImageSource } from 'react-native-vector-icons/Icon'
+import * as NavigationService from "react-navigation-helpers"
+import { PRIVATESCREENS } from "@shared-constants"
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from 'redux/store'
 import { setLogout } from "../screens/auth/rx/reducer";
-import { useDispatch, useSelector } from "react-redux";
-import { t } from "i18next";
-type Props = {};
-type ItemProps = {
-  index: string | number;
-  icon: ImageSource;
-  title: string;
-  length: number;
-  onPressList: (arg0: string | number) => void;
-};
+import { t } from 'i18next'
 
-const Item: React.FC<ItemProps> = ({
-  title,
-  icon,
-  index,
-  length,
-  onPressList,
-}: ItemProps) => {
+type ItemProps = {
+  index: string | number,
+  icon: ImageSource,
+  title: string,
+  command: string,
+  length: number,
+  onPressList: (arg0: string | number) => void,
+}
+
+const Item: React.FC<ItemProps> = ({title, icon, command, index, length, onPressList}: ItemProps) => {
+  const notificationIconState = useSelector((state: RootState) => state.app.notificationIconState)
+
   return (
     <View
       style={[
@@ -43,17 +31,21 @@ const Item: React.FC<ItemProps> = ({
         style={styles.itemContainer}
         onPress={() => onPressList(index)}
       >
-        <Image source={icon} style={styles.itemIcon}></Image>
-        <Text style={styles.itemTitle}>{title}</Text>
+          <Image source={icon} style={styles.itemIcon}></Image>
+          <View style={styles.titleView}>
+            <Text style={styles.itemTitle}>{title}</Text>
+            {
+              command === 'info' && (
+                <View style={[styles.redDot, {display: notificationIconState ? 'flex' : 'none'}]}></View>
+              )
+            }
+          </View>
       </TouchableOpacity>
     </View>
-  );
-};
-const Sidebar: React.FC<Props> = (props: Props) => {
-  const dispatch = useDispatch();
-  const sidebarState = useSelector(
-    (state: RootState) => state.auth.sidebarState,
-  );
+  )
+}
+const Sidebar: React.FC = () => {
+  const dispatch = useDispatch()
   const navList = [
     {
       title: t("Sidebar.Settings"),
@@ -94,7 +86,6 @@ const Sidebar: React.FC<Props> = (props: Props) => {
       case "support":
         break;
       case "logout":
-        // setLogoutModalVisible(true)
         dispatch(setLogout());
         break;
       default:
@@ -113,8 +104,10 @@ const Sidebar: React.FC<Props> = (props: Props) => {
             <Item
               key={`nav-item-${index}`}
               index={index}
+              length={navList.length}
               icon={item.icon}
               title={item.title}
+              command={item.command}
               onPressList={() => {
                 clickNavItem(item.command);
               }}
@@ -160,4 +153,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#383D39",
   },
-});
+  titleView: {
+    position: 'relative'
+  },
+  redDot: {
+    position: 'absolute',
+    top: 0,
+    right: -10,
+    width: 6,
+    height: 6,
+    backgroundColor: '#F196A8',
+    borderRadius: 6,
+  },
+})
