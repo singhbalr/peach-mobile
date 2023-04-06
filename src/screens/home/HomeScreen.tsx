@@ -160,7 +160,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             borderRadius: 15,
             backgroundColor: "#ffffff",
             width: ScreenWidth * 0.9,
-            padding: 15,
+            padding: 20,
             paddingTop: 0,
             margin: 10,
             marginBottom: 30,
@@ -182,6 +182,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                   width: 115,
                   height: 155,
                   borderRadius: 15,
+                  marginTop: 10,
                 }}
               />
               <View
@@ -224,6 +225,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                   lineHeight: 20,
                   marginBottom: 15,
                   color: "#383D39",
+                  marginTop: 10,
                 }}
               >
                 {patientReward.opportunity.opportunity_name}
@@ -480,7 +482,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       </View>
       <View
         style={{
-          paddingBottom: 26,
+          paddingBottom: 15,
           // borderBottomWidth: 2,
           // borderBottomColor: "#BABCB7",
           paddingHorizontal: 20,
