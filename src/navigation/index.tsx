@@ -31,6 +31,7 @@ import ClinicalFileViewer from "@screens/medicalRecord/ClinicalFileViewer";
 import DataReceiver from "@screens/dataReceiver/DataReceiver";
 import FollowupRequestRecordScreen from "@screens/followupRequest/FollowupRequestRecord";
 import HealehInfoDetail from "@screens/healthInfo/HealthInfoDetail";
+import UsefulHealthInfo from "@screens/healthInfo/UsefulHealthInfo";
 
 const Navigation = () => {
   const scheme = useColorScheme();
@@ -104,6 +105,10 @@ const Navigation = () => {
             <Stack.Screen
               name={PRIVATESCREENS.HEALTH_INFO_DETAIL}
               component={HealehInfoDetail}
+            />
+            <Stack.Screen
+              name={PRIVATESCREENS.USEFUL_HEALTH_INFO}
+              component={UsefulHealthInfo}
             />
           </>
         ) : (
