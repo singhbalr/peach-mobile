@@ -7,7 +7,6 @@ interface AuthState {
   token: string;
   patientId: string;
   patientDetails: any;
-  sidebarState: boolean;
 }
 const initialState = {
   username: "",
@@ -16,7 +15,6 @@ const initialState = {
   token: "",
   patientId: "",
   patientDetails: {},
-  sidebarState: false
 };
 const authSlice = createSlice({
   name: "auth",
@@ -41,9 +39,6 @@ const authSlice = createSlice({
       state.patientDetails = action.payload;
     },
     setLogout: () => initialState,
-    setSidebarState: (state: AuthState, action: { payload: boolean }) => {
-      state.sidebarState = action.payload;
-    },
   },
 });
 
@@ -72,10 +67,6 @@ interface SetPatientDetails {
   type: string;
   payload: any;
 }
-interface SetSidebarStateAction {
-  type: string;
-  payload: boolean;
-}
 
 interface setLogoutAction {}
 
@@ -87,7 +78,6 @@ type AuthActions =
   | setLogoutAction
   | SetPatientDetails
   | SetPatientIdAction
-  | SetSidebarStateAction;
 
 export const {
   setUsername,
@@ -97,5 +87,4 @@ export const {
   setLogout,
   setPatientId,
   setPatientDetails,
-  setSidebarState,
 } = authSlice.actions;

@@ -4,6 +4,7 @@ import { ScreenWidth } from "@freakycoder/react-native-helpers";
 
 interface Style {
   container: ViewStyle;
+  title: TextStyle;
   titleTextStyle: TextStyle;
   buttonStyle: ViewStyle;
   buttonTextStyle: TextStyle;
@@ -21,6 +22,13 @@ export default (theme: ExtendedTheme) => {
       flex: 1,
       alignItems: "center",
       backgroundColor: colors.secondaryBackground,
+    },
+    title: {
+      fontWeight: "bold",
+      fontSize: 22,
+      color: "#383D39",
+      textAlign: "center",
+      paddingHorizontal: 45,
     },
     titleTextStyle: {
       fontSize: 32,

@@ -50,7 +50,7 @@ const ClinicalReport: React.FC = () => {
         {
           reportList.map((item, index) => {
             return (
-              <View key={index} style={styles.reportItem}>
+              <View key={'report-item-' + index} style={styles.reportItem}>
                 <View style={styles.dateView}>
                   <Text style={styles.dateText}>{item.date}</Text>
                   <View style={styles.dateLine}></View>
@@ -58,7 +58,7 @@ const ClinicalReport: React.FC = () => {
                 <Text style={styles.greenText}>Medtimes</Text>
                 <Text style={styles.subText}>{item.doctor}</Text>
                 <View style={styles.buttonList}>
-                  <ButtonTabs key={index + 99}  showAll={true} buttonIndexs={item.buttonIndexs} setIndex={(index) => {
+                  <ButtonTabs key={'report-buttons-' + index}  showAll={true} buttonIndexs={item.buttonIndexs} setIndex={(index) => {
                     NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
                       activeIndex: index
                     });

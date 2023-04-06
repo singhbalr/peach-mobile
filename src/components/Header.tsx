@@ -1,10 +1,10 @@
-import React, { createRef } from 'react'
-import { View, StyleSheet, Text, Dimensions, TouchableOpacity } from 'react-native'
+import React, { useEffect } from 'react'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import InfoSvg from "../assets/dashboard/info.svg"
 import MenuSvg from "../assets/dashboard/menu.svg"
 import { useDispatch, useSelector } from 'react-redux'
-import { setSidebarState } from '@screens/auth/rx/reducer'
 import { RootState } from 'redux/store'
+import { setSidebarState, toggleNotificationIconState } from 'redux/reducer'
 
 type Props = {
   titleText: string
@@ -19,7 +19,11 @@ const Header: React.FC<Props> = (props: Props) => {
     subTitleText,
   } = props
   const dispatch = useDispatch()
-  const sidebarState = useSelector((state: RootState) => state.auth.sidebarState)
+  const notificationIconState = useSelector((state: RootState) => state.app.notificationIconState)
+
+  useEffect(() => {
+    dispatch(toggleNotificationIconState(true))
+  })
 
   return (
     <View style={styles.container}>
@@ -28,7 +32,10 @@ const Header: React.FC<Props> = (props: Props) => {
           {titleText}
         </Text>
         <View style={styles.buttonContainer}>
-          <InfoSvg style={[styles.icon, styles.infoIcon]}></InfoSvg>
+          <View style={styles.infoView}>
+            <InfoSvg style={[styles.icon, styles.infoIcon]}></InfoSvg>
+            <View style={[styles.redDot, {display: notificationIconState ? 'flex' : 'none'}]}></View>
+          </View>
           <TouchableOpacity
             onPress={() => {
               dispatch(setSidebarState(true))
@@ -77,6 +84,20 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
+  },
+  infoView: {
+    width: 16,
+    position: 'relative',
+    marginRight: 30,
+  },
+  redDot: {
+    position: 'absolute',
+    top: 0,
+    right: -10,
+    width: 6,
+    height: 6,
+    backgroundColor: '#F196A8',
+    borderRadius: 6,
   },
   icon: {
     color: '#ff5655'

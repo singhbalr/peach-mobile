@@ -5,19 +5,20 @@ import * as NavigationService from "react-navigation-helpers"
 import { PRIVATESCREENS } from "@shared-constants"
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
-import { setSidebarState } from '@screens/auth/rx/reducer'
+import { setSidebarState } from 'redux/reducer'
 
-type Props = {
-}
 type ItemProps = {
   index: string | number,
   icon: ImageSource,
   title: string,
+  command: string,
   length: number,
   onPressList: (arg0: string | number) => void,
 }
 
-const Item: React.FC<ItemProps> = ({title, icon, index, length, onPressList}: ItemProps) => {
+const Item: React.FC<ItemProps> = ({title, icon, command, index, length, onPressList}: ItemProps) => {
+  const notificationIconState = useSelector((state: RootState) => state.app.notificationIconState)
+
   return (
     <View style={[styles.itemView, index === length - 1 ? {borderBottomWidth: 0} : {}]}>
       <TouchableOpacity
@@ -25,14 +26,20 @@ const Item: React.FC<ItemProps> = ({title, icon, index, length, onPressList}: It
         onPress={() => onPressList(index)}
       >
           <Image source={icon} style={styles.itemIcon}></Image>
-          <Text style={styles.itemTitle}>{title}</Text>
+          <View style={styles.titleView}>
+            <Text style={styles.itemTitle}>{title}</Text>
+            {
+              command === 'info' && (
+                <View style={[styles.redDot, {display: notificationIconState ? 'flex' : 'none'}]}></View>
+              )
+            }
+          </View>
       </TouchableOpacity>
     </View>
   )
 }
-const Sidebar: React.FC<Props> = (props: Props) => {
+const Sidebar: React.FC = () => {
   const dispatch = useDispatch()
-  const sidebarState = useSelector((state: RootState) => state.auth.sidebarState)
   const navList = [
     {
       title: 'Settings',
@@ -92,8 +99,10 @@ const Sidebar: React.FC<Props> = (props: Props) => {
             <Item
               key={`nav-item-${index}`}
               index={index}
+              length={navList.length}
               icon={item.icon}
               title={item.title}
+              command={item.command}
               onPressList={() => {
                 clickNavItem(item.command)
               }}
@@ -138,5 +147,17 @@ const styles = StyleSheet.create({
   itemTitle: {
     fontSize: 16,
     color: '#383D39'
-  }
+  },
+  titleView: {
+    position: 'relative'
+  },
+  redDot: {
+    position: 'absolute',
+    top: 0,
+    right: -10,
+    width: 6,
+    height: 6,
+    backgroundColor: '#F196A8',
+    borderRadius: 6,
+  },
 })

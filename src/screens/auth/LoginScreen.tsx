@@ -219,9 +219,8 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "100%",
-    backgroundColor: "#B5CAA0",
+    backgroundColor: "#7BA040",
     color: "#606461",
-    borderRadius: 10,
   },
   inputContainer: {
     alignItems: "center",
@@ -235,13 +234,13 @@ const styles = StyleSheet.create({
   },
   passwordContainer: {
     flexDirection: "row",
-    marginTop: 20,
+    marginTop: 15,
   },
   secureTextIcon: {
     justifyContent: "center",
     position: "absolute",
     alignSelf: "center",
-    right: 5,
+    right: 10,
   },
   forgotPasswordLabel: {
     alignSelf: "center",
