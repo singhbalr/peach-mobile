@@ -10,10 +10,27 @@ interface Props {}
 
 const Onboarding: React.FC<Props> = () => {
   const navigation = useNavigation(); // get navigation object
+  //const [isVideoPlaying, setIsVideoPlaying] = useState(false); // state to track video playing status
+  
 
   const handleExplorePress = () => {
+    //if (videoRef.current) {
+      //videoRef.current.stop();
+    //}
     navigation.navigate(PUBLICSCREENS.LOGINSCREEN); // navigate to login screen
   };
+
+  //const handleVideoPress = () => {
+    // Pause/Play the video when clicked
+    //if (videoRef.current) {
+     // if (isVideoPlaying) {
+        //videoRef.current.pause();
+      //} else {
+        //videoRef.current.resume();
+      //}
+      //setIsVideoPlaying(!isVideoPlaying);
+    //}
+  //};
 
   return (
     <View style={styles.container}>
@@ -30,6 +47,7 @@ const Onboarding: React.FC<Props> = () => {
       <View style={styles.content}>
         <Text style={styles.title}>{t("OnBoarding.title")}</Text>
         <Video
+          
           source={{uri: 'https://drive.google.com/uc?export=download&id=1ao6KvvZUJGCR311e1bR7ISfkqJuSpgqx'}}
           style={{
             marginTop: 50,
@@ -38,7 +56,13 @@ const Onboarding: React.FC<Props> = () => {
             height: 200,
             borderRadius: 25
           }}
+          thumbnail={require("../../assets/contribute-data/onboarding.png")}
           resizeMode='contain'
+          controls={true}
+          playWhenInactive={true}
+          //paused={!isVideoPlaying} // Pause the video if isVideoPlaying is false
+          //onTouchStart={handleVideoPress} // Call handleVideoPress when video is clicked
+          
         />
         <Text style={styles.subTitle}>{t("OnBoarding.subtitle")}</Text>
         <KeyboardAvoidingView>
