@@ -150,6 +150,9 @@
       "DateBirth": "Date of Birth",
       "ExistRecord": "Existing Record",
       "Institutions": "Institutions"
+    },
+    "UsefulHealthInfo": {
+      "title": "Useful Health Info"
     }
   }
 }
