@@ -1,26 +1,33 @@
-import { ExtendedTheme } from "@react-navigation/native";
+import { ExtendedTheme } from "@react-navigation/native"
 
-import { ViewStyle, StyleSheet, View, TextStyle, } from "react-native";
-import { ScreenWidth } from "@freakycoder/react-native-helpers";
+import { ViewStyle, StyleSheet, View, TextStyle, } from "react-native"
+import { ScreenWidth } from "@freakycoder/react-native-helpers"
 interface Style {
-  container: ViewStyle;
-  button: ViewStyle;
-  buttonText: ViewStyle;
-  header: ViewStyle;
-  headerText: TextStyle;
-  headerInfo: TextStyle;
+  container: ViewStyle
+  mainContainer: View
+  tabContainer: ViewStyle
+  button: ViewStyle
+  buttonText: ViewStyle
+  header: ViewStyle
+  headerText: TextStyle
+  headerInfo: TextStyle
 }
 
 
 
 export default (theme: ExtendedTheme) => {
-  const { colors } = theme;
+  const { colors } = theme
   return StyleSheet.create<Style>({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
-      paddingHorizontal: 20,
+      backgroundColor: '#fafafa',
       marginTop: 20,
+    },
+    mainContainer: {
+      paddingHorizontal: 35,
+    },
+    tabContainer: {
+      paddingBottom: 83
     },
     button: {
       backgroundColor: "blue",
@@ -53,5 +60,5 @@ export default (theme: ExtendedTheme) => {
       fontWeight: "400",
     },
     
-  });
-};
+  })
+}

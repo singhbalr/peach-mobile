@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Image,
   StyleSheet,
@@ -7,8 +7,6 @@ import {
   ViewStyle,
   Animated,
 } from "react-native";
-import { GET_MEDICAL_RECORD_BY_BODY_PART } from "../../connection/mutation";
-import { useMutation } from "@apollo/client";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -18,8 +16,15 @@ import Header from "../../components/Header";
 import Popup from "../../components/Popup";
 import MaleBodySvg from "../../assets/dashboard/male-body.svg";
 import ReportSvg from "../../assets/dashboard/report.svg";
+import LiverSvg from "../../assets/dashboard/liver.svg";
+import PancreasSvg from "../../assets/dashboard/pancreas.svg";
+import StomachSvg from "../../assets/dashboard/stomach.svg";
+import BloodSvg from "../../assets/dashboard/blood.svg";
+import HeartSvg from "../../assets/dashboard/heart.svg";
+import LungsSvg from "../../assets/dashboard/lungs.svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { t } from "i18next";
+import BodyParts from "./components/BodyParts";
 
 interface HomeScreenProps {}
 interface ButtonProps {
@@ -65,7 +70,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     name: "",
     children: [],
   });
-  const drawer = createRef<React.ElementRef<typeof Drawer>>();
   const patientDetails = useSelector(
     (state: RootState) => state.auth.patientDetails,
   );
@@ -144,7 +148,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       useNativeDriver: true,
     }).start();
   };
-  const patientId = useSelector((state: RootState) => state.auth.patientId);
 
   useEffect(() => {
     fetchAllMedicalRecord();
@@ -177,10 +180,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     setFileRecordList(counts);
   };
 
-  // useEffect(() => {
-  //   buttonList();
-  // }, [fileRecordList]);
-
   const buttonList = [
     {
       name: t("YourBioverseScreen.name1"),
@@ -192,7 +191,24 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       name: t("YourBioverseScreen.name2"),
       classname: "buttonTwo",
       reportCount: 4,
-      children: [],
+      children: [
+        {
+          name: t("YourBioverseScreen.name23"),
+          icon: <HeartSvg />
+        },
+        {
+          name: t("YourBioverseScreen.name24"),
+          reportCount: 4,
+          icon: <LungsSvg />
+        },
+        {
+          name: t("YourBioverseScreen.name25"),
+          reportCount: 4
+        },
+        {
+          name: t("YourBioverseScreen.name26"),
+        },
+      ],
     },
     {
       name: t("YourBioverseScreen.name3"),
@@ -201,23 +217,26 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       children: [
         {
           name: t("YourBioverseScreen.name7"),
-          reportCount: 1,
+          reportCount: 0,
+          icon: <LiverSvg />
         },
         {
           name: t("YourBioverseScreen.name8"),
           reportCount: 0,
+          icon: <PancreasSvg />
         },
         {
           name: t("YourBioverseScreen.name9"),
           reportCount: 0,
+          icon: <StomachSvg />
         },
         {
           name: t("YourBioverseScreen.name10"),
-          reportCount: 0,
+          reportCount: 4,
         },
         {
           name: t("YourBioverseScreen.name11"),
-          reportCount: 0,
+          reportCount: 4,
         },
       ],
     },
@@ -240,6 +259,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       children: [
         {
           name: t("YourBioverseScreen.name12"),
+          icon: <BloodSvg />
         },
         {
           name: t("YourBioverseScreen.name13"),
@@ -283,7 +303,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     inputRange: [0, 1],
     outputRange: [1, 2],
   });
-
   return (
     <SafeAreaView style={styles.container}>
       <Header
@@ -305,7 +324,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           );
         })}
         <View style={styles.bodySvg}>
-          <MaleBodySvg height={460}></MaleBodySvg>
+          <MaleBodySvg height={580}></MaleBodySvg>
         </View>
       </View>
       {popupVisible && (
@@ -315,18 +334,22 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
               style={[styles.bodyDetailImage, { transform: [{ translateY }, { scale }] }]}
             /> */}
           <Image
-            source={require("../../assets/dashboard/body-detail1.png")}
+            source={activeItem.classname === 'buttonTwo' ? require('../../assets/dashboard/body-thorax.png') : activeItem.classname === 'buttonThree' ? require('../../assets/dashboard/body-detail.png') : ''}
             style={styles.bodyDetailImage}
             resizeMode={"cover"}
           ></Image>
         </View>
       )}
       <Popup
-        fileRecordList={fileRecordList}
         visible={popupVisible}
-        title={activeItem.name}
-        dataList={activeItem.children}
-        onPressList={onPressList}
+        contentElement={
+          <BodyParts
+            title={activeItem.name}
+            dataList={activeItem.children}
+            fileRecordList={fileRecordList}
+            onPressList={onPressList}
+          />
+        }
         onClose={() => {
           setPopupVisible(false);
         }}
@@ -348,14 +371,14 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     flex: 1,
-    marginTop: 70,
+    marginTop: 0,
   },
   bodySvg: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     position: "absolute",
-    top: 50,
+    top: 40,
     left: 0,
     right: 0,
     bottom: 0,
@@ -376,36 +399,44 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     backgroundColor: "#fff",
     borderRadius: 40,
+    shadowColor: "#7BA040",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   buttonOne: {
     position: "absolute",
-    top: "5%",
-    right: "9%",
+    top: "8%",
+    right: "8%",
   },
   buttonTwo: {
     position: "absolute",
-    top: "20%",
+    top: "25%",
     left: "15%",
   },
   buttonThree: {
     position: "absolute",
-    top: "31%",
-    right: "11%",
+    top: "34%",
+    right: "9%",
   },
   buttonFour: {
     position: "absolute",
-    top: "42%",
+    top: "46%",
     left: "9%",
   },
   buttonFive: {
     position: "absolute",
-    top: "62%",
+    top: "66%",
     right: "19%",
   },
   buttonSix: {
     position: "absolute",
-    top: "83%",
-    right: "10%",
+    top: "91%",
+    right: "3%",
   },
   buttonView: {
     flexDirection: "row",
@@ -430,15 +461,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
-    top: 0,
+    top: 92,
     left: 0,
     width: "100%",
     height: "100%",
     zIndex: 9,
-    backgroundColor: "#fafafa",
+    backgroundColor: "#ffffff",
   },
   bodyDetailImage: {
     width: "100%",
-    height: "110%",
+    height: "130%",
   },
 });
