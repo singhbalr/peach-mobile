@@ -6,8 +6,8 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  SafeAreaView
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/Header";
 import { PRIVATESCREENS } from "@shared-constants";
 import * as NavigationService from "react-navigation-helpers";
@@ -162,7 +162,7 @@ const ClinicalReport: React.FC = () => {
                       <View style={styles.dateLine}></View>
                     </View>
                     <Text style={styles.greenText}>
-                      {item.hospital_id.hospital_name}
+                      {item?.hospital_id?.hospital_name}
                     </Text>
                     <Text
                       style={styles.subText}
@@ -192,13 +192,13 @@ export default ClinicalReport;
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
+    // position: "relative",
     flex: 1,
-    width: "100%",
-    color: "#fff",
-    backgroundColor: "#fff",
-    zIndex: 1,
-    marginTop: 25,
+    // width: "100%",
+    // color: "#fff",
+    backgroundColor: "#FFFFFF",
+    // zIndex: 1,
+    // marginTop: 25,
   },
   mainContainer: {
     flex: 1,

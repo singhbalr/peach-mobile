@@ -66,6 +66,14 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     spleen: 0,
     stomach: 0,
   });
+  const [sectionCount, setSectionCount] = useState({
+    headandneck: 0,
+    limbs: 0,
+    lowerabdomen: 0,
+    other: 0,
+    thorax: 0,
+    upperabdomen: 0,
+  });
   const [activeItem, setActiveItem] = useState<object>({
     name: "",
     children: [],
@@ -151,6 +159,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   useEffect(() => {
     fetchAllMedicalRecord();
+    getRecordCountBySection();
   }, []);
 
   const fetchAllMedicalRecord = async () => {
@@ -180,17 +189,59 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     setFileRecordList(counts);
   };
 
+  const getRecordCountBySection = async () => {
+    const bodyParts = {
+      headandneck: ["liver", "pancreas", "stomach", "gallblader", "spleen"],
+      thorax: ["liver", "pancreas", "stomach", "gallblader", "spleen"],
+      upperabdomen: ["liver", "pancreas", "stomach", "gallblader", "spleen"],
+      lowerabdomen: ["liver", "pancreas", "stomach", "gallblader", "spleen"],
+      limbs: ["liver", "pancreas", "stomach", "gallblader", "spleen"],
+      other: ["liver", "pancreas", "stomach", "gallblader", "spleen"],
+    };
+
+    const counts = {};
+
+    // Loop through each body part and initialize the count to 0
+    for (const bodyPartSection in bodyParts) {
+      const bodyPartList = bodyParts[bodyPartSection];
+      counts[bodyPartSection] = 0;
+      for (const bodyPart of bodyPartList) {
+        counts[bodyPartSection] += 0;
+      }
+    }
+
+    // Loop through each medical record file and increment the count for each body part section
+    for (const record of patientDetails.medical_record) {
+      for (const file of record.medical_record_file) {
+        for (const metadata of file.file_metadata) {
+          for (const bodyPartSection in bodyParts) {
+            const bodyPartList = bodyParts[bodyPartSection];
+            if (bodyPartList.includes(metadata.body_part)) {
+              counts[bodyPartSection]++;
+            }
+          }
+        }
+      }
+    }
+    console.log(counts);
+    setSectionCount(counts);
+  };
+
+  // useEffect(() => {
+  //   buttonList();
+  // }, [fileRecordList]);
+
   const buttonList = [
     {
       name: t("YourBioverseScreen.name1"),
       classname: "buttonOne",
-      reportCount: 4,
+      identifier: "headandneck",
+      reportCount: sectionCount["headandneck"],
       children: [],
     },
     {
       name: t("YourBioverseScreen.name2"),
       classname: "buttonTwo",
-      reportCount: 4,
       children: [
         {
           name: t("YourBioverseScreen.name23"),
@@ -209,11 +260,14 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           name: t("YourBioverseScreen.name26"),
         },
       ],
+      identifier: "thorax",
+      reportCount: sectionCount["thorax"],
     },
     {
       name: t("YourBioverseScreen.name3"),
       classname: "buttonThree",
-      reportCount: 0,
+      identifier: "upperabdomen",
+      reportCount: sectionCount["upperabdomen"],
       children: [
         {
           name: t("YourBioverseScreen.name7"),
@@ -243,19 +297,22 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     {
       name: t("YourBioverseScreen.name4"),
       classname: "buttonFour",
-      reportCount: 0,
+      identifier: "lowerabdomen",
+      reportCount: sectionCount["lowerabdomen"],
       children: [],
     },
     {
       name: t("YourBioverseScreen.name5"),
       classname: "buttonFive",
-      reportCount: 0,
+      identifier: "limbs",
+      reportCount: sectionCount["limbs"],
       children: [],
     },
     {
       name: t("YourBioverseScreen.name6"),
       classname: "buttonSix",
-      reportCount: 0,
+      identifier: "other",
+      reportCount: sectionCount["other"],
       children: [
         {
           name: t("YourBioverseScreen.name12"),

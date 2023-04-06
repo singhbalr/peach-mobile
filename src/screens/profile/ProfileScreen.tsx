@@ -444,8 +444,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
             width: ScreenWidth * 0.9,
             padding: 10,
             paddingTop: 0,
-            margin: 10,
-            marginRight: 50,
+            marginBottom: 18,
             paddingRight: 30,
             elevation: 1,
           }}

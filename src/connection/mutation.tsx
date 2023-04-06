@@ -531,6 +531,23 @@ export const GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID = gql`
             updated_at
           }
         }
+        related_opportunity {
+          opportunity_picture_banner
+          opportunity_purpose
+          opportunity_name
+          opportunity_medical_record_accesibility_duration
+          opportunity_is_closed
+          opportunity_expiration
+          opportunity_description
+          opportunity_type_id {
+            _id
+            created_at
+            deleted_at
+            opportunity_type
+            opportunity_type_text
+            updated_at
+          }
+        }
       }
     }
   }

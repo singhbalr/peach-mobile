@@ -20,13 +20,13 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       flex: 1,
-      backgroundColor: '#fafafa',
-      marginTop: 20,
+      backgroundColor: '#fff',
     },
     mainContainer: {
       paddingHorizontal: 35,
     },
     tabContainer: {
+      paddingHorizontal: 35,
       paddingBottom: 83
     },
     button: {

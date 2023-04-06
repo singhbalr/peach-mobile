@@ -33,7 +33,7 @@ import FollowupRequestRecordScreen from "@screens/followupRequest/FollowupReques
 
 const Navigation = () => {
   const scheme = useColorScheme();
-  const isDarkMode = scheme === "dark";
+  const isDarkMode = scheme === "light";
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   React.useEffect((): any => {
     console.log("REACT NAVIGATION");
@@ -46,7 +46,7 @@ const Navigation = () => {
       onReady={() => {
         isReadyRef.current = true;
       }}
-      theme={isDarkMode ? DarkTheme : LightTheme}
+      theme={LightTheme}
     >
       <Stack.Navigator
         screenOptions={{
