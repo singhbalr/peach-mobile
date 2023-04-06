@@ -16,21 +16,17 @@ import ClinicalReport from "@screens/clinicalReport/ClinicalReport";
 import Sidebar from "../components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { setSidebarState } from "../screens/auth/rx/reducer";
-import DataReceiver from "@screens/dataReceiver/DataReceiver";
+import { setSidebarState } from "redux/reducer";
 const { width } = Dimensions.get("window");
-
 // ? If you want to use stack or tab or both
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const PrivateRoutes = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === "dark";
-  const drawer = createRef<React.ElementRef<typeof Drawer>>();
-  const sidebarState = useSelector(
-    (state: RootState) => state.auth.sidebarState,
-  );
-  const dispatch = useDispatch();
+  const drawer = createRef<React.ElementRef<typeof Drawer>>()
+  const sidebarState = useSelector((state: RootState) => state.app.sidebarState)
+  const dispatch = useDispatch()
 
   const renderTabIcon = (
     route: any,
@@ -148,7 +144,7 @@ const PrivateRoutes = () => {
             marginBottom: 10,
           },
         })}
-      >
+      > 
         <Tab.Screen
           name={PRIVATESCREENS.DASHBOARD}
           component={YourBioverseScreen}

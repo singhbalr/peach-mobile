@@ -30,7 +30,6 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
   const styles = useMemo(() => createStyles(theme), [theme]);
   const { route } = props;
   const { pageIndex, fileRecord } = route.params;
-
   const activeTabsArray = fileRecord.medical_record_file.map(
     (value, index) => value.medical_record_file_type_id.file_type,
   );

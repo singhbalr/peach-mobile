@@ -40,8 +40,12 @@
       "name19": "mental",
       "name20": "other bodyly fluids",
       "name21": "semen",
-      "name22": "skin"
-      
+      "name22": "skin",
+
+      "name23": "Heart",
+      "name24": "Lungs",
+      "name25": "Breasts",
+      "name26": "Pleural Fluid"
     },
     "ProfileScreen": {
       "title": "Contributions",

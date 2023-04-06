@@ -6,20 +6,17 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
-import PIbutton from "@shared-components/buttons/Pbutton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
-import RNBounceable from "@freakycoder/react-native-bounceable";
-import Icon from "react-native-dynamic-vector-icons";
 import { calculateDateDiff } from "@utils";
 import { useMutation } from "@apollo/client";
 import { REDEEM_REWARD } from "../../connection/mutation";
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
 import { t } from "i18next";
+import Navigation from "components/Navigation";
 
 interface RewardDetailsScreenProps {
   navigation: any;
@@ -51,23 +48,9 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
     handleRedeemReward();
   }, [props.route.params]);
 
-  const MenuButton = () => (
-    <RNBounceable>
-      <Icon
-        name="arrow-back"
-        type="Ionicons"
-        color={colors.iconBlack}
-        size={30}
-      />
-    </RNBounceable>
-  );
-
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <MenuButton />
-        <Text style={styles.headerText}>{t("RewardDetails.title")}</Text>
-      </View>
+      <Navigation titleText={t("RewardDetails.title")}></Navigation>
       <View
         style={{
           marginBottom: 26,
@@ -158,7 +141,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         marginRight: 5
                       }}
                     >
-                     {t("RewardDetails.title-content")}{" "}
+                      {t("RewardDetails.title-content")}{" "}
                     </Text>
                     <View
                       style={{

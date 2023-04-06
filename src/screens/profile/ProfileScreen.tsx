@@ -1,23 +1,20 @@
-import React, { useMemo, useState, useEffect, createRef } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { View, TouchableOpacity, Text, Image, ScrollView } from "react-native";
-import { useTheme, useIsFocused } from "@react-navigation/native";
+import { useTheme } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-dynamic-vector-icons";
 import * as NavigationService from "react-navigation-helpers";
-import Drawer from "react-native-drawer";
 import { t } from "i18next";
 
 /**
  * ? Local Imports
  */
 import createStyles from "./ProfileScreen.style";
-// import Text from "@shared-components/text-wrapper/TextWrapper";
 import { PRIVATESCREENS } from "@shared-constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../auth/rx/reducer";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
-import PIbutton from "@shared-components/buttons/Pbutton";
 import { useMutation, useQuery, useSubscription } from "@apollo/client";
 import {
   GET_DOCTOR_REQUEST,
@@ -29,11 +26,12 @@ import {
   TRANSACTION_UPDATED_SUBSCRIPTION,
   NEW_TRANSACTION,
 } from "../../connection/subscription";
-import Notification from "@shared-components/notification/notification";
 import { GET_ALL_OPPORTUNITY } from "../../connection/query";
 import moment from "moment";
 import countDaysLeft from "../../components/countDayLeft";
 import { RootState } from "../../redux/store";
+import Header from "components/Header";
+import { setNotificationInfo } from "redux/reducer";
 
 interface ProfileScreenProps {}
 
@@ -61,13 +59,11 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const PATIENT_ID = "6409ffecd48bc34d50258d7c";
   //
 
-  const isFocused = useIsFocused();
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("Screen1");
-  const [showNotification, setShowNotification] = useState(false);
   const [doctorRequest, setDoctorRequest] = useState([]);
   const [getDoctorRequest] = useMutation(GET_DOCTOR_REQUEST);
   const { loading, error, data } = useQuery(GET_ALL_OPPORTUNITY);
@@ -131,10 +127,12 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
             .transaction_type_text;
         if (transactionTypeText === "DOCTOR_REQUEST") {
           console.log("validated");
-          setShowNotification(true);
-          setTimeout(() => {
-            setShowNotification(false);
-          }, 5000);
+          dispatch(setNotificationInfo({
+            message: 'Data Request from Doctor Eddie Hui',
+            iconSource: require('../../assets/icons/doctor.png'),
+            btnText: 'Accept',
+            navigationScreen: '',
+          }))
           await callGraphQlAPI();
         }
       }
@@ -211,7 +209,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const Screen1 = () => {
     return (
       <View
-        style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}
+        style={styles.tabContainer}
       >
         <ScrollView>
           {data?.opportunities?.map((item: any, key: any) => (
@@ -228,7 +226,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const Screen2 = () => {
     return (
       <View
-        style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}
+        style={styles.tabContainer}
       >
         <SharedDataCard />
       </View>
@@ -238,7 +236,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const Screen3 = () => {
     return (
       <View
-        style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}
+        style={styles.tabContainer}
       >
         <ScrollView>
           {followUpRequest?.map((item: any, key: any) => (
@@ -446,8 +444,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
             width: ScreenWidth * 0.9,
             padding: 10,
             paddingTop: 0,
-            margin: 10,
-            marginRight: 50,
+            marginBottom: 18,
             paddingRight: 30,
             elevation: 1,
           }}
@@ -919,57 +916,9 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <View
-          style={{
-            flexDirection: "row",
-          }}
-        >
-          <View>
-            <Text style={styles.headerText}>{t("ProfileScreen.title")}</Text>
-            <View
-              style={{
-                flexDirection: "row",
-              }}
-            >
-              <Text style={styles.headerInfo}>
-                {t("ProfileScreen.subtitle")}
-              </Text>
-              <Image
-                source={require("../../assets/contribute-data/question-mark-icon.png")}
-                style={{
-                  width: 14,
-                  height: 14,
-                  marginLeft: 4,
-                  marginTop: 9,
-                }}
-              />
-            </View>
-          </View>
-          <Image
-            source={require("../../assets/contribute-data/menu-add.png")}
-            style={{
-              width: 16,
-              height: 16,
-              marginLeft: 50,
-            }}
-          />
-          <Image
-            source={require("../../assets/contribute-data/menu-icon.png")}
-            style={{
-              width: 16,
-              height: 16,
-              marginLeft: 30,
-            }}
-          />
-        </View>
-      </View>
+      <Header titleText="Contributions" subTitleText="Contribute Data Now to Get Rewards"></Header>
       <View
-        style={{
-          marginBottom: 5,
-          // borderBottomWidth: 2,
-          // borderBottomColor: "#BABCB7",
-        }}
+        style={styles.mainContainer}
       >
         <ScrollView
           horizontal
@@ -1008,10 +957,6 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
         </ScrollView>
       </View>
       {renderScreen(activeTab)}
-      <Notification
-        message="A new doctor request has been received!"
-        visible={showNotification}
-      />
     </SafeAreaView>
   );
 };
