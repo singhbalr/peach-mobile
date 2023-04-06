@@ -84,6 +84,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   const onPressList = (bodyPart: string) => {
     const medicalFile = getMedicalRecordFileFromStore(bodyPart);
+    console.log(JSON.stringify(medicalFile));
     const filteredData = getMedicalRecordFile(
       bodyPart.toLowerCase(),
       medicalFile,
@@ -131,7 +132,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
               // Check if the metadata has a "body_part" field that contains "liver"
               if (metadata.body_part === body_part.toLowerCase()) {
                 resultsArray.push(medicalRecordFile);
-                return resultsArray; // Return the medical record file that has "liver" in its metadata
+                // return resultsArray; // Return the medical record file that has "liver" in its metadata
               }
             }
           }
@@ -140,7 +141,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     }
 
     // Return null if no medical record file has "liver" in its metadata
-    return null;
+    return resultsArray;
   };
 
   const selectBodyParts = (item: React.SetStateAction<object>) => {
@@ -170,6 +171,8 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       "stomach",
       "gallblader",
       "spleen",
+      "blood",
+      "lungs",
     ]; //TODO: refactor this code to include all bodypart
 
     for (const bodyPart of lowerBodyPart) {
@@ -192,7 +195,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   const getRecordCountBySection = async () => {
     const bodyParts = {
       headandneck: ["liver", "pancreas", "stomach", "gallblader", "spleen"],
-      thorax: ["liver", "pancreas", "stomach", "gallblader", "spleen"],
+      thorax: ["lungs"],
       upperabdomen: ["liver", "pancreas", "stomach", "gallblader", "spleen"],
       lowerabdomen: ["liver", "pancreas", "stomach", "gallblader", "spleen"],
       limbs: ["liver", "pancreas", "stomach", "gallblader", "spleen"],
@@ -245,16 +248,16 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       children: [
         {
           name: t("YourBioverseScreen.name23"),
-          icon: <HeartSvg />
+          icon: <HeartSvg />,
         },
         {
           name: t("YourBioverseScreen.name24"),
           reportCount: 4,
-          icon: <LungsSvg />
+          icon: <LungsSvg />,
         },
         {
           name: t("YourBioverseScreen.name25"),
-          reportCount: 4
+          reportCount: 4,
         },
         {
           name: t("YourBioverseScreen.name26"),
@@ -272,17 +275,17 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         {
           name: t("YourBioverseScreen.name7"),
           reportCount: 0,
-          icon: <LiverSvg />
+          icon: <LiverSvg />,
         },
         {
           name: t("YourBioverseScreen.name8"),
           reportCount: 0,
-          icon: <PancreasSvg />
+          icon: <PancreasSvg />,
         },
         {
           name: t("YourBioverseScreen.name9"),
           reportCount: 0,
-          icon: <StomachSvg />
+          icon: <StomachSvg />,
         },
         {
           name: t("YourBioverseScreen.name10"),
@@ -316,7 +319,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       children: [
         {
           name: t("YourBioverseScreen.name12"),
-          icon: <BloodSvg />
+          icon: <BloodSvg />,
         },
         {
           name: t("YourBioverseScreen.name13"),
@@ -391,7 +394,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
               style={[styles.bodyDetailImage, { transform: [{ translateY }, { scale }] }]}
             /> */}
           <Image
-            source={activeItem.classname === 'buttonTwo' ? require('../../assets/dashboard/body-thorax.png') : activeItem.classname === 'buttonThree' ? require('../../assets/dashboard/body-detail.png') : ''}
+            source={
+              activeItem.classname === "buttonTwo"
+                ? require("../../assets/dashboard/body-thorax.png")
+                : activeItem.classname === "buttonThree"
+                ? require("../../assets/dashboard/body-detail.png")
+                : ""
+            }
             style={styles.bodyDetailImage}
             resizeMode={"cover"}
           ></Image>
