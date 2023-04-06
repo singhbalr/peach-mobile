@@ -614,7 +614,7 @@ const FollowupRequestRecordScreen: React.FC<
           style={{
             marginHorizontal: 10,
             marginBottom: 10,
-            marginTop: 35,
+            marginTop: 20,
           }}
         >
           <Text
@@ -628,24 +628,6 @@ const FollowupRequestRecordScreen: React.FC<
             Related Opportunities
           </Text>
           <FollowUpRequestCard {...detail.related_opportunity} />
-        </View>
-        <View>
-          <PIbutton
-            text={
-              <Text style={{ color: "white" }}>
-                {t("OpportunitiesRecord.contribute")}
-              </Text>
-            }
-            onPress={handleContributeNow}
-            type="primary"
-            style={{
-              backgroundColor: "#7BA040",
-              borderRadius: 45,
-              borderColor: "white",
-              marginBottom: 25,
-              padding: 8,
-            }}
-          />
         </View>
         <View
           style={{
@@ -970,6 +952,7 @@ const FollowupRequestRecordScreen: React.FC<
         <ScrollView
           style={{
             paddingBottom: isAppliedPatient() ? 20 : 100,
+            marginBottom: 120,
           }}
           showsVerticalScrollIndicator={false}
         >
