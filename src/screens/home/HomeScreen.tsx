@@ -74,50 +74,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   /*                               Render Methods                               */
   /* -------------------------------------------------------------------------- */
 
-  // const MenuButton = () => (
-  //   <RNBounceable>
-  //     <Icon name="menu" type="Ionicons" color={colors.iconBlack} size={30} />
-  //   </RNBounceable>
-  // );
-
-  // const Header = () => (
-  //   <View style={styles.header}>
-  //     <MenuButton />
-  //   </View>
-  // );
-
-  // const List = () => (
-  //   <View style={styles.listContainer}>
-  //     <FlatList
-  //       data={MockData}
-  //       renderItem={({ item }) => (
-  //         <CardItem data={item} onPress={handleItemPress} />
-  //       )}
-  //     />
-  //   </View>
-  // );
-
-  // const Welcome = () => (
-  //   <>
-  //     <Text h1 bold color={colors.text}>
-  //       Hello Kuray
-  //     </Text>
-  //     <Text
-  //       fontFamily={fonts.montserrat.lightItalic}
-  //       color={colors.placeholder}
-  //     >
-  //       Welcome Back
-  //     </Text>
-  //   </>
-  // );
-
-  // const Content = () => (
-  //   <View style={styles.contentContainer}>
-  //     <Welcome />
-  //     <List />
-  //   </View>
-  // );
-
   const handleTabPress = async (tabName: string) => {
     setActiveTab(() => {
       return tabName;
@@ -164,7 +120,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             paddingTop: 0,
             margin: 10,
             marginBottom: 30,
-            elevation: 1
+            elevation: 1,
           }}
         >
           <View
@@ -311,13 +267,11 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                     marginTop: 10,
                     backgroundColor: "#ECF1E8",
                     paddingHorizontal: 16,
-                    
                   }}
                 >
-                  <Text style={{ color: "#7BA040"}}>
+                  <Text style={{ color: "#7BA040" }}>
                     {patientReward.is_redeemed === true ? "REDEEMED" : "REDEEM"}
                   </Text>
-                  
                 </Button>
               </View>
             </View>
@@ -353,6 +307,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           justifyContent: "flex-start",
           alignItems: "center",
           backgroundColor: colors.secondaryBackground,
+          height: "100%",
         }}
       >
         <ScrollView>{renderRewardList()}</ScrollView>
@@ -420,14 +375,12 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   ];
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <Header />
-      <Content /> */}
+    <View style={styles.container}>
       <View
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
-          backgroundColor: '#7BA040',
+          backgroundColor: "#7BA040",
         }}
       >
         <View>
@@ -457,7 +410,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
               style={{
                 flexDirection: "row",
                 marginLeft: 170,
-                marginTop: 10
+                marginTop: 10,
               }}
             >
               <Image
@@ -482,12 +435,8 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       </View>
       <View
         style={{
-          paddingBottom: 15,
-          // borderBottomWidth: 2,
-          // borderBottomColor: "#BABCB7",
           paddingHorizontal: 20,
           backgroundColor: colors.secondaryBackground,
-          marginLeft: 15
         }}
       >
         <ScrollView
@@ -527,7 +476,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         </ScrollView>
       </View>
       {renderScreen()}
-    </SafeAreaView>
+    </View>
   );
 };
 

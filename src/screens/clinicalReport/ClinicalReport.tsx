@@ -174,13 +174,13 @@ export default ClinicalReport;
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
+    // position: "relative",
     flex: 1,
-    width: "100%",
-    color: "#fff",
-    backgroundColor: "#fff",
-    zIndex: 1,
-    marginTop: 25,
+    // width: "100%",
+    // color: "#fff",
+    backgroundColor: "#FFFFFF",
+    // zIndex: 1,
+    // marginTop: 25,
   },
   mainContainer: {
     flex: 1,
