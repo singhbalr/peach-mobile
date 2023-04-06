@@ -82,7 +82,7 @@ const Sidebar: React.FC = () => {
         NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA, {});
         break;
       case "info":
-        NavigationService.push(PRIVATESCREENS.HEALTH_INFO_DETAIL, {});
+        NavigationService.push(PRIVATESCREENS.USEFUL_HEALTH_INFO, {});
         break;
       case "support":
         break;

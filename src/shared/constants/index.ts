@@ -16,7 +16,8 @@ export const PRIVATESCREENS = {
   BIOVERSE_DETAIL_SCREEN: "BioverseDetailScreen",
   DATA_RECEIVER: "Data Receiver",
   FOLLOWUP_REQUEST: "Followup Request",
-  HEALTH_INFO_DETAIL: 'Health Info Detail'
+  HEALTH_INFO_DETAIL: 'Health Info Detail',
+  USEFUL_HEALTH_INFO: 'Useful Health Info'
 };
 
 export const PUBLICSCREENS = {
