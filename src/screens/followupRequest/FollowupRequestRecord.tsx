@@ -627,7 +627,7 @@ const FollowupRequestRecordScreen: React.FC<
           >
             Related Opportunities
           </Text>
-          <FollowUpRequestCard {...detail} />
+          <FollowUpRequestCard {...detail.related_opportunity} />
         </View>
         <View>
           <PIbutton
