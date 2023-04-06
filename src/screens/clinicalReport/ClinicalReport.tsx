@@ -13,6 +13,9 @@ import { PRIVATESCREENS } from "@shared-constants";
 import * as NavigationService from "react-navigation-helpers";
 import ButtonTabs from "components/ButtonTabs";
 import InstitutionsSvg from "../../assets/icons/institutions.svg";
+import ClinicalSvg from "../../assets/icons/clinical.svg";
+import GeneticSvg from "../../assets/icons/genetic.svg";
+import MedicalSvg from "../../assets/icons/medical.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { formatUnixTimestamp, maskHKID } from "utils";
@@ -34,65 +37,68 @@ const ClinicalReport: React.FC = () => {
   const patientDetails = useSelector(
     (state: RootState) => state.auth.patientDetails,
   );
-  const fileTypes = ['GENETIC_DATA', 'MEDICAL_IMAGING', 'CLINICAL_RECORD']
-  const patientList = patientDetails.medical_record.map(item => {
-    const buttonIndexs:number[] = []
-    item.medical_record_file.map((child: any) => {
-      const fileTypeIndex = fileTypes.findIndex(el => el === child.file_type)
-      buttonIndexs.push(fileTypeIndex)
-    })
-    return {
-      ...item,
-      buttonIndexs
-    }
-  })
-  console.log({patientDetails})
-  console.log({patientList})
-  // const returnIcon = (fileValue, fileIndex) => {
-  //   switch (fileValue.medical_record_file_type_id.file_type) {
-  //     case "CLINICAL_RECORD":
-  //       return (
-  //         <View
-  //           style={[styles.button, styles.clinicalSvg]}
-  //           activeOpacity={0.5}
-  //           key={fileIndex}
-  //         >
-  //           <ClinicalSvg></ClinicalSvg>
-  //           <Text style={styles.clinicalText}>
-  //             {fileValue.medical_record_file_type_id.file_type_text}
-  //           </Text>
-  //         </View>
-  //       );
-  //     case "GENETIC_DATA":
-  //       return (
-  //         <View
-  //           style={[styles.button, styles.geneticSvg]}
-  //           activeOpacity={0.5}
-  //           key={fileIndex}
-  //         >
-  //           <GeneticSvg></GeneticSvg>
-  //           <Text style={styles.geneticText}>
-  //             {fileValue.medical_record_file_type_id.file_type_text}
-  //           </Text>
-  //         </View>
-  //       );
-  //     case "MEDICAL_IMAGING":
-  //       return (
-  //         <View
-  //           style={[styles.button, styles.medicalSvg]}
-  //           activeOpacity={0.5}
-  //           key={fileIndex}
-  //         >
-  //           <MedicalSvg></MedicalSvg>
-  //           <Text style={styles.medicalText}>
-  //             {fileValue.medical_record_file_type_id.file_type_text}
-  //           </Text>
-  //         </View>
-  //       );
-  //     default:
-  //       break;
+  // const fileTypes = ['GENETIC_DATA', 'MEDICAL_IMAGING', 'CLINICAL_RECORD']
+  // const patientList = patientDetails.medical_record.map(item => {
+  //   console.log({item})
+  //   // console.log(222, item.medical_record_file)
+  //   item.medical_record_file.map((child: any) => {
+  //     const buttonIndexs:number[] = []
+  //     console.log(333, child.medical_record_file_type_id.file_type)
+  //     const fileTypeIndex = fileTypes.findIndex(el => el === child.medical_record_file_type_id.file_type)
+  //     buttonIndexs.push(fileTypeIndex)
+  //     console.log(666, {buttonIndexs})
+  //   })
+  //   return {
+  //     ...item,
+  //     buttonIndexs
   //   }
-  // };
+  // })
+
+  const returnIcon = (fileValue, fileIndex) => {
+    switch (fileValue.medical_record_file_type_id.file_type) {
+      case "CLINICAL_RECORD":
+        return (
+          <View
+            style={[styles.button, styles.clinicalSvg]}
+            activeOpacity={0.5}
+            key={fileIndex}
+          >
+            <ClinicalSvg></ClinicalSvg>
+            <Text style={styles.clinicalText}>
+              {fileValue.medical_record_file_type_id.file_type_text}
+            </Text>
+          </View>
+        );
+      case "GENETIC_DATA":
+        return (
+          <View
+            style={[styles.button, styles.geneticSvg]}
+            activeOpacity={0.5}
+            key={fileIndex}
+          >
+            <GeneticSvg></GeneticSvg>
+            <Text style={styles.geneticText}>
+              {fileValue.medical_record_file_type_id.file_type_text}
+            </Text>
+          </View>
+        );
+      case "MEDICAL_IMAGING":
+        return (
+          <View
+            style={[styles.button, styles.medicalSvg]}
+            activeOpacity={0.5}
+            key={fileIndex}
+          >
+            <MedicalSvg></MedicalSvg>
+            <Text style={styles.medicalText}>
+              {fileValue.medical_record_file_type_id.file_type_text}
+            </Text>
+          </View>
+        );
+      default:
+        break;
+    }
+  };
 
   // const reportList = [
   //   {
@@ -167,17 +173,17 @@ const ClinicalReport: React.FC = () => {
                     <Text
                       style={styles.subText}
                     >{`Dr. ${item.doctor_id.doctor_name} ${item.doctor_id.doctor_last_name}`}</Text>
-                    {/* <View style={styles.tagContainer}>
+                    <View style={styles.tagContainer}>
                       {returnIcon(data, dataIndex)}
-                    </View> */}
-                    <View style={styles.buttonList}>
+                    </View>
+                    {/* <View style={styles.buttonList}>
                       <ButtonTabs key={'report-buttons-' + index}  showAll={true} buttonIndexs={item.buttonIndexs} setIndex={(index) => {
                         handleItemPress(data, item)
                         // NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
                         //   activeIndex: index
                         // });
                       }}></ButtonTabs>
-                    </View>
+                    </View> */}
                   </TouchableOpacity>
                 );
               });
