@@ -1,8 +1,8 @@
 import React, { createRef } from "react";
-import {Image, Platform, Dimensions, useColorScheme} from "react-native";
+import { Image, Platform, Dimensions, useColorScheme } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import Drawer from 'react-native-drawer'
+import Drawer from "react-native-drawer";
 /**
  * ? Local & Shared Imports
  */
@@ -26,9 +26,11 @@ const Stack = createStackNavigator();
 const PrivateRoutes = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === "dark";
-  const drawer = createRef<React.ElementRef<typeof Drawer>>()
-  const sidebarState = useSelector((state: RootState) => state.auth.sidebarState)
-  const dispatch = useDispatch()
+  const drawer = createRef<React.ElementRef<typeof Drawer>>();
+  const sidebarState = useSelector(
+    (state: RootState) => state.auth.sidebarState,
+  );
+  const dispatch = useDispatch();
 
   const renderTabIcon = (
     route: any,
@@ -119,7 +121,7 @@ const PrivateRoutes = () => {
       tapToClose={true}
       side={"right"}
       onClose={() => {
-        dispatch(setSidebarState(false))
+        dispatch(setSidebarState(false));
       }}
       tweenHandler={(ratio) => ({
         mainOverlay: {
@@ -133,18 +135,18 @@ const PrivateRoutes = () => {
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) =>
             renderTabIcon(route, focused, color, size),
-          tabBarActiveTintColor: '#7BA040',
+          tabBarActiveTintColor: "#7BA040",
           tabBarInactiveTintColor: "#888B88",
           tabBarStyle: {
-            backgroundColor: isDarkMode ? palette.black : palette.white,
+            backgroundColor: palette.white,
             height: 83,
             paddingTop: 18,
-            paddingBottom: Platform.OS === 'ios' ? 25 : 18,
-            paddingHorizontal: Platform.OS === 'ios' ? 16 : 10,
+            paddingBottom: Platform.OS === "ios" ? 25 : 18,
+            paddingHorizontal: Platform.OS === "ios" ? 16 : 10,
           },
           tabBarIconStyle: {
-            marginBottom: 10
-          }
+            marginBottom: 10,
+          },
         })}
       >
         <Tab.Screen

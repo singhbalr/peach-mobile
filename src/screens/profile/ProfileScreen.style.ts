@@ -20,7 +20,6 @@ export default (theme: ExtendedTheme) => {
       flex: 1,
       backgroundColor: '#fff',
       paddingHorizontal: 20,
-      marginTop: 20,
     },
     button: {
       backgroundColor: "blue",
