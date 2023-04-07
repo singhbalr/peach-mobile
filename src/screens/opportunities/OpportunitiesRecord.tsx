@@ -133,7 +133,6 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
 
   // eslint-disable-next-line react/no-unstable-nested-components
   const OpportunityCard = () => {
-    console.log("opportunity_withdraw_data_rules", detail.opportunity_withdraw_data_rules)
     return (
       <View
         style={{
