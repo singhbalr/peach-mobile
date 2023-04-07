@@ -1,45 +1,51 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, KeyboardAvoidingView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  KeyboardAvoidingView,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import PIbutton from "@shared-components/buttons/Pbutton";
 import { PUBLICSCREENS } from "@shared-constants";
 import { t } from "i18next";
-import Video from 'react-native-video';
+import Video from "react-native-video";
 
 interface Props {}
 
 const Onboarding: React.FC<Props> = () => {
   const navigation = useNavigation(); // get navigation object
   //const [isVideoPlaying, setIsVideoPlaying] = useState(false); // state to track video playing status
-  
 
   const handleExplorePress = () => {
     //if (videoRef.current) {
-      //videoRef.current.stop();
+    //videoRef.current.stop();
     //}
     navigation.navigate(PUBLICSCREENS.LOGINSCREEN); // navigate to login screen
   };
 
   //const handleVideoPress = () => {
-    // Pause/Play the video when clicked
-    //if (videoRef.current) {
-     // if (isVideoPlaying) {
-        //videoRef.current.pause();
-      //} else {
-        //videoRef.current.resume();
-      //}
-      //setIsVideoPlaying(!isVideoPlaying);
-    //}
+  // Pause/Play the video when clicked
+  //if (videoRef.current) {
+  // if (isVideoPlaying) {
+  //videoRef.current.pause();
+  //} else {
+  //videoRef.current.resume();
+  //}
+  //setIsVideoPlaying(!isVideoPlaying);
+  //}
   //};
 
   return (
     <View style={styles.container}>
-      
       <View style={styles.logo}>
-        <Image 
-          source={require("../../assets/contribute-data/peach-logo.png")} 
+        <Image
+          source={require("../../assets/contribute-data/peach-logo-3x.png")}
           style={{
-            marginTop: 70, 
+            width: 60,
+            height: 60,
+            marginTop: 70,
             marginLeft: 30,
           }}
         />
@@ -47,47 +53,46 @@ const Onboarding: React.FC<Props> = () => {
       <View style={styles.content}>
         <Text style={styles.title}>{t("OnBoarding.title")}</Text>
         <Video
-          
-          source={{uri: 'https://drive.google.com/uc?export=download&id=1ao6KvvZUJGCR311e1bR7ISfkqJuSpgqx'}}
+          source={{
+            uri: "https://drive.google.com/uc?export=download&id=1ao6KvvZUJGCR311e1bR7ISfkqJuSpgqx",
+          }}
           style={{
             marginTop: 50,
             marginBottom: 50,
             width: 350,
             height: 200,
-            borderRadius: 25
+            borderRadius: 25,
           }}
           thumbnail={require("../../assets/contribute-data/onboarding.png")}
-          resizeMode='contain'
+          resizeMode="contain"
           controls={true}
           playWhenInactive={true}
           //paused={!isVideoPlaying} // Pause the video if isVideoPlaying is false
           //onTouchStart={handleVideoPress} // Call handleVideoPress when video is clicked
-          
         />
         <Text style={styles.subTitle}>{t("OnBoarding.subtitle")}</Text>
         <KeyboardAvoidingView>
           <PIbutton
-              text={t("OnBoarding.titleButton")}
-              type="secondary"
-              style={{
-                  backgroundColor: "white",
-                  borderRadius: 45,
-                  borderColor: "white",
-                  marginTop: 25,
-                  padding: 7
-              }}
-              onPress={handleExplorePress}
+            text={t("OnBoarding.titleButton")}
+            type="secondary"
+            style={{
+              backgroundColor: "white",
+              borderRadius: 45,
+              borderColor: "white",
+              marginTop: 25,
+              padding: 7,
+            }}
+            onPress={handleExplorePress}
           />
         </KeyboardAvoidingView>
-        
       </View>
       <Image
-          source={require("../../assets/contribute-data/wave.png")}
-          style={styles.backgroundImage}
-        />
+        source={require("../../assets/contribute-data/wave.png")}
+        style={styles.backgroundImage}
+      />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -104,8 +109,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     marginTop: 600,
     width: 412,
-    zIndex: -1
-
+    zIndex: -1,
   },
   content: {
     flex: 1,
@@ -127,12 +131,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginLeft: 30,
     marginRight: 30,
-    lineHeight: 30
+    lineHeight: 30,
   },
   logo: {
     padding: 3,
     alignSelf: "flex-start",
-  }
-})
+  },
+});
 
 export default Onboarding;
