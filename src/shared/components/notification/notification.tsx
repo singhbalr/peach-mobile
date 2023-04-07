@@ -1,39 +1,68 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react"
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, Modal, TouchableWithoutFeedback } from "react-native"
+import { useDispatch, useSelector } from "react-redux"
+import { removeNotificationInfo } from "redux/reducer"
+import { RootState } from "redux/store"
+import * as NavigationService from "react-navigation-helpers";
+const { height } = Dimensions.get("window")
 
-const Notification = ({ message, visible, duration = 3000 }) => {
-  const [show, setShow] = useState(false);
+const Notification: React.FC = () => {
+  const dispatch = useDispatch()
+  const [show, setShow] = useState(false)
+  const notificationInfo = useSelector((state: RootState) => state.app.notificationInfo)
 
   useEffect(() => {
-    if (visible) {
-      setShow(true);
+    setShow(!!notificationInfo.message)
+    console.log({notificationInfo})
+  }, [notificationInfo])
 
-      const timeoutId = setTimeout(() => {
-        setShow(false);
-      }, duration);
-
-      return () => {
-        clearTimeout(timeoutId);
-      };
-    }
-  }, [visible, duration]);
-
-  if (!show) {
-    return null;
-  }
+  if (!show) return false
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.message}>{message}</Text>
-    </View>
-  );
-};
+    <Modal animationType={"fade"} transparent={true} visible={show}>
+      <TouchableWithoutFeedback onPress={() => {
+        setShow(false)
+        dispatch(removeNotificationInfo())
+      }}>
+        <View style={styles.container}></View>
+      </TouchableWithoutFeedback>
+      <View style={styles.contentContainer}>
+        {
+          !!notificationInfo.iconSource && (
+            <Image source={notificationInfo.iconSource} style={styles.icon}></Image>
+          )
+        }
+        <Text style={styles.message}>{notificationInfo.message}</Text>
+        {
+          !!notificationInfo.btnText && (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                setShow(false)
+                dispatch(removeNotificationInfo())
+                // NavigationService.push(notificationInfo.navigationScreen, {});
+                
+              }}
+            >
+              <Text style={styles.btnText}>{notificationInfo.btnText}</Text>
+            </TouchableOpacity>
+          )
+        }
+      </View>
+    </Modal>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
-    borderRadius: 5,
-    padding: 10,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 83,
+    width: '100%',
+    height: height -83,
+    backgroundColor: 'rgba(0, 0, 0, .4)',
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -43,11 +72,44 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  message: {
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
+  contentContainer: {
+    position: 'absolute',
+    bottom: 113,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 18,
+    paddingHorizontal: 16,
+    marginHorizontal: 26,
+    borderRadius: 10,
+    backgroundColor: '#fff'
   },
-});
+  icon: {
+    flexShrink: 0,
+    width: 45,
+    height: 45,
+  },
+  message: {
+    flex: 1,
+    fontSize: 13,
+    fontWeight: 'bold',
+    paddingHorizontal: 13,
+  },
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexShrink: 0,
+    width: 80,
+    height: 30,
+    borderRadius: 45,
+    backgroundColor: '#7BA23F'
+  },
+  btnText: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#fff',
+  }
+})
 
-export default Notification;
+export default Notification

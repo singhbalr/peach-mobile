@@ -23,6 +23,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
+import Notification from "@shared-components/notification/notification";
 LogBox.ignoreAllLogs();
 
 const App = () => {
@@ -88,6 +89,7 @@ const App = () => {
           <PaperProvider theme={theme}>
             <ApolloProvider client={client}>
               <Navigation />
+              <Notification />
             </ApolloProvider>
           </PaperProvider>
         </PersistGate>

@@ -18,8 +18,7 @@ import { t } from "i18next";
 /**
  * ? Local Imports
  */
-import Popup from "../../components/PopupContribute";
-
+import Popup from "../../components/Popup";
 import createStyles from "./OpportunitiesRecord.style";
 import PIbutton from "@shared-components/buttons/Pbutton";
 
@@ -27,8 +26,6 @@ import PIbutton from "@shared-components/buttons/Pbutton";
  * ? Shared Imports
  */
 import { PRIVATESCREENS } from "@shared-constants";
-import fonts from "@fonts";
-import { FlatList } from "react-native-gesture-handler";
 import countDaysLeft from "../../components/countDayLeft";
 
 import {
@@ -43,7 +40,7 @@ import { CREATE_TRANSACTION_ORGANIZATION } from "connection/mutation";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import Button from "components/button";
-import MyShareData from "@screens/myShareData/MyShareData";
+import Navigation from "components/Navigation";
 
 interface OpportunityRecordScreenProps {
   navigation: any;
@@ -757,6 +754,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
   }, []);
 
   const handleContributeNow = async () => {
+    console.log(123)
     setIsLoading(true);
     setPopupVisible(true);
 
@@ -775,12 +773,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
     } catch (err) {
       console.log(err);
     }
-
-    // if (data.createTransactionOrganization) {
-    // }
-
     setIsLoading(false);
-    // console.log(data, "data");
   };
 
   return (
@@ -790,19 +783,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         backgroundColor: "white",
       }}
     >
-      <View style={styles.header}>
-        <MenuButton />
-        <Text
-          style={{
-            ...styles.headerText,
-            textAlign: "center",
-            flex: 1,
-            marginRight: 20,
-          }}
-        >
-          Colorectal Screening
-        </Text>
-      </View>
+      <Navigation titleText={t("RewardDetails.title")}></Navigation>
       <View>
         <ScrollView
           style={{
@@ -836,13 +817,13 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
       </View>
       <Popup
         visible={popupVisible}
-        title={"Thank you for your contribution!"}
-        element={
+        contentElement={
           <View
             style={{
               flex: 1,
             }}
           >
+            <Text style={styles.title}>Thank you for your contribution!</Text>
             <View
               style={{
                 padding: 10,
@@ -1006,7 +987,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                   alignItems: "center",
                 }}
               />
-              <Text>
+              <Text style={{flex: 1}}>
                 {t("OpportunitiesRecord.text12")}{" "}
                 <Text
                   style={{
@@ -1028,7 +1009,6 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             />
           </View>
         }
-        onPressList={() => {}}
         onClose={() => {
           setPopupVisible(false);
         }}

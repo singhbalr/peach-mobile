@@ -1,4 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import appReducer from "./reducer";
 import authReducer from "../screens/auth/rx/reducer";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
@@ -17,6 +18,7 @@ const persistConfig = {
 // }
 const middleware = [thunk, __DEV__ ? createDebugger() : ""];
 const rootReducer = combineReducers({
+  app: appReducer,
   auth: authReducer,
 });
 

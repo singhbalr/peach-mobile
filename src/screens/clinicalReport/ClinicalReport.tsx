@@ -7,8 +7,8 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/Header";
-import { SafeAreaView } from "react-native";
 import { PRIVATESCREENS } from "@shared-constants";
 import * as NavigationService from "react-navigation-helpers";
 import ButtonTabs from "components/ButtonTabs";
@@ -37,6 +37,22 @@ const ClinicalReport: React.FC = () => {
   const patientDetails = useSelector(
     (state: RootState) => state.auth.patientDetails,
   );
+  // const fileTypes = ['GENETIC_DATA', 'MEDICAL_IMAGING', 'CLINICAL_RECORD']
+  // const patientList = patientDetails.medical_record.map(item => {
+  //   console.log({item})
+  //   // console.log(222, item.medical_record_file)
+  //   item.medical_record_file.map((child: any) => {
+  //     const buttonIndexs:number[] = []
+  //     console.log(333, child.medical_record_file_type_id.file_type)
+  //     const fileTypeIndex = fileTypes.findIndex(el => el === child.medical_record_file_type_id.file_type)
+  //     buttonIndexs.push(fileTypeIndex)
+  //     console.log(666, {buttonIndexs})
+  //   })
+  //   return {
+  //     ...item,
+  //     buttonIndexs
+  //   }
+  // })
 
   const returnIcon = (fileValue, fileIndex) => {
     switch (fileValue.medical_record_file_type_id.file_type) {
@@ -84,18 +100,18 @@ const ClinicalReport: React.FC = () => {
     }
   };
 
-  const reportList = [
-    {
-      date: "25 JUL 2022",
-      doctor: "Dr. Ho Wai Ming",
-      buttonIndexs: [0, 1, 2], //Corresponding button： [0: Genetic Data, 1: Genetic Data, 2: Clinical Record]
-    },
-    {
-      date: "25 JUL 2022",
-      doctor: "Dr. Ho Wai Ming",
-      buttonIndexs: [0, 2],
-    },
-  ];
+  // const reportList = [
+  //   {
+  //     date: "25 JUL 2022",
+  //     doctor: "Dr. Ho Wai Ming",
+  //     buttonIndexs: [0, 1, 2], //Corresponding button： [0: Genetic Data, 1: Genetic Data, 2: Clinical Record]
+  //   },
+  //   {
+  //     date: "25 JUL 2022",
+  //     doctor: "Dr. Ho Wai Ming",
+  //     buttonIndexs: [0, 2],
+  //   },
+  // ];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -152,7 +168,7 @@ const ClinicalReport: React.FC = () => {
                       <View style={styles.dateLine}></View>
                     </View>
                     <Text style={styles.greenText}>
-                      {item.hospital_id.hospital_name}
+                      {item?.hospital_id?.hospital_name}
                     </Text>
                     <Text
                       style={styles.subText}
@@ -160,6 +176,14 @@ const ClinicalReport: React.FC = () => {
                     <View style={styles.tagContainer}>
                       {returnIcon(data, dataIndex)}
                     </View>
+                    {/* <View style={styles.buttonList}>
+                      <ButtonTabs key={'report-buttons-' + index}  showAll={true} buttonIndexs={item.buttonIndexs} setIndex={(index) => {
+                        handleItemPress(data, item)
+                        // NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
+                        //   activeIndex: index
+                        // });
+                      }}></ButtonTabs>
+                    </View> */}
                   </TouchableOpacity>
                 );
               });

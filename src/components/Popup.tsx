@@ -1,123 +1,38 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from "react"
 import {
   View,
   StyleSheet,
   Modal,
-  FlatList,
   TouchableOpacity,
-  Text,
   Dimensions,
-} from "react-native";
-import ArrowRightSvg from "../assets/dashboard/arrow-right.svg";
-import LiverSvg from "../assets/dashboard/liver.svg";
-import PancreasSvg from "../assets/dashboard/pancreas.svg";
-import StomachSvg from "../assets/dashboard/stomach.svg";
-import ReportSvg from "../assets/dashboard/report.svg";
-const { height } = Dimensions.get("window");
+} from "react-native"
+const { height } = Dimensions.get("window")
 
 type Props = {
-  visible: boolean;
-  title: string;
-  dataList: string[];
-  element?: ReactNode;
-  fileRecordList: any;
-  onPressList: (e: Event, index: number) => void;
-  onClose: () => void;
-};
-// props: [propsType: defaultValue] props introduce
-// props.visible: [Boolean] header title
+  visible: boolean
+  contentElement: ReactNode
+  onClose: () => void
+}
 
-type ItemProps = {
-  index: string | number;
-  item: string;
-  length: number;
-  fileRecordList: any;
-  onPressList: (arg0: string, arg1: string | number) => void;
-  onClose: () => void;
-};
-const Item: React.FC<ItemProps> = ({
-  index,
-  item,
-  length,
-  fileRecordList,
-  onPressList,
-}: ItemProps) => {
-  return (
-    <TouchableOpacity
-      onPress={() => onPressList(item, index)}
-      style={[
-        styles.itemContainer,
-        index === length - 1 ? { borderBottomWidth: 0 } : {},
-      ]}
-      disabled={!fileRecordList[item.name.toLowerCase()] > 0}
-    >
-      <View style={styles.itemView}>
-        {item.name === "Liver" && <LiverSvg style={styles.svgIcon}></LiverSvg>}
-        {item.name === "Pancreas" && (
-          <PancreasSvg style={styles.svgIcon}></PancreasSvg>
-        )}
-        {item.name === "Stomach" && (
-          <StomachSvg style={styles.svgIcon}></StomachSvg>
-        )}
-        <Text>{item.name}</Text>
-        {fileRecordList[item.name.toLowerCase()] > 0 && (
-          <>
-            <ReportSvg style={styles.reportIcon}></ReportSvg>
-            <Text style={styles.reportCount}>
-              {fileRecordList[item.name.toLowerCase()]}
-            </Text>
-          </>
-        )}
-      </View>
-      <ArrowRightSvg />
-    </TouchableOpacity>
-  );
-};
-const Header: React.FC<Props> = (props: Props) => {
-  const {
-    visible,
-    title,
-    dataList,
-    onPressList,
-    onClose,
-    element,
-    fileRecordList,
-  } = props;
+const Popup: React.FC<Props> = (props: Props) => {
+  const { visible, contentElement, onClose} = props
   return (
     <Modal animationType={"slide"} transparent={true} visible={visible}>
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.closeButtonContainer}
           onPress={() => {
-            onClose();
+            onClose()
           }}
         >
           <View style={styles.closeButton} />
         </TouchableOpacity>
-        <Text style={styles.title}>{title}</Text>
-        {element ? (
-          element
-        ) : (
-          <FlatList
-            data={dataList}
-            renderItem={({ item, index }) => (
-              <Item
-                fileRecordList={fileRecordList}
-                item={item}
-                index={index}
-                length={dataList.length}
-                onPressList={() => onPressList(item.name)}
-              />
-            )}
-            style={[styles.flatList]}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        )}
+        {contentElement}
       </View>
     </Modal>
-  );
-};
-export default Header;
+  )
+}
+export default Popup
 
 const styles = StyleSheet.create({
   container: {
@@ -138,6 +53,14 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
     zIndex: 999,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: -4,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   closeButtonContainer: {
     flexDirection: "row",
@@ -146,50 +69,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     left: "50%",
-    marginLeft: -65,
-    width: 200,
-    height: 26,
+    marginLeft: -90,
+    width: 250,
+    height: 50,
   },
   closeButton: {
+    position: "absolute",
+    top: 11,
     width: 30,
     height: 4,
     borderRadius: 4,
     backgroundColor: "#e6e6e6",
   },
-  title: {
-    // fontFamily: 'Titillium Web',
-    width: "100%",
-    fontWeight: "bold",
-    fontSize: 22,
-    color: "#383D39",
-    lineHeight: 33,
-    textAlign: "left",
-  },
-  flatList: {
-    width: "100%",
-  },
-  itemContainer: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    height: 72,
-    borderBottomWidth: 1,
-    borderColor: "#BABCB7",
-  },
-  itemView: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  svgIcon: {
-    marginRight: 13,
-  },
-  reportIcon: {
-    marginLeft: 10,
-    marginRight: 6,
-  },
-  reportCount: {
-    fontSize: 13,
-    color: "#888B88",
-  },
-});
+})
