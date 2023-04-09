@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React, { useMemo, useEffect, useState } from "react";
 import {
   View,

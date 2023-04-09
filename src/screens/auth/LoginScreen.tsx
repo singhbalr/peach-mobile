@@ -159,8 +159,10 @@ const LoginScreen: React.FC<Props> = () => {
       <ScrollView>
         <View style={styles.logo}>
           <Image
-            source={require("../../assets/contribute-data/peach-logo.png")}
+            source={require("../../assets/contribute-data/peach-logo-3x.png")}
             style={{
+              width: 60,
+              height: 60,
               marginTop: 70,
               marginLeft: 30,
             }}
@@ -329,7 +331,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: "white",
     fontWeight: "700",
-    marginTop: 40,
+    marginTop: 30,
   },
   loginContainer: {
     width: "100%",

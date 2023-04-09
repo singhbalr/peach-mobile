@@ -41,8 +41,10 @@ const Onboarding: React.FC<Props> = () => {
     <View style={styles.container}>
       <View style={styles.logo}>
         <Image
-          source={require("../../assets/contribute-data/peach-logo.png")}
+          source={require("../../assets/contribute-data/peach-logo-3x.png")}
           style={{
+            width: 60,
+            height: 60,
             marginTop: 70,
             marginLeft: 30,
           }}

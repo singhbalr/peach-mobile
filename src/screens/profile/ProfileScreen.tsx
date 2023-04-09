@@ -441,7 +441,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           style={{
             borderRadius: 20,
             backgroundColor: "#FAFAFA",
-            width: ScreenWidth * 0.9,
+            // width: ScreenWidth * 0.9,
             padding: 10,
             paddingTop: 0,
             marginBottom: 18,
@@ -496,6 +496,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
               }}
             >
               <Text
+                numberOfLines={2}
                 style={{
                   fontSize: 16,
                   fontWeight: "600",
@@ -504,7 +505,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                   color: "#383D39",
                 }}
               >
-                {opportunityData.opportunity_name}
+                {opportunityData.opportunity_name} {opportunityData.opportunity_name}
               </Text>
               <View
                 style={{
@@ -540,7 +541,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
               </View>
               <View
                 style={{
-                  flex: 1,
+                  flex: 2,
                   flexDirection: "row",
                 }}
               >
