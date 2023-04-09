@@ -552,3 +552,68 @@ export const GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID = gql`
     }
   }
 `;
+
+export const GET_MEDICAL_HEALTH_INFO = gql`
+  mutation GetMedicalHealthInfo($input: PatientID!) {
+    getMedicalHealthInfo(input: $input) {
+      _id
+      deleted_at
+      created_at
+      organization {
+        _id
+        created_at
+        deleted_at
+        organization_address
+        organization_age
+        organization_city
+        organization_email
+        organization_name
+        organization_password
+        organization_phone
+        organization_state
+        organization_zipcode
+        updated_at
+        organization_wallet_id
+      }
+      opportunity {
+        _id
+        created_at
+        deleted_at
+        organization {
+          _id
+          created_at
+          deleted_at
+          organization_address
+          organization_age
+          organization_city
+          organization_email
+          organization_name
+          organization_password
+          organization_phone
+          organization_state
+          organization_zipcode
+          updated_at
+          organization_wallet_id
+        }
+        medical_health_info {
+          _id
+          advertisement_click
+          advertisement_content
+          advertisement_image
+          advertisement_title
+          advertisement_views
+          created_at
+          deleted_at
+          updated_at
+        }
+        opportunity_description
+        opportunity_expiration
+        opportunity_name
+        opportunity_picture_banner
+        opportunity_purpose
+        opportunity_quota_count
+        opportunity_withdraw_data_rules
+      }
+    }
+  }
+`;

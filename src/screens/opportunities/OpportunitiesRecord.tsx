@@ -81,6 +81,8 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
     return typeof found === "object" ? true : false;
   };
 
+  const PROMOTION_OPP_ID = "6419e3e9db51e4ec7511f1be";
+
   console.log(isAppliedPatient(), "isAppliedPatient");
 
   const dataSharPrivacyPolicy = () => {
@@ -130,7 +132,10 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
 
   // eslint-disable-next-line react/no-unstable-nested-components
   const OpportunityCard = () => {
-    console.log("opportunity_withdraw_data_rules", detail.opportunity_withdraw_data_rules)
+    console.log(
+      "opportunity_withdraw_data_rules",
+      detail.opportunity_withdraw_data_rules,
+    );
     return (
       <View
         style={{
@@ -756,10 +761,11 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
   }, []);
 
   const handleContributeNow = async () => {
-    console.log(123)
     setIsLoading(true);
     setPopupVisible(true);
-
+    console.log("start detail.opportunity_type_id._id");
+    console.log(detail.opportunity_type_id._id);
+    console.log("end detail.opportunity_type_id._id");
     try {
       const { data } = await createTransactionOrganizationMutation({
         variables: {
@@ -772,8 +778,35 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           },
         },
       });
+      if (data) {
+        console.log(data);
+        if (
+          detail.opportunity_type_id._id === PROMOTION_OPP_ID &&
+          detail.medical_health_info.length
+        ) {
+          setTimeout(() => {
+            NavigationService.push(PRIVATESCREENS.HEALTH_INFO_DETAIL, {
+              opportunityData: detail,
+              index: 0,
+            });
+          }, 3000);
+        }
+      }
     } catch (err) {
       console.log(err);
+
+      if (
+        detail.opportunity_type_id._id === PROMOTION_OPP_ID &&
+        detail.medical_health_info.length > 0
+      ) {
+        console.log(JSON.stringify(detail));
+        setTimeout(() => {
+          NavigationService.push(PRIVATESCREENS.HEALTH_INFO_DETAIL, {
+            opportunityData: detail,
+            index: 0,
+          });
+        }, 3000);
+      }
     }
     setIsLoading(false);
   };
@@ -989,7 +1022,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                   alignItems: "center",
                 }}
               />
-              <Text style={{flex: 1}}>
+              <Text style={{ flex: 1 }}>
                 {t("OpportunitiesRecord.text12")}{" "}
                 <Text
                   style={{
@@ -1009,6 +1042,21 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               bgColor="#7BA040"
               textColor="white"
             />
+            {detail.opportunity_type_id._id === PROMOTION_OPP_ID ? (
+              <View
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 10,
+                }}
+              >
+                <Text style={{ color: "#606461", fontSize: 13 }}>
+                  {"Directing you to the health info in 3 seconds..."}
+                </Text>
+              </View>
+            ) : (
+              <></>
+            )}
           </View>
         }
         onClose={() => {

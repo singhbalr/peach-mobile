@@ -1,24 +1,43 @@
-import React from 'react'
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { ImageSource } from 'react-native-vector-icons/Icon'
-import * as NavigationService from "react-navigation-helpers"
-import { PRIVATESCREENS } from "@shared-constants"
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'redux/store'
+import React from "react";
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { ImageSource } from "react-native-vector-icons/Icon";
+import * as NavigationService from "react-navigation-helpers";
+import { PRIVATESCREENS } from "@shared-constants";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "redux/store";
 import { setLogout } from "../screens/auth/rx/reducer";
-import { t } from 'i18next'
+import { resetAppState } from "../redux/reducer";
+
+import { t } from "i18next";
 
 type ItemProps = {
-  index: string | number,
-  icon: ImageSource,
-  title: string,
-  command: string,
-  length: number,
-  onPressList: (arg0: string | number) => void,
-}
+  index: string | number;
+  icon: ImageSource;
+  title: string;
+  command: string;
+  length: number;
+  onPressList: (arg0: string | number) => void;
+};
 
-const Item: React.FC<ItemProps> = ({title, icon, command, index, length, onPressList}: ItemProps) => {
-  const notificationIconState = useSelector((state: RootState) => state.app.notificationIconState)
+const Item: React.FC<ItemProps> = ({
+  title,
+  icon,
+  command,
+  index,
+  length,
+  onPressList,
+}: ItemProps) => {
+  const notificationIconState = useSelector(
+    (state: RootState) => state.app.notificationIconState,
+  );
 
   return (
     <View
@@ -31,21 +50,24 @@ const Item: React.FC<ItemProps> = ({title, icon, command, index, length, onPress
         style={styles.itemContainer}
         onPress={() => onPressList(index)}
       >
-          <Image source={icon} style={styles.itemIcon}></Image>
-          <View style={styles.titleView}>
-            <Text style={styles.itemTitle}>{title}</Text>
-            {
-              command === 'info' && (
-                <View style={[styles.redDot, {display: notificationIconState ? 'flex' : 'none'}]}></View>
-              )
-            }
-          </View>
+        <Image source={icon} style={styles.itemIcon}></Image>
+        <View style={styles.titleView}>
+          <Text style={styles.itemTitle}>{title}</Text>
+          {command === "info" && (
+            <View
+              style={[
+                styles.redDot,
+                { display: notificationIconState ? "flex" : "none" },
+              ]}
+            ></View>
+          )}
+        </View>
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 const Sidebar: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navList = [
     {
       title: t("Sidebar.Settings"),
@@ -88,6 +110,7 @@ const Sidebar: React.FC = () => {
         break;
       case "logout":
         dispatch(setLogout());
+        dispatch(resetAppState());
         break;
       default:
         break;
@@ -155,15 +178,15 @@ const styles = StyleSheet.create({
     color: "#383D39",
   },
   titleView: {
-    position: 'relative'
+    position: "relative",
   },
   redDot: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     right: -10,
     width: 6,
     height: 6,
-    backgroundColor: '#F196A8',
+    backgroundColor: "#F196A8",
     borderRadius: 6,
   },
-})
+});

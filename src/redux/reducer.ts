@@ -36,6 +36,7 @@ const appSlice = createSlice({
     setSidebarState: (state: AppState, action: { payload: boolean }) => {
       state.sidebarState = action.payload;
     },
+    resetAppState: () => initialState,
   },
 })
 
@@ -46,4 +47,5 @@ export const {
   setNotificationInfo,
   removeNotificationInfo,
   setSidebarState,
+  resetAppState,
 } = appSlice.actions
