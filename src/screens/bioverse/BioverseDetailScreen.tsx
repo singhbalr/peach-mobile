@@ -94,7 +94,7 @@ const BioverseDetailScreen: React.FC = (props: Props) => {
                 <View style={styles.dateLine}></View>
               </View>
               <Text style={styles.greenText}>
-                ${value.hospital_id.hospital_name}
+                {value.hospital_id.hospital_name}
               </Text>
               <Text
                 style={styles.subText}

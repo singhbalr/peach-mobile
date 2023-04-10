@@ -22,6 +22,9 @@ export const formatUnixTimestamp = (timestamp: number) => {
 };
 
 export const maskHKID = (hkid: string) => {
+  if(!hkid){
+    return null
+  }
   if (hkid.length < 4) {
     return hkid;
   }

@@ -155,8 +155,8 @@ const LoginScreen: React.FC<Props> = () => {
   }, []);
 
   return (
-    <>
-      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+    <View style={styles.scrollViewContainer}>
+      <ScrollView>
         <View style={styles.logo}>
           <Image
             source={require("../../assets/contribute-data/peach-logo-3x.png")}
@@ -241,7 +241,6 @@ const LoginScreen: React.FC<Props> = () => {
             <Text style={{ fontSize: 14, color: "#ECF1E8", marginTop: 150 }}>
               {t("loginScreen.signUp")}
             </Text>
-
           </View>
         </KeyboardAvoidingView>
         {/*<View style={styles.container}>*/}
@@ -254,7 +253,7 @@ const LoginScreen: React.FC<Props> = () => {
           style={styles.backgroundImage}
         />
       </ScrollView>
-    </>
+    </View>
   );
 };
 
@@ -265,15 +264,10 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    bottom: 1,
     marginLeft: 0,
-    marginTop: 610,
-    width: 412,
-    zIndex: -1
-
+    zIndex: -1,
+    width: "100%",
   },
 
   container: {

@@ -98,18 +98,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignSelf: "stretch",
+    // alignSelf: "stretch",
   },
   backgroundImage: {
     position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    bottom: 1,
     marginLeft: 0,
-    marginTop: 600,
-    width: 412,
     zIndex: -1,
+    width: "100%",
   },
   content: {
     flex: 1,

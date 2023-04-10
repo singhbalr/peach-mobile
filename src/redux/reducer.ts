@@ -12,6 +12,7 @@ const initialState = {
     iconSource: '',
     btnText: '',
     navigationScreen: '',
+    payload: {}
   },
   sidebarState: false,
 }
@@ -30,12 +31,14 @@ const appSlice = createSlice({
         message: '',
         iconSource: '',
         btnText: '',
-        navigationScreen: null
+        navigationScreen: null,
+        payload: {}
       }
     },
     setSidebarState: (state: AppState, action: { payload: boolean }) => {
       state.sidebarState = action.payload;
     },
+    resetAppState: () => initialState,
   },
 })
 
@@ -46,4 +49,5 @@ export const {
   setNotificationInfo,
   removeNotificationInfo,
   setSidebarState,
+  resetAppState,
 } = appSlice.actions
