@@ -30,16 +30,20 @@ const PrivateRoutes = () => {
   const sidebarState = useSelector(
     (state: RootState) => state.app.sidebarState,
   );
+  const patientId = useSelector((state: RootState) => state.auth.patientId);
   const dispatch = useDispatch();
 
   const { _aa, _bb, _cc } = useSubscription(NEW_TRANSACTION, {
     onData: async ({ data }) => {
       const transaction = data.data.newTransaction;
-      console.log(JSON.stringify(transaction));
+      console.log(JSON.stringify(transaction.patient._id));
       if (data) {
         const transactionTypeText =
           transaction.transaction_type.transaction_type_text;
-        if (transactionTypeText === "DOCTOR_REQUEST") {
+        if (
+          transactionTypeText === "DOCTOR_REQUEST" &&
+          transaction.patient._id === patientId
+        ) {
           console.log("validated");
           const inputPayload = {
             variables: {
