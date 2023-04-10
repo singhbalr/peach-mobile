@@ -50,62 +50,59 @@ export const NEW_TRANSACTION = gql`
       _id
       created_at
       deleted_at
-      transaction_hash
-      transaction_is_closed
-      updated_at
       doctor {
         _id
         created_at
         deleted_at
         doctor_address
         doctor_city
-        doctor_date_of_birth
         doctor_email
+        doctor_date_of_birth
         doctor_gender
         doctor_last_name
         doctor_name
         doctor_password
         doctor_phone
-        doctor_state
-        doctor_wallet_id
         doctor_zipcode
-        updated_at
-      }
-      patient {
-        _id
-        created_at
-        deleted_at
-        patient_address
-        patient_age
-        patient_city
-        patient_date_of_birth
-        patient_email
-        patient_gender
-        patient_height
-        patient_last_name
-        patient_name
-        patient_password
-        patient_phone
-        patient_state
-        patient_wallet_id
-        patient_weight
-        patient_zipcode
-        updated_at
-        transaction_id {
+        doctor_wallet_id
+        doctor_state
+        hospital_id {
           _id
           created_at
           deleted_at
-          transaction_hash
-          transaction_is_closed
+          hospital_address
+          hospital_city
+          hospital_email
+          hospital_logo
+          hospital_name
+          hospital_phone
+          hospital_state
+          hospital_website
+          hospital_zipcode
           updated_at
-          transaction_type {
-            updated_at
-            transaction_type_text
-            deleted_at
-            created_at
-            _id
-          }
         }
+        updated_at
+      }
+      transaction_type {
+        _id
+        created_at
+        deleted_at
+        transaction_type_text
+        updated_at
+      }
+      updated_at
+      patient {
+        _id
+        patient_email
+        patient_date_of_birth
+        patient_age
+        patient_city
+        patient_address
+        patient_gender
+        patient_height
+        patient_identification_number
+        patient_last_name
+        patient_name
       }
     }
   }

@@ -697,3 +697,16 @@ export const GET_SHARED_DATA_BY_PATIENT = gql`
     }
   }
 `;
+
+export const APPROVE_DOCTOR_REQUEST = gql`
+  mutation UpdateTransaction(
+    $updateTransactionId: ID!
+    $input: UpdateTransactionInput
+  ) {
+    updateTransaction(id: $updateTransactionId, input: $input) {
+      _id
+      created_at
+      deleted_at
+    }
+  }
+`;

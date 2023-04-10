@@ -16,7 +16,9 @@ import ClinicalReport from "@screens/clinicalReport/ClinicalReport";
 import Sidebar from "../components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { setSidebarState } from "redux/reducer";
+import { setNotificationInfo, setSidebarState } from "redux/reducer";
+import { useSubscription } from "@apollo/client";
+import { NEW_TRANSACTION } from "connection/subscription";
 const { width } = Dimensions.get("window");
 // ? If you want to use stack or tab or both
 const Tab = createBottomTabNavigator();
@@ -24,9 +26,49 @@ const Stack = createStackNavigator();
 const PrivateRoutes = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === "dark";
-  const drawer = createRef<React.ElementRef<typeof Drawer>>()
-  const sidebarState = useSelector((state: RootState) => state.app.sidebarState)
-  const dispatch = useDispatch()
+  const drawer = createRef<React.ElementRef<typeof Drawer>>();
+  const sidebarState = useSelector(
+    (state: RootState) => state.app.sidebarState,
+  );
+  const dispatch = useDispatch();
+
+  const { _aa, _bb, _cc } = useSubscription(NEW_TRANSACTION, {
+    onData: async ({ data }) => {
+      const transaction = data.data.newTransaction;
+      console.log(JSON.stringify(transaction));
+      if (data) {
+        const transactionTypeText =
+          transaction.transaction_type.transaction_type_text;
+        if (transactionTypeText === "DOCTOR_REQUEST") {
+          console.log("validated");
+          const inputPayload = {
+            variables: {
+              input: {
+                transaction_type_id: transaction.transaction_type._id,
+                doctor_id: transaction.doctor._id,
+                transaction_is_closed: false,
+                transaction_hash: null,
+                patient_id: transaction.patient._id,
+                opportunity_id: null,
+                medical_record_id: null,
+              },
+              updateTransactionId: transaction._id,
+            },
+          };
+          const doctorName = `${transaction.doctor.doctor_name} ${transaction.doctor.doctor_last_name}`;
+          dispatch(
+            setNotificationInfo({
+              message: `Data Request from Doctor ${doctorName}`,
+              iconSource: require("./../assets/icons/doctor.png"),
+              btnText: "Accept",
+              navigationScreen: "",
+              payload: inputPayload,
+            }),
+          );
+        }
+      }
+    },
+  });
 
   const renderTabIcon = (
     route: any,
@@ -144,7 +186,7 @@ const PrivateRoutes = () => {
             marginBottom: 10,
           },
         })}
-      > 
+      >
         <Tab.Screen
           name={PRIVATESCREENS.DASHBOARD}
           component={YourBioverseScreen}
