@@ -32,6 +32,7 @@ const PrivateRoutes = () => {
   );
   const patientId = useSelector((state: RootState) => state.auth.patientId);
   const dispatch = useDispatch();
+  const PATIENT_APPROVED_TRANSACTION_ID = "640a0a2284947b59273ea03d";
 
   const { _aa, _bb, _cc } = useSubscription(NEW_TRANSACTION, {
     onData: async ({ data }) => {
@@ -48,7 +49,7 @@ const PrivateRoutes = () => {
           const inputPayload = {
             variables: {
               input: {
-                transaction_type_id: transaction.transaction_type._id,
+                transaction_type_id: PATIENT_APPROVED_TRANSACTION_ID,
                 doctor_id: transaction.doctor._id,
                 transaction_is_closed: false,
                 transaction_hash: null,
