@@ -103,6 +103,50 @@ const ClinicalReport: React.FC = () => {
   //   },
   // ];
 
+  const renderList = () => {
+    if (patientDetails.medical_record < 0) {
+      return <></>;
+    }
+
+    return patientDetails.medical_record.map((item, index) => {
+      {
+        return item.medical_record_file.map((data, dataIndex) => {
+          return (
+            <TouchableOpacity
+              key={dataIndex}
+              style={styles.reportItem}
+              onPress={() => handleItemPress(data, item)}
+            >
+              <View style={styles.dateView}>
+                <Text style={styles.dateText}>
+                  {formatUnixTimestamp(item.created_at)}
+                </Text>
+                <View style={styles.dateLine}></View>
+              </View>
+              <Text style={styles.greenText}>
+                {item?.hospital_id?.hospital_name}
+              </Text>
+              <Text
+                style={styles.subText}
+              >{`Dr. ${item.doctor_id.doctor_name} ${item.doctor_id.doctor_last_name}`}</Text>
+              <View style={styles.tagContainer}>
+                {returnIcon(data, dataIndex)}
+              </View>
+              {/* <View style={styles.buttonList}>
+                <ButtonTabs key={'report-buttons-' + index}  showAll={true} buttonIndexs={item.buttonIndexs} setIndex={(index) => {
+                  handleItemPress(data, item)
+                  // NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
+                  //   activeIndex: index
+                  // });
+                }}></ButtonTabs>
+              </View> */}
+            </TouchableOpacity>
+          );
+        });
+      }
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Header titleText={"Clinical Report"}></Header>
@@ -141,45 +185,7 @@ const ClinicalReport: React.FC = () => {
             </Text>
           </View>
         </View>
-        <ScrollView>
-          {patientDetails.medical_record.map((item, index) => {
-            {
-              return item.medical_record_file.map((data, dataIndex) => {
-                return (
-                  <TouchableOpacity
-                    key={dataIndex}
-                    style={styles.reportItem}
-                    onPress={() => handleItemPress(data, item)}
-                  >
-                    <View style={styles.dateView}>
-                      <Text style={styles.dateText}>
-                        {formatUnixTimestamp(item.created_at)}
-                      </Text>
-                      <View style={styles.dateLine}></View>
-                    </View>
-                    <Text style={styles.greenText}>
-                      {item?.hospital_id?.hospital_name}
-                    </Text>
-                    <Text
-                      style={styles.subText}
-                    >{`Dr. ${item.doctor_id.doctor_name} ${item.doctor_id.doctor_last_name}`}</Text>
-                    <View style={styles.tagContainer}>
-                      {returnIcon(data, dataIndex)}
-                    </View>
-                    {/* <View style={styles.buttonList}>
-                      <ButtonTabs key={'report-buttons-' + index}  showAll={true} buttonIndexs={item.buttonIndexs} setIndex={(index) => {
-                        handleItemPress(data, item)
-                        // NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
-                        //   activeIndex: index
-                        // });
-                      }}></ButtonTabs>
-                    </View> */}
-                  </TouchableOpacity>
-                );
-              });
-            }
-          })}
-        </ScrollView>
+        <ScrollView>{renderList()}</ScrollView>
       </View>
     </SafeAreaView>
   );

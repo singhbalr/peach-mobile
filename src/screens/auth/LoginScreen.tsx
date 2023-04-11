@@ -31,8 +31,8 @@ import { RootState } from "redux/store";
 interface Props {}
 
 const LoginScreen: React.FC<Props> = () => {
-  const [username, setUser] = useState("patient@peachbioverse.com");
-  const [password, setPass] = useState("12341234");
+  const [username, setUser] = useState("");
+  const [password, setPass] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isUserValid, setIsUserValid] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
