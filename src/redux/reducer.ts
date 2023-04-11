@@ -4,9 +4,13 @@ interface AppState {
   notificationIconState: boolean
   notificationInfo: any
   sidebarState: boolean
+  clinicalNotificationState: boolean
+  ctaModalNotificationState: boolean
 }
 const initialState = {
   notificationIconState: false,
+  clinicalNotificationState: true,
+  ctaModalNotificationState: false,
   notificationInfo: {
     message: '',
     iconSource: '',
@@ -22,6 +26,12 @@ const appSlice = createSlice({
   reducers: {
     toggleNotificationIconState: (state: AppState, action: { payload: boolean }) => {
       state.notificationIconState = action.payload
+    },
+    toggleClinicalNotificationState: (state: AppState, action: { payload: boolean }) => {
+      state.clinicalNotificationState = action.payload
+    },
+    toggleCtaModalNotificationState: (state: AppState, action: { payload: boolean }) => {
+      state.ctaModalNotificationState = action.payload
     },
     setNotificationInfo: (state: AppState, action: { payload: object }) => {
       state.notificationInfo = action.payload
@@ -50,4 +60,6 @@ export const {
   removeNotificationInfo,
   setSidebarState,
   resetAppState,
+  toggleClinicalNotificationState,
+  toggleCtaModalNotificationState
 } = appSlice.actions

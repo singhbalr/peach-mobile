@@ -15,7 +15,9 @@ const initialState = {
   isLoggedIn: false,
   token: "",
   patientId: "",
-  patientDetails: {},
+  patientDetails: {
+    medical_record: []
+  },
   medicalRecord: [],
 };
 const authSlice = createSlice({

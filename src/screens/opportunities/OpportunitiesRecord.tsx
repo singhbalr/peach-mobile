@@ -37,10 +37,11 @@ import {
 } from "./privacyPoliceData";
 import { useMutation } from "@apollo/client";
 import { CREATE_TRANSACTION_ORGANIZATION } from "connection/mutation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import Button from "components/button";
 import Navigation from "components/Navigation";
+import { toggleNotificationIconState } from "redux/reducer";
 
 interface OpportunityRecordScreenProps {
   navigation: any;
@@ -63,6 +64,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
   const [createTransactionOrganizationMutation] = useMutation(
     CREATE_TRANSACTION_ORGANIZATION,
   );
+  const dispatch = useDispatch();
   const patientId = useSelector((state: RootState) => state.auth.patientId);
 
   const detail: any = props.route.params.OpportunityRecord;
@@ -82,8 +84,6 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
 
   const PROMOTION_OPP_ID = "6419e3e9db51e4ec7511f1be";
 
-  console.log(isAppliedPatient(), "isAppliedPatient");
-
   const dataSharPrivacyPolicy = () => {
     switch (detail.opportunity_type_id.opportunity_type) {
       case "PRODUCT_DEVELOPMENT":
@@ -94,8 +94,27 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         return CasePrivacyPolice3;
       case "INSURANCE":
         return CasePrivacyPolice4;
+      case "PRODUCT_DEVELOPMENT_FOLLOW_UP_OPPORTUNITY":
+        return CasePrivacyPolice4;
       default:
         return CasePrivacyPolice5;
+    }
+  };
+
+  const getDataReceiver = () => {
+    switch (detail.opportunity_type_id.opportunity_type) {
+      case "PRODUCT_DEVELOPMENT":
+        return "Prenetics Limited";
+      case "PROMOTION":
+        return "McCann Health";
+      case "PHARMA_RWD":
+        return "GlaxoSmithKline";
+      case "INSURANCE":
+        return "McCann Health";
+      case "PRODUCT_DEVELOPMENT_FOLLOW_UP_OPPORTUNITY":
+        return "Prenetics Limited";
+      default:
+        return "Prenetics Limited";
     }
   };
 
@@ -406,7 +425,9 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           </Text>
           <TouchableOpacity
             onPress={() => {
-              NavigationService.push(PRIVATESCREENS.DATA_RECEIVER);
+              if (getDataReceiver() === "Prenetics Limited") {
+                NavigationService.push(PRIVATESCREENS.DATA_RECEIVER);
+              }
             }}
           >
             <Text
@@ -419,7 +440,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 marginRight: 10,
               }}
             >
-              {t("OpportunitiesRecord.prenetics-limited")} &gt;
+              {getDataReceiver()} &gt;
             </Text>
           </TouchableOpacity>
         </View>
@@ -780,6 +801,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           detail.medical_health_info.length
         ) {
           setTimeout(() => {
+            dispatch(toggleNotificationIconState(true));
             NavigationService.push(PRIVATESCREENS.HEALTH_INFO_DETAIL, {
               opportunityData: detail,
               index: 0,
@@ -1030,9 +1052,12 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             </View>
             <Button
               isLoading={isLoading}
-              onPress={() =>
-                NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA)
-              }
+              onPress={() => {
+                setPopupVisible(false);
+                NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA, {
+                  screen: "Screen1",
+                });
+              }}
               text={t("OpportunitiesRecord.text14")}
               bgColor="#7BA040"
               textColor="white"

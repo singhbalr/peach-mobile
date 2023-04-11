@@ -10,11 +10,18 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { removeNotificationInfo } from "redux/reducer";
+import {
+  removeNotificationInfo,
+  toggleCtaModalNotificationState,
+} from "redux/reducer";
 import { RootState } from "redux/store";
 import * as NavigationService from "react-navigation-helpers";
 import { useMutation } from "@apollo/client";
 import { APPROVE_DOCTOR_REQUEST } from "connection/mutation";
+import Popup from "components/Popup";
+import { t } from "i18next";
+import Button from "components/button";
+import { PRIVATESCREENS } from "@shared-constants";
 const { height } = Dimensions.get("window");
 
 const Notification: React.FC = () => {
@@ -24,7 +31,6 @@ const Notification: React.FC = () => {
     (state: RootState) => state.app.notificationInfo,
   );
   const [approveRequest] = useMutation(APPROVE_DOCTOR_REQUEST);
-
   useEffect(() => {
     setShow(!!notificationInfo.message);
     console.log({ notificationInfo });
@@ -59,10 +65,13 @@ const Notification: React.FC = () => {
               if (data) {
                 console.log(JSON.stringify(data));
                 setShow(false);
-                dispatch(removeNotificationInfo());
+                // dispatch(removeNotificationInfo());
+                setTimeout(() => {
+                  dispatch(toggleCtaModalNotificationState(true));
+                }, 500);
               }
-              setShow(false);
-              dispatch(removeNotificationInfo());
+              // setShow(false);
+              // dispatch(removeNotificationInfo());
               // NavigationService.push(notificationInfo.navigationScreen, {});
             }}
           >

@@ -21,10 +21,6 @@ const Header: React.FC<Props> = (props: Props) => {
     (state: RootState) => state.app.notificationIconState,
   );
 
-  useEffect(() => {
-    dispatch(toggleNotificationIconState(true));
-  });
-
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
