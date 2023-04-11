@@ -27,6 +27,10 @@ const PrivateRoutes = () => {
   const drawer = createRef<React.ElementRef<typeof Drawer>>()
   const sidebarState = useSelector((state: RootState) => state.app.sidebarState)
   const dispatch = useDispatch()
+  const clinicalBadge = undefined
+  const contributionsBadge = undefined
+  const rewardsBadge = undefined
+
 
   const renderTabIcon = (
     route: any,
@@ -143,6 +147,12 @@ const PrivateRoutes = () => {
           tabBarIconStyle: {
             marginBottom: 10,
           },
+          tabBarBadgeStyle: {
+            top: -12,
+            left: 6,
+            color: '#fff',
+            backgroundColor: '#F196A8'
+          }
         })}
       > 
         <Tab.Screen
@@ -152,14 +162,23 @@ const PrivateRoutes = () => {
         <Tab.Screen
           name={PRIVATESCREENS.CLINICAL_REPORT}
           component={ClinicalReport}
+          options={{
+            tabBarBadge: clinicalBadge
+          }}
         />
         <Tab.Screen
           name={PRIVATESCREENS.CONTRIBUTE_DATA}
           component={ProfileScreen}
+          options={{
+            tabBarBadge: contributionsBadge
+          }}
         />
         <Tab.Screen
           name={PRIVATESCREENS.REWARD_CENTER}
           component={HomeScreen}
+          options={{
+            tabBarBadge: rewardsBadge
+          }}
         />
       </Tab.Navigator>
     </Drawer>

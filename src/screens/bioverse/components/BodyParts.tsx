@@ -1,17 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native'
 import ArrowRightSvg from "../../../assets/dashboard/arrow-right.svg";
 import ReportSvg from "../../../assets/dashboard/report.svg";
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'redux/store'
-import { toggleNotificationIconState } from 'redux/reducer'
 
 type ItemProps = {
   index: string | number;
-  item: string;
+  item: { name: string; icon: any; reportCount: number; };
   length: number;
   fileRecordList: any;
-  onPressList: (arg1: string | number) => void;
+  onPressList: (arg1: { name: string; icon: any; reportCount: number; }) => void;
 };
 const Item: React.FC<ItemProps> = ({
   index,
@@ -22,7 +19,7 @@ const Item: React.FC<ItemProps> = ({
 }: ItemProps) => {
   return (
     <TouchableOpacity
-      onPress={() => onPressList(item, index)}
+      onPress={() => onPressList(item)}
       style={[
         styles.itemContainer,
         index === length - 1 ? { borderBottomWidth: 0 } : {},
@@ -47,7 +44,7 @@ const Item: React.FC<ItemProps> = ({
 
 type Props = {
   title: string
-  dataList: string[]
+  dataList: { name: string; icon: any; reportCount: number; }[]
   fileRecordList: any
   onPressList: (index: number | string) => void;
 }
@@ -56,12 +53,6 @@ const BodyParts: React.FC<Props> = (props: Props) => {
   const {
     title, dataList, fileRecordList, onPressList,
   } = props
-  const dispatch = useDispatch()
-  const notificationIconState = useSelector((state: RootState) => state.app.notificationIconState)
-
-  useEffect(() => {
-    dispatch(toggleNotificationIconState(true))
-  })
 
   return (
     <View style={styles.container}>
@@ -87,7 +78,6 @@ export default BodyParts
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: '100%',
   },
   title: {

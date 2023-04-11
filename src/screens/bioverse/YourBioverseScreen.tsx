@@ -15,6 +15,7 @@ import { PRIVATESCREENS } from "@shared-constants";
 import Header from "../../components/Header";
 import Popup from "../../components/Popup";
 import MaleBodySvg from "../../assets/dashboard/male-body.svg";
+import ThoraxBodySvg from "../../assets/dashboard/body-thorax.svg";
 import ReportSvg from "../../assets/dashboard/report.svg";
 import LiverSvg from "../../assets/dashboard/liver.svg";
 import PancreasSvg from "../../assets/dashboard/pancreas.svg";
@@ -22,6 +23,7 @@ import StomachSvg from "../../assets/dashboard/stomach.svg";
 import BloodSvg from "../../assets/dashboard/blood.svg";
 import HeartSvg from "../../assets/dashboard/heart.svg";
 import LungsSvg from "../../assets/dashboard/lungs.svg";
+import SearchSvg from "../../assets/dashboard/search.svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { t } from "i18next";
 import BodyParts from "./components/BodyParts";
@@ -74,13 +76,19 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     thorax: 0,
     upperabdomen: 0,
   });
-  const [activeItem, setActiveItem] = useState<object>({
+  const [activeItem, setActiveItem] = useState<{name: string, children: {name: string, icon: any, reportCount: number}[]}>({
     name: "",
-    children: [],
+    children: [{
+      name: '',
+      icon: '',
+      reportCount: 0
+    }]
   });
   const patientDetails = useSelector(
     (state: RootState) => state.auth.patientDetails,
   );
+
+  const [svgScale, setSvgScale] = useState<string>('100%')
 
   const onPressList = (bodyPart: string) => {
     const medicalFile = getMedicalRecordFileFromStore(bodyPart);
@@ -144,6 +152,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   };
 
   const selectBodyParts = (item: React.SetStateAction<object>) => {
+    setSvgScale('140%')
     setPopupVisible(true);
     setActiveItem(item);
     handlePress();
@@ -152,10 +161,18 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   const handlePress = () => {
     Animated.timing(animation, {
       toValue: 1,
-      duration: 1000,
+      duration: 400,
       useNativeDriver: true,
     }).start();
   };
+  const translateY = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 50],
+  });
+  const scale = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 2.5],
+  });
 
   useEffect(() => {
     fetchAllMedicalRecord();
@@ -223,7 +240,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         }
       }
     }
-    console.log(counts);
+    console.log({counts});
     setSectionCount(counts);
   };
 
@@ -352,14 +369,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     },
   ];
 
-  const translateY = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, -100],
-  });
-  const scale = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 2],
-  });
   return (
     <SafeAreaView style={styles.container}>
       <Header
@@ -369,7 +378,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       <View style={styles.bodyContainer}>
         {buttonList.map((item, index) => {
           return (
-            <View key={item.name} style={styles[item.classname]}>
+            <View key={item.name} style={[styles[item.classname], {display: popupVisible ? 'none' : ''}]}>
               <BodyButton
                 buttonText={item.name}
                 reportCount={item.reportCount}
@@ -380,23 +389,14 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             </View>
           );
         })}
-        <View style={styles.bodySvg}>
-          <MaleBodySvg height={580}></MaleBodySvg>
-        </View>
+        <Animated.View style={[styles.bodySvg, { transform: [{ translateY }, { scale }] }]}>
+          {/* <MaleBodySvg height={'100%'}></MaleBodySvg> */}
+          <ThoraxBodySvg></ThoraxBodySvg>
+        </Animated.View>
+        <TouchableOpacity style={styles.search}>
+          <SearchSvg></SearchSvg>
+        </TouchableOpacity>
       </View>
-      {popupVisible && (
-        <View style={styles.bodyDetailView}>
-          {/* <Animated.Image
-              source={require("../../assets/dashboard/body-detail-1x.png")}
-              style={[styles.bodyDetailImage, { transform: [{ translateY }, { scale }] }]}
-            /> */}
-          <Image
-            source={activeItem.classname === 'buttonTwo' ? require('../../assets/dashboard/body-thorax.png') : activeItem.classname === 'buttonThree' ? require('../../assets/dashboard/body-detail.png') : ''}
-            style={styles.bodyDetailImage}
-            resizeMode={"cover"}
-          ></Image>
-        </View>
-      )}
       <Popup
         visible={popupVisible}
         contentElement={
@@ -404,11 +404,16 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             title={activeItem.name}
             dataList={activeItem.children}
             fileRecordList={fileRecordList}
-            onPressList={onPressList}
+            onPressList={() => onPressList}
           />
         }
         onClose={() => {
           setPopupVisible(false);
+          Animated.timing(animation, {
+            toValue: 0,
+            duration: 400,
+            useNativeDriver: true,
+          }).start();
         }}
       />
     </SafeAreaView>
@@ -430,17 +435,21 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 0,
   },
+  search: {
+    position: 'absolute',
+    bottom: -5,
+    left: 27,
+  },
   bodySvg: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     position: "absolute",
-    top: 40,
+    top: 60,
     left: 0,
     right: 0,
     bottom: 0,
     width: "100%",
-    height: 460,
     zIndex: -1,
   },
   bodyButton: {

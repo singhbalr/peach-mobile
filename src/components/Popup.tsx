@@ -37,7 +37,6 @@ export default Popup
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    justifyContent: "center",
     position: "absolute",
     left: 0,
     right: 0,
