@@ -101,7 +101,9 @@ const Sidebar: React.FC = () => {
       case "settings":
         break;
       case "sharedData":
-        NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA, {});
+        NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA, {
+          screen: "Screen1",
+        });
         break;
       case "info":
         NavigationService.push(PRIVATESCREENS.USEFUL_HEALTH_INFO, {});

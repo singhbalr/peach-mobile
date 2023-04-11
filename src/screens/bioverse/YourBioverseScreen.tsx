@@ -44,14 +44,10 @@ const BodyButton: React.FC<ButtonProps> = (props) => {
     >
       <View style={styles.buttonView}>
         <Text style={styles.buttonText}>{buttonText}</Text>
-        {reportCount ? (
-          <>
-            <ReportSvg style={styles.btnIcon}></ReportSvg>
-            <Text style={styles.reportCount}>{reportCount}</Text>
-          </>
-        ) : (
-          <></>
-        )}
+        <>
+          {reportCount ? <ReportSvg style={styles.btnIcon}></ReportSvg> : <></>}
+          <Text style={styles.reportCount}>{reportCount}</Text>
+        </>
       </View>
     </TouchableOpacity>
   );

@@ -15,14 +15,29 @@ import {
   GET_SHARED_DATA_BY_PATIENT,
 } from "../../connection/mutation";
 import { RootState } from "redux/store";
+import {
+  CasePrivacyPolice1,
+  CasePrivacyPolice2,
+  CasePrivacyPolice3,
+  CasePrivacyPolice4,
+  CasePrivacyPolice5,
+} from "./../opportunities/privacyPoliceData";
+import {
+  formatUnixTimestamp,
+  formatUnixTimestampSharedData,
+  formatUnixTimestampTime,
+} from "utils";
+
 interface MyShareDataProps {}
 
-const MyShareData: React.FC<MyShareDataProps> = () => {
+const MyShareData: React.FC<MyShareDataProps> = (props) => {
+  const { navigation, route } = props;
+  const { screen } = route.params;
   const theme = useTheme();
 
   const styles = useMemo(() => createStyles(theme), [theme]);
 
-  const [activeTab, setActiveTab] = useState("Screen1");
+  const [activeTab, setActiveTab] = useState(screen);
   const [sharedData, setSharedData] = useState([]);
   const [sharedDataByPatient, setSharedDataByPatient] = useState([]);
   const [getSharedData] = useMutation(GET_SHARED_DATA);
@@ -32,6 +47,21 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
     callSharedDataApi();
     callSharedDataByPatient();
   }, []);
+
+  const dataSharPrivacyPolicy = (opportunity_type) => {
+    switch (opportunity_type) {
+      case "PRODUCT_DEVELOPMENT":
+        return CasePrivacyPolice1;
+      case "PROMOTION":
+        return CasePrivacyPolice2;
+      case "PHARMA_RWD":
+        return CasePrivacyPolice3;
+      case "INSURANCE":
+        return CasePrivacyPolice4;
+      default:
+        return CasePrivacyPolice5;
+    }
+  };
 
   const callSharedDataApi = async () => {
     const { data } = await getSharedData({
@@ -145,7 +175,7 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
               <Text
                 style={{
                   fontSize: 16,
-                  fontWeight: "700",
+                  fontWeight: "500",
                   marginTop: 20,
                   marginBottom: 5,
                   marginRight: 5,
@@ -168,45 +198,19 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
           </View>
 
           {/*Center container */}
-
-          <View
-            style={{
-              backgroundColor: "#fafafa",
-              borderRadius: 15,
-              padding: 20,
-              marginBottom: 10,
-              marginTop: 20,
-            }}
-          >
-            {/* <View
-          style={{
-            flexDirection: "row",
-          }}
-        >
-          <Image
-            source={require("../../assets/contribute-data/info-icon.png")}
-            style={{
-              marginTop: 5,
-              width: 9,
-              height: 9,
-            }}
-          />
-          <Text
-            style={{
-              marginHorizontal: 10,
-            }}
-          >
-            Your name, phone number, date of birth and the first 4 digits of
-            your Hong Kong Identity Card number.
-          </Text>
-        </View> */}
+          {dataSharPrivacyPolicy(
+            value.opportunity.opportunity_type_id.opportunity_type,
+          ).map((item, index) => (
             <View
+              key={index}
               style={{
                 flexDirection: "row",
+                marginTop: 10,
               }}
             >
+              {console.log(item.icon, "icon")}
               <Image
-                source={require("../../assets/contribute-data/clinical-record-icon.png")}
+                source={item.icon}
                 style={{
                   marginTop: 5,
                   width: 9,
@@ -215,64 +219,17 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
               />
               <Text
                 style={{
-                  marginHorizontal: 10,
+                  marginHorizontal: 5,
+                  fontWeight: "400",
+                  fontSize: 14,
+                  lineHeight: 19,
+                  color: "#606461",
                 }}
               >
-                {t("MyShareData.text1")}
+                {item.desc}
               </Text>
             </View>
-            <View
-              style={{
-                flexDirection: "row",
-              }}
-            >
-              <Image
-                source={require("../../assets/contribute-data/iot-icon.png")}
-                style={{
-                  marginTop: 5,
-                  width: 9,
-                  height: 9,
-                }}
-              />
-              <Text
-                style={{
-                  marginHorizontal: 10,
-                }}
-              >
-                {t("MyShareData.text2")}
-              </Text>
-            </View>
-          </View>
-
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 16,
-                fontWeight: "700",
-                marginTop: 20,
-                marginBottom: 5,
-                marginLeft: 10,
-                color: "#000",
-              }}
-            >
-              {t("MyShareData.text3")}
-            </Text>
-            <Image
-              source={require("../../assets/contribute-data/angle_up_icon.png")}
-              style={{
-                marginTop: 17,
-                width: 30,
-                height: 30,
-                marginRight: 10,
-              }}
-            />
-          </View>
+          ))}
 
           {/*Step Indicator */}
 
@@ -282,6 +239,7 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
               backgroundColor: "#fff",
               paddingHorizontal: 5,
               marginTop: 20,
+              borderRadius: 15,
             }}
           >
             <View
@@ -296,8 +254,10 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
               {data.map((val, i) => (
                 <View style={{ flexDirection: "row" }} key={i}>
                   <View style={{ marginRight: 10 }}>
-                    <Text>{val.date}</Text>
-                    <Text>{val.time}</Text>
+                    <Text>
+                      {formatUnixTimestampSharedData(value.created_at)}
+                    </Text>
+                    <Text>{formatUnixTimestampTime(value.created_at)}</Text>
                   </View>
                   <View style={{ alignItems: "center" }}>
                     <View

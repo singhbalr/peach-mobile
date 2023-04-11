@@ -107,3 +107,20 @@ export const NEW_TRANSACTION = gql`
     }
   }
 `;
+
+export const NEW_MEDICAL_HEALTH_INFO = gql`
+  subscription NewTransaction {
+    newAdvertisement {
+      _id
+      opportunity_id {
+        _id
+        applied_patient {
+          _id
+          patient {
+            _id
+          }
+        }
+      }
+    }
+  }
+`;

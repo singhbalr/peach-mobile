@@ -17,8 +17,9 @@ import { PRIVATESCREENS } from "@shared-constants";
 import { useMutation } from "@apollo/client";
 import { GET_MEDICAL_HEALTH_INFO } from "connection/mutation";
 import { RootState } from "redux/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formatUnixTimestamp } from "utils";
+import { toggleNotificationIconState } from "redux/reducer";
 
 type Props = {
   navigation: any;
@@ -59,7 +60,7 @@ const UsefulHealthInfo: React.FC<Props> = (props: Props) => {
   const patientId = useSelector((state: RootState) => state.auth.patientId);
   const [getMedicalHealthInfo] = useMutation(GET_MEDICAL_HEALTH_INFO);
   const [medicalInfo, setMedicalInfo] = useState({});
-
+  const dispatch = useDispatch();
   const infoList = [
     {
       isNew: true,
@@ -112,6 +113,7 @@ const UsefulHealthInfo: React.FC<Props> = (props: Props) => {
   };
 
   useEffect(() => {
+    dispatch(toggleNotificationIconState(false));
     renderMedicalHealthInfoList();
   }, []);
 
