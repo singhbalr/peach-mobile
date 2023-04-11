@@ -84,8 +84,6 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
 
   const PROMOTION_OPP_ID = "6419e3e9db51e4ec7511f1be";
 
-  console.log(isAppliedPatient(), "isAppliedPatient");
-
   const dataSharPrivacyPolicy = () => {
     switch (detail.opportunity_type_id.opportunity_type) {
       case "PRODUCT_DEVELOPMENT":
@@ -96,8 +94,27 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         return CasePrivacyPolice3;
       case "INSURANCE":
         return CasePrivacyPolice4;
+      case "PRODUCT_DEVELOPMENT_FOLLOW_UP_OPPORTUNITY":
+        return CasePrivacyPolice4;
       default:
         return CasePrivacyPolice5;
+    }
+  };
+
+  const getDataReceiver = () => {
+    switch (detail.opportunity_type_id.opportunity_type) {
+      case "PRODUCT_DEVELOPMENT":
+        return "Prenetics Limited";
+      case "PROMOTION":
+        return "McCann Health";
+      case "PHARMA_RWD":
+        return "GlaxoSmithKline";
+      case "INSURANCE":
+        return "McCann Health";
+      case "PRODUCT_DEVELOPMENT_FOLLOW_UP_OPPORTUNITY":
+        return "Prenetics Limited";
+      default:
+        return "Prenetics Limited";
     }
   };
 
@@ -408,7 +425,9 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           </Text>
           <TouchableOpacity
             onPress={() => {
-              NavigationService.push(PRIVATESCREENS.DATA_RECEIVER);
+              if (getDataReceiver() === "Prenetics Limited") {
+                NavigationService.push(PRIVATESCREENS.DATA_RECEIVER);
+              }
             }}
           >
             <Text
@@ -421,7 +440,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 marginRight: 10,
               }}
             >
-              {t("OpportunitiesRecord.prenetics-limited")} &gt;
+              {getDataReceiver()} &gt;
             </Text>
           </TouchableOpacity>
         </View>
