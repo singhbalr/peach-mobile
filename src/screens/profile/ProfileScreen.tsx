@@ -26,7 +26,10 @@ import {
   TRANSACTION_UPDATED_SUBSCRIPTION,
   NEW_TRANSACTION,
 } from "../../connection/subscription";
-import { GET_ALL_OPPORTUNITY } from "../../connection/query";
+import {
+  GET_ALL_OPPORTUNITY,
+  GET_ALL_OPPORTUNITY_FILTERED,
+} from "../../connection/query";
 import moment from "moment";
 import countDaysLeft from "../../components/countDayLeft";
 import { RootState } from "../../redux/store";
@@ -66,8 +69,13 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const [activeTab, setActiveTab] = useState("Screen1");
   const [doctorRequest, setDoctorRequest] = useState([]);
   const [getDoctorRequest] = useMutation(GET_DOCTOR_REQUEST);
-  const { loading, error, data } = useQuery(GET_ALL_OPPORTUNITY);
+
   const patientId = useSelector((state: RootState) => state.auth.patientId);
+  const { loading, error, data } = useQuery(
+    patientId === "642e80d7acc6442859edb5e2"
+      ? GET_ALL_OPPORTUNITY_FILTERED
+      : GET_ALL_OPPORTUNITY,
+  );
   const [followUpRequest, setFollowUpRequest] = useState([]);
   const [getFollowUpRequestByPatientId] = useMutation(
     GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID,
@@ -181,19 +189,22 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       throw new Error(`Could not fetch doctor list by id: ${error.message}`);
     }
   };
+  const renderScrollView = () => {
+    if (patientId === "642e80d7acc6442859edb5e2") {
+      return data?.opportunitiesFiltered?.map((item: any, key: any) => {
+        return <OpportunityCard key={`opportunity-card-${key}`} {...item} />;
+      });
+    }
 
+    return data?.opportunities?.map((item: any, key: any) => {
+      return <OpportunityCard key={`opportunity-card-${key}`} {...item} />;
+    });
+  };
   // eslint-disable-next-line react/no-unstable-nested-components
   const Screen1 = () => {
     return (
       <View style={styles.tabContainer}>
-        <ScrollView>
-          {data?.opportunities?.map((item: any, key: any) => (
-            <OpportunityCard key={`opportunity-card-${key}`} {...item} />
-          ))}
-          {/*{opportunityData.map((item, key) => (*/}
-          {/*  <OpportunityCard key={`opportunity-card-${key}`} {...item} />*/}
-          {/*))}*/}
-        </ScrollView>
+        <ScrollView>{renderScrollView()}</ScrollView>
       </View>
     );
   };
