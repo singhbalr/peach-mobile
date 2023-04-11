@@ -552,3 +552,161 @@ export const GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID = gql`
     }
   }
 `;
+
+export const GET_MEDICAL_HEALTH_INFO = gql`
+  mutation GetMedicalHealthInfo($input: PatientID!) {
+    getMedicalHealthInfo(input: $input) {
+      _id
+      deleted_at
+      created_at
+      organization {
+        _id
+        created_at
+        deleted_at
+        organization_address
+        organization_age
+        organization_city
+        organization_email
+        organization_name
+        organization_password
+        organization_phone
+        organization_state
+        organization_zipcode
+        updated_at
+        organization_wallet_id
+      }
+      opportunity {
+        _id
+        created_at
+        deleted_at
+        organization {
+          _id
+          created_at
+          deleted_at
+          organization_address
+          organization_age
+          organization_city
+          organization_email
+          organization_name
+          organization_password
+          organization_phone
+          organization_state
+          organization_zipcode
+          updated_at
+          organization_wallet_id
+        }
+        medical_health_info {
+          _id
+          advertisement_click
+          advertisement_content
+          advertisement_image
+          advertisement_title
+          advertisement_views
+          created_at
+          deleted_at
+          updated_at
+        }
+        opportunity_description
+        opportunity_expiration
+        opportunity_name
+        opportunity_picture_banner
+        opportunity_purpose
+        opportunity_quota_count
+        opportunity_withdraw_data_rules
+      }
+    }
+  }
+`;
+export const GET_SHARED_DATA_BY_PATIENT = gql`
+  mutation GetSharedDataByPatientDoctor($input: PatientID!) {
+    getSharedDataByPatientDoctor(input: $input) {
+      _id
+      created_at
+      deleted_at
+      opportunity {
+        _id
+        created_at
+        deleted_at
+        opportunity_data_accesibility_duration
+        opportunity_description
+        opportunity_expiration
+        opportunity_is_closed
+        opportunity_medical_record_accesibility_duration
+        opportunity_name
+        opportunity_picture_banner
+        opportunity_purpose
+        opportunity_quota_count
+        opportunity_withdraw_data_rules
+        organization_id
+        updated_at
+        organization {
+          _id
+          organization_name
+          organization_wallet_id
+          organization_age
+          organization_address
+          organization_city
+          organization_state
+          organization_zipcode
+          organization_phone
+          organization_email
+          organization_password
+          created_at
+          updated_at
+          deleted_at
+        }
+        opportunity_type_id {
+          _id
+          opportunity_type
+          opportunity_type_text
+          created_at
+          updated_at
+          deleted_at
+        }
+      }
+      organization_id
+      transaction_hash
+      transaction_is_closed
+      updated_at
+      transaction_type {
+        _id
+        transaction_type_text
+        created_at
+        updated_at
+        deleted_at
+      }
+      doctor {
+        doctor_email
+        doctor_last_name
+        doctor_gender
+        doctor_name
+        doctor_phone
+        doctor_state
+        doctor_wallet_id
+        hospital_id {
+          _id
+          hospital_address
+          hospital_city
+          hospital_email
+          hospital_logo
+          hospital_name
+          hospital_phone
+          hospital_state
+        }
+      }
+    }
+  }
+`;
+
+export const APPROVE_DOCTOR_REQUEST = gql`
+  mutation UpdateTransaction(
+    $updateTransactionId: ID!
+    $input: UpdateTransactionInput
+  ) {
+    updateTransaction(id: $updateTransactionId, input: $input) {
+      _id
+      created_at
+      deleted_at
+    }
+  }
+`;

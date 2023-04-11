@@ -1,5 +1,13 @@
 import React, { createRef } from "react";
-import { Image, Platform, Dimensions, useColorScheme } from "react-native";
+import {
+  Image,
+  Platform,
+  Dimensions,
+  useColorScheme,
+  View,
+  StyleSheet,
+  Text,
+} from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Drawer from "react-native-drawer";
@@ -16,9 +24,18 @@ import ClinicalReport from "@screens/clinicalReport/ClinicalReport";
 import Sidebar from "../components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { setSidebarState } from "redux/reducer";
+import {
+  setNotificationInfo,
+  setSidebarState,
+  toggleNotificationIconState,
+} from "redux/reducer";
+import { useSubscription } from "@apollo/client";
+import {
+  NEW_MEDICAL_HEALTH_INFO,
+  NEW_TRANSACTION,
+} from "connection/subscription";
 const { width } = Dimensions.get("window");
-// ? If you want to use stack or tab or both
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const PrivateRoutes = () => {
@@ -30,7 +47,108 @@ const PrivateRoutes = () => {
   const clinicalBadge = undefined
   const contributionsBadge = undefined
   const rewardsBadge = undefined
+  const patientId = useSelector((state: RootState) => state.auth.patientId);
+  const clinicalNotificationState = useSelector(
+    (state: RootState) => state.app.clinicalNotificationState,
+  );
+  const PATIENT_APPROVED_TRANSACTION_ID = "640a0a2284947b59273ea03d";
+  const { _aa, _bb, _cc } = useSubscription(NEW_TRANSACTION, {
+    onData: async ({ data }) => {
+      const transaction = data.data.newTransaction;
+      console.log(JSON.stringify(transaction.patient._id));
+      if (data) {
+        const transactionTypeText =
+          transaction.transaction_type.transaction_type_text;
+        if (
+          transactionTypeText === "DOCTOR_REQUEST" &&
+          transaction.patient._id === patientId
+        ) {
+          console.log("validated");
+          const inputPayload = {
+            variables: {
+              input: {
+                transaction_type_id: PATIENT_APPROVED_TRANSACTION_ID,
+                doctor_id: transaction.doctor._id,
+                transaction_is_closed: false,
+                transaction_hash: null,
+                patient_id: transaction.patient._id,
+                opportunity_id: null,
+                medical_record_id: null,
+              },
+              updateTransactionId: transaction._id,
+            },
+          };
+          const doctorName = `${transaction.doctor.doctor_name} ${transaction.doctor.doctor_last_name}`;
+          dispatch(
+            setNotificationInfo({
+              message: `Data Request from Doctor ${doctorName}`,
+              iconSource: require("./../assets/icons/doctor.png"),
+              btnText: "Accept",
+              navigationScreen: "",
+              payload: inputPayload,
+            }),
+          );
+        }
+      }
+    },
+  });
 
+  const { _aaa, _bbb, _ccc } = useSubscription(NEW_MEDICAL_HEALTH_INFO, {
+    onData: async ({ data }) => {
+      const appliedPatientArray =
+        data.data.newAdvertisement.opportunity_id.applied_patient;
+      console.log(
+        JSON.stringify(
+          data.data.newAdvertisement.opportunity_id.applied_patient,
+        ),
+      );
+
+      const foundTransaction = appliedPatientArray.find((transaction) => {
+        return transaction.patient._id === patientId;
+      });
+      console.log("transaction start");
+      console.log(foundTransaction);
+      console.log("transaction end");
+      if (appliedPatientArray.length > 0 && foundTransaction) {
+        dispatch(toggleNotificationIconState(true));
+      }
+
+      // if (data) {
+      //   const transactionTypeText =
+      //     transaction.transaction_type.transaction_type_text;
+      //   if (
+      //     transactionTypeText === "DOCTOR_REQUEST" &&
+      //     transaction.patient._id === patientId
+      //   ) {
+      //     console.log("validated");
+      //     const inputPayload = {
+      //       variables: {
+      //         input: {
+      //           transaction_type_id: PATIENT_APPROVED_TRANSACTION_ID,
+      //           doctor_id: transaction.doctor._id,
+      //           transaction_is_closed: false,
+      //           transaction_hash: null,
+      //           patient_id: transaction.patient._id,
+      //           opportunity_id: null,
+      //           medical_record_id: null,
+      //         },
+      //         updateTransactionId: transaction._id,
+      //       },
+      //     };
+      //     const doctorName = `${transaction.doctor.doctor_name} ${transaction.doctor.doctor_last_name}`;
+      //     dispatch(
+      //       setNotificationInfo({
+      //         message: `Data Request from Doctor ${doctorName}`,
+      //         iconSource: require("./../assets/icons/doctor.png"),
+      //         btnText: "Accept",
+      //         navigationScreen: "",
+      //         payload: inputPayload,
+      //       }),
+      //     );
+      //   }
+      // }
+    },
+  });
 
   const renderTabIcon = (
     route: any,
@@ -56,17 +174,25 @@ const PrivateRoutes = () => {
 
       case PRIVATESCREENS.CLINICAL_REPORT:
         return (
-          <Image
-            source={
-              focused
-                ? require("../assets/navbar-icons/clinical-report-focused.png")
-                : require("../assets/navbar-icons/clinical-report.png")
-            }
-            style={{
-              width: 20,
-              height: 24,
-            }}
-          />
+          <>
+            <Image
+              source={
+                focused
+                  ? require("../assets/navbar-icons/clinical-report-focused.png")
+                  : require("../assets/navbar-icons/clinical-report.png")
+              }
+              style={{
+                width: 20,
+                height: 24,
+              }}
+            />
+            <View
+              style={[
+                styles.redDot,
+                { display: clinicalNotificationState ? "flex" : "none" },
+              ]}
+            ></View>
+          </>
         );
 
       case PRIVATESCREENS.DASHBOARD:
@@ -154,7 +280,7 @@ const PrivateRoutes = () => {
             backgroundColor: '#F196A8'
           }
         })}
-      > 
+      >
         <Tab.Screen
           name={PRIVATESCREENS.DASHBOARD}
           component={YourBioverseScreen}
@@ -185,3 +311,15 @@ const PrivateRoutes = () => {
   );
 };
 export default PrivateRoutes;
+
+const styles = StyleSheet.create({
+  redDot: {
+    position: "absolute",
+    top: 0,
+    right: 20,
+    width: 6,
+    height: 6,
+    backgroundColor: "#F196A8",
+    borderRadius: 6,
+  },
+});

@@ -31,8 +31,8 @@ import { RootState } from "redux/store";
 interface Props {}
 
 const LoginScreen: React.FC<Props> = () => {
-  const [username, setUser] = useState("patient@peachbioverse.com");
-  const [password, setPass] = useState("12341234");
+  const [username, setUser] = useState("");
+  const [password, setPass] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isUserValid, setIsUserValid] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
@@ -155,12 +155,14 @@ const LoginScreen: React.FC<Props> = () => {
   }, []);
 
   return (
-    <>
-      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+    <View style={styles.scrollViewContainer}>
+      <ScrollView>
         <View style={styles.logo}>
           <Image
-            source={require("../../assets/contribute-data/peach-logo.png")}
+            source={require("../../assets/contribute-data/peach-logo-3x.png")}
             style={{
+              width: 60,
+              height: 60,
               marginTop: 70,
               marginLeft: 30,
             }}
@@ -239,7 +241,6 @@ const LoginScreen: React.FC<Props> = () => {
             <Text style={{ fontSize: 14, color: "#ECF1E8", marginTop: 150 }}>
               {t("loginScreen.signUp")}
             </Text>
-
           </View>
         </KeyboardAvoidingView>
         {/*<View style={styles.container}>*/}
@@ -252,7 +253,7 @@ const LoginScreen: React.FC<Props> = () => {
           style={styles.backgroundImage}
         />
       </ScrollView>
-    </>
+    </View>
   );
 };
 
@@ -263,15 +264,10 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    bottom: 1,
     marginLeft: 0,
-    marginTop: 610,
-    width: 412,
-    zIndex: -1
-
+    zIndex: -1,
+    width: "100%",
   },
 
   container: {
@@ -335,7 +331,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: "white",
     fontWeight: "700",
-    marginTop: 40,
+    marginTop: 30,
   },
   loginContainer: {
     width: "100%",

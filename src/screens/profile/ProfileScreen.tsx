@@ -118,27 +118,6 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     },
   });
 
-  const { _aa, _bb, _cc } = useSubscription(NEW_TRANSACTION, {
-    onData: async ({ data }) => {
-      console.log(data.data.newTransaction);
-      if (data) {
-        const transactionTypeText =
-          data.data.newTransaction.patient.transaction_id[0].transaction_type
-            .transaction_type_text;
-        if (transactionTypeText === "DOCTOR_REQUEST") {
-          console.log("validated");
-          dispatch(setNotificationInfo({
-            message: 'Data Request from Doctor Eddie Hui',
-            iconSource: require('../../assets/icons/doctor.png'),
-            btnText: 'Accept',
-            navigationScreen: '',
-          }))
-          await callGraphQlAPI();
-        }
-      }
-    },
-  });
-
   const handleTabPress = async (tabName: string) => {
     setActiveTab(() => {
       const newCount = tabName;
@@ -148,9 +127,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       return newCount;
     });
   };
-  const handleLogout = () => {
-    dispatch(setLogout());
-  };
+
   const handleItemPress = (OpportunityRecord: any) => {
     NavigationService.push(PRIVATESCREENS.OPPORTUNITY_RECORD, {
       OpportunityRecord,
@@ -208,9 +185,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   // eslint-disable-next-line react/no-unstable-nested-components
   const Screen1 = () => {
     return (
-      <View
-        style={styles.tabContainer}
-      >
+      <View style={styles.tabContainer}>
         <ScrollView>
           {data?.opportunities?.map((item: any, key: any) => (
             <OpportunityCard key={`opportunity-card-${key}`} {...item} />
@@ -225,9 +200,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   // eslint-disable-next-line react/no-unstable-nested-components
   const Screen2 = () => {
     return (
-      <View
-        style={styles.tabContainer}
-      >
+      <View style={styles.tabContainer}>
         <SharedDataCard />
       </View>
     );
@@ -235,9 +208,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
 
   const Screen3 = () => {
     return (
-      <View
-        style={styles.tabContainer}
-      >
+      <View style={styles.tabContainer}>
         <ScrollView>
           {followUpRequest?.map((item: any, key: any) => (
             <FollowUpRequestCard
@@ -441,7 +412,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           style={{
             borderRadius: 20,
             backgroundColor: "#FAFAFA",
-            width: ScreenWidth * 0.9,
+            // width: ScreenWidth * 0.9,
             padding: 10,
             paddingTop: 0,
             marginBottom: 18,
@@ -496,6 +467,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
               }}
             >
               <Text
+                numberOfLines={2}
                 style={{
                   fontSize: 16,
                   fontWeight: "600",
@@ -504,6 +476,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                   color: "#383D39",
                 }}
               >
+                {opportunityData.opportunity_name}{" "}
                 {opportunityData.opportunity_name}
               </Text>
               <View
@@ -540,7 +513,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
               </View>
               <View
                 style={{
-                  flex: 1,
+                  flex: 2,
                   flexDirection: "row",
                 }}
               >
@@ -916,10 +889,11 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header titleText="Contributions" subTitleText="Contribute Data Now to Get Rewards"></Header>
-      <View
-        style={styles.mainContainer}
-      >
+      <Header
+        titleText="Contributions"
+        subTitleText="Contribute Data Now to Get Rewards"
+      ></Header>
+      <View style={styles.mainContainer}>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}

@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React, { useMemo, useEffect, useState } from "react";
 import {
   View,
@@ -1165,9 +1164,12 @@ const FollowupRequestRecordScreen: React.FC<
             </View>
             <Button
               isLoading={isLoading}
-              onPress={() =>
-                NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA)
-              }
+              onPress={() => {
+                setPopupVisible(false);
+                NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA, {
+                  screen: "Screen1",
+                });
+              }}
               text={t("OpportunitiesRecord.text14")}
               bgColor="#7BA040"
               textColor="white"

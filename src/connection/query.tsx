@@ -51,6 +51,7 @@ export const GET_ALL_OPPORTUNITY = gql`
         updated_at
         deleted_at
       }
+
       opportunity_picture_banner
       opportunity_name
       opportunity_description
@@ -64,6 +65,17 @@ export const GET_ALL_OPPORTUNITY = gql`
       created_at
       updated_at
       deleted_at
+      medical_health_info {
+        _id
+        advertisement_click
+        advertisement_content
+        advertisement_image
+        advertisement_title
+        advertisement_views
+        created_at
+        deleted_at
+        updated_at
+      }
     }
   }
 `;

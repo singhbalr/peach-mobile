@@ -4,14 +4,19 @@ interface AppState {
   notificationIconState: boolean
   notificationInfo: any
   sidebarState: boolean
+  clinicalNotificationState: boolean
+  ctaModalNotificationState: boolean
 }
 const initialState = {
   notificationIconState: false,
+  clinicalNotificationState: true,
+  ctaModalNotificationState: false,
   notificationInfo: {
     message: '',
     iconSource: '',
     btnText: '',
     navigationScreen: '',
+    payload: {}
   },
   sidebarState: false,
 }
@@ -22,6 +27,12 @@ const appSlice = createSlice({
     toggleNotificationIconState: (state: AppState, action: { payload: boolean }) => {
       state.notificationIconState = action.payload
     },
+    toggleClinicalNotificationState: (state: AppState, action: { payload: boolean }) => {
+      state.clinicalNotificationState = action.payload
+    },
+    toggleCtaModalNotificationState: (state: AppState, action: { payload: boolean }) => {
+      state.ctaModalNotificationState = action.payload
+    },
     setNotificationInfo: (state: AppState, action: { payload: object }) => {
       state.notificationInfo = action.payload
     },
@@ -30,12 +41,14 @@ const appSlice = createSlice({
         message: '',
         iconSource: '',
         btnText: '',
-        navigationScreen: null
+        navigationScreen: null,
+        payload: {}
       }
     },
     setSidebarState: (state: AppState, action: { payload: boolean }) => {
       state.sidebarState = action.payload;
     },
+    resetAppState: () => initialState,
   },
 })
 
@@ -46,4 +59,7 @@ export const {
   setNotificationInfo,
   removeNotificationInfo,
   setSidebarState,
+  resetAppState,
+  toggleClinicalNotificationState,
+  toggleCtaModalNotificationState
 } = appSlice.actions

@@ -64,7 +64,9 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     </RNBounceable>
   );
   const goToSharedData = () => {
-    NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA);
+    NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA, {
+      screen: "Screen1",
+    });
   };
 
   const Header = () => (
