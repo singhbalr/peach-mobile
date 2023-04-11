@@ -66,7 +66,7 @@ const Onboarding: React.FC<Props> = () => {
           thumbnail={require("../../assets/contribute-data/onboarding.png")}
           resizeMode="contain"
           controls={true}
-          playWhenInactive={true}
+          playWhenInactive={false}
           //paused={!isVideoPlaying} // Pause the video if isVideoPlaying is false
           //onTouchStart={handleVideoPress} // Call handleVideoPress when video is clicked
         />
