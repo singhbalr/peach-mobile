@@ -20,7 +20,16 @@ export const formatUnixTimestamp = (timestamp: number) => {
   const date = moment.unix(unixTimestamp);
   return date.format("DD MMM YYYY");
 };
-
+export const formatUnixTimestampSharedData = (timestamp: number) => {
+  const unixTimestamp = Math.floor(timestamp / 1000);
+  const date = moment.unix(unixTimestamp);
+  return date.format("DD/MM/YYYY");
+};
+export const formatUnixTimestampTime = (timestamp: number) => {
+  const unixTimestamp = Math.floor(timestamp / 1000);
+  const date = moment.unix(unixTimestamp);
+  return date.format("hh:mm a");
+};
 export const maskHKID = (hkid: string) => {
   if(!hkid){
     return null

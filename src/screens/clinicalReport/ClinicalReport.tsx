@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -16,16 +16,18 @@ import InstitutionsSvg from "../../assets/icons/institutions.svg";
 import ClinicalSvg from "../../assets/icons/clinical.svg";
 import GeneticSvg from "../../assets/icons/genetic.svg";
 import MedicalSvg from "../../assets/icons/medical.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { formatUnixTimestamp, maskHKID } from "utils";
 import { t } from "i18next";
+import { toggleClinicalNotificationState } from "redux/reducer";
 const ClinicalReport: React.FC = () => {
   // const handleItemPress = () => {
   //   NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
   //     activeIndex: 2,
   //   });
   // };
+  const dispatch = useDispatch();
   const handleItemPress = (fileRecord: any, medicalRecord: any) => {
     NavigationService.push(PRIVATESCREENS.CLINICAL_FILE_VIEWER, {
       pageIndex: 2,
@@ -37,22 +39,10 @@ const ClinicalReport: React.FC = () => {
   const patientDetails = useSelector(
     (state: RootState) => state.auth.patientDetails,
   );
-  // const fileTypes = ['GENETIC_DATA', 'MEDICAL_IMAGING', 'CLINICAL_RECORD']
-  // const patientList = patientDetails.medical_record.map(item => {
-  //   console.log({item})
-  //   // console.log(222, item.medical_record_file)
-  //   item.medical_record_file.map((child: any) => {
-  //     const buttonIndexs:number[] = []
-  //     console.log(333, child.medical_record_file_type_id.file_type)
-  //     const fileTypeIndex = fileTypes.findIndex(el => el === child.medical_record_file_type_id.file_type)
-  //     buttonIndexs.push(fileTypeIndex)
-  //     console.log(666, {buttonIndexs})
-  //   })
-  //   return {
-  //     ...item,
-  //     buttonIndexs
-  //   }
-  // })
+
+  useEffect(() => {
+    dispatch(toggleClinicalNotificationState(false));
+  }, []);
 
   const returnIcon = (fileValue, fileIndex) => {
     switch (fileValue.medical_record_file_type_id.file_type) {
