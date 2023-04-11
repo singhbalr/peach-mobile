@@ -332,6 +332,41 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
   };
 
   const Screen2 = () => {
+    const data = [
+      {
+        label: (
+          <Text style={{ color: "black" }}>
+            {t("MyShareData.label1")}{" "}
+            <Text style={{ fontWeight: "bold", color: "#7BA040" }}>
+              {t("MyShareData.label1-1")}
+            </Text>
+          </Text>
+        ),
+        date: <Text style={{ color: "black" }}>01/03/2023</Text>,
+        time: <Text style={{ color: "black" }}>10:30am</Text>,
+      },
+      {
+        label: t("MyShareData.label2"),
+        date: "01/03/2023",
+        time: "10:30am",
+      },
+      {
+        label: t("MyShareData.label3"),
+        date: "01/03/2023",
+        time: "10:30am",
+      },
+      {
+        label: t("MyShareData.label4"),
+        date: "01/03/2023",
+        time: "10:30am",
+      },
+      {
+        label: t("MyShareData.label5"),
+        date: "01/03/2023",
+        time: "10:30am",
+      },
+    ];
+
     return sharedDataByPatient.map((value, index) => {
       if (!value.doctor) {
         return <></>;
@@ -372,163 +407,163 @@ const MyShareData: React.FC<MyShareDataProps> = () => {
 
           {/*Center container */}
 
-          {/*  <View*/}
-          {/*    style={{*/}
-          {/*      backgroundColor: "#fafafa",*/}
-          {/*      borderRadius: 15,*/}
-          {/*      padding: 20,*/}
-          {/*      marginBottom: 10,*/}
-          {/*      marginTop: 20,*/}
-          {/*    }}*/}
-          {/*  >*/}
-          {/*    /!* <View*/}
-          {/*  style={{*/}
-          {/*    flexDirection: "row",*/}
-          {/*  }}*/}
-          {/*>*/}
-          {/*  <Image*/}
-          {/*    source={require("../../assets/contribute-data/info-icon.png")}*/}
-          {/*    style={{*/}
-          {/*      marginTop: 5,*/}
-          {/*      width: 9,*/}
-          {/*      height: 9,*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*  <Text*/}
-          {/*    style={{*/}
-          {/*      marginHorizontal: 10,*/}
-          {/*    }}*/}
-          {/*  >*/}
-          {/*    Your name, phone number, date of birth and the first 4 digits of*/}
-          {/*    your Hong Kong Identity Card number.*/}
-          {/*  </Text>*/}
-          {/*</View> *!/*/}
-          {/*    <View*/}
-          {/*      style={{*/}
-          {/*        flexDirection: "row",*/}
-          {/*      }}*/}
-          {/*    >*/}
-          {/*      <Image*/}
-          {/*        source={require("../../assets/contribute-data/clinical-record-icon.png")}*/}
-          {/*        style={{*/}
-          {/*          marginTop: 5,*/}
-          {/*          width: 9,*/}
-          {/*          height: 9,*/}
-          {/*        }}*/}
-          {/*      />*/}
-          {/*      <Text*/}
-          {/*        style={{*/}
-          {/*          marginHorizontal: 10,*/}
-          {/*        }}*/}
-          {/*      >*/}
-          {/*        {t("MyShareData.text1")}*/}
-          {/*      </Text>*/}
-          {/*    </View>*/}
-          {/*    <View*/}
-          {/*      style={{*/}
-          {/*        flexDirection: "row",*/}
-          {/*      }}*/}
-          {/*    >*/}
-          {/*      <Image*/}
-          {/*        source={require("../../assets/contribute-data/iot-icon.png")}*/}
-          {/*        style={{*/}
-          {/*          marginTop: 5,*/}
-          {/*          width: 9,*/}
-          {/*          height: 9,*/}
-          {/*        }}*/}
-          {/*      />*/}
-          {/*      <Text*/}
-          {/*        style={{*/}
-          {/*          marginHorizontal: 10,*/}
-          {/*        }}*/}
-          {/*      >*/}
-          {/*        {t("MyShareData.text2")}*/}
-          {/*      </Text>*/}
-          {/*    </View>*/}
-          {/*  </View>*/}
+          <View
+            style={{
+              backgroundColor: "#fafafa",
+              borderRadius: 15,
+              padding: 20,
+              marginBottom: 10,
+              marginTop: 20,
+            }}
+          >
+            {/* <View
+            style={{
+              flexDirection: "row",
+            }}
+          >
+            <Image
+              source={require("../../assets/contribute-data/info-icon.png")}
+              style={{
+                marginTop: 5,
+                width: 9,
+                height: 9,
+              }}
+            />
+            <Text
+              style={{
+                marginHorizontal: 10,
+              }}
+            >
+              Your name, phone number, date of birth and the first 4 digits of
+              your Hong Kong Identity Card number.
+            </Text>
+          </View> */}
+            <View
+              style={{
+                flexDirection: "row",
+              }}
+            >
+              <Image
+                source={require("../../assets/contribute-data/clinical-record-icon.png")}
+                style={{
+                  marginTop: 5,
+                  width: 9,
+                  height: 9,
+                }}
+              />
+              <Text
+                style={{
+                  marginHorizontal: 10,
+                }}
+              >
+                {t("MyShareData.text1")}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+              }}
+            >
+              <Image
+                source={require("../../assets/contribute-data/iot-icon.png")}
+                style={{
+                  marginTop: 5,
+                  width: 9,
+                  height: 9,
+                }}
+              />
+              <Text
+                style={{
+                  marginHorizontal: 10,
+                }}
+              >
+                {t("MyShareData.text2")}
+              </Text>
+            </View>
+          </View>
 
-          {/*  <View*/}
-          {/*    style={{*/}
-          {/*      flex: 1,*/}
-          {/*      flexDirection: "row",*/}
-          {/*      justifyContent: "space-between",*/}
-          {/*    }}*/}
-          {/*  >*/}
-          {/*    <Text*/}
-          {/*      style={{*/}
-          {/*        fontSize: 16,*/}
-          {/*        fontWeight: "700",*/}
-          {/*        marginTop: 20,*/}
-          {/*        marginBottom: 5,*/}
-          {/*        marginLeft: 10,*/}
-          {/*        color: "#000",*/}
-          {/*      }}*/}
-          {/*    >*/}
-          {/*      {t("MyShareData.text3")}*/}
-          {/*    </Text>*/}
-          {/*    <Image*/}
-          {/*      source={require("../../assets/contribute-data/angle_up_icon.png")}*/}
-          {/*      style={{*/}
-          {/*        marginTop: 17,*/}
-          {/*        width: 30,*/}
-          {/*        height: 30,*/}
-          {/*        marginRight: 10,*/}
-          {/*      }}*/}
-          {/*    />*/}
-          {/*  </View>*/}
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "700",
+                marginTop: 20,
+                marginBottom: 5,
+                marginLeft: 10,
+                color: "#000",
+              }}
+            >
+              {t("MyShareData.text3")}
+            </Text>
+            <Image
+              source={require("../../assets/contribute-data/angle_up_icon.png")}
+              style={{
+                marginTop: 17,
+                width: 30,
+                height: 30,
+                marginRight: 10,
+              }}
+            />
+          </View>
 
-          {/*  /!*Step Indicator *!/*/}
+          {/*Step Indicator */}
 
-          {/*  <View*/}
-          {/*    style={{*/}
-          {/*      flex: 1,*/}
-          {/*      backgroundColor: "#fff",*/}
-          {/*      paddingHorizontal: 5,*/}
-          {/*      marginTop: 20,*/}
-          {/*    }}*/}
-          {/*  >*/}
-          {/*    <View*/}
-          {/*      style={{*/}
-          {/*        padding: 10,*/}
-          {/*        paddingTop: 0,*/}
-          {/*        margin: 15,*/}
-          {/*        marginLeft: 1,*/}
-          {/*        backgroundColor: "#fff",*/}
-          {/*      }}*/}
-          {/*    >*/}
-          {/*      {data.map((val, i) => (*/}
-          {/*        <View style={{ flexDirection: "row" }} key={i}>*/}
-          {/*          <View style={{ marginRight: 10 }}>*/}
-          {/*            <Text>{val.date}</Text>*/}
-          {/*            <Text>{val.time}</Text>*/}
-          {/*          </View>*/}
-          {/*          <View style={{ alignItems: "center" }}>*/}
-          {/*            <View*/}
-          {/*              style={{*/}
-          {/*                width: 15,*/}
-          {/*                height: 15,*/}
-          {/*                backgroundColor: "#7BA040",*/}
-          {/*                borderRadius: 7.5,*/}
-          {/*                marginHorizontal: 10,*/}
-          {/*              }}*/}
-          {/*            />*/}
-          {/*            {i + 1 !== data.length && (*/}
-          {/*              <View*/}
-          {/*                style={{*/}
-          {/*                  width: 5,*/}
-          {/*                  height: 50,*/}
-          {/*                  backgroundColor: "#7BA040",*/}
-          {/*                }}*/}
-          {/*              />*/}
-          {/*            )}*/}
-          {/*          </View>*/}
-          {/*          <Text style={{ maxWidth: 160, marginLeft: 10 }}>*/}
-          {/*            {val.label}*/}
-          {/*          </Text>*/}
-          {/*        </View>*/}
-          {/*      ))}*/}
-          {/*    </View>*/}
-          {/*  </View>*/}
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "#fff",
+              paddingHorizontal: 5,
+              marginTop: 20,
+            }}
+          >
+            <View
+              style={{
+                padding: 10,
+                paddingTop: 0,
+                margin: 15,
+                marginLeft: 1,
+                backgroundColor: "#fff",
+              }}
+            >
+              {data.map((val, i) => (
+                <View style={{ flexDirection: "row" }} key={i}>
+                  <View style={{ marginRight: 10 }}>
+                    <Text>{val.date}</Text>
+                    <Text>{val.time}</Text>
+                  </View>
+                  <View style={{ alignItems: "center" }}>
+                    <View
+                      style={{
+                        width: 15,
+                        height: 15,
+                        backgroundColor: "#7BA040",
+                        borderRadius: 7.5,
+                        marginHorizontal: 10,
+                      }}
+                    />
+                    {i + 1 !== data.length && (
+                      <View
+                        style={{
+                          width: 5,
+                          height: 50,
+                          backgroundColor: "#7BA040",
+                        }}
+                      />
+                    )}
+                  </View>
+                  <Text style={{ maxWidth: 160, marginLeft: 10 }}>
+                    {val.label}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          </View>
         </View>
       );
     });
