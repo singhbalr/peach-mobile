@@ -6,6 +6,8 @@ import {
   View,
   ViewStyle,
   Animated,
+  Easing,
+  TouchableOpacity
 } from "react-native";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
@@ -15,6 +17,8 @@ import { PRIVATESCREENS } from "@shared-constants";
 import Header from "../../components/Header";
 import Popup from "../../components/Popup";
 import MaleBodySvg from "../../assets/dashboard/male-body.svg";
+import ThoraxBodySvg from "../../assets/dashboard/body-thorax.svg";
+import UpperBodySvg from "../../assets/dashboard/body-upper.svg";
 import ReportSvg from "../../assets/dashboard/report.svg";
 import LiverSvg from "../../assets/dashboard/liver.svg";
 import PancreasSvg from "../../assets/dashboard/pancreas.svg";
@@ -22,9 +26,10 @@ import StomachSvg from "../../assets/dashboard/stomach.svg";
 import BloodSvg from "../../assets/dashboard/blood.svg";
 import HeartSvg from "../../assets/dashboard/heart.svg";
 import LungsSvg from "../../assets/dashboard/lungs.svg";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import SearchSvg from "../../assets/dashboard/search.svg";
 import { t } from "i18next";
 import BodyParts from "./components/BodyParts";
+import Search from "./components/Search";
 
 interface HomeScreenProps {}
 interface ButtonProps {
@@ -70,9 +75,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     thorax: 0,
     upperabdomen: 0,
   });
-  const [activeItem, setActiveItem] = useState<object>({
+  const [activeItem, setActiveItem] = useState<{name: string, children: {name: string, icon: any, reportCount: number}[]}>({
     name: "",
-    children: [],
+    children: [{
+      name: '',
+      icon: '',
+      reportCount: 0
+    }]
   });
   const patientDetails = useSelector(
     (state: RootState) => state.auth.patientDetails,
@@ -139,20 +148,84 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     // Return null if no medical record file has "liver" in its metadata
     return resultsArray;
   };
-
-  const selectBodyParts = (item: React.SetStateAction<object>) => {
-    setPopupVisible(true);
-    setActiveItem(item);
-    handlePress();
-  };
+  // animation
+  const [activeBodySvg, setActiveBodySvg] = useState<string>('');
   const [animation] = useState(new Animated.Value(0));
-  const handlePress = () => {
+  const [translateY, setTranslateY] = useState<any>(animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 0],
+  }))
+  const [scale, setScale] = useState<any>(animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 1],
+  }))
+  const [opacity, setOpacity] = useState<any>(animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 1],
+  }))
+  const [bodyContainerTranslateY, setBodyContainerTranslateY] = useState<any>(animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 0],
+  }))
+  const performAnimation = () => {
     Animated.timing(animation, {
       toValue: 1,
-      duration: 1000,
+      duration: 300,
+      easing: Easing.ease,
       useNativeDriver: true,
     }).start();
   };
+  // body parts click event
+  const selectBodyParts = (item: React.SetStateAction<object>) => {
+    setActiveBodySvg(item.identifier)
+    if (item.animation) {
+      console.log(333, activeBodySvg)
+      const topRange = [0, item.animation.top]
+      const scaleRange = [1, item.animation.scale]
+      setTranslateY(animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: topRange,
+      }))
+      setScale(animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: scaleRange,
+      }))
+      setOpacity(animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [1, 0],
+      }))
+      setBodyContainerTranslateY(animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 0],
+      }))
+    }
+    setPopupVisible(true);
+    setActiveItem(item);
+    performAnimation();
+  };
+  // search
+  const [searchPopupVisible, setSearchPopupVisible] = useState<boolean>(false)
+  const handleClickSearch = () => {
+    setSearchPopupVisible(true)
+    setTranslateY(animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 0],
+    }))
+    setScale(animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 1],
+    }))
+    setOpacity(animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 0],
+    }))
+    setBodyContainerTranslateY(animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, -130],
+    }))
+    performAnimation()
+  }
+
 
   useEffect(() => {
     fetchAllMedicalRecord();
@@ -337,13 +410,9 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         }
       }
     }
-    console.log(counts);
+    console.log({counts});
     setSectionCount(counts);
   };
-
-  // useEffect(() => {
-  //   buttonList();
-  // }, [fileRecordList]);
 
   const buttonList = [
     {
@@ -356,6 +425,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     {
       name: t("YourBioverseScreen.name2"),
       classname: "buttonTwo",
+      identifier: "thorax",
+      reportCount: sectionCount["thorax"],
+      animation: {
+        top: 25,
+        scale: 2.4
+      },
+      svg: <ThoraxBodySvg />,
       children: [
         {
           name: t("YourBioverseScreen.name23"),
@@ -374,14 +450,17 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           name: t("YourBioverseScreen.name26"),
         },
       ],
-      identifier: "thorax",
-      reportCount: sectionCount["thorax"],
     },
     {
       name: t("YourBioverseScreen.name3"),
       classname: "buttonThree",
       identifier: "upperabdomen",
       reportCount: sectionCount["upperabdomen"],
+      animation: {
+        top: -70,
+        scale: 2.4
+      },
+      svg: <UpperBodySvg />,
       children: [
         {
           name: t("YourBioverseScreen.name7"),
@@ -466,24 +545,18 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     },
   ];
 
-  const translateY = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, -100],
-  });
-  const scale = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 2],
-  });
   return (
     <SafeAreaView style={styles.container}>
-      <Header
-        titleText={t("YourBioverseScreen.title")}
-        subTitleText={t("YourBioverseScreen.subtitle")}
-      ></Header>
-      <View style={styles.bodyContainer}>
+      <Animated.View style={{ opacity }}>
+        <Header
+          titleText={t("YourBioverseScreen.title")}
+          subTitleText={t("YourBioverseScreen.subtitle")}
+        ></Header>
+      </Animated.View>
+      <Animated.View style={[styles.bodyContainer, {transform: [{translateY: bodyContainerTranslateY}]}]}>
         {buttonList.map((item, index) => {
           return (
-            <View key={item.name} style={styles[item.classname]}>
+            <View key={item.name} style={[styles[item.classname], {display: popupVisible ? 'none' : ''}]}>
               <BodyButton
                 buttonText={item.name}
                 reportCount={item.reportCount}
@@ -494,29 +567,26 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             </View>
           );
         })}
-        <View style={styles.bodySvg}>
-          <MaleBodySvg height={580}></MaleBodySvg>
-        </View>
-      </View>
-      {popupVisible && (
-        <View style={styles.bodyDetailView}>
-          {/* <Animated.Image
-              source={require("../../assets/dashboard/body-detail-1x.png")}
-              style={[styles.bodyDetailImage, { transform: [{ translateY }, { scale }] }]}
-            /> */}
-          <Image
-            source={
-              activeItem.classname === "buttonTwo"
-                ? require("../../assets/dashboard/body-thorax.png")
-                : activeItem.classname === "buttonThree"
-                ? require("../../assets/dashboard/body-detail.png")
-                : ""
-            }
-            style={styles.bodyDetailImage}
-            resizeMode={"cover"}
-          ></Image>
-        </View>
-      )}
+        <Animated.View style={[styles.bodySvg, { transform: [{ translateY }, { scale }] }]}>
+          <MaleBodySvg height={'100%'} style={{display: popupVisible ? 'none' : ''}}></MaleBodySvg>
+          {
+            buttonList.map(svgItem => {
+              if (svgItem.svg) {
+                return (
+                  <View style={{display: svgItem.identifier !== activeBodySvg ? 'none' : ''}}>
+                    {svgItem.svg}
+                  </View>
+                )
+              }
+              return <></>
+            })
+          }
+        </Animated.View>
+        <TouchableOpacity style={styles.search} onPress={() => handleClickSearch()}>
+          <SearchSvg></SearchSvg>
+        </TouchableOpacity>
+      </Animated.View>
+      {/* body parts popup */}
       <Popup
         visible={popupVisible}
         contentElement={
@@ -524,11 +594,34 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             title={activeItem.name}
             dataList={activeItem.children}
             fileRecordList={fileRecordList}
-            onPressList={onPressList}
+            onPressList={() => onPressList}
           />
         }
         onClose={() => {
           setPopupVisible(false);
+          setActiveBodySvg('')
+          Animated.timing(animation, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver: true,
+          }).start();
+        }}
+      />
+      {/* search popup */}
+      <Popup
+        visible={searchPopupVisible}
+        contentElement={
+          <Search
+            buttonList={buttonList}
+          />
+        }
+        onClose={() => {
+          setSearchPopupVisible(false);
+          Animated.timing(animation, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver: true,
+          }).start();
         }}
       />
     </SafeAreaView>
@@ -550,17 +643,21 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 0,
   },
+  search: {
+    position: 'absolute',
+    bottom: -5,
+    left: 27,
+  },
   bodySvg: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     position: "absolute",
-    top: 40,
+    top: 60,
     left: 0,
     right: 0,
     bottom: 0,
     width: "100%",
-    height: 460,
     zIndex: -1,
   },
   bodyButton: {
