@@ -6,8 +6,8 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  SafeAreaView
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/Header";
 import { PRIVATESCREENS } from "@shared-constants";
 import * as NavigationService from "react-navigation-helpers";
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // width: "100%",
     // color: "#fff",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#fafafa",
     // zIndex: 1,
     // marginTop: 25,
   },

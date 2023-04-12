@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity, FlatList, TextInput } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity, FlatList, TextInput, Platform, KeyboardAvoidingView } from 'react-native'
 import InputSearchSvg from "../../../assets/dashboard/input-search.svg";
-import ReportSvg from "../../../assets/dashboard/report.svg";
 
 type ItemProps = {
   index: string | number;
@@ -47,7 +46,6 @@ const Search: React.FC<Props> = (props: Props) => {
   const [searchVal, setSearchVal] = useState<string>('')
   const [searchResult, setSearchResult] = useState<[]>([])
   const searchChange = (nativeEvent) => {
-    console.log(111, nativeEvent?.text)
     if (!nativeEvent?.text) {
       setSearchResult([])
       return false
@@ -68,31 +66,36 @@ const Search: React.FC<Props> = (props: Props) => {
     console.log({name})
   }
   return (
-    <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        <InputSearchSvg></InputSearchSvg>
-        <TextInput
-          style={styles.textInput}
-          autoFocus
-          onChangeText={text => setSearchVal(text)}
-          value={searchVal}
-          onChange={({nativeEvent}) => searchChange(nativeEvent)}
+    <KeyboardAvoidingView
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <View style={styles.container}>
+          <View style={styles.searchContainer}>
+            <InputSearchSvg></InputSearchSvg>
+            <TextInput
+              style={styles.textInput}
+              autoFocus
+              onChangeText={text => setSearchVal(text)}
+              value={searchVal}
+              onChange={({nativeEvent}) => searchChange(nativeEvent)}
+            />
+          </View>
+        <FlatList
+          data={searchResult}
+          renderItem={({ item, index }) => (
+            <Item
+              item={item}
+              index={index}
+              length={searchResult.length}
+              onPressList={() => onPressList(item.name)}
+            />
+          )}
+          style={[styles.flatList]}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
-      <FlatList
-        data={searchResult}
-        renderItem={({ item, index }) => (
-          <Item
-            item={item}
-            index={index}
-            length={searchResult.length}
-            onPressList={() => onPressList(item.name)}
-          />
-        )}
-        style={[styles.flatList]}
-        keyExtractor={(item, index) => index.toString()}
-      />
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 export default Search

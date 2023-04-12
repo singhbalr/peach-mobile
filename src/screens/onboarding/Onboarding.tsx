@@ -45,8 +45,8 @@ const Onboarding: React.FC<Props> = () => {
           style={{
             width: 60,
             height: 60,
-            marginTop: 70,
-            marginLeft: 30,
+            marginTop: 72,
+            marginLeft: 14,
           }}
         />
       </View>
@@ -57,29 +57,29 @@ const Onboarding: React.FC<Props> = () => {
             uri: "https://drive.google.com/uc?export=download&id=1ao6KvvZUJGCR311e1bR7ISfkqJuSpgqx",
           }}
           style={{
-            marginTop: 50,
-            marginBottom: 50,
-            width: 350,
-            height: 200,
-            borderRadius: 25,
+            marginVertical: 30,
+            width: '100%',
+            height: 190,
+            borderRadius: 15,
           }}
           thumbnail={require("../../assets/contribute-data/onboarding.png")}
-          resizeMode="contain"
+          resizeMode="cover"
           controls={true}
           playWhenInactive={false}
           //paused={!isVideoPlaying} // Pause the video if isVideoPlaying is false
           //onTouchStart={handleVideoPress} // Call handleVideoPress when video is clicked
         />
         <Text style={styles.subTitle}>{t("OnBoarding.subtitle")}</Text>
-        <KeyboardAvoidingView>
+        <KeyboardAvoidingView style={styles.btnView}>
           <PIbutton
             text={t("OnBoarding.titleButton")}
             type="secondary"
             style={{
+              width: '100%',
               backgroundColor: "white",
               borderRadius: 45,
               borderColor: "white",
-              marginTop: 25,
+              marginTop: 30,
               padding: 7,
             }}
             onPress={handleExplorePress}
@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    // alignSelf: "stretch",
   },
   backgroundImage: {
     position: "absolute",
@@ -111,23 +110,26 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    paddingHorizontal: 34,
     paddingTop: 3,
     marginBottom: 70,
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
+    fontWeight: 'bold',
+    lineHeight: 33,
     color: "white",
-    fontWeight: "700",
   },
   subTitle: {
-    fontSize: 16,
+    fontSize: 18,
     color: "white",
+    lineHeight: 27,
     fontWeight: "500",
     textAlign: "center",
-    marginLeft: 30,
-    marginRight: 30,
-    lineHeight: 30,
+    paddingHorizontal: 18,
+  },
+  btnView: {
+    width: '100%'
   },
   logo: {
     padding: 3,
