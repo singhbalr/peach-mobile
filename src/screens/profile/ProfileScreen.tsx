@@ -413,7 +413,11 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                         lineHeight: 21,
                       }}
                     >
-                      HK${item.reward_amount}
+                      {item.reward_type_description.reward_type ===
+                      "CASH_COUPON"
+                        ? "HK$"
+                        : ""}
+                      {item.reward_amount}
                     </Text>
                     <Text
                       style={{
@@ -564,7 +568,11 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                         lineHeight: 21,
                       }}
                     >
-                      HK${item.reward_amount}
+                      {item.reward_type_description.reward_type ===
+                      "CASH_COUPON"
+                        ? "HK$"
+                        : ""}
+                      {item.reward_amount}
                     </Text>
                     <Text
                       style={{

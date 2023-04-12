@@ -39,6 +39,7 @@ const Item: React.FC<ItemProps> = (props: ItemProps) => {
         NavigationService.push(PRIVATESCREENS.HEALTH_INFO_DETAIL, {
           opportunityData: item.opportunity,
           index: item.index,
+          showMoreOpportunities: true,
         });
       }}
     >
