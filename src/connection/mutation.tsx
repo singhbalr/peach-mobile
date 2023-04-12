@@ -246,6 +246,10 @@ export const PATIENT_LOGIN = gql`
         patient_weight
         patient_zipcode
         updated_at
+        contribute_data_count
+        patient_reward_count
+        opportunities_count
+        opportunities_count_filtered
       }
     }
   }

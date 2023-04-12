@@ -50,7 +50,9 @@ const ClinicalFileViewer: React.FC<ClinicalFileViewerProps> = (props) => {
     }
     return null;
   };
-  const title = `Dr. ${medicalRecord.doctor_id.doctor_name} ${medicalRecord.doctor_id.doctor_last_name}`;
+  const title = medicalRecord.doctor_id
+    ? `Dr. ${medicalRecord.doctor_id.doctor_name} ${medicalRecord.doctor_id.doctor_last_name}`
+    : "";
   const clinicalData = getMedicalRecordFileWithType("CLINICAL_RECORD");
   const geneticData = getMedicalRecordFileWithType("GENETIC_DATA");
   const medicalImaging = getMedicalRecordFileWithType("MEDICAL_IMAGING");
@@ -126,7 +128,11 @@ const ClinicalFileViewer: React.FC<ClinicalFileViewerProps> = (props) => {
                   uri: medicalImaging.medical_record_file_link,
                 }}
                 horizontal={true}
-                page={1}
+                enablePaging={true}
+                onPageChanged={(page, numberOfPages) => {
+                  setCurrentPage(page);
+                  setTotalPage(numberOfPages);
+                }}
                 onError={(error) => {
                   console.log(error);
                 }}
@@ -135,6 +141,25 @@ const ClinicalFileViewer: React.FC<ClinicalFileViewerProps> = (props) => {
                 }}
                 style={styles.pdf}
               />
+            </View>
+            <View style={styles.pagination}>
+              <TouchableOpacity
+                onPress={() => {
+                  togglePage(-1);
+                }}
+              >
+                <PrevSvg />
+              </TouchableOpacity>
+              <Text style={styles.currentPage}>
+                {currentPage + "/" + totalPage}
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  togglePage(1);
+                }}
+              >
+                <NextSvg />
+              </TouchableOpacity>
             </View>
           </View>
         );
@@ -149,7 +174,11 @@ const ClinicalFileViewer: React.FC<ClinicalFileViewerProps> = (props) => {
                   uri: geneticData.medical_record_file_link,
                 }}
                 horizontal={true}
-                page={1}
+                enablePaging={true}
+                onPageChanged={(page, numberOfPages) => {
+                  setCurrentPage(page);
+                  setTotalPage(numberOfPages);
+                }}
                 onError={(error) => {
                   console.log(error);
                 }}
@@ -158,6 +187,25 @@ const ClinicalFileViewer: React.FC<ClinicalFileViewerProps> = (props) => {
                 }}
                 style={styles.pdf}
               />
+            </View>
+            <View style={styles.pagination}>
+              <TouchableOpacity
+                onPress={() => {
+                  togglePage(-1);
+                }}
+              >
+                <PrevSvg />
+              </TouchableOpacity>
+              <Text style={styles.currentPage}>
+                {currentPage + "/" + totalPage}
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  togglePage(1);
+                }}
+              >
+                <NextSvg />
+              </TouchableOpacity>
             </View>
           </View>
         );

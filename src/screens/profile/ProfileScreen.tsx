@@ -34,7 +34,10 @@ import moment from "moment";
 import countDaysLeft from "../../components/countDayLeft";
 import { RootState } from "../../redux/store";
 import Header from "components/Header";
-import { setNotificationInfo } from "redux/reducer";
+import {
+  setNotificationInfo,
+  toggleContributeNotificationState,
+} from "redux/reducer";
 
 interface ProfileScreenProps {}
 
@@ -102,6 +105,10 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
         break;
     }
   }, [activeTab]);
+
+  useEffect(() => {
+    dispatch(toggleContributeNotificationState(false));
+  }, []);
 
   const [updateTransaction] = useMutation(
     UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
@@ -762,73 +769,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           </Text>
         </View>
 
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
-          {/* <Icon
-            name={"gift"}
-            type="AntDesign"
-            color={colors.iconBlack}
-            size={30}
-          /> */}
-          {/* reward component */}
-          {/* <View
-            style={{
-              borderRadius: 1,
-              flexDirection: "row",
-              alignItems: "center",
-              padding: 5,
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: "#696C69",
-                borderTopStartRadius: 5,
-                borderBottomStartRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text style={{ color: "#FFFFFF" }}>2 dose</Text>
-            </View>
-            <View
-              style={{
-                backgroundColor: "#999C9A",
-                borderTopEndRadius: 5,
-                borderBottomEndRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text>Shingrix vaccine</Text>
-            </View>
-          </View> */}
-          {/* <View
-            style={{
-              borderRadius: 1,
-              flexDirection: "row",
-              alignItems: "center",
-              padding: 5,
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: "#696C69",
-                borderTopStartRadius: 5,
-                borderBottomStartRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text style={{ color: "#FFFFFF" }}>100 HKD</Text>
-            </View>
-            <View
-              style={{
-                backgroundColor: "#999C9A",
-                borderTopEndRadius: 5,
-                borderBottomEndRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text>K11 Musea</Text>
-            </View>
-          </View> */}
-        </View>
+        <View style={{ flexDirection: "row", justifyContent: "center" }}></View>
       </View>
     );
   };
