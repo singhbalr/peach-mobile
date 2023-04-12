@@ -801,11 +801,9 @@ export const GET_OPPORTUNITY_BY_ORGANIZATION_ID = gql`
 
 export const GET_OPPORTUNITY_BY_ORGANIZATION_ID_FILTERED = gql`
   mutation GetOpportunityByOrganizationIdOpp(
-    $getOpportunityByOrganizationIdOppId: ID!
+    $opportunity: opportunityOrganizationInput!
   ) {
-    getOpportunityByOrganizationIdOpp(
-      id: $getOpportunityByOrganizationIdOppId
-    ) {
+    getOpportunityByOrganizationIdOpp(opportunity: $opportunity) {
       _id
       applied_patient {
         patient {

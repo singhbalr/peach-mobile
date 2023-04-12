@@ -15,7 +15,13 @@ import Line from "../../components/Line";
 import { t } from "i18next";
 import OpportunityCard from "@screens/opportunities/OpportunityCard";
 import { useMutation } from "@apollo/client";
-import { GET_OPPORTUNITY_BY_ORGANIZATION_ID_FILTERED } from "connection/mutation";
+import {
+  GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID,
+  GET_OPPORTUNITY_BY_ORGANIZATION_ID_FILTERED,
+} from "connection/mutation";
+import { useSelector } from "react-redux";
+import { RootState } from "redux/store";
+import { FollowUpRequestCard } from "components/FollowUpRequestCard";
 const DataReceiver: React.FC = () => {
   const theme = useTheme();
   const { colors } = theme;
@@ -24,11 +30,33 @@ const DataReceiver: React.FC = () => {
   const [getOppByOrg] = useMutation(
     GET_OPPORTUNITY_BY_ORGANIZATION_ID_FILTERED,
   );
+  const patientId = useSelector((state: RootState) => state.auth.patientId);
+  const [getFollowUpRequestByPatientId] = useMutation(
+    GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID,
+  );
+  const [followUpRequest, setFollowUpRequest] = useState([]);
+  const fetchFollowUpRequest = async () => {
+    try {
+      const { data } = await getFollowUpRequestByPatientId({
+        variables: {
+          input: {
+            patient_id: patientId,
+          },
+        },
+      });
+      setFollowUpRequest(data.getFollowUpRequestByPatientId);
+    } catch (err) {
+      console.log("Failed to fetch followup request by patient id", err);
+    }
+  };
 
   const loadOpportunity = async () => {
     const { data } = await getOppByOrg({
       variables: {
-        getOpportunityByOrganizationIdOppId: "6434afe5d2fb27638e768583",
+        opportunity: {
+          opportunity_type_id: "6419e3b9db51e4ec7511f1bc",
+          organization_id: "6434afe5d2fb27638e768583",
+        },
       },
     });
 
@@ -39,6 +67,7 @@ const DataReceiver: React.FC = () => {
   };
   useEffect(() => {
     loadOpportunity();
+    fetchFollowUpRequest();
   }, []);
 
   const opportunityData = [
@@ -144,6 +173,12 @@ const DataReceiver: React.FC = () => {
 
           {opportunities.map((item, key) => (
             <OpportunityCard key={key} {...item} />
+          ))}
+          {followUpRequest?.map((item: any, key: any) => (
+            <FollowUpRequestCard
+              key={`followup-request-card-${key}`}
+              {...item}
+            />
           ))}
         </View>
       </ScrollView>
