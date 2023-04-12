@@ -17,16 +17,17 @@ const PInput: ComponentType = (props) => {
       onChangeText={props.onChangeText}
       style={props.style}
       contentStyle={{
-        backgroundColor: '#B5CAA0',
+        backgroundColor: "#B5CAA0",
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#7BA040'
+        borderColor: "#7BA040",
       }}
       secureTextEntry={props.secureTextEntry}
       value={props.value}
       label={props.label}
       underlineStyle={styles.underlineStyle}
       underlineColor="transparent"
+      activeUnderlineColor="#7ba240"
       mode={"flat"}
     />
   );

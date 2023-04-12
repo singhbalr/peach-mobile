@@ -1,5 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { View, TouchableOpacity, Text, Image, ScrollView } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  Image,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-dynamic-vector-icons";
@@ -12,26 +19,20 @@ import { t } from "i18next";
 import createStyles from "./ProfileScreen.style";
 import { PRIVATESCREENS } from "@shared-constants";
 import { useDispatch, useSelector } from "react-redux";
-import { setLogout } from "../auth/rx/reducer";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import { useMutation, useQuery, useSubscription } from "@apollo/client";
 import {
   GET_DOCTOR_REQUEST,
   GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID,
-  GET_MEDICAL_RECORD_BY_BODY_PART,
   UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
 } from "../../connection/mutation";
-import {
-  TRANSACTION_UPDATED_SUBSCRIPTION,
-  NEW_TRANSACTION,
-} from "../../connection/subscription";
+import { TRANSACTION_UPDATED_SUBSCRIPTION } from "../../connection/subscription";
 import { GET_ALL_OPPORTUNITY } from "../../connection/query";
 import moment from "moment";
 import countDaysLeft from "../../components/countDayLeft";
 import { RootState } from "../../redux/store";
 import Header from "components/Header";
-import { setNotificationInfo } from "redux/reducer";
 
 interface ProfileScreenProps {}
 
@@ -62,35 +63,27 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
-  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("Screen1");
   const [doctorRequest, setDoctorRequest] = useState([]);
   const [getDoctorRequest] = useMutation(GET_DOCTOR_REQUEST);
-  const { loading, error, data } = useQuery(GET_ALL_OPPORTUNITY);
+  const { loading: allOpportunityLoading, data: allOpportunityData } =
+    useQuery(GET_ALL_OPPORTUNITY);
   const patientId = useSelector((state: RootState) => state.auth.patientId);
-  const [followUpRequest, setFollowUpRequest] = useState([]);
-  const [getFollowUpRequestByPatientId] = useMutation(
-    GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID,
-  );
-  const fetchFollowUpRequest = async () => {
-    try {
-      const { data } = await getFollowUpRequestByPatientId({
-        variables: {
-          input: {
-            patient_id: patientId,
-          },
-        },
-      });
-      setFollowUpRequest(data.getFollowUpRequestByPatientId);
-    } catch (err) {
-      console.log("Failed to fetch followup request by patient id", err);
-    }
-  };
+  const [
+    getFollowUpRequestByPatientIdParams,
+    { data: followUpRequestData, loading: followUpRequestLoading },
+  ] = useMutation(GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID);
 
   useEffect(() => {
     switch (activeTab) {
       case "Screen3":
-        fetchFollowUpRequest();
+        getFollowUpRequestByPatientIdParams({
+          variables: {
+            input: {
+              patient_id: patientId,
+            },
+          },
+        });
         break;
     }
   }, [activeTab]);
@@ -99,24 +92,24 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
   );
 
-  const { _a, _b, _c } = useSubscription(TRANSACTION_UPDATED_SUBSCRIPTION, {
-    onData: async ({ data }) => {
-      console.log(data);
-      // if (data) {
-      //   const transactionTypeText =
-      //     data.transactionUpdated.patient.transaction_id[0].transaction_type
-      //       .transaction_type_text;
-      //   if (transactionTypeText === "DOCTOR_REQUEST") {
-      //     console.log("validated");
-      //     setShowNotification(true);
-      //     setTimeout(() => {
-      //       setShowNotification(false);
-      //     }, 5000);
-      //     await callGraphQlAPI();
-      //   }
-      // }
-    },
-  });
+  // const { _a, _b, _c } = useSubscription(TRANSACTION_UPDATED_SUBSCRIPTION, {
+  //   onData: async ({ data }) => {
+  //     console.log(data);
+  //     // if (data) {
+  //     //   const transactionTypeText =
+  //     //     data.transactionUpdated.patient.transaction_id[0].transaction_type
+  //     //       .transaction_type_text;
+  //     //   if (transactionTypeText === "DOCTOR_REQUEST") {
+  //     //     console.log("validated");
+  //     //     setShowNotification(true);
+  //     //     setTimeout(() => {
+  //     //       setShowNotification(false);
+  //     //     }, 5000);
+  //     //     await callGraphQlAPI();
+  //     //   }
+  //     // }
+  //   },
+  // });
 
   const handleTabPress = async (tabName: string) => {
     setActiveTab(() => {
@@ -148,7 +141,6 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       const { data } = await getDoctorRequest({
         variables: {
           input: {
-            // eslint-disable-next-line camelcase
             patient_id: PATIENT_ID,
           },
         },
@@ -187,12 +179,17 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     return (
       <View style={styles.tabContainer}>
         <ScrollView>
-          {data?.opportunities?.map((item: any, key: any) => (
+          {allOpportunityLoading && (
+            <ActivityIndicator
+              animating={allOpportunityLoading}
+              color="#7ba23f"
+              size="large"
+              style={{ marginTop: 20 }}
+            />
+          )}
+          {allOpportunityData?.opportunities?.map((item: any, key: any) => (
             <OpportunityCard key={`opportunity-card-${key}`} {...item} />
           ))}
-          {/*{opportunityData.map((item, key) => (*/}
-          {/*  <OpportunityCard key={`opportunity-card-${key}`} {...item} />*/}
-          {/*))}*/}
         </ScrollView>
       </View>
     );
@@ -209,48 +206,58 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const Screen3 = () => {
     return (
       <View style={styles.tabContainer}>
+        {followUpRequestLoading && (
+          <ActivityIndicator
+            animating={followUpRequestLoading}
+            color="#7ba23f"
+            size="large"
+            style={{ marginTop: 20 }}
+          />
+        )}
         <ScrollView>
-          {followUpRequest?.map((item: any, key: any) => (
-            <FollowUpRequestCard
-              key={`followup-request-card-${key}`}
-              {...item}
-            />
-          ))}
+          {followUpRequestData?.getFollowUpRequestByPatientId?.map(
+            (item: any, key: any) => (
+              <FollowUpRequestCard
+                key={`followup-request-card-${key}`}
+                {...item}
+              />
+            ),
+          )}
         </ScrollView>
       </View>
     );
   };
 
-  const renderDoctorRequest = () => {
-    return (
-      // const {doctor_name, doctor_last_name, hospital_name, hospital_address, hospital_city, hospital_state, hospital_email} = props
-      <FlatList
-        data={doctorRequest}
-        renderItem={({ item }) => (
-          <DoctorCard
-            transaction_id={item._id}
-            doctor_name={item.doctor.doctor_name}
-            doctor_last_name={item.doctor.doctor_last_name}
-            hospital_name={item.doctor.hospital_id.hospital_name}
-            hospital_address={item.doctor.hospital_id.hospital_address}
-            hospital_city={item.doctor.hospital_id.hospital_city}
-            hospital_state={item.doctor.hospital_id.hospital_state}
-            hospital_email={item.doctor.hospital_id.hospital_email}
-            transaction_type_text={item.transaction_type.transaction_type_text}
-          />
-        )}
-        keyExtractor={(item) => item._id}
-        showsVerticalScrollIndicator={false}
-      />
-    );
-  };
+  // const renderDoctorRequest = () => {
+  //   return (
+  //     // const {doctor_name, doctor_last_name, hospital_name, hospital_address, hospital_city, hospital_state, hospital_email} = props
+  //     <FlatList
+  //       data={doctorRequest}
+  //       renderItem={({ item }) => (
+  //         <DoctorCard
+  //           transaction_id={item._id}
+  //           doctor_name={item.doctor.doctor_name}
+  //           doctor_last_name={item.doctor.doctor_last_name}
+  //           hospital_name={item.doctor.hospital_id.hospital_name}
+  //           hospital_address={item.doctor.hospital_id.hospital_address}
+  //           hospital_city={item.doctor.hospital_id.hospital_city}
+  //           hospital_state={item.doctor.hospital_id.hospital_state}
+  //           hospital_email={item.doctor.hospital_id.hospital_email}
+  //           transaction_type_text={item.transaction_type.transaction_type_text}
+  //         />
+  //       )}
+  //       keyExtractor={(item) => item._id}
+  //       showsVerticalScrollIndicator={false}
+  //     />
+  //   );
+  // };
 
-  const calculateDateDiff = (date: moment.MomentInput) => {
-    const now = moment();
-    const event = moment(date, "x");
-
-    return event.diff(now, "days");
-  };
+  // const calculateDateDiff = (date: moment.MomentInput) => {
+  //   const now = moment();
+  //   const event = moment(date, "x");
+  //
+  //   return event.diff(now, "days");
+  // };
 
   // eslint-disable-next-line react/no-unstable-nested-components
   const FollowUpRequestCard = (followupRequest) => {
@@ -262,11 +269,10 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           style={{
             borderRadius: 20,
             backgroundColor: "#FAFAFA",
-            width: ScreenWidth * 0.9,
+            // width: ScreenWidth * 0.9,
             padding: 10,
             paddingTop: 0,
-            margin: 10,
-            marginRight: 50,
+            marginBottom: 18,
             paddingRight: 30,
             elevation: 1,
           }}
@@ -666,201 +672,201 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       </View>
     );
   };
-  const DoctorCard = (props) => {
-    const {
-      transaction_id,
-      doctor_name,
-      doctor_last_name,
-      hospital_name,
-      hospital_address,
-      hospital_city,
-      hospital_state,
-      hospital_email,
-      transaction_type_text,
-    } = props;
-    return (
-      <View
-        style={{
-          borderWidth: 1,
-          borderRadius: 5,
-          borderColor:
-            transaction_type_text === "DOCTOR_REQUEST" ? "#000000" : "green",
-          width: ScreenWidth * 0.9,
-          padding: 15,
-          marginBottom: 10,
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: 15,
-          }}
-        >
-          <Text>{hospital_email}</Text>
-          <TouchableOpacity
-            onPressIn={async () => await approveRequest(transaction_id)}
-          >
-            <Text
-              style={{
-                fontSize: 14,
-                fontWeight: "500",
-                color:
-                  transaction_type_text === "DOCTOR_REQUEST"
-                    ? "#7BA23F"
-                    : "#000000",
-              }}
-            >
-              {t("ProfileScreen.text8")}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            flexDirection: "column",
-            justifyContent: "center",
-            marginBottom: 15,
-          }}
-        >
-          <Text style={{ fontSize: 18, fontWeight: "600", marginBottom: 15 }}>
-            Dr. {doctor_name} {""} {doctor_last_name}
-          </Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "column",
-            justifyContent: "center",
-            marginBottom: 15,
-          }}
-        >
-          <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 5 }}>
-            {hospital_name}
-          </Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "column",
-            justifyContent: "center",
-            marginBottom: 15,
-          }}
-        >
-          <Text style={{ fontSize: 14, marginBottom: 5 }}>
-            {hospital_address} {", "} {hospital_city}
-            {", "}
-            {hospital_state}
-          </Text>
-        </View>
+  // const DoctorCard = (props) => {
+  //   const {
+  //     transaction_id,
+  //     doctor_name,
+  //     doctor_last_name,
+  //     hospital_name,
+  //     hospital_address,
+  //     hospital_city,
+  //     hospital_state,
+  //     hospital_email,
+  //     transaction_type_text,
+  //   } = props;
+  //   return (
+  //     <View
+  //       style={{
+  //         borderWidth: 1,
+  //         borderRadius: 5,
+  //         borderColor:
+  //           transaction_type_text === "DOCTOR_REQUEST" ? "#000000" : "green",
+  //         width: ScreenWidth * 0.9,
+  //         padding: 15,
+  //         marginBottom: 10,
+  //       }}
+  //     >
+  //       <View
+  //         style={{
+  //           flexDirection: "row",
+  //           justifyContent: "space-between",
+  //           marginBottom: 15,
+  //         }}
+  //       >
+  //         <Text>{hospital_email}</Text>
+  //         <TouchableOpacity
+  //           onPressIn={async () => await approveRequest(transaction_id)}
+  //         >
+  //           <Text
+  //             style={{
+  //               fontSize: 14,
+  //               fontWeight: "500",
+  //               color:
+  //                 transaction_type_text === "DOCTOR_REQUEST"
+  //                   ? "#7BA23F"
+  //                   : "#000000",
+  //             }}
+  //           >
+  //             {t("ProfileScreen.text8")}
+  //           </Text>
+  //         </TouchableOpacity>
+  //       </View>
+  //       <View
+  //         style={{
+  //           flexDirection: "column",
+  //           justifyContent: "center",
+  //           marginBottom: 15,
+  //         }}
+  //       >
+  //         <Text style={{ fontSize: 18, fontWeight: "600", marginBottom: 15 }}>
+  //           Dr. {doctor_name} {""} {doctor_last_name}
+  //         </Text>
+  //       </View>
+  //       <View
+  //         style={{
+  //           flexDirection: "column",
+  //           justifyContent: "center",
+  //           marginBottom: 15,
+  //         }}
+  //       >
+  //         <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 5 }}>
+  //           {hospital_name}
+  //         </Text>
+  //       </View>
+  //       <View
+  //         style={{
+  //           flexDirection: "column",
+  //           justifyContent: "center",
+  //           marginBottom: 15,
+  //         }}
+  //       >
+  //         <Text style={{ fontSize: 14, marginBottom: 5 }}>
+  //           {hospital_address} {", "} {hospital_city}
+  //           {", "}
+  //           {hospital_state}
+  //         </Text>
+  //       </View>
+  //
+  //       <View style={{ flexDirection: "row", justifyContent: "center" }}>
+  //         {/* <Icon
+  //           name={"gift"}
+  //           type="AntDesign"
+  //           color={colors.iconBlack}
+  //           size={30}
+  //         /> */}
+  //         {/* reward component */}
+  //         {/* <View
+  //           style={{
+  //             borderRadius: 1,
+  //             flexDirection: "row",
+  //             alignItems: "center",
+  //             padding: 5,
+  //           }}
+  //         >
+  //           <View
+  //             style={{
+  //               backgroundColor: "#696C69",
+  //               borderTopStartRadius: 5,
+  //               borderBottomStartRadius: 5,
+  //               padding: 5,
+  //             }}
+  //           >
+  //             <Text style={{ color: "#FFFFFF" }}>2 dose</Text>
+  //           </View>
+  //           <View
+  //             style={{
+  //               backgroundColor: "#999C9A",
+  //               borderTopEndRadius: 5,
+  //               borderBottomEndRadius: 5,
+  //               padding: 5,
+  //             }}
+  //           >
+  //             <Text>Shingrix vaccine</Text>
+  //           </View>
+  //         </View> */}
+  //         {/* <View
+  //           style={{
+  //             borderRadius: 1,
+  //             flexDirection: "row",
+  //             alignItems: "center",
+  //             padding: 5,
+  //           }}
+  //         >
+  //           <View
+  //             style={{
+  //               backgroundColor: "#696C69",
+  //               borderTopStartRadius: 5,
+  //               borderBottomStartRadius: 5,
+  //               padding: 5,
+  //             }}
+  //           >
+  //             <Text style={{ color: "#FFFFFF" }}>100 HKD</Text>
+  //           </View>
+  //           <View
+  //             style={{
+  //               backgroundColor: "#999C9A",
+  //               borderTopEndRadius: 5,
+  //               borderBottomEndRadius: 5,
+  //               padding: 5,
+  //             }}
+  //           >
+  //             <Text>K11 Musea</Text>
+  //           </View>
+  //         </View> */}
+  //       </View>
+  //     </View>
+  //   );
+  // };
+  // const borderStyle1 = () => {
+  //   if (activeTab === "Screen1") {
+  //     return {
+  //       borderWidth: 1,
+  //       borderRadius: 5,
+  //       borderColor: "#000000",
+  //       height: 35,
+  //       justifyContent: "center",
+  //       backgroundColor: "#7BA23F",
+  //       color: "#FFFFFF",
+  //     };
+  //   }
+  // };
 
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
-          {/* <Icon
-            name={"gift"}
-            type="AntDesign"
-            color={colors.iconBlack}
-            size={30}
-          /> */}
-          {/* reward component */}
-          {/* <View
-            style={{
-              borderRadius: 1,
-              flexDirection: "row",
-              alignItems: "center",
-              padding: 5,
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: "#696C69",
-                borderTopStartRadius: 5,
-                borderBottomStartRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text style={{ color: "#FFFFFF" }}>2 dose</Text>
-            </View>
-            <View
-              style={{
-                backgroundColor: "#999C9A",
-                borderTopEndRadius: 5,
-                borderBottomEndRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text>Shingrix vaccine</Text>
-            </View>
-          </View> */}
-          {/* <View
-            style={{
-              borderRadius: 1,
-              flexDirection: "row",
-              alignItems: "center",
-              padding: 5,
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: "#696C69",
-                borderTopStartRadius: 5,
-                borderBottomStartRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text style={{ color: "#FFFFFF" }}>100 HKD</Text>
-            </View>
-            <View
-              style={{
-                backgroundColor: "#999C9A",
-                borderTopEndRadius: 5,
-                borderBottomEndRadius: 5,
-                padding: 5,
-              }}
-            >
-              <Text>K11 Musea</Text>
-            </View>
-          </View> */}
-        </View>
-      </View>
-    );
-  };
-  const borderStyle1 = () => {
-    if (activeTab === "Screen1") {
-      return {
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: "#000000",
-        height: 35,
-        justifyContent: "center",
-        backgroundColor: "#7BA23F",
-        color: "#FFFFFF",
-      };
-    }
-  };
-
-  const borderStyle2 = () => {
-    if (activeTab === "Screen2") {
-      return {
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: "#000000",
-        height: 35,
-        justifyContent: "center",
-        backgroundColor: "#7BA23F",
-        color: "#FFFFFF",
-      };
-    }
-  };
-  const borderStyle3 = () => {
-    if (activeTab === "Screen3") {
-      return {
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: "#000000",
-        height: 35,
-        justifyContent: "center",
-        backgroundColor: "#7BA23F",
-        color: "#FFFFFF",
-      };
-    }
-  };
+  // const borderStyle2 = () => {
+  //   if (activeTab === "Screen2") {
+  //     return {
+  //       borderWidth: 1,
+  //       borderRadius: 5,
+  //       borderColor: "#000000",
+  //       height: 35,
+  //       justifyContent: "center",
+  //       backgroundColor: "#7BA23F",
+  //       color: "#FFFFFF",
+  //     };
+  //   }
+  // };
+  // const borderStyle3 = () => {
+  //   if (activeTab === "Screen3") {
+  //     return {
+  //       borderWidth: 1,
+  //       borderRadius: 5,
+  //       borderColor: "#000000",
+  //       height: 35,
+  //       justifyContent: "center",
+  //       backgroundColor: "#7BA23F",
+  //       color: "#FFFFFF",
+  //     };
+  //   }
+  // };
 
   const renderScreen = (activeTab: string) => {
     switch (activeTab) {
@@ -892,7 +898,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       <Header
         titleText="Contributions"
         subTitleText="Contribute Data Now to Get Rewards"
-      ></Header>
+      />
       <View style={styles.mainContainer}>
         <ScrollView
           horizontal

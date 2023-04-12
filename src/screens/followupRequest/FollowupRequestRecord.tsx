@@ -73,7 +73,7 @@ const FollowupRequestRecordScreen: React.FC<
     // });
     // return false;
     const found = detail.applied_patient.find(
-      (item: any) => item.patient._id == patientId,
+      (item: any) => item?.patient?._id == patientId,
     );
     return typeof found === "object" ? true : false;
   };
