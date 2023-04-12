@@ -225,31 +225,7 @@ const PrivateRoutes = () => {
     }
   };
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarIcon: ({ focused, color, size }) =>
-          renderTabIcon(route, focused, color, size),
-        tabBarActiveTintColor: "#7BA040",
-        tabBarInactiveTintColor: "#888B88",
-        tabBarStyle: {
-          backgroundColor: palette.white,
-          height: 83,
-          paddingTop: 18,
-          paddingBottom: Platform.OS === "ios" ? 25 : 18,
-          paddingHorizontal: Platform.OS === "ios" ? 16 : 10,
-        },
-        tabBarIconStyle: {
-          marginBottom: 10,
-        },
-        tabBarBadgeStyle: {
-          top: -12,
-          left: 6,
-          color: "#fff",
-          backgroundColor: "#F196A8",
-        },
-      })}
-    >
+    <Drawer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerShown: false,
@@ -270,9 +246,9 @@ const PrivateRoutes = () => {
           tabBarBadgeStyle: {
             top: -12,
             left: 6,
-            color: '#fff',
-            backgroundColor: '#F196A8'
-          }
+            color: "#fff",
+            backgroundColor: "#F196A8",
+          },
         })}
       >
         <Tab.Screen

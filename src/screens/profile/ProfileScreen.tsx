@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { View, TouchableOpacity, Text, Image, ScrollView, SafeAreaView } from "react-native";
+import { View, TouchableOpacity, Text, Image, ScrollView, SafeAreaView, StyleSheet } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-dynamic-vector-icons";
