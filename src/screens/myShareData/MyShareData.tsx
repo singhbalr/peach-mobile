@@ -1,5 +1,12 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { View, TouchableOpacity, Text, Image, ScrollView } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  Image,
+  ScrollView,
+  Animated,
+} from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
 import { useSelector } from "react-redux";
@@ -27,6 +34,7 @@ import {
   formatUnixTimestampSharedData,
   formatUnixTimestampTime,
 } from "utils";
+import Header from "../../components/Header";
 
 interface MyShareDataProps {}
 
@@ -331,7 +339,7 @@ const MyShareData: React.FC<MyShareDataProps> = (props) => {
       if (!value.doctor) {
         return <></>;
       }
-      console.log(value.doctor)
+      console.log(value.doctor);
       return (
         <View
           style={{
@@ -555,40 +563,18 @@ const MyShareData: React.FC<MyShareDataProps> = (props) => {
     },
   ];
 
+  const [animation] = useState(new Animated.Value(0));
+  const [opacity, setOpacity] = useState<any>(
+    animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 1],
+    }),
+  );
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <View
-          style={{
-            flexDirection: "row",
-          }}
-        >
-          <View>
-            <Text style={styles.headerText}>{t("MyShareData.text4")}</Text>
-          </View>
-          <Image
-            source={require("../../assets/contribute-data/menu-add.png")}
-            style={{
-              width: 16,
-              height: 16,
-              marginLeft: 170,
-            }}
-          />
-          <Image
-            source={require("../../assets/contribute-data/menu-icon.png")}
-            style={{
-              width: 16,
-              height: 16,
-              marginLeft: 30,
-            }}
-          />
-        </View>
-      </View>
-      <View
-        style={{
-          marginBottom: 5,
-        }}
-      >
+      <Header titleText={t("MyShareData.text4")} style={{ paddingBottom: 5 }} />
+      <View style={styles.mainContainer}>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}

@@ -229,76 +229,57 @@ const PrivateRoutes = () => {
     }
   };
   return (
-    <Drawer
-      ref={drawer}
-      open={sidebarState}
-      type="overlay"
-      content={<Sidebar />}
-      openDrawerOffset={0.15 * width}
-      tapToClose={true}
-      side={"right"}
-      onClose={() => {
-        dispatch(setSidebarState(false));
-      }}
-      tweenHandler={(ratio) => ({
-        mainOverlay: {
-          opacity: ratio / 1.5,
-          backgroundColor: "rgba(56, 61, 57, 1)",
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarIcon: ({ focused, color, size }) =>
+          renderTabIcon(route, focused, color, size),
+        tabBarActiveTintColor: "#7BA040",
+        tabBarInactiveTintColor: "#888B88",
+        tabBarStyle: {
+          backgroundColor: palette.white,
+          height: 83,
+          paddingTop: 18,
+          paddingBottom: Platform.OS === "ios" ? 25 : 18,
+          paddingHorizontal: Platform.OS === "ios" ? 16 : 10,
+        },
+        tabBarIconStyle: {
+          marginBottom: 10,
+        },
+        tabBarBadgeStyle: {
+          top: -12,
+          left: 6,
+          color: "#fff",
+          backgroundColor: "#F196A8",
         },
       })}
     >
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          headerShown: false,
-          tabBarIcon: ({ focused, color, size }) =>
-            renderTabIcon(route, focused, color, size),
-          tabBarActiveTintColor: "#7BA040",
-          tabBarInactiveTintColor: "#888B88",
-          tabBarStyle: {
-            backgroundColor: palette.white,
-            height: 83,
-            paddingTop: 18,
-            paddingBottom: Platform.OS === "ios" ? 25 : 18,
-            paddingHorizontal: Platform.OS === "ios" ? 16 : 10,
-          },
-          tabBarIconStyle: {
-            marginBottom: 10,
-          },
-          tabBarBadgeStyle: {
-            top: -12,
-            left: 6,
-            color: "#fff",
-            backgroundColor: "#F196A8",
-          },
-        })}
-      >
-        <Tab.Screen
-          name={PRIVATESCREENS.DASHBOARD}
-          component={YourBioverseScreen}
-        />
-        <Tab.Screen
-          name={PRIVATESCREENS.CLINICAL_REPORT}
-          component={ClinicalReport}
-          options={{
-            tabBarBadge: clinicalBadge,
-          }}
-        />
-        <Tab.Screen
-          name={PRIVATESCREENS.CONTRIBUTE_DATA}
-          component={ProfileScreen}
-          options={{
-            tabBarBadge: contributionsBadge,
-          }}
-        />
-        <Tab.Screen
-          name={PRIVATESCREENS.REWARD_CENTER}
-          component={HomeScreen}
-          options={{
-            tabBarBadge: rewardsBadge,
-          }}
-        />
-      </Tab.Navigator>
-    </Drawer>
+      <Tab.Screen
+        name={PRIVATESCREENS.DASHBOARD}
+        component={YourBioverseScreen}
+      />
+      <Tab.Screen
+        name={PRIVATESCREENS.CLINICAL_REPORT}
+        component={ClinicalReport}
+        options={{
+          tabBarBadge: clinicalBadge,
+        }}
+      />
+      <Tab.Screen
+        name={PRIVATESCREENS.CONTRIBUTE_DATA}
+        component={ProfileScreen}
+        options={{
+          tabBarBadge: contributionsBadge,
+        }}
+      />
+      <Tab.Screen
+        name={PRIVATESCREENS.REWARD_CENTER}
+        component={HomeScreen}
+        options={{
+          tabBarBadge: rewardsBadge,
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 export default PrivateRoutes;
