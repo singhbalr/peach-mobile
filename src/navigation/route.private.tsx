@@ -57,7 +57,6 @@ const PrivateRoutes = () => {
   const rewardNotificationState = useSelector(
     (state: RootState) => state.app.rewardNotificationState,
   );
-  const dispatch = useDispatch();
   const PATIENT_APPROVED_TRANSACTION_ID = "640a0a2284947b59273ea03d";
   const { _aa, _bb, _cc } = useSubscription(NEW_TRANSACTION, {
     onData: async ({ data }) => {
