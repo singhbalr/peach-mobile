@@ -594,7 +594,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
               key={item.name}
               style={[
                 styles[item.classname],
-                { display: popupVisible ? "none" : "" },
+                popupVisible ? { display: "none" } : {},
               ]}
             >
               <BodyButton
@@ -612,15 +612,17 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         >
           <MaleBodySvg
             height={"100%"}
-            style={{ display: popupVisible ? "none" : "" }}
+            style={popupVisible ? { display: "none" } : {}}
           ></MaleBodySvg>
           {buttonList.map((svgItem) => {
             if (svgItem.svg) {
               return (
                 <View
-                  style={{
-                    display: svgItem.identifier !== activeBodySvg ? "none" : "",
-                  }}
+                  style={
+                    svgItem.identifier !== activeBodySvg
+                      ? { display: "none" }
+                      : {}
+                  }
                 >
                   {svgItem.svg}
                 </View>

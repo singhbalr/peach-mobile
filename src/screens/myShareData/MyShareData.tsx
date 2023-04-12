@@ -331,6 +331,7 @@ const MyShareData: React.FC<MyShareDataProps> = (props) => {
       if (!value.doctor) {
         return <></>;
       }
+      console.log(value.doctor)
       return (
         <View
           style={{
@@ -360,7 +361,8 @@ const MyShareData: React.FC<MyShareDataProps> = (props) => {
                   color: "#000",
                 }}
               >
-                Data Request from {value.doctor.doctor_name}
+                Data Request from {value.doctor.doctor_name}{" "}
+                {value.doctor.doctor_last_name}
               </Text>
             </View>
           </View>
