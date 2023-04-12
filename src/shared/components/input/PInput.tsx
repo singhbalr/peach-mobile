@@ -28,6 +28,7 @@ const PInput: ComponentType = (props) => {
       label={props.label}
       underlineStyle={styles.underlineStyle}
       underlineColor="transparent"
+      activeUnderlineColor="#7ba240"
       mode={"flat"}
     />
   );

@@ -808,32 +808,32 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     }
   };
 
-  const borderStyle2 = () => {
-    if (activeTab === "Screen2") {
-      return {
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: "#000000",
-        height: 35,
-        justifyContent: "center",
-        backgroundColor: "#7BA23F",
-        color: "#FFFFFF",
-      };
-    }
-  };
-  const borderStyle3 = () => {
-    if (activeTab === "Screen3") {
-      return {
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: "#000000",
-        height: 35,
-        justifyContent: "center",
-        backgroundColor: "#7BA23F",
-        color: "#FFFFFF",
-      };
-    }
-  };
+  // const borderStyle2 = () => {
+  //   if (activeTab === "Screen2") {
+  //     return {
+  //       borderWidth: 1,
+  //       borderRadius: 5,
+  //       borderColor: "#000000",
+  //       height: 35,
+  //       justifyContent: "center",
+  //       backgroundColor: "#7BA23F",
+  //       color: "#FFFFFF",
+  //     };
+  //   }
+  // };
+  // const borderStyle3 = () => {
+  //   if (activeTab === "Screen3") {
+  //     return {
+  //       borderWidth: 1,
+  //       borderRadius: 5,
+  //       borderColor: "#000000",
+  //       height: 35,
+  //       justifyContent: "center",
+  //       backgroundColor: "#7BA23F",
+  //       color: "#FFFFFF",
+  //     };
+  //   }
+  // };
 
   const renderScreen = (activeTab: string) => {
     switch (activeTab) {
@@ -865,7 +865,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       <Header
         titleText="Contributions"
         subTitleText="Contribute Data Now to Get Rewards"
-      ></Header>
+      />
       <View style={styles.mainContainer}>
         <ScrollView
           horizontal
