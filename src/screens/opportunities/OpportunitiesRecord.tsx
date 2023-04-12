@@ -875,7 +875,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               flex: 1,
             }}
           >
-            <Text style={styles.title}>Thank you for your contribution!</Text>
+            <Text style={styles.title}>{t("OpportunitiesRecord.thanks-contribution")}</Text>
             <View
               style={{
                 padding: 10,

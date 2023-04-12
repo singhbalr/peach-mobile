@@ -80,10 +80,7 @@ const DataReceiver: React.FC = () => {
               color: "#1C1C1C",
             }}
           >
-            Prenetics&apos; mission is to bring health closer to people, by
-            decentralizing health care, and focusing on the comprehensive
-            testing capabilities covering prevention, diagnostics, and
-            personalized care.
+            {t("DataReceiver.Prenetics")}
           </Text>
           <TouchableOpacity
             style={{
@@ -99,7 +96,7 @@ const DataReceiver: React.FC = () => {
                 color: "#7BA23F",
               }}
             >
-              https://www.prenetics.com
+              {t("DataReceiver.link-prenetics")}
             </Text>
           </TouchableOpacity>
 
@@ -113,7 +110,7 @@ const DataReceiver: React.FC = () => {
               alignSelf: "flex-start",
             }}
           >
-            Opportunities of Prenetics
+            {t("DataReceiver.opportunity-prenetics")}
           </Text>
 
           {opportunityData.map((item, key) => (
