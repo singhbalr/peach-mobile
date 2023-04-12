@@ -14,7 +14,7 @@ import { PRIVATESCREENS } from "@shared-constants";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { setLogout } from "../screens/auth/rx/reducer";
-import { resetAppState } from "../redux/reducer";
+import { resetAppState, setSidebarState } from "../redux/reducer";
 
 import { t } from "i18next";
 
@@ -96,7 +96,7 @@ const Sidebar: React.FC = () => {
     },
   ];
   const clickNavItem = (command: string) => {
-    console.log(command);
+    dispatch(setSidebarState(false));
     switch (command) {
       case "settings":
         break;

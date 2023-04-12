@@ -4,6 +4,7 @@ import { ViewStyle, StyleSheet, View, TextStyle } from "react-native";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 interface Style {
   container: ViewStyle;
+  mainContainer: ViewStyle;
   button: ViewStyle;
   buttonText: ViewStyle;
   header: ViewStyle;
@@ -11,16 +12,16 @@ interface Style {
   headerInfo: TextStyle;
 }
 
-
-
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
   return StyleSheet.create<Style>({
     container: {
       flex: 1,
       backgroundColor: colors.secondaryBackground,
+    },
+    mainContainer: {
       paddingHorizontal: 20,
-      marginTop: 20,
+      marginBottom: 5,
     },
     button: {
       backgroundColor: "blue",
@@ -52,6 +53,5 @@ export default (theme: ExtendedTheme) => {
       color: "#606461",
       fontWeight: "400",
     },
-    
   });
 };
