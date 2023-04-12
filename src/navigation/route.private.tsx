@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react";
+import React, { createRef } from "react";
 import {
   Image,
   Platform,
@@ -11,7 +11,6 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Drawer from "react-native-drawer";
-import Button from "components/button";
 /**
  * ? Local & Shared Imports
  */
@@ -37,9 +36,6 @@ import {
   NEW_MEDICAL_HEALTH_INFO,
   NEW_TRANSACTION,
 } from "connection/subscription";
-import Popup from "components/Popup";
-import * as NavigationService from "react-navigation-helpers";
-import { t } from "i18next";
 const { width } = Dimensions.get("window");
 
 const Tab = createBottomTabNavigator();
@@ -47,10 +43,12 @@ const Stack = createStackNavigator();
 const PrivateRoutes = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === "dark";
-  const drawer = createRef<React.ElementRef<typeof Drawer>>();
-  const sidebarState = useSelector(
-    (state: RootState) => state.app.sidebarState,
-  );
+  const drawer = createRef<React.ElementRef<typeof Drawer>>()
+  const sidebarState = useSelector((state: RootState) => state.app.sidebarState)
+  const dispatch = useDispatch()
+  const clinicalBadge = undefined
+  const contributionsBadge = undefined
+  const rewardsBadge = undefined
   const patientId = useSelector((state: RootState) => state.auth.patientId);
   const clinicalNotificationState = useSelector(
     (state: RootState) => state.app.clinicalNotificationState,
@@ -61,7 +59,6 @@ const PrivateRoutes = () => {
   const rewardNotificationState = useSelector(
     (state: RootState) => state.app.rewardNotificationState,
   );
-  const dispatch = useDispatch();
   const PATIENT_APPROVED_TRANSACTION_ID = "640a0a2284947b59273ea03d";
   const { _aa, _bb, _cc } = useSubscription(NEW_TRANSACTION, {
     onData: async ({ data }) => {
@@ -265,6 +262,12 @@ const PrivateRoutes = () => {
           tabBarIconStyle: {
             marginBottom: 10,
           },
+          tabBarBadgeStyle: {
+            top: -12,
+            left: 6,
+            color: '#fff',
+            backgroundColor: '#F196A8'
+          }
         })}
       >
         <Tab.Screen
@@ -274,14 +277,23 @@ const PrivateRoutes = () => {
         <Tab.Screen
           name={PRIVATESCREENS.CLINICAL_REPORT}
           component={ClinicalReport}
+          options={{
+            tabBarBadge: clinicalBadge
+          }}
         />
         <Tab.Screen
           name={PRIVATESCREENS.CONTRIBUTE_DATA}
           component={ProfileScreen}
+          options={{
+            tabBarBadge: contributionsBadge
+          }}
         />
         <Tab.Screen
           name={PRIVATESCREENS.REWARD_CENTER}
           component={HomeScreen}
+          options={{
+            tabBarBadge: rewardsBadge
+          }}
         />
       </Tab.Navigator>
     </Drawer>

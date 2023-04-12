@@ -106,7 +106,8 @@
       "text11": "Its company website is:",
       "text12": "Your data is securely shared. Trace your data in My",
       "text13": "Shared Data.",
-      "text14": "My Shared Data"
+      "text14": "My Shared Data",
+      "thanks-contribution": "Thank you for your contribution!"
     },
     "OpportunitiesSuccess": {
       "text1": "congratulations! you just received a reward. Go to Reward Centor to redeem it.",
@@ -153,6 +154,11 @@
     },
     "UsefulHealthInfo": {
       "title": "Useful Health Info"
+    },
+    "DataReceiver": {
+      "Prenetics": "Prenetics' mission is to bring health closer to people, by decentralizing health care, and focusing on the comprehensive testing capabilities covering prevention, diagnostics, and personalized care.",
+      "link-prenetics": "https://www.prenetics.com",
+      "opportunity-prenetics": "Opportunities of Prenetics"
     }
   }
 }
