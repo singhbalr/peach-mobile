@@ -51,6 +51,13 @@ const PrivateRoutes = () => {
   const clinicalNotificationState = useSelector(
     (state: RootState) => state.app.clinicalNotificationState,
   );
+  const contributeNotificationState = useSelector(
+    (state: RootState) => state.app.contributeNotificationState,
+  );
+  const rewardNotificationState = useSelector(
+    (state: RootState) => state.app.rewardNotificationState,
+  );
+  const dispatch = useDispatch();
   const PATIENT_APPROVED_TRANSACTION_ID = "640a0a2284947b59273ea03d";
   const { _aa, _bb, _cc } = useSubscription(NEW_TRANSACTION, {
     onData: async ({ data }) => {
@@ -159,17 +166,25 @@ const PrivateRoutes = () => {
     switch (route.name) {
       case PRIVATESCREENS.REWARD_CENTER:
         return (
-          <Image
-            source={
-              focused
-                ? require("../assets/navbar-icons/rewards-focused.png")
-                : require("../assets/navbar-icons/rewards.png")
-            }
-            style={{
-              width: 30,
-              height: 30,
-            }}
-          />
+          <>
+            <Image
+              source={
+                focused
+                  ? require("../assets/navbar-icons/rewards-focused.png")
+                  : require("../assets/navbar-icons/rewards.png")
+              }
+              style={{
+                width: 30,
+                height: 30,
+              }}
+            />
+            <View
+              style={[
+                styles.redDot,
+                { display: rewardNotificationState ? "flex" : "none" },
+              ]}
+            ></View>
+          </>
         );
 
       case PRIVATESCREENS.CLINICAL_REPORT:
@@ -212,17 +227,25 @@ const PrivateRoutes = () => {
 
       case PRIVATESCREENS.CONTRIBUTE_DATA:
         return (
-          <Image
-            source={
-              focused
-                ? require("../assets/navbar-icons/contributions-focused.png")
-                : require("../assets/navbar-icons/contributions.png")
-            }
-            style={{
-              width: 24,
-              height: 24,
-            }}
-          />
+          <>
+            <Image
+              source={
+                focused
+                  ? require("../assets/navbar-icons/contributions-focused.png")
+                  : require("../assets/navbar-icons/contributions.png")
+              }
+              style={{
+                width: 24,
+                height: 24,
+              }}
+            />
+            <View
+              style={[
+                styles.redDot,
+                { display: contributeNotificationState ? "flex" : "none" },
+              ]}
+            ></View>
+          </>
         );
 
       default:

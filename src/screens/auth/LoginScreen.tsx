@@ -26,6 +26,10 @@ import {
 } from "../../connection/mutation";
 import { t } from "i18next";
 import { RootState } from "redux/store";
+import {
+  toggleContributeNotificationState,
+  toggleRewardNotificationState,
+} from "redux/reducer";
 
 // import { authBiometrics } from "../../shared/sensors/Biometric";
 interface Props {}
@@ -75,13 +79,19 @@ const LoginScreen: React.FC<Props> = () => {
 
     if (data.patientLogin.data != null) {
       console.log(data);
-      const { patient_email, _id } = data.patientLogin.data;
+      const { patient_email, _id, opportunities_count, patient_reward_count } =
+        data.patientLogin.data;
       console.log(data.patientLogin);
       console.log(data.patientLogin.data);
       dispatch(setUsername(patient_email));
       dispatch(setPatientId(_id));
       dispatch(setPatientDetails(data.patientLogin.data));
-
+      if (opportunities_count && opportunities_count > 0) {
+        dispatch(toggleContributeNotificationState(true));
+      }
+      if (patient_reward_count && patient_reward_count > 0) {
+        dispatch(toggleRewardNotificationState(true));
+      }
       await fetchAllMedicalRecord(_id);
 
       dispatch(setLoggedInState(true));
