@@ -1,16 +1,45 @@
-import React, { useMemo } from "react";
-import {Image, Linking, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
+import React, { useEffect, useMemo, useState } from "react";
+import {
+  Image,
+  Linking,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import HeaderNavigation from "../../components/HeaderNavigation";
 import { useTheme } from "@react-navigation/native";
 import createStyles from "@screens/dataReceiver/DataReceiver.style";
 import Line from "../../components/Line";
 import { t } from "i18next";
 import OpportunityCard from "@screens/opportunities/OpportunityCard";
-
+import { useMutation } from "@apollo/client";
+import { GET_OPPORTUNITY_BY_ORGANIZATION_ID_FILTERED } from "connection/mutation";
 const DataReceiver: React.FC = () => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
+  const [opportunities, setOpportunities] = useState([]);
+  const [getOppByOrg] = useMutation(
+    GET_OPPORTUNITY_BY_ORGANIZATION_ID_FILTERED,
+  );
+
+  const loadOpportunity = async () => {
+    const { data } = await getOppByOrg({
+      variables: {
+        getOpportunityByOrganizationIdOppId: "6434afe5d2fb27638e768583",
+      },
+    });
+
+    if (data) {
+      console.log(data.getOpportunityByOrganizationIdOpp);
+      setOpportunities(data.getOpportunityByOrganizationIdOpp);
+    }
+  };
+  useEffect(() => {
+    loadOpportunity();
+  }, []);
 
   const opportunityData = [
     {
@@ -113,7 +142,7 @@ const DataReceiver: React.FC = () => {
             {t("DataReceiver.opportunity-prenetics")}
           </Text>
 
-          {opportunityData.map((item, key) => (
+          {opportunities.map((item, key) => (
             <OpportunityCard key={key} {...item} />
           ))}
         </View>

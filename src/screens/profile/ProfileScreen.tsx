@@ -1,5 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { View, TouchableOpacity, Text, Image, ScrollView } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  Image,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-dynamic-vector-icons";
@@ -37,6 +44,7 @@ import Header from "components/Header";
 import {
   setNotificationInfo,
   toggleContributeNotificationState,
+  toggleFollowupNotificationState,
 } from "redux/reducer";
 
 interface ProfileScreenProps {}
@@ -74,6 +82,10 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const [getDoctorRequest] = useMutation(GET_DOCTOR_REQUEST);
 
   const patientId = useSelector((state: RootState) => state.auth.patientId);
+  const followupNotificationState = useSelector(
+    (state: RootState) => state.app.followupNotificationState,
+  );
+
   const { loading, error, data } = useQuery(
     patientId === "642e80d7acc6442859edb5e2"
       ? GET_ALL_OPPORTUNITY_FILTERED
@@ -102,6 +114,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     switch (activeTab) {
       case "Screen3":
         fetchFollowUpRequest();
+        dispatch(toggleFollowupNotificationState(false));
         break;
     }
   }, [activeTab]);
@@ -877,6 +890,16 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 >
                   {item.title}
                 </Text>
+                {key === 1 ? (
+                  <View
+                    style={[
+                      style.redDot,
+                      { display: followupNotificationState ? "flex" : "none" },
+                    ]}
+                  ></View>
+                ) : (
+                  <></>
+                )}
               </View>
             </TouchableOpacity>
           ))}
@@ -888,3 +911,15 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
 };
 
 export default ProfileScreen;
+
+const style = StyleSheet.create({
+  redDot: {
+    position: "absolute",
+    top: 10,
+    right: -10,
+    width: 6,
+    height: 6,
+    backgroundColor: "#F196A8",
+    borderRadius: 6,
+  },
+});
