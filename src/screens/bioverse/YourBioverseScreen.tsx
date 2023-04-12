@@ -7,7 +7,7 @@ import {
   ViewStyle,
   Animated,
   Easing,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
@@ -75,19 +75,25 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     thorax: 0,
     upperabdomen: 0,
   });
-  const [activeItem, setActiveItem] = useState<{name: string, children: {name: string, icon: any, reportCount: number}[]}>({
+  const [activeItem, setActiveItem] = useState<{
+    name: string;
+    children: { name: string; icon: any; reportCount: number }[];
+  }>({
     name: "",
-    children: [{
-      name: '',
-      icon: '',
-      reportCount: 0
-    }]
+    children: [
+      {
+        name: "",
+        icon: "",
+        reportCount: 0,
+      },
+    ],
   });
   const patientDetails = useSelector(
     (state: RootState) => state.auth.patientDetails,
   );
 
   const onPressList = (bodyPart: string) => {
+    console.log(bodyPart);
     const medicalFile = getMedicalRecordFileFromStore(bodyPart);
     console.log(JSON.stringify(medicalFile));
     const filteredData = getMedicalRecordFile(
@@ -149,24 +155,32 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     return resultsArray;
   };
   // animation
-  const [activeBodySvg, setActiveBodySvg] = useState<string>('');
+  const [activeBodySvg, setActiveBodySvg] = useState<string>("");
   const [animation] = useState(new Animated.Value(0));
-  const [translateY, setTranslateY] = useState<any>(animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 0],
-  }))
-  const [scale, setScale] = useState<any>(animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 1],
-  }))
-  const [opacity, setOpacity] = useState<any>(animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 1],
-  }))
-  const [bodyContainerTranslateY, setBodyContainerTranslateY] = useState<any>(animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 0],
-  }))
+  const [translateY, setTranslateY] = useState<any>(
+    animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 0],
+    }),
+  );
+  const [scale, setScale] = useState<any>(
+    animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 1],
+    }),
+  );
+  const [opacity, setOpacity] = useState<any>(
+    animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 1],
+    }),
+  );
+  const [bodyContainerTranslateY, setBodyContainerTranslateY] = useState<any>(
+    animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 0],
+    }),
+  );
   const performAnimation = () => {
     Animated.timing(animation, {
       toValue: 1,
@@ -177,55 +191,70 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   };
   // body parts click event
   const selectBodyParts = (item: React.SetStateAction<object>) => {
-    setActiveBodySvg(item.identifier)
+    setActiveBodySvg(item.identifier);
     if (item.animation) {
-      console.log(333, activeBodySvg)
-      const topRange = [0, item.animation.top]
-      const scaleRange = [1, item.animation.scale]
-      setTranslateY(animation.interpolate({
-        inputRange: [0, 1],
-        outputRange: topRange,
-      }))
-      setScale(animation.interpolate({
-        inputRange: [0, 1],
-        outputRange: scaleRange,
-      }))
-      setOpacity(animation.interpolate({
-        inputRange: [0, 1],
-        outputRange: [1, 0],
-      }))
-      setBodyContainerTranslateY(animation.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 0],
-      }))
+      console.log(333, activeBodySvg);
+      const topRange = [0, item.animation.top];
+      const scaleRange = [1, item.animation.scale];
+      setTranslateY(
+        animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: topRange,
+        }),
+      );
+      setScale(
+        animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: scaleRange,
+        }),
+      );
+      setOpacity(
+        animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [1, 0],
+        }),
+      );
+      setBodyContainerTranslateY(
+        animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, 0],
+        }),
+      );
     }
     setPopupVisible(true);
     setActiveItem(item);
     performAnimation();
   };
   // search
-  const [searchPopupVisible, setSearchPopupVisible] = useState<boolean>(false)
+  const [searchPopupVisible, setSearchPopupVisible] = useState<boolean>(false);
   const handleClickSearch = () => {
-    setSearchPopupVisible(true)
-    setTranslateY(animation.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 0],
-    }))
-    setScale(animation.interpolate({
-      inputRange: [0, 1],
-      outputRange: [1, 1],
-    }))
-    setOpacity(animation.interpolate({
-      inputRange: [0, 1],
-      outputRange: [1, 0],
-    }))
-    setBodyContainerTranslateY(animation.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, -130],
-    }))
-    performAnimation()
-  }
-
+    setSearchPopupVisible(true);
+    setTranslateY(
+      animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 0],
+      }),
+    );
+    setScale(
+      animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [1, 1],
+      }),
+    );
+    setOpacity(
+      animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [1, 0],
+      }),
+    );
+    setBodyContainerTranslateY(
+      animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, -130],
+      }),
+    );
+    performAnimation();
+  };
 
   useEffect(() => {
     fetchAllMedicalRecord();
@@ -410,7 +439,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         }
       }
     }
-    console.log({counts});
+    console.log({ counts });
     setSectionCount(counts);
   };
 
@@ -429,7 +458,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       reportCount: sectionCount["thorax"],
       animation: {
         top: 25,
-        scale: 2.4
+        scale: 2.4,
       },
       svg: <ThoraxBodySvg />,
       children: [
@@ -458,7 +487,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       reportCount: sectionCount["upperabdomen"],
       animation: {
         top: -70,
-        scale: 2.4
+        scale: 2.4,
       },
       svg: <UpperBodySvg />,
       children: [
@@ -553,10 +582,21 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           subTitleText={t("YourBioverseScreen.subtitle")}
         ></Header>
       </Animated.View>
-      <Animated.View style={[styles.bodyContainer, {transform: [{translateY: bodyContainerTranslateY}]}]}>
+      <Animated.View
+        style={[
+          styles.bodyContainer,
+          { transform: [{ translateY: bodyContainerTranslateY }] },
+        ]}
+      >
         {buttonList.map((item, index) => {
           return (
-            <View key={item.name} style={[styles[item.classname], {display: popupVisible ? 'none' : ''}]}>
+            <View
+              key={item.name}
+              style={[
+                styles[item.classname],
+                { display: popupVisible ? "none" : "" },
+              ]}
+            >
               <BodyButton
                 buttonText={item.name}
                 reportCount={item.reportCount}
@@ -567,22 +607,32 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             </View>
           );
         })}
-        <Animated.View style={[styles.bodySvg, { transform: [{ translateY }, { scale }] }]}>
-          <MaleBodySvg height={'100%'} style={{display: popupVisible ? 'none' : ''}}></MaleBodySvg>
-          {
-            buttonList.map(svgItem => {
-              if (svgItem.svg) {
-                return (
-                  <View style={{display: svgItem.identifier !== activeBodySvg ? 'none' : ''}}>
-                    {svgItem.svg}
-                  </View>
-                )
-              }
-              return <></>
-            })
-          }
+        <Animated.View
+          style={[styles.bodySvg, { transform: [{ translateY }, { scale }] }]}
+        >
+          <MaleBodySvg
+            height={"100%"}
+            style={{ display: popupVisible ? "none" : "" }}
+          ></MaleBodySvg>
+          {buttonList.map((svgItem) => {
+            if (svgItem.svg) {
+              return (
+                <View
+                  style={{
+                    display: svgItem.identifier !== activeBodySvg ? "none" : "",
+                  }}
+                >
+                  {svgItem.svg}
+                </View>
+              );
+            }
+            return <></>;
+          })}
         </Animated.View>
-        <TouchableOpacity style={styles.search} onPress={() => handleClickSearch()}>
+        <TouchableOpacity
+          style={styles.search}
+          onPress={() => handleClickSearch()}
+        >
           <SearchSvg></SearchSvg>
         </TouchableOpacity>
       </Animated.View>
@@ -594,12 +644,12 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             title={activeItem.name}
             dataList={activeItem.children}
             fileRecordList={fileRecordList}
-            onPressList={() => onPressList}
+            onPressList={onPressList}
           />
         }
         onClose={() => {
           setPopupVisible(false);
-          setActiveBodySvg('')
+          setActiveBodySvg("");
           Animated.timing(animation, {
             toValue: 0,
             duration: 300,
@@ -610,11 +660,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       {/* search popup */}
       <Popup
         visible={searchPopupVisible}
-        contentElement={
-          <Search
-            buttonList={buttonList}
-          />
-        }
+        contentElement={<Search buttonList={buttonList} />}
         onClose={() => {
           setSearchPopupVisible(false);
           Animated.timing(animation, {
@@ -644,7 +690,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
   },
   search: {
-    position: 'absolute',
+    position: "absolute",
     bottom: -5,
     left: 27,
   },
