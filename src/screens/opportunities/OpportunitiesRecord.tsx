@@ -805,6 +805,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             NavigationService.push(PRIVATESCREENS.HEALTH_INFO_DETAIL, {
               opportunityData: detail,
               index: 0,
+              showMoreOpportunities: false,
             });
           }, 3000);
         }
@@ -821,6 +822,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           NavigationService.push(PRIVATESCREENS.HEALTH_INFO_DETAIL, {
             opportunityData: detail,
             index: 0,
+            showMoreOpportunities: false,
           });
         }, 3000);
       }
@@ -875,7 +877,9 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               flex: 1,
             }}
           >
-            <Text style={styles.title}>{t("OpportunitiesRecord.thanks-contribution")}</Text>
+            <Text style={styles.title}>
+              {t("OpportunitiesRecord.thanks-contribution")}
+            </Text>
             <View
               style={{
                 padding: 10,
