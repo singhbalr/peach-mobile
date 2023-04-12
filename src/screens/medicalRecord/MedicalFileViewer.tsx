@@ -57,8 +57,24 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
   const medicalImaging = getMedicalRecordFileWithType("MEDICAL_IMAGING");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const handleLoadComplete = (numberOfPages, filePath) => {
-    pdfRef.current &&
-      pdfRef.current.setPage(parseInt(clinicalData.file_metadata[0].page));
+    switch (activeIndex) {
+      case "CLINICAL_RECORD":
+        pdfRef.current &&
+          pdfRef.current.setPage(parseInt(clinicalData.file_metadata[0].page));
+        break;
+      case "MEDICAL_IMAGING":
+        pdfRef.current &&
+          pdfRef.current.setPage(
+            parseInt(medicalImaging.file_metadata[0].page),
+          );
+        break;
+      case "GENETIC_DATA":
+        pdfRef.current &&
+          pdfRef.current.setPage(parseInt(geneticData.file_metadata[0].page));
+        break;
+      default:
+        break;
+    }
   };
   const togglePage = (num: number) => {
     if (
@@ -132,7 +148,13 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
                   uri: medicalImaging.medical_record_file_link,
                 }}
                 horizontal={true}
-                page={1}
+                // page={currentPage}
+                enablePaging={true}
+                onLoadComplete={handleLoadComplete}
+                onPageChanged={(page, numberOfPages) => {
+                  setCurrentPage(page);
+                  setTotalPage(numberOfPages);
+                }}
                 onError={(error) => {
                   console.log(error);
                 }}
@@ -141,6 +163,25 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
                 }}
                 style={styles.pdf}
               />
+            </View>
+            <View style={styles.pagination}>
+              <TouchableOpacity
+                onPress={() => {
+                  togglePage(-1);
+                }}
+              >
+                <PrevSvg />
+              </TouchableOpacity>
+              <Text style={styles.currentPage}>
+                {currentPage + "/" + totalPage}
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  togglePage(1);
+                }}
+              >
+                <NextSvg />
+              </TouchableOpacity>
             </View>
           </View>
         );
@@ -155,7 +196,13 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
                   uri: geneticData.medical_record_file_link,
                 }}
                 horizontal={true}
-                page={1}
+                // page={currentPage}
+                enablePaging={true}
+                onLoadComplete={handleLoadComplete}
+                onPageChanged={(page, numberOfPages) => {
+                  setCurrentPage(page);
+                  setTotalPage(numberOfPages);
+                }}
                 onError={(error) => {
                   console.log(error);
                 }}
@@ -164,6 +211,25 @@ const MedicalFileViewer: React.FC<MedicalFileViewerProps> = (props) => {
                 }}
                 style={styles.pdf}
               />
+            </View>
+            <View style={styles.pagination}>
+              <TouchableOpacity
+                onPress={() => {
+                  togglePage(-1);
+                }}
+              >
+                <PrevSvg />
+              </TouchableOpacity>
+              <Text style={styles.currentPage}>
+                {currentPage + "/" + totalPage}
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  togglePage(1);
+                }}
+              >
+                <NextSvg />
+              </TouchableOpacity>
             </View>
           </View>
         );

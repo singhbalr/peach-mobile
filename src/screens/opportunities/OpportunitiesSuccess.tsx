@@ -19,6 +19,7 @@ import PIbutton from "@shared-components/buttons/Pbutton";
 import { PRIVATESCREENS } from "@shared-constants";
 import fonts from "@fonts";
 import { FlatList } from "react-native-gesture-handler";
+import { toggleContributeNotificationState } from "redux/reducer";
 
 interface OpportunitiesSuccessScreenProps {
   navigation: any;
@@ -31,6 +32,7 @@ const OpportunitiesSuccessScreen: React.FC<OpportunitiesSuccessScreenProps> = (
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
+  const dispatch = useDispatch();
   //   const { medicalReport, parts } = props.route.params;
   const [activeTab, setActiveTab] = useState("Purpose");
   const handleItemPress = (OpportunitiesSuccess: any) => {
@@ -82,7 +84,9 @@ const OpportunitiesSuccessScreen: React.FC<OpportunitiesSuccessScreenProps> = (
                 padding: 5,
               }}
             >
-              <Text style={{ color: "#FFFFFF" }}>{t("OpportunitiesSuccess.text3")}</Text>
+              <Text style={{ color: "#FFFFFF" }}>
+                {t("OpportunitiesSuccess.text3")}
+              </Text>
             </View>
             <View
               style={{
@@ -111,7 +115,9 @@ const OpportunitiesSuccessScreen: React.FC<OpportunitiesSuccessScreenProps> = (
                 padding: 5,
               }}
             >
-              <Text style={{ color: "#FFFFFF" }}>{t("OpportunitiesSuccess.text3")}</Text>
+              <Text style={{ color: "#FFFFFF" }}>
+                {t("OpportunitiesSuccess.text3")}
+              </Text>
             </View>
             <View
               style={{

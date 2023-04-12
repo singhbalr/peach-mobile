@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 export const GET_DOCTOR_REQUEST = gql`
   mutation GetTransactionByPatientId($input: PatientID!) {
@@ -246,6 +246,10 @@ export const PATIENT_LOGIN = gql`
         patient_weight
         patient_zipcode
         updated_at
+        contribute_data_count
+        patient_reward_count
+        opportunities_count
+        opportunities_count_filtered
       }
     }
   }
@@ -707,6 +711,90 @@ export const APPROVE_DOCTOR_REQUEST = gql`
       _id
       created_at
       deleted_at
+    }
+  }
+`;
+
+export const GET_OPPORTUNITY_BY_ORGANIZATION_ID = gql`
+  mutation GetOpportunityByOrganizationIdMobile(
+    $getOpportunityByOrganizationIdMobileId: ID!
+  ) {
+    getOpportunityByOrganizationIdMobile(
+      id: $getOpportunityByOrganizationIdMobileId
+    ) {
+      _id
+      applied_patient {
+        patient {
+          _id
+        }
+      }
+      organization {
+        _id
+        organization_name
+        organization_wallet_id
+        organization_age
+        organization_address
+        organization_city
+        organization_state
+        organization_zipcode
+        organization_phone
+        organization_email
+        organization_password
+        created_at
+        updated_at
+        deleted_at
+      }
+      reward {
+        _id
+        created_at
+        deleted_at
+        opportunity_id
+        reward_amount
+        reward_name
+        reward_type
+        updated_at
+        reward_type_description {
+          _id
+          created_at
+          deleted_at
+          reward_type
+          reward_type_text
+          updated_at
+        }
+      }
+      opportunity_type_id {
+        _id
+        opportunity_type
+        opportunity_type_text
+        created_at
+        updated_at
+        deleted_at
+      }
+
+      opportunity_picture_banner
+      opportunity_name
+      opportunity_description
+      opportunity_expiration
+      opportunity_purpose
+      opportunity_medical_record_accesibility_duration
+      opportunity_data_accesibility_duration
+      opportunity_is_closed
+      opportunity_quota_count
+      opportunity_withdraw_data_rules
+      created_at
+      updated_at
+      deleted_at
+      medical_health_info {
+        _id
+        advertisement_click
+        advertisement_content
+        advertisement_image
+        advertisement_title
+        advertisement_views
+        created_at
+        deleted_at
+        updated_at
+      }
     }
   }
 `;
