@@ -53,7 +53,7 @@ const ClinicalReport: React.FC = () => {
             activeOpacity={0.5}
             key={fileIndex}
           >
-            <ClinicalSvg></ClinicalSvg>
+            <ClinicalSvg />
             <Text style={styles.clinicalText}>
               {fileValue.medical_record_file_type_id.file_type_text}
             </Text>
@@ -66,7 +66,7 @@ const ClinicalReport: React.FC = () => {
             activeOpacity={0.5}
             key={fileIndex}
           >
-            <GeneticSvg></GeneticSvg>
+            <GeneticSvg />
             <Text style={styles.geneticText}>
               {fileValue.medical_record_file_type_id.file_type_text}
             </Text>
@@ -79,7 +79,7 @@ const ClinicalReport: React.FC = () => {
             activeOpacity={0.5}
             key={fileIndex}
           >
-            <MedicalSvg></MedicalSvg>
+            <MedicalSvg />
             <Text style={styles.medicalText}>
               {fileValue.medical_record_file_type_id.file_type_text}
             </Text>
@@ -90,18 +90,11 @@ const ClinicalReport: React.FC = () => {
     }
   };
 
-  // const reportList = [
-  //   {
-  //     date: "25 JUL 2022",
-  //     doctor: "Dr. Ho Wai Ming",
-  //     buttonIndexs: [0, 1, 2], //Corresponding button： [0: Genetic Data, 1: Genetic Data, 2: Clinical Record]
-  //   },
-  //   {
-  //     date: "25 JUL 2022",
-  //     doctor: "Dr. Ho Wai Ming",
-  //     buttonIndexs: [0, 2],
-  //   },
-  // ];
+  const renderDrText = (doctor) => {
+    if (doctor) {
+      return `Dr. ${doctor.doctor_name} ${doctor.doctor_last_name}`;
+    }
+  };
 
   const renderList = () => {
     if (patientDetails.medical_record < 0) {
@@ -109,54 +102,42 @@ const ClinicalReport: React.FC = () => {
     }
 
     return patientDetails.medical_record.map((item, index) => {
-      {
-        return item.medical_record_file.map((data, dataIndex) => {
-          return (
-            <TouchableOpacity
-              key={dataIndex}
-              style={styles.reportItem}
-              onPress={() => handleItemPress(data, item)}
-            >
-              <View style={styles.dateView}>
-                <Text style={styles.dateText}>
-                  {formatUnixTimestamp(item.created_at)}
-                </Text>
-                <View style={styles.dateLine}></View>
-              </View>
-              <Text style={styles.greenText}>
-                {item?.hospital_id?.hospital_name}
+      return item.medical_record_file.map((data, dataIndex) => {
+        return (
+          <TouchableOpacity
+            key={dataIndex}
+            style={styles.reportItem}
+            onPress={() => handleItemPress(data, item)}
+          >
+            <View style={styles.dateView}>
+              <Text style={styles.dateText}>
+                {formatUnixTimestamp(item.created_at)}
               </Text>
-              <Text
-                style={styles.subText}
-              >{`Dr. ${item.doctor_id.doctor_name} ${item.doctor_id.doctor_last_name}`}</Text>
-              <View style={styles.tagContainer}>
-                {returnIcon(data, dataIndex)}
-              </View>
-              {/* <View style={styles.buttonList}>
-                <ButtonTabs key={'report-buttons-' + index}  showAll={true} buttonIndexs={item.buttonIndexs} setIndex={(index) => {
-                  handleItemPress(data, item)
-                  // NavigationService.push(PRIVATESCREENS.MEDICAL_FILE_VIEWER, {
-                  //   activeIndex: index
-                  // });
-                }}></ButtonTabs>
-              </View> */}
-            </TouchableOpacity>
-          );
-        });
-      }
+              <View style={styles.dateLine} />
+            </View>
+            <Text style={styles.greenText}>
+              {item?.hospital_id?.hospital_name}
+            </Text>
+            <Text style={styles.subText}>{renderDrText(item.doctor_id)}</Text>
+            <View style={styles.tagContainer}>
+              {returnIcon(data, dataIndex)}
+            </View>
+          </TouchableOpacity>
+        );
+      });
     });
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header titleText={"Clinical Report"}></Header>
+      <Header titleText={"Clinical Report"} />
       <View style={styles.mainContainer}>
         <View style={styles.infoContainer}>
           <View style={styles.topInfo}>
             <Image
               source={require("../../assets/icons/user.png")}
               style={styles.userIcon}
-            ></Image>
+            />
             <Text
               style={styles.username}
             >{`${patientDetails.patient_name} ${patientDetails.patient_last_name}`}</Text>

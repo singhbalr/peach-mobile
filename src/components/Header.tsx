@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, ViewStyle } from "react-native";
 import InfoSvg from "../assets/dashboard/info.svg";
 import MenuSvg from "../assets/dashboard/menu.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,21 +8,22 @@ import { setSidebarState, toggleNotificationIconState } from "redux/reducer";
 import { PRIVATESCREENS } from "@shared-constants";
 import * as NavigationService from "react-navigation-helpers";
 type Props = {
-  titleText: string;
-  subTitleText?: string;
+  titleText: string
+  subTitleText?: string
+  style?: ViewStyle
 };
 // props: [propsType: defaultValue] props introduce
 // props.titleText: [String] header title
 // props.subTitleText: [String] header subtitle
 const Header: React.FC<Props> = (props: Props) => {
-  const { titleText, subTitleText } = props;
+  const { titleText, subTitleText, style } = props;
   const dispatch = useDispatch();
   const notificationIconState = useSelector(
     (state: RootState) => state.app.notificationIconState,
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={styles.topContainer}>
         <Text style={styles.title}>{titleText}</Text>
         <View style={styles.buttonContainer}>

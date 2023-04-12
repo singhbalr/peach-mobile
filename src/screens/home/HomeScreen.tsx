@@ -11,7 +11,7 @@ import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import { useMutation } from "@apollo/client";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as NavigationService from "react-navigation-helpers";
 /**
  * ? Local Imports
@@ -26,6 +26,7 @@ import { Button } from "react-native-paper";
 import { RootState } from "redux/store";
 import { PRIVATESCREENS } from "@shared-constants";
 import moment from "moment";
+import { toggleRewardNotificationState } from "redux/reducer";
 
 interface HomeScreenProps {}
 
@@ -55,8 +56,10 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   const [getRewards] = useMutation(GET_REWARDS_BY_PATIENT_ID);
   const patientId = useSelector((state: RootState) => state.auth.patientId);
+  const dispatch = useDispatch();
   useEffect(() => {
     loadRewards();
+    dispatch(toggleRewardNotificationState(false));
   }, []);
 
   const loadRewards = async () => {

@@ -14,12 +14,13 @@ type ComponentType = React.FC<Props>;
 const PInput: ComponentType = (props) => {
   return (
     <TextInput
+      underlineColorAndroid="#B5CAA0"
       onChangeText={props.onChangeText}
       style={props.style}
       contentStyle={{
         backgroundColor: "#B5CAA0",
         borderRadius: 10,
-        borderWidth: 1,
+        borderWidth: 0,
         borderColor: "#7BA040",
       }}
       secureTextEntry={props.secureTextEntry}
@@ -34,10 +35,8 @@ const PInput: ComponentType = (props) => {
 };
 const styles = StyleSheet.create({
   underlineStyle: {
-    alignItems: "center",
-    borderRadius: 15,
-    color: "#606461",
-    borderColor: "transparent",
+    borderBottomWidth: 2,
+    borderColor: "#B5CAA0",
   },
 });
 export default PInput;

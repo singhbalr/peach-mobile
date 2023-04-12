@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react";
+import React, { createRef } from "react";
 import {
   Image,
   Platform,
@@ -11,7 +11,6 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Drawer from "react-native-drawer";
-import Button from "components/button";
 /**
  * ? Local & Shared Imports
  */
@@ -28,16 +27,15 @@ import { RootState } from "../redux/store";
 import {
   setNotificationInfo,
   setSidebarState,
+  toggleFollowupNotificationState,
   toggleNotificationIconState,
 } from "redux/reducer";
 import { useSubscription } from "@apollo/client";
 import {
+  NEW_FOLLOWUP_REQUEST,
   NEW_MEDICAL_HEALTH_INFO,
   NEW_TRANSACTION,
 } from "connection/subscription";
-import Popup from "components/Popup";
-import * as NavigationService from "react-navigation-helpers";
-import { t } from "i18next";
 const { width } = Dimensions.get("window");
 
 const Tab = createBottomTabNavigator();
@@ -49,11 +47,20 @@ const PrivateRoutes = () => {
   const sidebarState = useSelector(
     (state: RootState) => state.app.sidebarState,
   );
+  const dispatch = useDispatch();
+  const clinicalBadge = undefined;
+  const contributionsBadge = undefined;
+  const rewardsBadge = undefined;
   const patientId = useSelector((state: RootState) => state.auth.patientId);
   const clinicalNotificationState = useSelector(
     (state: RootState) => state.app.clinicalNotificationState,
   );
-  const dispatch = useDispatch();
+  const contributeNotificationState = useSelector(
+    (state: RootState) => state.app.contributeNotificationState,
+  );
+  const rewardNotificationState = useSelector(
+    (state: RootState) => state.app.rewardNotificationState,
+  );
   const PATIENT_APPROVED_TRANSACTION_ID = "640a0a2284947b59273ea03d";
   const { _aa, _bb, _cc } = useSubscription(NEW_TRANSACTION, {
     onData: async ({ data }) => {
@@ -100,56 +107,21 @@ const PrivateRoutes = () => {
     onData: async ({ data }) => {
       const appliedPatientArray =
         data.data.newAdvertisement.opportunity_id.applied_patient;
-      console.log(
-        JSON.stringify(
-          data.data.newAdvertisement.opportunity_id.applied_patient,
-        ),
-      );
-
       const foundTransaction = appliedPatientArray.find((transaction) => {
         return transaction.patient._id === patientId;
       });
-      console.log("transaction start");
-      console.log(foundTransaction);
-      console.log("transaction end");
       if (appliedPatientArray.length > 0 && foundTransaction) {
         dispatch(toggleNotificationIconState(true));
       }
+    },
+  });
 
-      // if (data) {
-      //   const transactionTypeText =
-      //     transaction.transaction_type.transaction_type_text;
-      //   if (
-      //     transactionTypeText === "DOCTOR_REQUEST" &&
-      //     transaction.patient._id === patientId
-      //   ) {
-      //     console.log("validated");
-      //     const inputPayload = {
-      //       variables: {
-      //         input: {
-      //           transaction_type_id: PATIENT_APPROVED_TRANSACTION_ID,
-      //           doctor_id: transaction.doctor._id,
-      //           transaction_is_closed: false,
-      //           transaction_hash: null,
-      //           patient_id: transaction.patient._id,
-      //           opportunity_id: null,
-      //           medical_record_id: null,
-      //         },
-      //         updateTransactionId: transaction._id,
-      //       },
-      //     };
-      //     const doctorName = `${transaction.doctor.doctor_name} ${transaction.doctor.doctor_last_name}`;
-      //     dispatch(
-      //       setNotificationInfo({
-      //         message: `Data Request from Doctor ${doctorName}`,
-      //         iconSource: require("./../assets/icons/doctor.png"),
-      //         btnText: "Accept",
-      //         navigationScreen: "",
-      //         payload: inputPayload,
-      //       }),
-      //     );
-      //   }
-      // }
+  const { _aaaa, _bbbb, _cccc } = useSubscription(NEW_FOLLOWUP_REQUEST, {
+    onData: async ({ data }) => {
+      const foundPatientId = data.data.newFollowupRequest.patient._id;
+      if (foundPatientId === patientId) {
+        dispatch(toggleFollowupNotificationState(true));
+      }
     },
   });
 
@@ -162,17 +134,25 @@ const PrivateRoutes = () => {
     switch (route.name) {
       case PRIVATESCREENS.REWARD_CENTER:
         return (
-          <Image
-            source={
-              focused
-                ? require("../assets/navbar-icons/rewards-focused.png")
-                : require("../assets/navbar-icons/rewards.png")
-            }
-            style={{
-              width: 30,
-              height: 30,
-            }}
-          />
+          <>
+            <Image
+              source={
+                focused
+                  ? require("../assets/navbar-icons/rewards-focused.png")
+                  : require("../assets/navbar-icons/rewards.png")
+              }
+              style={{
+                width: 30,
+                height: 30,
+              }}
+            />
+            <View
+              style={[
+                styles.redDot,
+                { display: rewardNotificationState ? "flex" : "none" },
+              ]}
+            ></View>
+          </>
         );
 
       case PRIVATESCREENS.CLINICAL_REPORT:
@@ -215,17 +195,25 @@ const PrivateRoutes = () => {
 
       case PRIVATESCREENS.CONTRIBUTE_DATA:
         return (
-          <Image
-            source={
-              focused
-                ? require("../assets/navbar-icons/contributions-focused.png")
-                : require("../assets/navbar-icons/contributions.png")
-            }
-            style={{
-              width: 24,
-              height: 24,
-            }}
-          />
+          <>
+            <Image
+              source={
+                focused
+                  ? require("../assets/navbar-icons/contributions-focused.png")
+                  : require("../assets/navbar-icons/contributions.png")
+              }
+              style={{
+                width: 24,
+                height: 24,
+              }}
+            />
+            <View
+              style={[
+                styles.redDot,
+                { display: contributeNotificationState ? "flex" : "none" },
+              ]}
+            ></View>
+          </>
         );
 
       default:
@@ -276,6 +264,12 @@ const PrivateRoutes = () => {
           tabBarIconStyle: {
             marginBottom: 10,
           },
+          tabBarBadgeStyle: {
+            top: -12,
+            left: 6,
+            color: "#fff",
+            backgroundColor: "#F196A8",
+          },
         })}
       >
         <Tab.Screen
@@ -285,14 +279,23 @@ const PrivateRoutes = () => {
         <Tab.Screen
           name={PRIVATESCREENS.CLINICAL_REPORT}
           component={ClinicalReport}
+          options={{
+            tabBarBadge: clinicalBadge,
+          }}
         />
         <Tab.Screen
           name={PRIVATESCREENS.CONTRIBUTE_DATA}
           component={ProfileScreen}
+          options={{
+            tabBarBadge: contributionsBadge,
+          }}
         />
         <Tab.Screen
           name={PRIVATESCREENS.REWARD_CENTER}
           component={HomeScreen}
+          options={{
+            tabBarBadge: rewardsBadge,
+          }}
         />
       </Tab.Navigator>
     </Drawer>

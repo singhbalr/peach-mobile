@@ -18,7 +18,7 @@ export const calculateDateDiff = (date: moment.MomentInput) => {
 export const formatUnixTimestamp = (timestamp: number) => {
   const unixTimestamp = Math.floor(timestamp / 1000);
   const date = moment.unix(unixTimestamp);
-  return date.format("DD MMM YYYY");
+  return date.format("DD/MM/YYYY");
 };
 export const formatUnixTimestampSharedData = (timestamp: number) => {
   const unixTimestamp = Math.floor(timestamp / 1000);

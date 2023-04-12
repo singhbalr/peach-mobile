@@ -1,15 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 interface AppState {
-  notificationIconState: boolean
-  notificationInfo: any
-  sidebarState: boolean
-  clinicalNotificationState: boolean
-  ctaModalNotificationState: boolean
+  notificationIconState: boolean;
+  notificationInfo: any;
+  sidebarState: boolean;
+  clinicalNotificationState: boolean;
+  ctaModalNotificationState: boolean;
+  contributeNotificationState: boolean;
+  rewardNotificationState: boolean;
+  followupNotificationState: boolean;
 }
 const initialState = {
   notificationIconState: false,
   clinicalNotificationState: true,
+  contributeNotificationState: false,
+  rewardNotificationState: false,
+  followupNotificationState: true,
   ctaModalNotificationState: false,
   notificationInfo: {
     message: '',
@@ -25,16 +31,25 @@ const appSlice = createSlice({
   initialState,
   reducers: {
     toggleNotificationIconState: (state: AppState, action: { payload: boolean }) => {
-      state.notificationIconState = action.payload
+      state.notificationIconState = action.payload;
     },
     toggleClinicalNotificationState: (state: AppState, action: { payload: boolean }) => {
-      state.clinicalNotificationState = action.payload
+      state.clinicalNotificationState = action.payload;
+    },
+    toggleContributeNotificationState: (state: AppState, action: { payload: boolean }) => {
+      state.contributeNotificationState = action.payload;
+    },
+    toggleRewardNotificationState: (state: AppState, action: { payload: boolean }) => {
+      state.rewardNotificationState = action.payload;
+    },
+    toggleFollowupNotificationState: (state: AppState, action: { payload: boolean }) => {
+      state.followupNotificationState = action.payload;
     },
     toggleCtaModalNotificationState: (state: AppState, action: { payload: boolean }) => {
-      state.ctaModalNotificationState = action.payload
+      state.ctaModalNotificationState = action.payload;
     },
     setNotificationInfo: (state: AppState, action: { payload: object }) => {
-      state.notificationInfo = action.payload
+      state.notificationInfo = action.payload;
     },
     removeNotificationInfo:(state: AppState) => {
       state.notificationInfo = {
@@ -61,5 +76,8 @@ export const {
   setSidebarState,
   resetAppState,
   toggleClinicalNotificationState,
-  toggleCtaModalNotificationState
+  toggleCtaModalNotificationState,
+  toggleContributeNotificationState,
+  toggleRewardNotificationState,
+  toggleFollowupNotificationState
 } = appSlice.actions
