@@ -73,7 +73,7 @@ const FollowupRequestRecordScreen: React.FC<
     // });
     // return false;
     const found = detail.applied_patient.find(
-      (item: any) => item.patient._id == patientId,
+      (item: any) => item?.patient?._id == patientId,
     );
     return typeof found === "object" ? true : false;
   };
@@ -236,7 +236,11 @@ const FollowupRequestRecordScreen: React.FC<
                         lineHeight: 21,
                       }}
                     >
-                      HK${item.reward_amount}
+                      {item.reward_type_description.reward_type ===
+                      "CASH_COUPON"
+                        ? "HK$"
+                        : ""}
+                      {item.reward_amount}
                     </Text>
                     <Text
                       style={{

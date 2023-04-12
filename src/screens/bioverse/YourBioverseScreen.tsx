@@ -561,7 +561,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       <Animated.View style={[styles.bodyContainer, {transform: [{translateY: bodyContainerTranslateY}]}]}>
         {buttonList.map((item, index) => {
           return (
-            <View key={item.name} style={[styles[item.classname], {display: popupVisible ? 'none' : ''}]}>
+            <View key={item.name} style={[styles[item.classname], popupVisible ? {display: "none"} : {}]}>
               <BodyButton
                 buttonText={item.name}
                 reportCount={item.reportCount}
@@ -573,12 +573,12 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           );
         })}
         <Animated.View style={[styles.bodySvg, { transform: [{ translateY }, { scale }] }]}>
-          <MaleBodySvg height={'100%'} style={{display: popupVisible ? 'none' : ''}}></MaleBodySvg>
+          <MaleBodySvg height={'100%'} style={popupVisible ? {display: "none"} : {}}></MaleBodySvg>
           {
             buttonList.map(svgItem => {
               if (svgItem.svg) {
                 return (
-                  <View style={{display: svgItem.identifier !== activeBodySvg ? 'none' : ''}}>
+                  <View style={svgItem.identifier !== activeBodySvg ? {display: "none"} : {}}>
                     {svgItem.svg}
                   </View>
                 )

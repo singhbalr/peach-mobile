@@ -124,3 +124,15 @@ export const NEW_MEDICAL_HEALTH_INFO = gql`
     }
   }
 `;
+export const NEW_FOLLOWUP_REQUEST = gql`
+  subscription Subscription {
+    newFollowupRequest {
+      _id
+      created_at
+      deleted_at
+      patient {
+        _id
+      }
+    }
+  }
+`;

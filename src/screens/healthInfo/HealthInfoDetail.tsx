@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -13,6 +13,10 @@ import { t } from "i18next";
 import { PRIVATESCREENS } from "@shared-constants";
 import * as NavigationService from "react-navigation-helpers";
 import { formatUnixTimestamp } from "utils";
+import { useMutation } from "@apollo/client";
+import { GET_OPPORTUNITY_BY_ORGANIZATION_ID_FILTERED } from "connection/mutation";
+import OpportunityCard from "@screens/opportunities/OpportunityCard";
+
 type Props = {
   navigation: any;
   route: any;
@@ -20,9 +24,38 @@ type Props = {
 
 const HealthInfoDetail: React.FC<Props> = (props: Props) => {
   const { route } = props;
-  const { opportunityData, index } = route.params;
+  const { opportunityData, index, showMoreOpportunities } = route.params;
+  const [opportunities, setOpportunities] = useState([]);
+  const [getOppByOrg] = useMutation(
+    GET_OPPORTUNITY_BY_ORGANIZATION_ID_FILTERED,
+  );
+
+  const PROMOTIONAL_TYPE_ID = "6419e3e9db51e4ec7511f1be";
+  const DEMO_ORG_ID = "6434afe5d2fb27638e768583";
+
   console.log(JSON.stringify(opportunityData));
-  const [showBtn, setShowBtn] = useState<boolean>(true);
+
+  const loadOpportunity = async () => {
+    const { data } = await getOppByOrg({
+      variables: {
+        opportunity: {
+          opportunity_type_id: PROMOTIONAL_TYPE_ID,
+          organization_id: DEMO_ORG_ID,
+        },
+      },
+    });
+
+    if (data) {
+      console.log(data.getOpportunityByOrganizationIdOpp);
+      setOpportunities(data.getOpportunityByOrganizationIdOpp);
+    }
+  };
+
+  useEffect(() => {
+    if (showMoreOpportunities === true) {
+      loadOpportunity();
+    }
+  }, []);
 
   const staticContent = {
     title: opportunityData.medical_health_info[index].advertisement_title,
@@ -55,7 +88,26 @@ const HealthInfoDetail: React.FC<Props> = (props: Props) => {
           ></Image>
           <Text style={styles.content}>{staticContent.content}</Text>
         </View>
-        {showBtn ? (
+        {showMoreOpportunities ? (
+          <View>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "600",
+                color: "#383D39",
+                marginHorizontal: 35,
+                marginTop: 35,
+              }}
+            >
+              Related Opportunities
+            </Text>
+            {opportunities.map((item, key) => (
+              <View style={styles.opportunitiesCard}>
+                <OpportunityCard key={key} {...item} />
+              </View>
+            ))}
+          </View>
+        ) : (
           <View style={styles.bottomBtnView}>
             <Text style={styles.bottomText}>
               <Text style={styles.bottomText}>{staticContent.bottomText}</Text>
@@ -73,10 +125,6 @@ const HealthInfoDetail: React.FC<Props> = (props: Props) => {
                 </Text>
               </View>
             </TouchableOpacity>
-          </View>
-        ) : (
-          <View style={styles.opportunitiesCard}>
-            <Text style={styles.opportunitiesTitle}>Related Opportunities</Text>
           </View>
         )}
       </ScrollView>
@@ -182,7 +230,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   opportunitiesCard: {
-    marginTop: 26,
+    marginTop: 15,
     paddingHorizontal: 35,
     paddingBottom: 100,
   },

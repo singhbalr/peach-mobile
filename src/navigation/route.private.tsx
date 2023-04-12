@@ -27,10 +27,12 @@ import { RootState } from "../redux/store";
 import {
   setNotificationInfo,
   setSidebarState,
+  toggleFollowupNotificationState,
   toggleNotificationIconState,
 } from "redux/reducer";
 import { useSubscription } from "@apollo/client";
 import {
+  NEW_FOLLOWUP_REQUEST,
   NEW_MEDICAL_HEALTH_INFO,
   NEW_TRANSACTION,
 } from "connection/subscription";
@@ -41,12 +43,14 @@ const Stack = createStackNavigator();
 const PrivateRoutes = () => {
   const scheme = useColorScheme();
   const isDarkMode = scheme === "dark";
-  const drawer = createRef<React.ElementRef<typeof Drawer>>()
-  const sidebarState = useSelector((state: RootState) => state.app.sidebarState)
-  const dispatch = useDispatch()
-  const clinicalBadge = undefined
-  const contributionsBadge = undefined
-  const rewardsBadge = undefined
+  const drawer = createRef<React.ElementRef<typeof Drawer>>();
+  const sidebarState = useSelector(
+    (state: RootState) => state.app.sidebarState,
+  );
+  const dispatch = useDispatch();
+  const clinicalBadge = undefined;
+  const contributionsBadge = undefined;
+  const rewardsBadge = undefined;
   const patientId = useSelector((state: RootState) => state.auth.patientId);
   const clinicalNotificationState = useSelector(
     (state: RootState) => state.app.clinicalNotificationState,
@@ -103,56 +107,21 @@ const PrivateRoutes = () => {
     onData: async ({ data }) => {
       const appliedPatientArray =
         data.data.newAdvertisement.opportunity_id.applied_patient;
-      console.log(
-        JSON.stringify(
-          data.data.newAdvertisement.opportunity_id.applied_patient,
-        ),
-      );
-
       const foundTransaction = appliedPatientArray.find((transaction) => {
         return transaction.patient._id === patientId;
       });
-      console.log("transaction start");
-      console.log(foundTransaction);
-      console.log("transaction end");
       if (appliedPatientArray.length > 0 && foundTransaction) {
         dispatch(toggleNotificationIconState(true));
       }
+    },
+  });
 
-      // if (data) {
-      //   const transactionTypeText =
-      //     transaction.transaction_type.transaction_type_text;
-      //   if (
-      //     transactionTypeText === "DOCTOR_REQUEST" &&
-      //     transaction.patient._id === patientId
-      //   ) {
-      //     console.log("validated");
-      //     const inputPayload = {
-      //       variables: {
-      //         input: {
-      //           transaction_type_id: PATIENT_APPROVED_TRANSACTION_ID,
-      //           doctor_id: transaction.doctor._id,
-      //           transaction_is_closed: false,
-      //           transaction_hash: null,
-      //           patient_id: transaction.patient._id,
-      //           opportunity_id: null,
-      //           medical_record_id: null,
-      //         },
-      //         updateTransactionId: transaction._id,
-      //       },
-      //     };
-      //     const doctorName = `${transaction.doctor.doctor_name} ${transaction.doctor.doctor_last_name}`;
-      //     dispatch(
-      //       setNotificationInfo({
-      //         message: `Data Request from Doctor ${doctorName}`,
-      //         iconSource: require("./../assets/icons/doctor.png"),
-      //         btnText: "Accept",
-      //         navigationScreen: "",
-      //         payload: inputPayload,
-      //       }),
-      //     );
-      //   }
-      // }
+  const { _aaaa, _bbbb, _cccc } = useSubscription(NEW_FOLLOWUP_REQUEST, {
+    onData: async ({ data }) => {
+      const foundPatientId = data.data.newFollowupRequest.patient._id;
+      if (foundPatientId === patientId) {
+        dispatch(toggleFollowupNotificationState(true));
+      }
     },
   });
 
@@ -256,21 +225,28 @@ const PrivateRoutes = () => {
     }
   };
   return (
-    <Drawer
-      ref={drawer}
-      open={sidebarState}
-      type="overlay"
-      content={<Sidebar />}
-      openDrawerOffset={0.15 * width}
-      tapToClose={true}
-      side={"right"}
-      onClose={() => {
-        dispatch(setSidebarState(false));
-      }}
-      tweenHandler={(ratio) => ({
-        mainOverlay: {
-          opacity: ratio / 1.5,
-          backgroundColor: "rgba(56, 61, 57, 1)",
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarIcon: ({ focused, color, size }) =>
+          renderTabIcon(route, focused, color, size),
+        tabBarActiveTintColor: "#7BA040",
+        tabBarInactiveTintColor: "#888B88",
+        tabBarStyle: {
+          backgroundColor: palette.white,
+          height: 83,
+          paddingTop: 18,
+          paddingBottom: Platform.OS === "ios" ? 25 : 18,
+          paddingHorizontal: Platform.OS === "ios" ? 16 : 10,
+        },
+        tabBarIconStyle: {
+          marginBottom: 10,
+        },
+        tabBarBadgeStyle: {
+          top: -12,
+          left: 6,
+          color: "#fff",
+          backgroundColor: "#F196A8",
         },
       })}
     >

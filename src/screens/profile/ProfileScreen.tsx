@@ -36,6 +36,7 @@ import Header from "components/Header";
 import {
   setNotificationInfo,
   toggleContributeNotificationState,
+  toggleFollowupNotificationState,
 } from "redux/reducer";
 
 interface ProfileScreenProps {}
@@ -73,6 +74,10 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const [getDoctorRequest] = useMutation(GET_DOCTOR_REQUEST);
 
   const patientId = useSelector((state: RootState) => state.auth.patientId);
+  const followupNotificationState = useSelector(
+    (state: RootState) => state.app.followupNotificationState,
+  );
+
   const { loading, error, data } = useQuery(
     patientId === "642e80d7acc6442859edb5e2"
       ? GET_ALL_OPPORTUNITY_FILTERED
@@ -101,6 +106,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     switch (activeTab) {
       case "Screen3":
         fetchFollowUpRequest();
+        dispatch(toggleFollowupNotificationState(false));
         break;
     }
   }, [activeTab]);
@@ -396,7 +402,11 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                         lineHeight: 21,
                       }}
                     >
-                      HK${item.reward_amount}
+                      {item.reward_type_description.reward_type ===
+                      "CASH_COUPON"
+                        ? "HK$"
+                        : ""}
+                      {item.reward_amount}
                     </Text>
                     <Text
                       style={{
@@ -545,7 +555,11 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                         lineHeight: 21,
                       }}
                     >
-                      HK${item.reward_amount}
+                      {item.reward_type_description.reward_type ===
+                      "CASH_COUPON"
+                        ? "HK$"
+                        : ""}
+                      {item.reward_amount}
                     </Text>
                     <Text
                       style={{
@@ -781,32 +795,32 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     }
   };
 
-  const borderStyle2 = () => {
-    if (activeTab === "Screen2") {
-      return {
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: "#000000",
-        height: 35,
-        justifyContent: "center",
-        backgroundColor: "#7BA23F",
-        color: "#FFFFFF",
-      };
-    }
-  };
-  const borderStyle3 = () => {
-    if (activeTab === "Screen3") {
-      return {
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: "#000000",
-        height: 35,
-        justifyContent: "center",
-        backgroundColor: "#7BA23F",
-        color: "#FFFFFF",
-      };
-    }
-  };
+  // const borderStyle2 = () => {
+  //   if (activeTab === "Screen2") {
+  //     return {
+  //       borderWidth: 1,
+  //       borderRadius: 5,
+  //       borderColor: "#000000",
+  //       height: 35,
+  //       justifyContent: "center",
+  //       backgroundColor: "#7BA23F",
+  //       color: "#FFFFFF",
+  //     };
+  //   }
+  // };
+  // const borderStyle3 = () => {
+  //   if (activeTab === "Screen3") {
+  //     return {
+  //       borderWidth: 1,
+  //       borderRadius: 5,
+  //       borderColor: "#000000",
+  //       height: 35,
+  //       justifyContent: "center",
+  //       backgroundColor: "#7BA23F",
+  //       color: "#FFFFFF",
+  //     };
+  //   }
+  // };
 
   const renderScreen = (activeTab: string) => {
     switch (activeTab) {
@@ -838,7 +852,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       <Header
         titleText="Contributions"
         subTitleText="Contribute Data Now to Get Rewards"
-      ></Header>
+      />
       <View style={styles.mainContainer}>
         <ScrollView
           horizontal
@@ -871,6 +885,16 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 >
                   {item.title}
                 </Text>
+                {key === 1 ? (
+                  <View
+                    style={[
+                      style.redDot,
+                      { display: followupNotificationState ? "flex" : "none" },
+                    ]}
+                  ></View>
+                ) : (
+                  <></>
+                )}
               </View>
             </TouchableOpacity>
           ))}
@@ -882,3 +906,15 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
 };
 
 export default ProfileScreen;
+
+const style = StyleSheet.create({
+  redDot: {
+    position: "absolute",
+    top: 10,
+    right: -10,
+    width: 6,
+    height: 6,
+    backgroundColor: "#F196A8",
+    borderRadius: 6,
+  },
+});
