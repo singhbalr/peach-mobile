@@ -1,5 +1,11 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, ViewStyle } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ViewStyle,
+} from "react-native";
 import InfoSvg from "../assets/dashboard/info.svg";
 import MenuSvg from "../assets/dashboard/menu.svg";
 import InfoWhiteSvg from "../assets/icons/info-white.svg";
@@ -11,10 +17,10 @@ import { PRIVATESCREENS } from "@shared-constants";
 import * as NavigationService from "react-navigation-helpers";
 import { useNavigation, useRoute } from "@react-navigation/native";
 type Props = {
-  titleText: string
-  subTitleText?: string
-  style?: ViewStyle
-  isRewardsScreen?: boolean
+  titleText: string;
+  subTitleText?: string;
+  style?: ViewStyle;
+  isRewardsScreen?: boolean;
 };
 // props: [propsType: defaultValue] props introduce
 // props.titleText: [String] header title
@@ -27,17 +33,22 @@ const Header: React.FC<Props> = (props: Props) => {
   );
 
   return (
-    <View style={[styles.container, isRewardsScreen ? styles.rewardsHeader : {}]}>
-      {
-        isRewardsScreen && (
-          <View style={styles.bg}>
-            <View style={styles.bgOne}></View>
-            <View style={styles.bgTwo}></View>
-          </View>
-        )
-      }
+    <View style={[styles.container, false ? styles.rewardsHeader : {}]}>
+      {isRewardsScreen && (
+        <View style={styles.bg}>
+          <View style={styles.bgOne}></View>
+          <View style={styles.bgTwo}></View>
+        </View>
+      )}
       <View style={styles.topContainer}>
-        <Text style={[styles.title, {color: isRewardsScreen ? '#fff' : '#383D39'}]}>{titleText}</Text>
+        <Text
+          style={[
+            styles.title,
+            { color: isRewardsScreen ? "#fff" : "#383D39" },
+          ]}
+        >
+          {titleText}
+        </Text>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={[styles.infoView, styles.headerBtn]}
@@ -48,11 +59,13 @@ const Header: React.FC<Props> = (props: Props) => {
               NavigationService.push(PRIVATESCREENS.USEFUL_HEALTH_INFO, {});
             }}
           >
-            {
-              isRewardsScreen
-              ? <InfoWhiteSvg style={[styles.icon, styles.infoIcon]}></InfoWhiteSvg>
-              : <InfoSvg style={[styles.icon, styles.infoIcon]}></InfoSvg>
-            }
+            {isRewardsScreen ? (
+              <InfoWhiteSvg
+                style={[styles.icon, styles.infoIcon]}
+              ></InfoWhiteSvg>
+            ) : (
+              <InfoSvg style={[styles.icon, styles.infoIcon]}></InfoSvg>
+            )}
             <View
               style={[
                 styles.redDot,
@@ -61,20 +74,22 @@ const Header: React.FC<Props> = (props: Props) => {
             ></View>
           </TouchableOpacity>
           <TouchableOpacity
-          style={styles.headerBtn}
+            style={styles.headerBtn}
             onPress={() => {
               dispatch(setSidebarState(true));
             }}
           >
-            {
-              isRewardsScreen
-                ? <MenuWhiteSvg style={[styles.icon, styles.menuIcon]}></MenuWhiteSvg>
-                : <MenuSvg style={[styles.icon, styles.menuIcon]}></MenuSvg>
-            }
+            {isRewardsScreen ? (
+              <MenuWhiteSvg
+                style={[styles.icon, styles.menuIcon]}
+              ></MenuWhiteSvg>
+            ) : (
+              <MenuSvg style={[styles.icon, styles.menuIcon]}></MenuSvg>
+            )}
           </TouchableOpacity>
         </View>
       </View>
-      { subTitleText && <Text style={styles.subTitle}>{subTitleText}</Text>}
+      {subTitleText && <Text style={styles.subTitle}>{subTitleText}</Text>}
     </View>
   );
 };
@@ -145,25 +160,25 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   bg: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: '#7BA040',
+    backgroundColor: "#7BA040",
   },
   bgOne: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(177, 197, 158, .5)',
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(177, 197, 158, .5)",
   },
   bgTwo: {
-    position: 'absolute',
+    position: "absolute",
     top: -7940,
     right: -7000,
     width: 8090,
     height: 8000,
     borderRadius: 1000,
-    backgroundColor: '#7BA040',
-  }
+    backgroundColor: "#7BA040",
+  },
 });
