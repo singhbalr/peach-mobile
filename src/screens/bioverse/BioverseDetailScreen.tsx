@@ -27,6 +27,12 @@ const BioverseDetailScreen: React.FC = (props: Props) => {
     });
   };
 
+  const renderDrText = (doctor) => {
+    if (doctor) {
+      return `Dr. ${doctor.doctor_name} ${doctor.doctor_last_name}`;
+    }
+  };
+
   const returnIcon = (fileValue, fileIndex) => {
     switch (fileValue.medical_record_file_type_id.file_type) {
       case "CLINICAL_RECORD":
@@ -96,9 +102,9 @@ const BioverseDetailScreen: React.FC = (props: Props) => {
               <Text style={styles.greenText}>
                 {value.hospital_id.hospital_name}
               </Text>
-              <Text
-                style={styles.subText}
-              >{`Dr. ${value.doctor_id.doctor_name} ${value.doctor_id.doctor_last_name}`}</Text>
+              <Text style={styles.subText}>
+                {renderDrText(value.doctor_id)}
+              </Text>
               <View style={styles.tagContainer}>
                 {value.medical_record_file.map((record_file, index) =>
                   returnIcon(record_file, index),

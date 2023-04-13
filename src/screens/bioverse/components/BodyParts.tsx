@@ -1,14 +1,20 @@
-import React from 'react'
-import { View, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native'
+import React from "react";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import ArrowRightSvg from "../../../assets/dashboard/arrow-right.svg";
 import ReportSvg from "../../../assets/dashboard/report.svg";
 
 type ItemProps = {
   index: string | number;
-  item: { name: string; icon: any; reportCount: number; };
+  item: { name: string; icon: any; reportCount: number };
   length: number;
   fileRecordList: any;
-  onPressList: (arg1: { name: string; icon: any; reportCount: number; }) => void;
+  onPressList: any;
 };
 const Item: React.FC<ItemProps> = ({
   index,
@@ -17,23 +23,25 @@ const Item: React.FC<ItemProps> = ({
   fileRecordList,
   onPressList,
 }: ItemProps) => {
+  console.log(item);
   return (
     <TouchableOpacity
-      onPress={() => onPressList(item)}
+      onPress={() => onPressList(item.name)}
       style={[
         styles.itemContainer,
         index === length - 1 ? { borderBottomWidth: 0 } : {},
       ]}
     >
       <View style={styles.itemView}>
-        <View style={item.icon ? styles.svgIcon : {}}>
-          {item.icon}
-        </View>
+        <View style={item.icon ? styles.svgIcon : {}}>{item.icon}</View>
         <Text>{item.name}</Text>
         {fileRecordList[item.name.toLowerCase()] > 0 && (
           <>
             <ReportSvg style={styles.reportIcon}></ReportSvg>
-            <Text style={styles.reportCount}> {fileRecordList[item.name.toLowerCase()]}</Text>
+            <Text style={styles.reportCount}>
+              {" "}
+              {fileRecordList[item.name.toLowerCase()]}
+            </Text>
           </>
         )}
       </View>
@@ -43,42 +51,40 @@ const Item: React.FC<ItemProps> = ({
 };
 
 type Props = {
-  title: string
-  dataList: { name: string; icon: any; reportCount: number; }[]
-  fileRecordList: any
-  onPressList: (index: number | string) => void;
-}
+  title: string;
+  dataList: { name: string; icon: any; reportCount: number }[];
+  fileRecordList: any;
+  onPressList: any;
+};
 
 const BodyParts: React.FC<Props> = (props: Props) => {
-  const {
-    title, dataList, fileRecordList, onPressList,
-  } = props
+  const { title, dataList, fileRecordList, onPressList } = props;
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
-        <FlatList
-          data={dataList}
-          renderItem={({ item, index }) => (
-            <Item
-              item={item}
-              index={index}
-              fileRecordList={fileRecordList}
-              length={dataList.length}
-              onPressList={() => onPressList(item.name)}
-            />
-          )}
-          style={[styles.flatList]}
-          keyExtractor={(item, index) => index.toString()}
-        />
+      <FlatList
+        data={dataList}
+        renderItem={({ item, index }) => (
+          <Item
+            item={item}
+            index={index}
+            fileRecordList={fileRecordList}
+            length={dataList.length}
+            onPressList={onPressList}
+          />
+        )}
+        style={[styles.flatList]}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </View>
-  )
-}
-export default BodyParts
+  );
+};
+export default BodyParts;
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
   },
   title: {
     // fontFamily: 'Titillium Web',
@@ -116,4 +122,4 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: "#888B88",
   },
-})
+});
