@@ -33,14 +33,14 @@
       "name12": "Blood",
       "name13": "Bones",
       "name14": "Genetics",
-      "name15": "glands",
-      "name16": "joints and bones (Other than limbs or ribs)",
-      "name17": "lymph",
-      "name18": "medication",
-      "name19": "mental",
-      "name20": "other bodyly fluids",
-      "name21": "semen",
-      "name22": "skin",
+      "name15": "Glands",
+      "name16": "Joints and bones (Other than limbs or ribs)",
+      "name17": "Lymph",
+      "name18": "Medication",
+      "name19": "Mental",
+      "name20": "Other bodily fluids",
+      "name21": "Semen",
+      "name22": "Skin",
 
       "name23": "Heart",
       "name24": "Lungs",
@@ -127,7 +127,7 @@
       "text1": "The data stored in the informatics system of the Connected Clinics, Hospitals and Labs.",
       "text2": "The data stored in the informatics system of the Connected Wearable Devices.",
       "text3": "My Progress",
-      "text4": "My Share Data"
+      "text4": "My Shared Data"
     },
     "RewardDetails": {
       "title": "Colorectal Screening",
@@ -142,7 +142,7 @@
     },
     "Sidebar": {
       "Settings": "Settings",
-      "MyShareData": "My Share Data",
+      "MyShareData": "My Shared Data",
       "Useful": "Useful Health Info",
       "Support": "Support",
       "LogOut": "Log Out"
@@ -159,6 +159,9 @@
       "Prenetics": "Prenetics' mission is to bring health closer to people, by decentralizing health care, and focusing on the comprehensive testing capabilities covering prevention, diagnostics, and personalized care.",
       "link-prenetics": "https://www.prenetics.com",
       "opportunity-prenetics": "Opportunities of Prenetics"
+    },
+    "RewardsScreen": {
+      "title": "Rewards"
     }
   }
 }

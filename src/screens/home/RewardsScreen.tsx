@@ -6,29 +6,29 @@ import {
   ScrollView,
   TouchableOpacity,
   View,
+  Text,
 } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import { useMutation } from "@apollo/client";
 import { useDispatch, useSelector } from "react-redux";
 import * as NavigationService from "react-navigation-helpers";
 /**
  * ? Local Imports
  */
-import createStyles from "./HomeScreen.style";
+import createStyles from "./RewardsScreen.style";
 import { GET_REWARDS_BY_PATIENT_ID } from "../../connection/mutation";
 /**
  * ? Shared Imports
  */
-import Text from "@shared-components/text-wrapper/TextWrapper";
 import { Button } from "react-native-paper";
 import { RootState } from "redux/store";
 import { PRIVATESCREENS } from "@shared-constants";
 import moment from "moment";
 import { toggleRewardNotificationState } from "redux/reducer";
+import Header from "components/Header";
+import { t } from "i18next";
 
-interface HomeScreenProps {}
+interface RewardsScreenProps {}
 
 interface RewardProps {
   title: string;
@@ -43,7 +43,7 @@ interface AvailableDataProps {
   additionalRewards?: undefined | RewardProps[];
 }
 
-const HomeScreen: React.FC<HomeScreenProps> = () => {
+const RewardsScreen: React.FC<RewardsScreenProps> = () => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -116,13 +116,11 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       <TouchableOpacity onPress={() => handleItemPress(patientReward)}>
         <View
           style={{
+            width: '100%',
             borderRadius: 15,
             backgroundColor: "#ffffff",
-            width: ScreenWidth * 0.9,
-            padding: 20,
-            paddingTop: 0,
-            margin: 10,
-            marginBottom: 30,
+            padding: 10,
+            marginBottom: 18,
             elevation: 1,
           }}
         >
@@ -141,7 +139,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                   width: 115,
                   height: 155,
                   borderRadius: 15,
-                  marginTop: 10,
                 }}
               />
               <View
@@ -157,7 +154,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
               >
                 <Text
                   style={{
-                    color: "white",
+                    color: "#fff",
                     fontSize: 11,
                     fontWeight: "900",
                   }}
@@ -313,7 +310,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           height: "100%",
         }}
       >
-        <ScrollView>{renderRewardList()}</ScrollView>
+        <ScrollView style={styles.rewardList}>{renderRewardList()}</ScrollView>
       </View>
     );
   };
@@ -346,7 +343,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           backgroundColor: colors.secondaryBackground,
         }}
       >
-        <ScrollView>{renderRewardList()}</ScrollView>
+        <ScrollView style={styles.rewardList}>{renderRewardList()}</ScrollView>
       </View>
     );
   };
@@ -379,73 +376,15 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   return (
     <View style={styles.container}>
+      <Header titleText={t('RewardsScreen.title')} isRewardsScreen={true}></Header>
       <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          backgroundColor: "#7BA040",
-        }}
-      >
-        <View>
-          <Image
-            source={require("../../assets/header/overlay.png")}
-            style={{ width: screenSize.width, height: 120 }}
-          />
-          <View
-            style={{
-              position: "absolute",
-              bottom: 20,
-              left: 34,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text
-              color={colors.white}
-              style={{
-                fontSize: 22,
-                fontWeight: "700",
-              }}
-            >
-              Rewards
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                marginLeft: 170,
-                marginTop: 10,
-              }}
-            >
-              <Image
-                source={require("../../assets/header/add-icon-white.png")}
-                style={{
-                  width: 16,
-                  height: 16,
-                  marginLeft: 20,
-                }}
-              />
-              <Image
-                source={require("../../assets/header/menu-icon-white.png")}
-                style={{
-                  width: 16,
-                  height: 16,
-                  marginLeft: 30,
-                }}
-              />
-            </View>
-          </View>
-        </View>
-      </View>
-      <View
-        style={{
-          paddingHorizontal: 20,
-          backgroundColor: colors.secondaryBackground,
-        }}
+        style={styles.tabContainer}
       >
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           snapToAlignment="center"
+          style={styles.tabScroll}
         >
           {tabList.map((item, key) => (
             <TouchableOpacity
@@ -456,9 +395,9 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={{
                   justifyContent: "center",
                   height: 40,
-                  borderBottomWidth: 2,
+                  borderBottomWidth: 1.5,
                   borderBottomColor:
-                    activeTab === item.screenName ? "#7BA040" : "#BABCB7",
+                    activeTab === item.screenName ? "#7BA040" : "transparent",
                   marginRight: 38,
                 }}
               >
@@ -483,4 +422,4 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   );
 };
 
-export default HomeScreen;
+export default RewardsScreen;

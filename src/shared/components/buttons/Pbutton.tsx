@@ -41,6 +41,7 @@ const PIbutton: ComponentType = (props) => {
         contentStyle={styles.contentStyle}
         labelStyle={styles.textStyle}
         style={[
+          {marginTop: 15},
           props.type === "primary"
             ? styles.buttonStylePrimary
             : styles.buttonStyleSecondary,
@@ -63,7 +64,6 @@ const styles = StyleSheet.create({
     width: "72%",
   },
   buttonContainer: {
-    marginTop: 15,
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",

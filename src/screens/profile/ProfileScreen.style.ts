@@ -18,13 +18,13 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create<Style>({
     container: {
       flex: 1,
-      backgroundColor: "#fff",
+      backgroundColor: "#fafafa",
     },
     mainContainer: {
       paddingHorizontal: 35,
     },
     tabContainer: {
-      paddingTop: 10,
+      paddingTop: 26,
       paddingHorizontal: 35,
       marginBottom: 120,
     },

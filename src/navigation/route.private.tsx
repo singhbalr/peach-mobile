@@ -17,7 +17,7 @@ import Drawer from "react-native-drawer";
 import { PRIVATESCREENS } from "@shared-constants";
 import { palette } from "@theme/themes";
 // ? Screens
-import HomeScreen from "@screens/home/HomeScreen";
+import RewardsScreen from "@screens/home/RewardsScreen";
 import ProfileScreen from "@screens/profile/ProfileScreen";
 import YourBioverseScreen from "@screens/bioverse/YourBioverseScreen";
 import ClinicalReport from "@screens/clinicalReport/ClinicalReport";
@@ -132,52 +132,6 @@ const PrivateRoutes = () => {
     size: number,
   ) => {
     switch (route.name) {
-      case PRIVATESCREENS.REWARD_CENTER:
-        return (
-          <>
-            <Image
-              source={
-                focused
-                  ? require("../assets/navbar-icons/rewards-focused.png")
-                  : require("../assets/navbar-icons/rewards.png")
-              }
-              style={{
-                width: 30,
-                height: 30,
-              }}
-            />
-            <View
-              style={[
-                styles.redDot,
-                { display: rewardNotificationState ? "flex" : "none" },
-              ]}
-            ></View>
-          </>
-        );
-
-      case PRIVATESCREENS.CLINICAL_REPORT:
-        return (
-          <>
-            <Image
-              source={
-                focused
-                  ? require("../assets/navbar-icons/clinical-report-focused.png")
-                  : require("../assets/navbar-icons/clinical-report.png")
-              }
-              style={{
-                width: 20,
-                height: 24,
-              }}
-            />
-            <View
-              style={[
-                styles.redDot,
-                { display: clinicalNotificationState ? "flex" : "none" },
-              ]}
-            ></View>
-          </>
-        );
-
       case PRIVATESCREENS.DASHBOARD:
         return (
           <Image
@@ -192,7 +146,28 @@ const PrivateRoutes = () => {
             }}
           />
         );
-
+      case PRIVATESCREENS.CLINICAL_REPORT:
+        return (
+          <>
+            <Image
+              source={
+                focused
+                  ? require("../assets/navbar-icons/clinical-report-focused.png")
+                  : require("../assets/navbar-icons/clinical-report.png")
+              }
+              style={{
+                width: 21,
+                height: 24,
+              }}
+            />
+            <View
+              style={[
+                styles.redDot,
+                { display: clinicalNotificationState ? "flex" : "none" },
+              ]}
+            ></View>
+          </>
+        );
       case PRIVATESCREENS.CONTRIBUTE_DATA:
         return (
           <>
@@ -203,7 +178,7 @@ const PrivateRoutes = () => {
                   : require("../assets/navbar-icons/contributions.png")
               }
               style={{
-                width: 24,
+                width: 25,
                 height: 24,
               }}
             />
@@ -215,7 +190,28 @@ const PrivateRoutes = () => {
             ></View>
           </>
         );
-
+      case PRIVATESCREENS.REWARD_CENTER:
+        return (
+          <>
+            <Image
+              source={
+                focused
+                  ? require("../assets/navbar-icons/rewards-focused.png")
+                  : require("../assets/navbar-icons/rewards.png")
+              }
+              style={{
+                width: 29,
+                height: 31,
+              }}
+            />
+            <View
+              style={[
+                styles.redDot,
+                { display: rewardNotificationState ? "flex" : "none" },
+              ]}
+            ></View>
+          </>
+        );
       default:
         return (
           <Image
@@ -229,57 +225,59 @@ const PrivateRoutes = () => {
     }
   };
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarIcon: ({ focused, color, size }) =>
-          renderTabIcon(route, focused, color, size),
-        tabBarActiveTintColor: "#7BA040",
-        tabBarInactiveTintColor: "#888B88",
-        tabBarStyle: {
-          backgroundColor: palette.white,
-          height: 83,
-          paddingTop: 18,
-          paddingBottom: Platform.OS === "ios" ? 25 : 18,
-          paddingHorizontal: Platform.OS === "ios" ? 16 : 10,
-        },
-        tabBarIconStyle: {
-          marginBottom: 10,
-        },
-        tabBarBadgeStyle: {
-          top: -12,
-          left: 6,
-          color: "#fff",
-          backgroundColor: "#F196A8",
-        },
-      })}
-    >
-      <Tab.Screen
-        name={PRIVATESCREENS.DASHBOARD}
-        component={YourBioverseScreen}
-      />
-      <Tab.Screen
-        name={PRIVATESCREENS.CLINICAL_REPORT}
-        component={ClinicalReport}
-        options={{
-          tabBarBadge: clinicalBadge,
-        }}
-      />
-      <Tab.Screen
-        name={PRIVATESCREENS.CONTRIBUTE_DATA}
-        component={ProfileScreen}
-        options={{
-          tabBarBadge: contributionsBadge,
-        }}
-      />
-      <Tab.Screen
-        name={PRIVATESCREENS.REWARD_CENTER}
-        component={HomeScreen}
-        options={{
-          tabBarBadge: rewardsBadge,
-        }}
-      />
-    </Tab.Navigator>
+    <Drawer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) =>
+            renderTabIcon(route, focused, color, size),
+          tabBarActiveTintColor: "#7BA040",
+          tabBarInactiveTintColor: "#888B88",
+          tabBarStyle: {
+            backgroundColor: palette.white,
+            height: 83,
+            paddingTop: 18,
+            paddingBottom: Platform.OS === "ios" ? 25 : 18,
+            paddingHorizontal: Platform.OS === "ios" ? 16 : 10,
+          },
+          tabBarIconStyle: {
+            marginBottom: 10,
+          },
+          tabBarBadgeStyle: {
+            top: -12,
+            left: 6,
+            color: "#fff",
+            backgroundColor: "#F196A8",
+          },
+        })}
+      >
+        <Tab.Screen
+          name={PRIVATESCREENS.DASHBOARD}
+          component={YourBioverseScreen}
+        />
+        <Tab.Screen
+          name={PRIVATESCREENS.CLINICAL_REPORT}
+          component={ClinicalReport}
+          options={{
+            tabBarBadge: clinicalBadge
+          }}
+        />
+        <Tab.Screen
+          name={PRIVATESCREENS.CONTRIBUTE_DATA}
+          component={ProfileScreen}
+          options={{
+            tabBarBadge: contributionsBadge
+          }}
+        />
+        <Tab.Screen
+          name={PRIVATESCREENS.REWARD_CENTER}
+          component={RewardsScreen}
+          options={{
+            tabBarBadge: rewardsBadge
+          }}
+        />
+      </Tab.Navigator>
+    </Drawer>
   );
 };
 export default PrivateRoutes;

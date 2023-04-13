@@ -1,12 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  Image,
-  ScrollView,
-  StyleSheet,
-} from "react-native";
+import { View, TouchableOpacity, Text, Image, ScrollView, SafeAreaView, StyleSheet } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-dynamic-vector-icons";
@@ -20,7 +13,6 @@ import createStyles from "./ProfileScreen.style";
 import { PRIVATESCREENS } from "@shared-constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../auth/rx/reducer";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import { useMutation, useQuery, useSubscription } from "@apollo/client";
 import {
@@ -292,13 +284,10 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
         <View
           style={{
             borderRadius: 20,
-            backgroundColor: "#FAFAFA",
-            width: ScreenWidth * 0.9,
+            backgroundColor: "#fff",
             padding: 10,
-            paddingTop: 0,
-            margin: 10,
-            marginRight: 50,
-            paddingRight: 30,
+            paddingRight: 20,
+            marginBottom: 18,
             elevation: 1,
           }}
         >
@@ -445,13 +434,11 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       <TouchableOpacity onPress={() => handleItemPress(opportunityData)}>
         <View
           style={{
-            borderRadius: 20,
-            backgroundColor: "#FAFAFA",
-            // width: ScreenWidth * 0.9,
+            borderRadius: 15,
+            backgroundColor: "#fff",
             padding: 10,
-            paddingTop: 0,
+            paddingRight: 20,
             marginBottom: 18,
-            paddingRight: 30,
             elevation: 1,
           }}
         >
