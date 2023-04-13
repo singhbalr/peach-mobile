@@ -107,6 +107,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       medicalFile,
     );
     setPopupVisible(false);
+    onBodyPartsPopupClose()
     NavigationService.push(PRIVATESCREENS.BIOVERSE_DETAIL_SCREEN, {
       records: filteredData,
       bodyPart: bodyPart,
@@ -261,6 +262,16 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     );
     performAnimation();
   };
+
+  const onBodyPartsPopupClose = () => {
+    setPopupVisible(false);
+    setActiveBodySvg("");
+    Animated.timing(animation, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  }
 
   useEffect(() => {
     fetchAllMedicalRecord();
@@ -652,15 +663,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             onPressList={onPressList}
           />
         }
-        onClose={() => {
-          setPopupVisible(false);
-          setActiveBodySvg("");
-          Animated.timing(animation, {
-            toValue: 0,
-            duration: 300,
-            useNativeDriver: true,
-          }).start();
-        }}
+        onClose={() => onBodyPartsPopupClose}
       />
       {/* search popup */}
       <Popup
