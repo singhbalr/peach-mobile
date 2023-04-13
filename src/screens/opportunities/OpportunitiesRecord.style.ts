@@ -23,7 +23,7 @@ export default (theme: ExtendedTheme) => {
     container: {
       flex: 1,
       alignItems: "center",
-      backgroundColor: colors.secondaryBackground,
+      backgroundColor: '#fff',
     },
     mainContainer: {
       paddingHorizontal: 35,

@@ -60,6 +60,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
           <View
             style={{
               alignItems: "center",
+              paddingHorizontal: 35,
             }}
           >
             <View style={{ marginBottom: 50 }}>
@@ -68,12 +69,11 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                   borderRadius: 1,
                   flexDirection: "row",
                   alignItems: "center",
-                  padding: 5,
                 }}
               >
                 <View
                   style={{
-                    width: ScreenWidth * 0.9,
+                    width: '100%',
                     marginBottom: 10,
                   }}
                 >
@@ -87,7 +87,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         uri: detail?.opportunity?.opportunity_picture_banner,
                       }}
                       style={{
-                        width: 370,
+                        width: '100%',
                         height: 184,
                         borderRadius: 15,
                         
