@@ -486,7 +486,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             </View>
           </View>
         ))}
-        <View>
+        {/* <View>
           <PIbutton
             text={
               <Text style={{ color: "white" }}>
@@ -503,10 +503,10 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               padding: 8,
             }}
           />
-        </View>
+        </View> */}
         <View
           style={{
-            marginBottom: 20,
+            marginBottom: 100,
           }}
         />
         {/*<View style={{ flexDirection: "row", justifyContent: "center" }}>*/}
