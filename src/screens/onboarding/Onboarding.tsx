@@ -53,12 +53,10 @@ const Onboarding: React.FC<Props> = () => {
       <View style={styles.content}>
         <Text style={styles.title}>{t("OnBoarding.title")}</Text>
         <Video
-          source={{
-            uri: "https://drive.google.com/uc?export=download&id=1ao6KvvZUJGCR311e1bR7ISfkqJuSpgqx",
-          }}
+          source={require("../../assets/video/onboarding.mp4")}
           style={{
             marginVertical: 30,
-            width: '100%',
+            width: "100%",
             height: 190,
             borderRadius: 15,
           }}
@@ -75,7 +73,7 @@ const Onboarding: React.FC<Props> = () => {
             text={t("OnBoarding.titleButton")}
             type="secondary"
             style={{
-              width: '100%',
+              width: "100%",
               backgroundColor: "white",
               borderRadius: 45,
               borderColor: "white",
@@ -116,7 +114,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     lineHeight: 33,
     color: "white",
   },
@@ -129,7 +127,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
   },
   btnView: {
-    width: '100%'
+    width: "100%",
   },
   logo: {
     padding: 3,

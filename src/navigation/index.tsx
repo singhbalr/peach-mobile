@@ -1,5 +1,5 @@
-import React, {createRef} from "react";
-import {Dimensions, useColorScheme} from "react-native";
+import React, { createRef } from "react";
+import { Dimensions, useColorScheme } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { isReadyRef, navigationRef } from "react-navigation-helpers";
@@ -23,7 +23,7 @@ const Stack = createStackNavigator();
 
 //redux state checking for login
 
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import PublicRoutes from "./route.public";
 import RewardDetails from "@screens/home/RewardDetails";
@@ -33,7 +33,7 @@ import FollowupRequestRecordScreen from "@screens/followupRequest/FollowupReques
 import HealehInfoDetail from "@screens/healthInfo/HealthInfoDetail";
 import UsefulHealthInfo from "@screens/healthInfo/UsefulHealthInfo";
 import Sidebar from "../components/Sidebar";
-import {setSidebarState} from "../redux/reducer";
+import { setSidebarState } from "../redux/reducer";
 import Drawer from "react-native-drawer";
 
 const { width } = Dimensions.get("window");

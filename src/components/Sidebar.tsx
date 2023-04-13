@@ -24,6 +24,7 @@ type ItemProps = {
   title: string;
   command: string;
   length: number;
+  enabled: boolean;
   onPressList: (arg0: string | number) => void;
 };
 
@@ -33,6 +34,7 @@ const Item: React.FC<ItemProps> = ({
   command,
   index,
   length,
+  enabled,
   onPressList,
 }: ItemProps) => {
   const notificationIconState = useSelector(
@@ -49,6 +51,7 @@ const Item: React.FC<ItemProps> = ({
       <TouchableOpacity
         style={styles.itemContainer}
         onPress={() => onPressList(index)}
+        disabled={!enabled}
       >
         <Image source={icon} style={styles.itemIcon}></Image>
         <View style={styles.titleView}>
@@ -134,6 +137,11 @@ const Sidebar: React.FC = () => {
               icon={item.icon}
               title={item.title}
               command={item.command}
+              enabled={
+                item.command === "settings" || item.command === "support"
+                  ? false
+                  : true
+              }
               onPressList={() => {
                 clickNavItem(item.command);
               }}
