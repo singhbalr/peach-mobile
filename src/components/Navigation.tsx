@@ -1,6 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import * as NavigationService from "react-navigation-helpers";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: Unreachable code error
 import ArrowLeftSvg from "../assets/dashboard/arrow-left.svg";
 
 type Props = {

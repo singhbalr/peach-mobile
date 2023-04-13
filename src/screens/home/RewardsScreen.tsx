@@ -27,6 +27,7 @@ import moment from "moment";
 import { toggleRewardNotificationState } from "redux/reducer";
 import Header from "components/Header";
 import { t } from "i18next";
+import countDaysLeft from "components/countDayLeft";
 
 interface RewardsScreenProps {}
 
@@ -116,7 +117,7 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
       <TouchableOpacity onPress={() => handleItemPress(patientReward)}>
         <View
           style={{
-            width: '100%',
+            width: "100%",
             borderRadius: 15,
             backgroundColor: "#ffffff",
             padding: 10,
@@ -136,6 +137,7 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
                   uri: patientReward.opportunity.opportunity_picture_banner,
                 }}
                 style={{
+                  flex: 1,
                   width: 115,
                   height: 155,
                   borderRadius: 15,
@@ -159,7 +161,7 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
                     fontWeight: "900",
                   }}
                 >
-                  {calculateDateDiff(
+                  {countDaysLeft(
                     patientReward.opportunity.opportunity_expiration,
                   )}{" "}
                   Days
@@ -376,10 +378,11 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
 
   return (
     <View style={styles.container}>
-      <Header titleText={t('RewardsScreen.title')} isRewardsScreen={true}></Header>
-      <View
-        style={styles.tabContainer}
-      >
+      <Header
+        titleText={t("RewardsScreen.title")}
+        isRewardsScreen={true}
+      ></Header>
+      <View style={styles.tabContainer}>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
