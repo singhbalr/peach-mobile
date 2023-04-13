@@ -259,21 +259,21 @@ const PrivateRoutes = () => {
           name={PRIVATESCREENS.CLINICAL_REPORT}
           component={ClinicalReport}
           options={{
-            tabBarBadge: clinicalBadge
+            tabBarBadge: clinicalBadge,
           }}
         />
         <Tab.Screen
           name={PRIVATESCREENS.CONTRIBUTE_DATA}
           component={ProfileScreen}
           options={{
-            tabBarBadge: contributionsBadge
+            tabBarBadge: contributionsBadge,
           }}
         />
         <Tab.Screen
           name={PRIVATESCREENS.REWARD_CENTER}
           component={RewardsScreen}
           options={{
-            tabBarBadge: rewardsBadge
+            tabBarBadge: rewardsBadge,
           }}
         />
       </Tab.Navigator>
