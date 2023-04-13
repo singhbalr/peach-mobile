@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_ALL_OPPORTUNITY = gql`
-  query Opportunities {
+  mutation Opportunities {
     opportunities {
       _id
       applied_patient {
@@ -80,7 +80,7 @@ export const GET_ALL_OPPORTUNITY = gql`
   }
 `;
 export const GET_ALL_OPPORTUNITY_FILTERED = gql`
-  query Query {
+  mutation Opportunities {
     opportunitiesFiltered {
       _id
       applied_patient {

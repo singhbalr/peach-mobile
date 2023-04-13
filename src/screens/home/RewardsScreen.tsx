@@ -64,6 +64,11 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
     dispatch(toggleRewardNotificationState(false));
   }, []);
 
+  useEffect(() => {
+    setRewardList([]);
+    loadRewards();
+  }, [activeTab]);
+
   const loadRewards = async () => {
     const { data } = await getRewards({
       variables: {
@@ -83,7 +88,6 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
     setActiveTab(() => {
       return tabName;
     });
-    await loadRewards();
   };
 
   const calculateDateDiff = (date: moment.MomentInput) => {
@@ -115,7 +119,10 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
     const { patientReward } = props;
 
     return (
-      <TouchableOpacity onPress={() => handleItemPress(patientReward)}>
+      <TouchableOpacity
+        onPress={() => handleItemPress(patientReward)}
+        // disabled={patientReward.is_redeemed}
+      >
         <View
           style={{
             width: "100%",
@@ -124,6 +131,7 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
             padding: 10,
             marginBottom: 18,
             elevation: 1,
+            opacity: patientReward.is_redeemed === true ? 0.5 : 1,
           }}
         >
           <View
@@ -367,14 +375,17 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
     {
       screenName: "Screen1",
       title: "Available",
+      enabled: true,
     },
     {
       screenName: "Screen2",
       title: "Used",
+      enabled: true,
     },
     {
       screenName: "Screen3",
       title: "Other",
+      enabled: false,
     },
   ];
 
@@ -395,6 +406,7 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
             <TouchableOpacity
               key={"navigation-tab-" + key}
               onPress={async () => handleTabPress(item.screenName)}
+              disabled={!item.enabled}
             >
               <View
                 style={{

@@ -118,20 +118,44 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
     }
   };
 
+  const generateRewardSentence = (rewards) => {
+    let medicalServiceRewards = [];
+    let cashCouponRewards = [];
+
+    rewards.forEach((reward) => {
+      let rewardTypeDescription =
+        reward.reward_type_description.reward_type_text;
+      let rewardAmount = reward.reward_amount;
+      let rewardName = reward.reward_name;
+
+      if (rewardTypeDescription === "Medical Service") {
+        medicalServiceRewards.push(`${rewardAmount} ${rewardName}`);
+      } else if (rewardTypeDescription === "Cash Coupon") {
+        cashCouponRewards.push(`${rewardAmount} ${rewardName}`);
+      }
+    });
+
+    let sentence = "You will be entitled to ";
+    if (medicalServiceRewards.length > 0) {
+      sentence += medicalServiceRewards.join(" and ");
+    }
+
+    if (cashCouponRewards.length > 0) {
+      if (medicalServiceRewards.length > 0) {
+        sentence += " and a ";
+      } else {
+        sentence += "a ";
+      }
+      sentence += cashCouponRewards.join(" and ");
+    }
+
+    return sentence;
+  };
+
   /* -------------------------------------------------------------------------- */
   /*                               Render Methods                               */
   /* -------------------------------------------------------------------------- */
   // eslint-disable-next-line react/no-unstable-nested-components
-  const MenuButton = () => (
-    <RNBounceable onPress={() => NavigationService.goBack()}>
-      <Icon
-        name="arrow-back"
-        type="Ionicons"
-        color={colors.iconBlack}
-        size={30}
-      />
-    </RNBounceable>
-  );
 
   const dataReceiver = [
     {
@@ -336,6 +360,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 flexDirection: "column",
                 marginLeft: 10,
                 marginBottom: 10,
+                marginRight: 20,
               }}
             >
               <Text
@@ -346,6 +371,9 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                   lineHeight: 21,
                 }}
               >
+                {item.reward_type_description.reward_type === "CASH_COUPON"
+                  ? "HK$"
+                  : ""}
                 {item.reward_amount}
               </Text>
               <Text
@@ -357,7 +385,6 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 }}
               >
                 {item.reward_type_description.reward_type_text}{" "}
-                {item.reward_name}
               </Text>
             </View>
           ))}
@@ -375,15 +402,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               marginRight: 10,
             }}
           >
-            You will be entitled to{" "}
-            {detail.reward.map(
-              (item: any) =>
-                item.reward_amount +
-                " " +
-                item.reward_type_description.reward_type_text +
-                " " +
-                item.reward_name,
-            )}
+            {generateRewardSentence(detail.reward)}
           </Text>
         </View>
         <View
@@ -486,96 +505,11 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
             </View>
           </View>
         ))}
-        {/* <View>
-          <PIbutton
-            text={
-              <Text style={{ color: "white" }}>
-                {t("OpportunitiesRecord.contribute")}
-              </Text>
-            }
-            onPress={handleContributeNow}
-            type="primary"
-            style={{
-              backgroundColor: "#7BA040",
-              borderRadius: 45,
-              borderColor: "white",
-              marginBottom: 25,
-              padding: 8,
-            }}
-          />
-        </View> */}
         <View
           style={{
             marginBottom: 100,
           }}
         />
-        {/*<View style={{ flexDirection: "row", justifyContent: "center" }}>*/}
-        {/*  <Icon*/}
-        {/*    name={"gift"}*/}
-        {/*    type="AntDesign"*/}
-        {/*    color={colors.iconBlack}*/}
-        {/*    size={30}*/}
-        {/*  />*/}
-        {/*  /!* reward component *!/*/}
-        {/*  <View*/}
-        {/*    style={{*/}
-        {/*      borderRadius: 1,*/}
-        {/*      flexDirection: "row",*/}
-        {/*      alignItems: "center",*/}
-        {/*      padding: 5,*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    <View*/}
-        {/*      style={{*/}
-        {/*        backgroundColor: "#7BA23F",*/}
-        {/*        borderTopStartRadius: 5,*/}
-        {/*        borderBottomStartRadius: 5,*/}
-        {/*        padding: 5,*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      <Text style={{ color: "#FFFFFF" }}>2 dose</Text>*/}
-        {/*    </View>*/}
-        {/*    <View*/}
-        {/*      style={{*/}
-        {/*        backgroundColor: "#B5CAA0",*/}
-        {/*        borderTopEndRadius: 5,*/}
-        {/*        borderBottomEndRadius: 5,*/}
-        {/*        padding: 5,*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      <Text>Shingrix vaccine</Text>*/}
-        {/*    </View>*/}
-        {/*  </View>*/}
-        {/*  <View*/}
-        {/*    style={{*/}
-        {/*      borderRadius: 1,*/}
-        {/*      flexDirection: "row",*/}
-        {/*      alignItems: "center",*/}
-        {/*      padding: 5,*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    <View*/}
-        {/*      style={{*/}
-        {/*        backgroundColor: "#7BA23F",*/}
-        {/*        borderTopStartRadius: 5,*/}
-        {/*        borderBottomStartRadius: 5,*/}
-        {/*        padding: 5,*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      <Text style={{ color: "#FFFFFF" }}>100 HKD</Text>*/}
-        {/*    </View>*/}
-        {/*    <View*/}
-        {/*      style={{*/}
-        {/*        backgroundColor: "#B5CAA0",*/}
-        {/*        borderTopEndRadius: 5,*/}
-        {/*        borderBottomEndRadius: 5,*/}
-        {/*        padding: 5,*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      <Text>K11 Musea</Text>*/}
-        {/*    </View>*/}
-        {/*  </View>*/}
-        {/*</View>*/}
       </View>
     );
   };
@@ -772,7 +706,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
 
   useEffect(() => {
     console.log(parts);
-    console.log(medicalReport);
+    console.log(JSON.stringify(props.route.params.OpportunityRecord));
     console.log(patientId, "patientId");
   }, []);
 
@@ -1001,6 +935,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                         flexDirection: "column",
                         // marginRight: 10,
                         marginBottom: 10,
+                        marginRight: 20,
                       }}
                     >
                       <Text

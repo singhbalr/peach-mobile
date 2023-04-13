@@ -551,6 +551,24 @@ export const GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID = gql`
             opportunity_type_text
             updated_at
           }
+          reward {
+            _id
+            created_at
+            deleted_at
+            opportunity_id
+            reward_amount
+            reward_name
+            reward_type
+            updated_at
+            reward_type_description {
+              _id
+              created_at
+              deleted_at
+              reward_type
+              reward_type_text
+              updated_at
+            }
+          }
         }
       }
     }

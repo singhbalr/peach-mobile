@@ -1,22 +1,17 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useTheme } from "@react-navigation/native";
 import createStyles from "@screens/opportunities/OpportunitiesRecord.style";
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import { calculateDateDiff } from "@utils";
 import { useMutation } from "@apollo/client";
 import { REDEEM_REWARD } from "../../connection/mutation";
-import {useSelector} from "react-redux";
-import {RootState} from "../../redux/store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 import { t } from "i18next";
 import Navigation from "components/Navigation";
+import countDaysLeft from "components/countDayLeft";
 
 interface RewardDetailsScreenProps {
   navigation: any;
@@ -28,9 +23,9 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
   const patientId = useSelector((state: RootState) => state.auth.patientId);
-  const [detail, setDetail] = useState({});
+  // const [detail, setDetail] = useState({});
   const [redeemRewardMutation] = useMutation(REDEEM_REWARD);
-
+  const detail = props.route.params.Reward;
   const handleRedeemReward = async () => {
     const { data } = await redeemRewardMutation({
       variables: {
@@ -40,13 +35,16 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
         },
       },
     });
-    console.log(data);
+    if (data) {
+      return true;
+    }
   };
 
   useEffect(() => {
-    setDetail(props.route.params.Reward);
+    // console.log(JSON.stringify(props.route.params.Reward));
+    // setDetail(props.route.params.Reward);
     handleRedeemReward();
-  }, [props.route.params]);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -73,7 +71,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
               >
                 <View
                   style={{
-                    width: '100%',
+                    width: "100%",
                     marginBottom: 10,
                   }}
                 >
@@ -87,10 +85,9 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         uri: detail?.opportunity?.opportunity_picture_banner,
                       }}
                       style={{
-                        width: '100%',
+                        width: "100%",
                         height: 184,
                         borderRadius: 15,
-                        
                       }}
                     />
                     <View
@@ -104,7 +101,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         bottom: 10,
                         marginBottom: 5,
                         borderRadius: 5,
-                        marginLeft: 10
+                        marginLeft: 10,
                         // left: 7,
                       }}
                     >
@@ -113,12 +110,11 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                           color: "white",
                           fontSize: 11,
                           fontWeight: "900",
-                          marginBottom: 3
-
+                          marginBottom: 3,
                         }}
                       >
-                        {calculateDateDiff(
-                          detail?.opportunity?.opportunity_expiration,
+                        {countDaysLeft(
+                          detail?.opportunity.opportunity_expiration,
                         )}{" "}
                         Days
                       </Text>
@@ -138,7 +134,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         marginBottom: 16,
                         color: "#383D39",
                         marginLeft: 5,
-                        marginRight: 5
+                        marginRight: 5,
                       }}
                     >
                       {t("RewardDetails.title-content")}{" "}
@@ -180,7 +176,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                           fontSize: 18,
                           alignItems: "center",
                           color: "#D1AE6C",
-                          marginTop: 5
+                          marginTop: 5,
                         }}
                       >
                         {t("RewardDetails.reward")}
@@ -235,7 +231,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                       fontSize: 18,
                       color: "#606461",
                       lineHeight: 21,
-                      marginLeft: 10
+                      marginLeft: 10,
                     }}
                   >
                     {t("RewardDetails.terms")}
@@ -255,16 +251,18 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                       <Text
                         style={{
                           marginRight: 2,
-                          marginLeft: 8
+                          marginLeft: 8,
                         }}
                       >
                         {"\u2022"}
                       </Text>
-                      <Text style={{
+                      <Text
+                        style={{
                           marginRight: 30,
                           marginLeft: 10,
-                          marginBottom: 10
-                        }}>
+                          marginBottom: 10,
+                        }}
+                      >
                         {t("RewardDetails.text")}
                       </Text>
                     </View>
@@ -276,16 +274,18 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                       <Text
                         style={{
                           marginRight: 2,
-                          marginLeft: 8
+                          marginLeft: 8,
                         }}
                       >
                         {"\u2022"}
                       </Text>
-                      <Text style={{
+                      <Text
+                        style={{
                           marginRight: 30,
                           marginLeft: 10,
-                          marginBottom: 10
-                        }}>
+                          marginBottom: 10,
+                        }}
+                      >
                         {t("RewardDetails.text")}
                       </Text>
                     </View>

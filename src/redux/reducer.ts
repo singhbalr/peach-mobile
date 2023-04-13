@@ -15,7 +15,7 @@ const initialState = {
   clinicalNotificationState: true,
   contributeNotificationState: false,
   rewardNotificationState: false,
-  followupNotificationState: true,
+  followupNotificationState: false,
   ctaModalNotificationState: false,
   notificationInfo: {
     message: '',

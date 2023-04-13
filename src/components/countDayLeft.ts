@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 const countDaysLeft = (maxDateTimeStamp: any) => {
+    console.log(maxDateTimeStamp);
     const fistDate = new Date();
     const lastDate = new Date(
         maxDateTimeStamp.length === 13
