@@ -258,11 +258,11 @@ const LoginScreen: React.FC<Props> = () => {
         {/*    <Icon name={"finger-print"} size={37} />*/}
         {/*  </TouchableOpacity>*/}
         {/*</View>*/}
-        <Image
-          source={require("../../assets/contribute-data/wave.png")}
-          style={styles.backgroundImage}
-        />
       </ScrollView>
+      <Image
+        source={require("../../assets/contribute-data/wave.png")}
+        style={styles.backgroundImage}
+      />
     </View>
   );
 };

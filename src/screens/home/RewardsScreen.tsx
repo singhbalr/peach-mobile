@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
   Text,
+  SafeAreaView,
 } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
@@ -127,6 +128,7 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
         >
           <View
             style={{
+              // height: 155,
               flexDirection: "row",
               justifyContent: "space-between",
             }}
@@ -377,7 +379,7 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
   ];
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header
         titleText={t("RewardsScreen.title")}
         isRewardsScreen={true}
@@ -421,7 +423,7 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
         </ScrollView>
       </View>
       {renderScreen()}
-    </View>
+    </SafeAreaView>
   );
 };
 

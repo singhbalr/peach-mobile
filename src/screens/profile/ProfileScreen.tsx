@@ -452,6 +452,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
         >
           <View
             style={{
+              // height: 155,
+              // maxHeight: 200,
               flexDirection: "row",
               justifyContent: "space-between",
             }}
@@ -462,7 +464,6 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 style={{
                   flex: 1,
                   width: 115,
-                  height: 155,
                   borderRadius: 15,
                   marginTop: 5,
                 }}
