@@ -111,6 +111,9 @@ const FollowupRequestRecordScreen: React.FC<
   );
 
   const FollowUpRequestCard = (opportunity) => {
+    console.log("FOLLOWUPREQUEST START");
+    console.log(JSON.stringify(opportunity));
+    console.log("FOLLOWUPREQUEST END");
     return (
       <TouchableOpacity
       // onPress={() => handleFollowupPress(followupRequest)}
@@ -321,7 +324,7 @@ const FollowupRequestRecordScreen: React.FC<
                 fontWeight: "900",
               }}
             >
-              {/*{countDaysLeft(detail.opportunity_expiration)}{" "}*/}
+              {countDaysLeft(detail.opportunity_expiration)}{" "}
               {t("OpportunitiesRecord.days-left")}
             </Text>
           </View>
@@ -465,6 +468,7 @@ const FollowupRequestRecordScreen: React.FC<
                 flexDirection: "column",
                 marginLeft: 10,
                 marginBottom: 10,
+                marginRight: 20,
               }}
             >
               <Text
@@ -475,6 +479,9 @@ const FollowupRequestRecordScreen: React.FC<
                   lineHeight: 21,
                 }}
               >
+                {item.reward_type_description.reward_type === "CASH_COUPON"
+                  ? "HK$"
+                  : ""}
                 {item.reward_amount}
               </Text>
               <Text
@@ -485,8 +492,7 @@ const FollowupRequestRecordScreen: React.FC<
                   lineHeight: 21,
                 }}
               >
-                {item.reward_type_description.reward_type_text}{" "}
-                {item.reward_name}
+                {item.reward_type_description.reward_type_text}
               </Text>
             </View>
           ))}
@@ -504,15 +510,7 @@ const FollowupRequestRecordScreen: React.FC<
               marginRight: 10,
             }}
           >
-            You will be entitled to{" "}
-            {detail.reward.map(
-              (item: any) =>
-                item.reward_amount +
-                " " +
-                item.reward_type_description.reward_type_text +
-                " " +
-                item.reward_name,
-            )}
+            {generateRewardSentence(detail.reward)}
           </Text>
         </View>
         <View
@@ -637,73 +635,6 @@ const FollowupRequestRecordScreen: React.FC<
             marginBottom: 20,
           }}
         />
-        {/*<View style={{ flexDirection: "row", justifyContent: "center" }}>*/}
-        {/*  <Icon*/}
-        {/*    name={"gift"}*/}
-        {/*    type="AntDesign"*/}
-        {/*    color={colors.iconBlack}*/}
-        {/*    size={30}*/}
-        {/*  />*/}
-        {/*  /!* reward component *!/*/}
-        {/*  <View*/}
-        {/*    style={{*/}
-        {/*      borderRadius: 1,*/}
-        {/*      flexDirection: "row",*/}
-        {/*      alignItems: "center",*/}
-        {/*      padding: 5,*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    <View*/}
-        {/*      style={{*/}
-        {/*        backgroundColor: "#7BA23F",*/}
-        {/*        borderTopStartRadius: 5,*/}
-        {/*        borderBottomStartRadius: 5,*/}
-        {/*        padding: 5,*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      <Text style={{ color: "#FFFFFF" }}>2 dose</Text>*/}
-        {/*    </View>*/}
-        {/*    <View*/}
-        {/*      style={{*/}
-        {/*        backgroundColor: "#B5CAA0",*/}
-        {/*        borderTopEndRadius: 5,*/}
-        {/*        borderBottomEndRadius: 5,*/}
-        {/*        padding: 5,*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      <Text>Shingrix vaccine</Text>*/}
-        {/*    </View>*/}
-        {/*  </View>*/}
-        {/*  <View*/}
-        {/*    style={{*/}
-        {/*      borderRadius: 1,*/}
-        {/*      flexDirection: "row",*/}
-        {/*      alignItems: "center",*/}
-        {/*      padding: 5,*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    <View*/}
-        {/*      style={{*/}
-        {/*        backgroundColor: "#7BA23F",*/}
-        {/*        borderTopStartRadius: 5,*/}
-        {/*        borderBottomStartRadius: 5,*/}
-        {/*        padding: 5,*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      <Text style={{ color: "#FFFFFF" }}>100 HKD</Text>*/}
-        {/*    </View>*/}
-        {/*    <View*/}
-        {/*      style={{*/}
-        {/*        backgroundColor: "#B5CAA0",*/}
-        {/*        borderTopEndRadius: 5,*/}
-        {/*        borderBottomEndRadius: 5,*/}
-        {/*        padding: 5,*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      <Text>K11 Musea</Text>*/}
-        {/*    </View>*/}
-        {/*  </View>*/}
-        {/*</View>*/}
       </View>
     );
   };
@@ -900,7 +831,7 @@ const FollowupRequestRecordScreen: React.FC<
 
   useEffect(() => {
     console.log(parts);
-    console.log(medicalReport);
+    console.log(props.route.params.followupRequestData.opportunity);
     console.log(patientId, "patientId");
   }, []);
 
@@ -929,6 +860,40 @@ const FollowupRequestRecordScreen: React.FC<
 
     setIsLoading(false);
     // console.log(data, "data");
+  };
+
+  const generateRewardSentence = (rewards) => {
+    let medicalServiceRewards = [];
+    let cashCouponRewards = [];
+
+    rewards.forEach((reward) => {
+      let rewardTypeDescription =
+        reward.reward_type_description.reward_type_text;
+      let rewardAmount = reward.reward_amount;
+      let rewardName = reward.reward_name;
+
+      if (rewardTypeDescription === "Medical Service") {
+        medicalServiceRewards.push(`${rewardAmount} ${rewardName}`);
+      } else if (rewardTypeDescription === "Cash Coupon") {
+        cashCouponRewards.push(`${rewardAmount} ${rewardName}`);
+      }
+    });
+
+    let sentence = "You will be entitled to ";
+    if (medicalServiceRewards.length > 0) {
+      sentence += medicalServiceRewards.join(" and ");
+    }
+
+    if (cashCouponRewards.length > 0) {
+      if (medicalServiceRewards.length > 0) {
+        sentence += " and a ";
+      } else {
+        sentence += "a ";
+      }
+      sentence += cashCouponRewards.join(" and ");
+    }
+
+    return sentence;
   };
 
   return (
@@ -1113,6 +1078,7 @@ const FollowupRequestRecordScreen: React.FC<
                         flexDirection: "column",
                         // marginRight: 10,
                         marginBottom: 10,
+                        marginRight: 20,
                       }}
                     >
                       <Text
@@ -1131,8 +1097,7 @@ const FollowupRequestRecordScreen: React.FC<
                           color: "#888B88",
                         }}
                       >
-                        {item.reward_type_description.reward_type_text}{" "}
-                        {item.reward_name}
+                        {item.reward_type_description.reward_type_text}
                       </Text>
                     </View>
                   ))}

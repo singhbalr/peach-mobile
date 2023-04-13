@@ -92,6 +92,7 @@ const BioverseDetailScreen: React.FC = (props: Props) => {
             <TouchableOpacity
               key={index}
               onPress={() => handleItemPress(value)}
+              style={{ marginBottom: 12 }}
             >
               <View style={styles.dateView}>
                 <Text style={styles.dateText}>

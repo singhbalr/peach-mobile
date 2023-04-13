@@ -56,6 +56,19 @@ const MyShareData: React.FC<MyShareDataProps> = (props) => {
     callSharedDataByPatient();
   }, []);
 
+  useEffect(() => {
+    switch (activeTab) {
+      case "Screen1":
+        setSharedData([]);
+        callSharedDataApi();
+        break;
+      case "Screen2":
+        setSharedDataByPatient([]);
+        callSharedDataByPatient();
+        break;
+    }
+  }, [activeTab]);
+
   const dataSharPrivacyPolicy = (opportunity_type) => {
     switch (opportunity_type) {
       case "PRODUCT_DEVELOPMENT":
@@ -109,9 +122,6 @@ const MyShareData: React.FC<MyShareDataProps> = (props) => {
   const handleTabPress = async (tabName: string) => {
     setActiveTab(() => {
       const newCount = tabName;
-      if (newCount === "Screen2") {
-        // callGraphQlAPI();
-      }
       return newCount;
     });
   };

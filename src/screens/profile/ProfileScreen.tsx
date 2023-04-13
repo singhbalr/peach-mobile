@@ -7,6 +7,7 @@ import {
   ScrollView,
   SafeAreaView,
   StyleSheet,
+  RefreshControl,
 } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
@@ -22,7 +23,12 @@ import { PRIVATESCREENS } from "@shared-constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../auth/rx/reducer";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
-import { useMutation, useQuery, useSubscription } from "@apollo/client";
+import {
+  useMutation,
+  useQuery,
+  useSubscription,
+  useApolloClient,
+} from "@apollo/client";
 import {
   GET_DOCTOR_REQUEST,
   GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID,
@@ -68,29 +74,23 @@ interface OpportunityProps {
 }
 
 const ProfileScreen: React.FC<ProfileScreenProps> = () => {
-  //TO BE REFACTOR
-  const PATIENT_APPROVED_TRANSACTION_ID = "640a0a2284947b59273ea03d";
-  const PATIENT_ID = "6409ffecd48bc34d50258d7c";
-  //
-
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
   const dispatch = useDispatch();
+  const client = useApolloClient();
   const [activeTab, setActiveTab] = useState("Screen1");
-  const [doctorRequest, setDoctorRequest] = useState([]);
-  const [getDoctorRequest] = useMutation(GET_DOCTOR_REQUEST);
-
   const patientId = useSelector((state: RootState) => state.auth.patientId);
   const followupNotificationState = useSelector(
     (state: RootState) => state.app.followupNotificationState,
   );
 
-  const { loading, error, data } = useQuery(
+  const [getOpportunityData] = useMutation(
     patientId === "642e80d7acc6442859edb5e2"
       ? GET_ALL_OPPORTUNITY_FILTERED
       : GET_ALL_OPPORTUNITY,
   );
+  const [opportunities, setOpportunities] = useState([]);
   const [followUpRequest, setFollowUpRequest] = useState([]);
   const [getFollowUpRequestByPatientId] = useMutation(
     GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID,
@@ -109,23 +109,47 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       console.log("Failed to fetch followup request by patient id", err);
     }
   };
+  const fethAllOpportunities = async () => {
+    try {
+      const { data } = await getOpportunityData();
+      setOpportunities(data);
+    } catch (err) {
+      console.log("Failed to fetch followup request by patient id", err);
+    }
+  };
+
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const onRefreshScreen1 = async () => {
+    setIsRefreshing(true);
+    setOpportunities([]);
+    fethAllOpportunities();
+    setIsRefreshing(false);
+  };
+
+  const onRefreshScreen2 = async () => {
+    setIsRefreshing(true);
+    setOpportunities([]);
+    fethAllOpportunities();
+    setIsRefreshing(false);
+  };
 
   useEffect(() => {
     switch (activeTab) {
-      case "Screen3":
-        fetchFollowUpRequest();
+      case "Screen1":
+        onRefreshScreen1();
+        break;
+      case "Screen2":
+        onRefreshScreen2();
         dispatch(toggleFollowupNotificationState(false));
         break;
     }
   }, [activeTab]);
 
   useEffect(() => {
+    fethAllOpportunities();
     dispatch(toggleContributeNotificationState(false));
   }, []);
-
-  const [updateTransaction] = useMutation(
-    UPDATE_TRANSACTION_BY_TRANSACTION_TYPE_ID,
-  );
 
   const { _a, _b, _c } = useSubscription(TRANSACTION_UPDATED_SUBSCRIPTION, {
     onData: async ({ data }) => {
@@ -149,9 +173,6 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const handleTabPress = async (tabName: string) => {
     setActiveTab(() => {
       const newCount = tabName;
-      if (newCount === "Screen3") {
-        callGraphQlAPI();
-      }
       return newCount;
     });
   };
@@ -170,53 +191,16 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
 
     console.log(followupRequestData, "followupRequest");
   };
-
-  const callGraphQlAPI = async () => {
-    try {
-      const { data } = await getDoctorRequest({
-        variables: {
-          input: {
-            // eslint-disable-next-line camelcase
-            patient_id: PATIENT_ID,
-          },
-        },
-      });
-      setDoctorRequest([]);
-      setDoctorRequest(data.getTransactionByPatientId);
-      return data;
-    } catch (error) {
-      throw new Error(`Could not fetch doctor list by id: ${error.message}`);
-    }
-  };
-
-  const approveRequest = async (transaction_id: string) => {
-    console.log(transaction_id);
-
-    try {
-      const { data } = await updateTransaction({
-        variables: {
-          updateTransactionId: transaction_id,
-          input: {
-            transaction_type_id: PATIENT_APPROVED_TRANSACTION_ID,
-          },
-        },
-      });
-
-      if (data) {
-        await callGraphQlAPI();
-      }
-    } catch (error) {
-      throw new Error(`Could not fetch doctor list by id: ${error.message}`);
-    }
-  };
   const renderScrollView = () => {
     if (patientId === "642e80d7acc6442859edb5e2") {
-      return data?.opportunitiesFiltered?.map((item: any, key: any) => {
-        return <OpportunityCard key={`opportunity-card-${key}`} {...item} />;
-      });
+      return opportunities?.opportunitiesFiltered?.map(
+        (item: any, key: any) => {
+          return <OpportunityCard key={`opportunity-card-${key}`} {...item} />;
+        },
+      );
     }
 
-    return data?.opportunities?.map((item: any, key: any) => {
+    return opportunities?.opportunities?.map((item: any, key: any) => {
       return <OpportunityCard key={`opportunity-card-${key}`} {...item} />;
     });
   };
@@ -224,23 +208,30 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const Screen1 = () => {
     return (
       <View style={styles.tabContainer}>
-        <ScrollView>{renderScrollView()}</ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={onRefreshScreen1}
+            />
+          }
+        >
+          {renderScrollView()}
+        </ScrollView>
       </View>
     );
   };
-  // eslint-disable-next-line react/no-unstable-nested-components
   const Screen2 = () => {
     return (
       <View style={styles.tabContainer}>
-        <SharedDataCard />
-      </View>
-    );
-  };
-
-  const Screen3 = () => {
-    return (
-      <View style={styles.tabContainer}>
-        <ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={onRefreshScreen2}
+            />
+          }
+        >
           {followUpRequest?.map((item: any, key: any) => (
             <FollowUpRequestCard
               key={`followup-request-card-${key}`}
@@ -702,95 +693,95 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       </View>
     );
   };
-  const DoctorCard = (props) => {
-    const {
-      transaction_id,
-      doctor_name,
-      doctor_last_name,
-      hospital_name,
-      hospital_address,
-      hospital_city,
-      hospital_state,
-      hospital_email,
-      transaction_type_text,
-    } = props;
-    return (
-      <View
-        style={{
-          borderWidth: 1,
-          borderRadius: 5,
-          borderColor:
-            transaction_type_text === "DOCTOR_REQUEST" ? "#000000" : "green",
-          width: ScreenWidth * 0.9,
-          padding: 15,
-          marginBottom: 10,
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: 15,
-          }}
-        >
-          <Text>{hospital_email}</Text>
-          <TouchableOpacity
-            onPressIn={async () => await approveRequest(transaction_id)}
-          >
-            <Text
-              style={{
-                fontSize: 14,
-                fontWeight: "500",
-                color:
-                  transaction_type_text === "DOCTOR_REQUEST"
-                    ? "#7BA23F"
-                    : "#000000",
-              }}
-            >
-              {t("ProfileScreen.text8")}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            flexDirection: "column",
-            justifyContent: "center",
-            marginBottom: 15,
-          }}
-        >
-          <Text style={{ fontSize: 18, fontWeight: "600", marginBottom: 15 }}>
-            Dr. {doctor_name} {""} {doctor_last_name}
-          </Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "column",
-            justifyContent: "center",
-            marginBottom: 15,
-          }}
-        >
-          <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 5 }}>
-            {hospital_name}
-          </Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "column",
-            justifyContent: "center",
-            marginBottom: 15,
-          }}
-        >
-          <Text style={{ fontSize: 14, marginBottom: 5 }}>
-            {hospital_address} {", "} {hospital_city}
-            {", "}
-            {hospital_state}
-          </Text>
-        </View>
+  // const DoctorCard = (props) => {
+  //   const {
+  //     transaction_id,
+  //     doctor_name,
+  //     doctor_last_name,
+  //     hospital_name,
+  //     hospital_address,
+  //     hospital_city,
+  //     hospital_state,
+  //     hospital_email,
+  //     transaction_type_text,
+  //   } = props;
+  //   return (
+  //     <View
+  //       style={{
+  //         borderWidth: 1,
+  //         borderRadius: 5,
+  //         borderColor:
+  //           transaction_type_text === "DOCTOR_REQUEST" ? "#000000" : "green",
+  //         width: ScreenWidth * 0.9,
+  //         padding: 15,
+  //         marginBottom: 10,
+  //       }}
+  //     >
+  //       <View
+  //         style={{
+  //           flexDirection: "row",
+  //           justifyContent: "space-between",
+  //           marginBottom: 15,
+  //         }}
+  //       >
+  //         <Text>{hospital_email}</Text>
+  //         <TouchableOpacity
+  //           onPressIn={async () => await approveRequest(transaction_id)}
+  //         >
+  //           <Text
+  //             style={{
+  //               fontSize: 14,
+  //               fontWeight: "500",
+  //               color:
+  //                 transaction_type_text === "DOCTOR_REQUEST"
+  //                   ? "#7BA23F"
+  //                   : "#000000",
+  //             }}
+  //           >
+  //             {t("ProfileScreen.text8")}
+  //           </Text>
+  //         </TouchableOpacity>
+  //       </View>
+  //       <View
+  //         style={{
+  //           flexDirection: "column",
+  //           justifyContent: "center",
+  //           marginBottom: 15,
+  //         }}
+  //       >
+  //         <Text style={{ fontSize: 18, fontWeight: "600", marginBottom: 15 }}>
+  //           Dr. {doctor_name} {""} {doctor_last_name}
+  //         </Text>
+  //       </View>
+  //       <View
+  //         style={{
+  //           flexDirection: "column",
+  //           justifyContent: "center",
+  //           marginBottom: 15,
+  //         }}
+  //       >
+  //         <Text style={{ fontSize: 14, fontWeight: "600", marginBottom: 5 }}>
+  //           {hospital_name}
+  //         </Text>
+  //       </View>
+  //       <View
+  //         style={{
+  //           flexDirection: "column",
+  //           justifyContent: "center",
+  //           marginBottom: 15,
+  //         }}
+  //       >
+  //         <Text style={{ fontSize: 14, marginBottom: 5 }}>
+  //           {hospital_address} {", "} {hospital_city}
+  //           {", "}
+  //           {hospital_state}
+  //         </Text>
+  //       </View>
 
-        <View style={{ flexDirection: "row", justifyContent: "center" }}></View>
-      </View>
-    );
-  };
+  //       <View style={{ flexDirection: "row", justifyContent: "center" }}></View>
+  //     </View>
+  //   );
+  // };
   const borderStyle1 = () => {
     if (activeTab === "Screen1") {
       return {
@@ -805,42 +796,12 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     }
   };
 
-  // const borderStyle2 = () => {
-  //   if (activeTab === "Screen2") {
-  //     return {
-  //       borderWidth: 1,
-  //       borderRadius: 5,
-  //       borderColor: "#000000",
-  //       height: 35,
-  //       justifyContent: "center",
-  //       backgroundColor: "#7BA23F",
-  //       color: "#FFFFFF",
-  //     };
-  //   }
-  // };
-  // const borderStyle3 = () => {
-  //   if (activeTab === "Screen3") {
-  //     return {
-  //       borderWidth: 1,
-  //       borderRadius: 5,
-  //       borderColor: "#000000",
-  //       height: 35,
-  //       justifyContent: "center",
-  //       backgroundColor: "#7BA23F",
-  //       color: "#FFFFFF",
-  //     };
-  //   }
-  // };
-
   const renderScreen = (activeTab: string) => {
     switch (activeTab) {
       case "Screen1":
         return <Screen1 />;
       case "Screen2":
         return <Screen2 />;
-
-      case "Screen3":
-        return <Screen3 />;
       default:
         return <Screen1 />;
     }
@@ -852,7 +813,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       title: t("ProfileScreen.tab-title1"),
     },
     {
-      screenName: "Screen3",
+      screenName: "Screen2",
       title: t("ProfileScreen.tab-title2"),
     },
   ];
