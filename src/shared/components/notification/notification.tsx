@@ -36,6 +36,12 @@ const Notification: React.FC = () => {
     console.log({ notificationInfo });
   }, [notificationInfo]);
 
+  useEffect(() => {
+    if (show === false) {
+      dispatch(removeNotificationInfo());
+    }
+  }, [show]);
+
   if (!show) return false;
 
   return (

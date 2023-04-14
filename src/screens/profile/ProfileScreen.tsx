@@ -129,8 +129,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
 
   const onRefreshScreen2 = async () => {
     setIsRefreshing(true);
-    setOpportunities([]);
-    fethAllOpportunities();
+    setFollowUpRequest([]);
+    fetchFollowUpRequest();
     setIsRefreshing(false);
   };
 
