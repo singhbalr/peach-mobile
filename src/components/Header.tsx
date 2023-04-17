@@ -46,6 +46,13 @@ const Header: React.FC<Props> = (props: Props) => {
       <View style={styles.topContainer}>
         {props.isBackHome ? (
           <TouchableOpacity
+            style={{
+              width: 40,
+              height: 60,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "flex-start",
+            }}
             onPress={() => {
               NavigationService.popToTop();
             }}
@@ -109,6 +116,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   icon: {
+    backgroundColor: "red",
     width: 40,
     height: 60,
   },
