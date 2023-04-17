@@ -5,8 +5,8 @@ import {
   Modal,
   TouchableOpacity,
   Dimensions,
-} from "react-native"
-const { height } = Dimensions.get("window")
+} from "react-native";
+const { height } = Dimensions.get("window");
 
 type Props = {
   visible: boolean
@@ -22,7 +22,7 @@ const Popup: React.FC<Props> = (props: Props) => {
         <TouchableOpacity
           style={styles.closeButtonContainer}
           onPress={() => {
-            onClose()
+            onClose();
           }}
         >
           <View style={styles.closeButton} />
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: "#e6e6e6",
   },
-})
+});
