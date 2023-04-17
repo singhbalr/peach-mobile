@@ -114,7 +114,7 @@ const Sidebar: React.FC = () => {
         });
         break;
       case "yourBioverse":
-        NavigationService.popToTop();
+        NavigationService.navigate(PRIVATESCREENS.DASHBOARD);
         break;
       case "info":
         NavigationService.push(PRIVATESCREENS.USEFUL_HEALTH_INFO, {});
