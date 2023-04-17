@@ -73,6 +73,11 @@ const Sidebar: React.FC = () => {
   const dispatch = useDispatch();
   const navList = [
     {
+      title: t("YourBioverseScreen.title"),
+      icon: require("../assets/navbar-icons/your-bioverse-focused.png"),
+      command: "yourBioverse",
+    },
+    {
       title: t("Sidebar.Settings"),
       icon: require("../assets/sidebar/settings.png"),
       command: "settings",
@@ -107,6 +112,9 @@ const Sidebar: React.FC = () => {
         NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA, {
           screen: "Screen1",
         });
+        break;
+      case "yourBioverse":
+        NavigationService.popToTop();
         break;
       case "info":
         NavigationService.push(PRIVATESCREENS.USEFUL_HEALTH_INFO, {});

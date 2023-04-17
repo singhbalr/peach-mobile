@@ -120,7 +120,7 @@ const UsefulHealthInfo: React.FC<Props> = (props: Props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header titleText={t("UsefulHealthInfo.title")}></Header>
+      <Header isBackHome titleText={t("UsefulHealthInfo.title")}></Header>
       <FlatList
         data={medicalInfo}
         style={styles.list}
