@@ -19,9 +19,12 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 type Props = {
   titleText: string;
   subTitleText?: string;
+  isBackHome?: boolean;
   style?: ViewStyle;
   isRewardsScreen?: boolean;
 };
+import ArrowLeftSvg from "../assets/dashboard/arrow-left.svg";
+
 // props: [propsType: defaultValue] props introduce
 // props.titleText: [String] header title
 // props.subTitleText: [String] header subtitle
@@ -41,6 +44,15 @@ const Header: React.FC<Props> = (props: Props) => {
         </View>
       )}
       <View style={styles.topContainer}>
+        {props.isBackHome ? (
+          <TouchableOpacity
+            onPress={() => {
+              NavigationService.popToTop();
+            }}
+          >
+            <ArrowLeftSvg></ArrowLeftSvg>
+          </TouchableOpacity>
+        ) : null}
         <Text
           style={[
             styles.title,
@@ -96,6 +108,10 @@ const Header: React.FC<Props> = (props: Props) => {
 export default Header;
 
 const styles = StyleSheet.create({
+  icon: {
+    width: 40,
+    height: 60,
+  },
   container: {
     position: "relative",
     width: "100%",
