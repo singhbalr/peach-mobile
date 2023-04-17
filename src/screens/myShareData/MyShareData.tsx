@@ -583,7 +583,11 @@ const MyShareData: React.FC<MyShareDataProps> = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header titleText={t("MyShareData.text4")} style={{ paddingBottom: 5 }} />
+      <Header
+        isBackHome
+        titleText={t("MyShareData.text4")}
+        style={{ paddingBottom: 5 }}
+      />
       <View style={styles.mainContainer}>
         <ScrollView
           horizontal
