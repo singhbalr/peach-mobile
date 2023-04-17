@@ -41,7 +41,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import Button from "components/button";
 import Navigation from "components/Navigation";
-import { toggleNotificationIconState } from "redux/reducer";
+import {
+  toggleNotificationIconState,
+  toggleRewardNotificationState,
+} from "redux/reducer";
 
 interface OpportunityRecordScreenProps {
   navigation: any;
@@ -729,7 +732,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         },
       });
       if (data) {
-        console.log(data);
+        dispatch(toggleRewardNotificationState(true));
         if (
           detail.opportunity_type_id._id === PROMOTION_OPP_ID &&
           detail.medical_health_info.length

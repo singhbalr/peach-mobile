@@ -38,10 +38,11 @@ import {
 } from "./privacyPoliceData";
 import { useMutation } from "@apollo/client";
 import { CREATE_TRANSACTION_ORGANIZATION } from "connection/mutation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import Button from "components/button";
 import FollowupRequestRecord from "@screens/followupRequest/FollowupRequestRecord";
+import { toggleRewardNotificationState } from "redux/reducer";
 
 interface FollowupRequestRecordProps {
   navigation: any;
@@ -64,7 +65,7 @@ const FollowupRequestRecordScreen: React.FC<
   const patientId = useSelector((state: RootState) => state.auth.patientId);
 
   const detail: any = props.route.params.followupRequestData.opportunity;
-
+  const dispatch = useDispatch();
   const isAppliedPatient = () => {
     // detail.applied_patient.map((item: any) => {
     //   if (item.patient._id == patientId) {
@@ -851,6 +852,10 @@ const FollowupRequestRecordScreen: React.FC<
           },
         },
       });
+
+      if (data) {
+        dispatch(toggleRewardNotificationState(true));
+      }
     } catch (err) {
       console.log(err);
     }

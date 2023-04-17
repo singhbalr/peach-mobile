@@ -35,8 +35,8 @@ import {
 interface Props {}
 
 const LoginScreen: React.FC<Props> = () => {
-  const [username, setUser] = useState("");
-  const [password, setPass] = useState("");
+  const [username, setUser] = useState("alan@peachbio.com");
+  const [password, setPass] = useState("12341234");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isUserValid, setIsUserValid] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
