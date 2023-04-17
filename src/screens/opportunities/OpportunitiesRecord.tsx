@@ -781,7 +781,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         >
           <OpportunityCard />
         </ScrollView>
-        {!isAppliedPatient() ? null : (
+        {isAppliedPatient() ? null : (
           <View
             style={{
               position: "absolute",
