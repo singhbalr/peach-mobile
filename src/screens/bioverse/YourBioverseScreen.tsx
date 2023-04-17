@@ -34,7 +34,7 @@ import Search from "./components/Search";
 interface HomeScreenProps {}
 interface ButtonProps {
   buttonText: string;
-  reportCount?: Number;
+  reportCount?: number;
   buttonStyles?: ViewStyle;
   onPress?: () => void;
 }
@@ -52,7 +52,7 @@ const BodyButton: React.FC<ButtonProps> = (props) => {
         <>
           {reportCount ? (
             <>
-              <ReportSvg style={styles.btnIcon}></ReportSvg>
+              <ReportSvg style={styles.btnIcon} />
               <Text style={styles.reportCount}>{reportCount}</Text>
             </>
           ) : (
@@ -107,7 +107,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       medicalFile,
     );
     setPopupVisible(false);
-    onBodyPartsPopupClose()
+    onBodyPartsPopupClose();
     NavigationService.push(PRIVATESCREENS.BIOVERSE_DETAIL_SCREEN, {
       records: filteredData,
       bodyPart: bodyPart,
@@ -264,6 +264,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   };
 
   const onBodyPartsPopupClose = () => {
+    console.log("Parts close");
     setPopupVisible(false);
     setActiveBodySvg("");
     Animated.timing(animation, {
@@ -271,7 +272,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       duration: 300,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   useEffect(() => {
     fetchAllMedicalRecord();
@@ -465,14 +466,14 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       name: t("YourBioverseScreen.name1"),
       classname: "buttonOne",
       identifier: "headandneck",
-      reportCount: sectionCount["headandneck"],
+      reportCount: sectionCount.headandneck,
       children: [],
     },
     {
       name: t("YourBioverseScreen.name2"),
       classname: "buttonTwo",
       identifier: "thorax",
-      reportCount: sectionCount["thorax"],
+      reportCount: sectionCount.thorax,
       animation: {
         top: 25,
         scale: 2.4,
@@ -501,7 +502,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       name: t("YourBioverseScreen.name3"),
       classname: "buttonThree",
       identifier: "upperabdomen",
-      reportCount: sectionCount["upperabdomen"],
+      reportCount: sectionCount.upperabdomen,
       animation: {
         top: -70,
         scale: 2.4,
@@ -537,21 +538,21 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       name: t("YourBioverseScreen.name4"),
       classname: "buttonFour",
       identifier: "lowerabdomen",
-      reportCount: sectionCount["lowerabdomen"],
+      reportCount: sectionCount.lowerabdomen,
       children: [],
     },
     {
       name: t("YourBioverseScreen.name5"),
       classname: "buttonFive",
       identifier: "limbs",
-      reportCount: sectionCount["limbs"],
+      reportCount: sectionCount.limbs,
       children: [],
     },
     {
       name: t("YourBioverseScreen.name6"),
       classname: "buttonSix",
       identifier: "other",
-      reportCount: sectionCount["other"],
+      reportCount: sectionCount.other,
       children: [
         {
           name: t("YourBioverseScreen.name12"),
@@ -597,7 +598,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         <Header
           titleText={t("YourBioverseScreen.title")}
           subTitleText={t("YourBioverseScreen.subtitle")}
-        ></Header>
+        />
       </Animated.View>
       <Animated.View
         style={[
@@ -620,7 +621,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 onPress={() => {
                   selectBodyParts(item);
                 }}
-              ></BodyButton>
+              />
             </View>
           );
         })}
@@ -630,7 +631,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           <MaleBodySvg
             height={"100%"}
             style={popupVisible ? { display: "none" } : {}}
-          ></MaleBodySvg>
+          />
           {buttonList.map((svgItem) => {
             if (svgItem.svg) {
               return (
@@ -663,7 +664,9 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             onPressList={onPressList}
           />
         }
-        onClose={() => onBodyPartsPopupClose}
+        onClose={() => {
+          onBodyPartsPopupClose();
+        }}
       />
       {/* search popup */}
       <Popup
