@@ -37,15 +37,23 @@ interface ButtonProps {
   reportCount?: number;
   buttonStyles?: ViewStyle;
   onPress?: () => void;
+  disabled?: boolean;
 }
 const BodyButton: React.FC<ButtonProps> = (props) => {
-  const { buttonText, reportCount, buttonStyles, onPress } = props;
+  const {
+    buttonText,
+    reportCount,
+    buttonStyles,
+    onPress,
+    disabled = false,
+  } = props;
 
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       style={[styles.bodyButton, buttonStyles]}
       onPress={onPress}
+      disabled={disabled}
     >
       <View style={styles.buttonView}>
         <Text style={styles.buttonText}>{buttonText}</Text>
@@ -538,6 +546,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       name: t("YourBioverseScreen.name4"),
       classname: "buttonFour",
       identifier: "lowerabdomen",
+      disabled: true,
       reportCount: sectionCount.lowerabdomen,
       children: [],
     },
@@ -545,6 +554,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       name: t("YourBioverseScreen.name5"),
       classname: "buttonFive",
       identifier: "limbs",
+      disabled: true,
       reportCount: sectionCount.limbs,
       children: [],
     },
@@ -552,6 +562,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       name: t("YourBioverseScreen.name6"),
       classname: "buttonSix",
       identifier: "other",
+      disabled: true,
       reportCount: sectionCount.other,
       children: [
         {
@@ -618,6 +629,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
               <BodyButton
                 buttonText={item.name}
                 reportCount={item.reportCount}
+                disabled={item.disabled}
                 onPress={() => {
                   selectBodyParts(item);
                 }}
