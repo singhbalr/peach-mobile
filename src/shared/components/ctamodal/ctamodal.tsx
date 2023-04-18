@@ -56,6 +56,7 @@ const CtaModal: React.FC = () => {
             <View
               style={{
                 position: "relative",
+                marginBottom: 20,
               }}
             >
               <Image
@@ -76,6 +77,7 @@ const CtaModal: React.FC = () => {
                   lineHeight: 28,
                   color: "#383D39",
                   textAlign: "center",
+                  fontFamily: "TitilliumWeb-Regular",
                 }}
               >
                 {"You have accepted the data request from Doctor Eddie Hui"}

@@ -562,7 +562,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       name: t("YourBioverseScreen.name6"),
       classname: "buttonSix",
       identifier: "other",
-      disabled: true,
+      disabled: false,
       reportCount: sectionCount.other,
       children: [
         {

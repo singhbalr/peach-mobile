@@ -879,6 +879,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                     fontWeight: "700",
                     fontSize: 16,
                     color: "#383D39",
+                    fontFamily: "TitilliumWeb-Regular",
                   }}
                 >
                   {detail.opportunity_name}

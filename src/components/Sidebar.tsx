@@ -194,6 +194,7 @@ const styles = StyleSheet.create({
   itemTitle: {
     fontSize: 16,
     color: "#383D39",
+    fontFamily: "TitilliumWeb-Regular",
   },
   titleView: {
     position: "relative",

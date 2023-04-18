@@ -345,6 +345,7 @@ const FollowupRequestRecordScreen: React.FC<
               color: "#383D39",
               marginLeft: 10,
               marginRight: 10,
+              fontFamily: "TitilliumWeb-Bold",
             }}
           >
             {detail.opportunity_name}
@@ -1009,7 +1010,7 @@ const FollowupRequestRecordScreen: React.FC<
                       fontWeight: "900",
                     }}
                   >
-                    {/*{countDaysLeft(detail.opportunity_expiration)}{" "}*/}
+                    {countDaysLeft(detail.opportunity_expiration)}{" "}
                     {t("OpportunitiesRecord.days-left")}
                   </Text>
                 </View>
@@ -1026,6 +1027,7 @@ const FollowupRequestRecordScreen: React.FC<
                     fontWeight: "700",
                     fontSize: 16,
                     color: "#383D39",
+                    fontFamily: "TitilliumWeb-Regular",
                   }}
                 >
                   {detail.opportunity_name}
