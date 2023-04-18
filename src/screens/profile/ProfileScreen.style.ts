@@ -21,7 +21,10 @@ export default (theme: ExtendedTheme) => {
       backgroundColor: "#fafafa",
     },
     mainContainer: {
-      paddingHorizontal: 35,
+      borderBottomWidth: 0.5,
+      borderBottomColor: "#BABCB7",
+      // paddingHorizontal: 35,
+      marginHorizontal: 35,
     },
     tabContainer: {
       paddingTop: 26,
