@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
+import GestureRecognizer from "react-native-swipe-gestures";
 const { height } = Dimensions.get("window");
 
 type Props = {
@@ -17,19 +18,25 @@ type Props = {
 const Popup: React.FC<Props> = (props: Props) => {
   const { visible, contentElement, onClose} = props
   return (
-    <Modal animationType={"slide"} transparent={true} visible={visible}>
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.closeButtonContainer}
-          onPress={() => {
-            onClose();
-          }}
-        >
-          <View style={styles.closeButton} />
-        </TouchableOpacity>
-        {contentElement}
-      </View>
-    </Modal>
+    <GestureRecognizer
+      onSwipeDown={() => {
+        onClose();
+      }}
+    >
+      <Modal animationType={"slide"} transparent={true} visible={visible}>
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.closeButtonContainer}
+            onPress={() => {
+              onClose();
+            }}
+          >
+            <View style={styles.closeButton} />
+          </TouchableOpacity>
+          {contentElement}
+        </View>
+      </Modal>
+    </GestureRecognizer>
   )
 }
 export default Popup
