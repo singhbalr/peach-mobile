@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    // fontFamily: 'Titillium Web',
+    // fontFamily: "TitilliumWeb-Bold",
     fontSize: 22,
     fontWeight: "bold",
     color: "#383D39",

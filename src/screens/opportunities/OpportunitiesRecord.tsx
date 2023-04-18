@@ -230,6 +230,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         >
           <Text
             style={{
+              fontFamily: "TitilliumWeb-Bold",
               fontSize: 22,
               fontWeight: "700",
               marginBottom: 16,
@@ -929,13 +930,13 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                     <View
                       key={index}
                       style={{
-                        width: 100,
+                        width: 90,
                         // backgroundColor: "red",
                         display: "flex",
                         flexDirection: "column",
                         // marginRight: 10,
                         marginBottom: 10,
-                        marginRight: 20,
+                        marginRight: 10,
                       }}
                     >
                       <Text
