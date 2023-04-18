@@ -95,9 +95,9 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    bottom: 83,
+    bottom: 0,
     width: "100%",
-    height: height - 83,
+    height: height,
     backgroundColor: "rgba(0, 0, 0, .4)",
     shadowColor: "#000",
     shadowOffset: {
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     position: "absolute",
-    bottom: 113,
+    bottom: 100,
     left: 0,
     right: 0,
     flexDirection: "row",

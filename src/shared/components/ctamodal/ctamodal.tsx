@@ -125,6 +125,8 @@ const CtaModal: React.FC = () => {
         </View>
       }
       onClose={() => {
+        dispatch(removeNotificationInfo());
+        dispatch(toggleCtaModalNotificationState(false));
         setShow(false);
       }}
     />

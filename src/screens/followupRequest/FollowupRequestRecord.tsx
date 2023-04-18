@@ -18,7 +18,7 @@ import { t } from "i18next";
 /**
  * ? Local Imports
  */
-import Popup from "../../components/PopupContribute";
+import Popup from "components/Popup";
 
 import createStyles from "./FollowupRequestRecord.style";
 import PIbutton from "@shared-components/buttons/Pbutton";
@@ -956,7 +956,7 @@ const FollowupRequestRecordScreen: React.FC<
       <Popup
         visible={popupVisible}
         title={"Thank you for your contribution!"}
-        element={
+        contentElement={
           <View
             style={{
               flex: 1,
