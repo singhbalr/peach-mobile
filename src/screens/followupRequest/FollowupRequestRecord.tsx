@@ -214,7 +214,7 @@ const FollowupRequestRecordScreen: React.FC<
                       color: "#D1AE6C",
                     }}
                   >
-                    {opportunity?.reward ? "Reward" : "Additional Reward"}
+                    {opportunity?.reward ? "Rewards" : "Additional Rewards"}
                   </Text>
                 </View>
               </View>
@@ -494,7 +494,7 @@ const FollowupRequestRecordScreen: React.FC<
                   lineHeight: 21,
                 }}
               >
-                {item.reward_type_description.reward_type_text}
+                {item.reward_name}
               </Text>
             </View>
           ))}
@@ -881,7 +881,7 @@ const FollowupRequestRecordScreen: React.FC<
       if (rewardTypeDescription === "Medical Service") {
         medicalServiceRewards.push(`${rewardAmount} ${rewardName}`);
       } else if (rewardTypeDescription === "Cash Coupon") {
-        cashCouponRewards.push(`${rewardAmount} ${rewardName}`);
+        cashCouponRewards.push(`HK$${rewardAmount} ${rewardName}`);
       }
     });
 
@@ -1091,20 +1091,26 @@ const FollowupRequestRecordScreen: React.FC<
                       <Text
                         style={{
                           fontWeight: "600",
-                          fontSize: 10,
+                          fontSize: 14,
                           color: "#606461",
+                          lineHeight: 21,
                         }}
                       >
+                        {item.reward_type_description.reward_type ===
+                        "CASH_COUPON"
+                          ? "HK$"
+                          : ""}
                         {item.reward_amount}
                       </Text>
                       <Text
                         style={{
                           fontWeight: "600",
-                          fontSize: 13,
+                          fontSize: 10,
                           color: "#888B88",
+                          marginRight: 5,
                         }}
                       >
-                        {item.reward_type_description.reward_type_text}
+                        {item.reward_name}
                       </Text>
                     </View>
                   ))}

@@ -376,7 +376,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                       color: "#D1AE6C",
                     }}
                   >
-                    Additional Reward{" "}
+                    Additional Rewards{" "}
                   </Text>
                 </View>
               </View>
@@ -533,7 +533,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                       color: "#D1AE6C",
                     }}
                   >
-                    {opportunityData.reward ? "Reward" : "Additional Reward"}
+                    {opportunityData.reward ? "Rewards" : "Additional Rewards"}
                   </Text>
                 </View>
               </View>

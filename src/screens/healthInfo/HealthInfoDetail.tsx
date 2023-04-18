@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     lineHeight: 28,
     color: "#383D39",
+    fontFamily: "TitilliumWeb-Bold",
   },
   tipsView: {
     flexDirection: "row",

@@ -475,6 +475,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       classname: "buttonOne",
       identifier: "headandneck",
       reportCount: sectionCount.headandneck,
+      disabled: true,
       children: [],
     },
     {
