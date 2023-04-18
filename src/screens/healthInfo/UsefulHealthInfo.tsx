@@ -46,7 +46,9 @@ const Item: React.FC<ItemProps> = (props: ItemProps) => {
       {item.isNew && <View style={styles.redDot}></View>}
       <Image style={styles.image} source={{ uri: item.image }}></Image>
       <View style={styles.contentView}>
-        <Text style={styles.title}>{item.title}</Text>
+        <Text numberOfLines={2} style={styles.title}>
+          {item.title}
+        </Text>
         <View style={styles.tipsView}>
           <Text style={styles.company}>{item.company}</Text>
           <Text>·</Text>
@@ -146,6 +148,7 @@ const styles = StyleSheet.create({
   },
   itemView: {
     flex: 1,
+    marginBottom: 15,
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
