@@ -51,9 +51,10 @@ const styles = StyleSheet.create({
     height: 60,
   },
   title: {
-    // fontFamily: 'Titillium Web',
+    fontFamily: "TitilliumWeb-SemiBold",
     fontSize: 14,
     color: "#606461",
     lineHeight: 21,
+    fontWeight: "600",
   },
 });

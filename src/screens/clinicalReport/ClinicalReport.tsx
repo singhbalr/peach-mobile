@@ -6,7 +6,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import Header from "../../components/Header";
 import { PRIVATESCREENS } from "@shared-constants";
@@ -207,6 +207,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "#383D39",
+    fontFamily: "TitilliumWeb-Bold",
   },
   infoItem: {
     flexDirection: "row",
@@ -232,7 +233,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    color: "#000",
+    color: "#383D39",
+    fontFamily: "TitilliumWeb-SemiBold",
+    fontWeight: "600",
   },
   titleRight: {
     flexDirection: "row",
