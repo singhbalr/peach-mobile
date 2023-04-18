@@ -187,6 +187,7 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
               }}
             >
               <Text
+                numberOfLines={2}
                 style={{
                   fontSize: 16,
                   fontWeight: "700",
