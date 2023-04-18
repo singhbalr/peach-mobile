@@ -474,6 +474,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       name: t("YourBioverseScreen.name1"),
       classname: "buttonOne",
       identifier: "headandneck",
+      disabled: true,
       reportCount: sectionCount.headandneck,
       children: [],
     },
@@ -562,7 +563,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
       name: t("YourBioverseScreen.name6"),
       classname: "buttonSix",
       identifier: "other",
-      disabled: true,
       reportCount: sectionCount.other,
       children: [
         {
