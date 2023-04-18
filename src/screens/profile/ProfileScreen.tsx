@@ -375,7 +375,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                       color: "#D1AE6C",
                     }}
                   >
-                    {opportunity?.reward ? "Reward" : "Additional Reward"}
+                    Additional Reward{" "}
                   </Text>
                 </View>
               </View>
@@ -492,6 +492,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
               <Text
                 numberOfLines={2}
                 style={{
+                  fontFamily: "TitilliumWeb-Bold",
                   fontSize: 16,
                   fontWeight: "600",
                   marginTop: 10,
@@ -526,6 +527,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                       lineHeight: 17,
                       fontWeight: "700",
                       fontSize: 11,
+                      fontFamily: "TitilliumWeb-Bold",
                       alignItems: "center",
                       color: "#D1AE6C",
                     }}
@@ -554,6 +556,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                         fontSize: 14,
                         color: "#606461",
                         lineHeight: 21,
+                        fontFamily: "TitilliumWeb-SemiBold",
                       }}
                     >
                       {item.reward_type_description.reward_type ===
@@ -839,9 +842,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 style={{
                   justifyContent: "center",
                   height: 40,
-                  borderBottomWidth: 2,
-                  borderBottomColor:
-                    activeTab === item.screenName ? "#7BA040" : "#BABCB7",
+                  borderBottomWidth: activeTab === item.screenName ? 1.5 : 0,
+                  borderBottomColor: "#7BA040",
                   marginRight: 38,
                 }}
               >

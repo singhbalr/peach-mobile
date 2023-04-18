@@ -7,7 +7,7 @@ import {
   Dimensions,
   Animated,
 } from "react-native";
-
+import GestureRecognizer from "react-native-swipe-gestures";
 const { height } = Dimensions.get("window");
 
 type Props = {
@@ -48,29 +48,36 @@ const Popup: React.FC<Props> = (props: Props) => {
   });
 
   return (
-    <Modal animationType={"none"} transparent={true} visible={visible}>
-      <Animated.View style={[styles.overlay, { opacity }]} />
-      <Animated.View
-        style={[
-          styles.container,
-          {
-            transform: [{ translateY }],
-          },
-        ]}
-      >
-        <TouchableOpacity
-          style={styles.closeButtonContainer}
-          onPress={() => {
-            onClose();
-          }}
+    <GestureRecognizer
+      onSwipeDown={() => {
+        onClose();
+      }}
+    >
+      <Modal animationType={"none"} transparent={true} visible={visible}>
+        <Animated.View style={[styles.overlay, { opacity }]} />
+        <Animated.View
+          style={[
+            styles.container,
+            {
+              transform: [{ translateY }],
+            },
+          ]}
         >
-          <View style={styles.closeButton} />
-        </TouchableOpacity>
-        {contentElement}
-      </Animated.View>
-    </Modal>
+          <TouchableOpacity
+            style={styles.closeButtonContainer}
+            onPress={() => {
+              onClose();
+            }}
+          >
+            <View style={styles.closeButton} />
+          </TouchableOpacity>
+          {contentElement}
+        </Animated.View>
+      </Modal>
+    </GestureRecognizer>
   );
 };
+export default Popup;
 
 const styles = StyleSheet.create({
   overlay: {
