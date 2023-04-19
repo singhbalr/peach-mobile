@@ -140,6 +140,8 @@ const styles = StyleSheet.create({
     color: "#000",
     lineHeight: 27,
     marginBottom: 22,
+    fontFamily: "TitilliumWeb-SemiBold",
+    fontWeight: "500",
   },
   dateView: {
     flexDirection: "row",
@@ -151,6 +153,7 @@ const styles = StyleSheet.create({
     color: "#888B88",
     lineHeight: 19,
     marginRight: 15,
+    fontWeight: "600",
   },
   dateLine: {
     flex: 1,
@@ -162,12 +165,14 @@ const styles = StyleSheet.create({
     color: "#7BA040",
     lineHeight: 17,
     marginBottom: 2,
+    fontFamily: "TitilliumWeb-Regular",
   },
   subText: {
     fontSize: 16,
     color: "#383D39",
     lineHeight: 24,
     marginBottom: 9,
+    fontFamily: "TitilliumWeb-SemiBold",
   },
   button: {
     flexDirection: "row",

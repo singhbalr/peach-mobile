@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    // fontFamily: "TitilliumWeb-Bold",
+    fontFamily: "TitilliumWeb-Bold",
     fontSize: 22,
     fontWeight: "bold",
     color: "#383D39",
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   subTitle: {
-    // fontFamily: 'Roboto',
+    fontFamily: "Roboto",
     fontSize: 13,
     color: "#606461",
     lineHeight: 19,

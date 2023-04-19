@@ -179,6 +179,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 18,
     color: "#383D39",
+    fontFamily: "TitilliumWeb-Bold",
   },
   tipsView: {
     flex: 1,

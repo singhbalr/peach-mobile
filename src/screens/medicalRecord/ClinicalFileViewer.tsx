@@ -50,8 +50,8 @@ const ClinicalFileViewer: React.FC<ClinicalFileViewerProps> = (props) => {
     }
     return null;
   };
-  const title = medicalRecord.doctor_id
-    ? `Dr. ${medicalRecord.doctor_id.doctor_name} ${medicalRecord.doctor_id.doctor_last_name}`
+  const title = medicalRecord.hospital_id
+    ? `${medicalRecord.hospital_id.hospital_name}`
     : "";
   const clinicalData = getMedicalRecordFileWithType("CLINICAL_RECORD");
   const geneticData = getMedicalRecordFileWithType("GENETIC_DATA");

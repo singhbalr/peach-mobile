@@ -24,6 +24,8 @@ const Button: FunctionComponent<Props> = ({
         paddingVertical: 14,
         backgroundColor: bgColor,
         borderRadius: 100,
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Text
