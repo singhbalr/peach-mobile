@@ -15,6 +15,7 @@ import * as NavigationService from "react-navigation-helpers";
 import RNBounceable from "@freakycoder/react-native-bounceable";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import { t } from "i18next";
+
 /**
  * ? Local Imports
  */
@@ -43,6 +44,7 @@ import { RootState } from "redux/store";
 import Button from "components/button";
 import FollowupRequestRecord from "@screens/followupRequest/FollowupRequestRecord";
 import { toggleRewardNotificationState } from "redux/reducer";
+import Navigation from "components/Navigation";
 
 interface FollowupRequestRecordProps {
   navigation: any;
@@ -63,8 +65,11 @@ const FollowupRequestRecordScreen: React.FC<
     CREATE_TRANSACTION_ORGANIZATION,
   );
   const patientId = useSelector((state: RootState) => state.auth.patientId);
-
+  const [isThisOpportunityApplied, setIsThisOpportunityApplied] =
+    useState<boolean>(false);
   const detail: any = props.route.params.followupRequestData.opportunity;
+  console.log("Followup Opportunityy");
+  console.log(JSON.stringify(detail));
   const dispatch = useDispatch();
   const isAppliedPatient = () => {
     // detail.applied_patient.map((item: any) => {
@@ -79,7 +84,7 @@ const FollowupRequestRecordScreen: React.FC<
     return typeof found === "object" ? true : false;
   };
 
-  console.log(isAppliedPatient(), "isAppliedPatient");
+  console.log(isAppliedPatient(), "isFollowUpAppliedPatient");
 
   const dataSharPrivacyPolicy = () => {
     switch (detail.opportunity_type_id.opportunity_type) {
@@ -176,6 +181,7 @@ const FollowupRequestRecordScreen: React.FC<
               }}
             >
               <Text
+                numberOfLines={2}
                 style={{
                   fontSize: 16,
                   fontWeight: "600",
@@ -855,6 +861,7 @@ const FollowupRequestRecordScreen: React.FC<
       });
 
       if (data) {
+        setIsThisOpportunityApplied(true);
         dispatch(toggleRewardNotificationState(true));
       }
     } catch (err) {
@@ -909,30 +916,21 @@ const FollowupRequestRecordScreen: React.FC<
         backgroundColor: "white",
       }}
     >
-      <View style={styles.header}>
-        <MenuButton />
-        <Text
-          style={{
-            ...styles.headerText,
-            textAlign: "center",
-            flex: 1,
-            marginRight: 20,
-          }}
-        >
-          Colorectal Screening
-        </Text>
-      </View>
+      <Navigation
+        titleText={detail.opportunity_type_id.opportunity_type_text}
+      ></Navigation>
       <View>
         <ScrollView
           style={{
-            paddingBottom: isAppliedPatient() ? 20 : 100,
+            paddingBottom:
+              isAppliedPatient() || isThisOpportunityApplied ? 20 : 100,
             marginBottom: 120,
           }}
           showsVerticalScrollIndicator={false}
         >
           <OpportunityCard />
         </ScrollView>
-        {isAppliedPatient() ? null : (
+        {isAppliedPatient() || isThisOpportunityApplied ? null : (
           <View
             style={{
               position: "absolute",
@@ -956,13 +954,15 @@ const FollowupRequestRecordScreen: React.FC<
       </View>
       <Popup
         visible={popupVisible}
-        title={"Thank you for your contribution!"}
         contentElement={
           <View
             style={{
               flex: 1,
             }}
           >
+            <Text style={styles.title}>
+              {t("OpportunitiesRecord.thanks-contribution")}
+            </Text>
             <View
               style={{
                 padding: 10,
@@ -979,6 +979,7 @@ const FollowupRequestRecordScreen: React.FC<
               <View
                 style={{
                   position: "relative",
+                  height: 155,
                 }}
               >
                 <Image
@@ -1022,6 +1023,7 @@ const FollowupRequestRecordScreen: React.FC<
                 }}
               >
                 <Text
+                  numberOfLines={2}
                   style={{
                     width: 200,
                     fontWeight: "700",
@@ -1079,13 +1081,13 @@ const FollowupRequestRecordScreen: React.FC<
                     <View
                       key={index}
                       style={{
-                        width: 100,
+                        width: 90,
                         // backgroundColor: "red",
                         display: "flex",
                         flexDirection: "column",
                         // marginRight: 10,
                         marginBottom: 10,
-                        marginRight: 20,
+                        marginRight: 10,
                       }}
                     >
                       <Text
@@ -1133,7 +1135,7 @@ const FollowupRequestRecordScreen: React.FC<
                   alignItems: "center",
                 }}
               />
-              <Text>
+              <Text style={{ flex: 1 }}>
                 {t("OpportunitiesRecord.text12")}{" "}
                 <Text
                   style={{
@@ -1158,7 +1160,6 @@ const FollowupRequestRecordScreen: React.FC<
             />
           </View>
         }
-        onPressList={() => {}}
         onClose={() => {
           setPopupVisible(false);
         }}

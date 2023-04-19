@@ -48,7 +48,11 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Navigation titleText={t("RewardDetails.title")}></Navigation>
+      <Navigation
+        titleText={
+          detail?.opportunity?.opportunity_type_id?.opportunity_type_text
+        }
+      ></Navigation>
       <View
         style={{
           marginBottom: 26,
@@ -137,7 +141,7 @@ const RewardDetails: React.FC<RewardDetailsScreenProps> = (props) => {
                         marginRight: 5,
                       }}
                     >
-                      {t("RewardDetails.title-content")}{" "}
+                      {detail?.opportunity?.opportunity_name}
                     </Text>
                     <View
                       style={{

@@ -88,8 +88,8 @@
       "reward": "Rewards",
       "more-information": "More Information",
       "data-receiver": "Data Receiver",
-      "prenetics-limited": "Prenetics Limited",
-      "prenetics": "Prenetics",
+      "prenetics-limited": "Postnetics Limited",
+      "prenetics": "Postnetics",
       "contribute": "Contribute Now",
 
       "text1": "intended use of your data :",
@@ -101,8 +101,8 @@
       "text7": "data accessible duration :",
       "text8": "48 months after you have contributed your data.",
 
-      "text9": "Prenetics&apos; mission is to bring health closer to people, by decentralizing health care, and focusing on the comprehensive testing capabilities covering prevention, diagnostics, and personalized care.",
-      "text10": "https://www.prenetics.com",
+      "text9": "Postnetics&apos; mission is to bring health closer to people, by decentralizing health care, and focusing on the comprehensive testing capabilities covering prevention, diagnostics, and personalized care.",
+      "text10": "https://www.postnetics.com",
       "text11": "Its company website is:",
       "text12": "Your data is securely shared. Trace your data in My",
       "text13": "Shared Data.",
@@ -156,9 +156,9 @@
       "title": "Useful Health Info"
     },
     "DataReceiver": {
-      "Prenetics": "Prenetics' mission is to bring health closer to people, by decentralizing health care, and focusing on the comprehensive testing capabilities covering prevention, diagnostics, and personalized care.",
-      "link-prenetics": "https://www.prenetics.com",
-      "opportunity-prenetics": "Opportunities of Prenetics"
+      "Prenetics": "Postnetics' mission is to bring health closer to people, by decentralizing health care, and focusing on the comprehensive testing capabilities covering prevention, diagnostics, and personalized care.",
+      "link-prenetics": "https://www.postnetics.com",
+      "opportunity-prenetics": "Opportunities of Postnetics"
     },
     "RewardsScreen": {
       "title": "Rewards"
