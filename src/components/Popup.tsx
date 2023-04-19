@@ -23,7 +23,7 @@ const Popup: React.FC<Props> = (props: Props) => {
     <SwipeUpDownModal
       modalVisible={visible}
       HeaderStyle={{ marginTop: 0 }}
-      MainContainerModal={{ backgroundColor: "transparent" }}
+      // MainContainerModal={{ backgroundColor: "transparent" }}
       onClose={() => {
         onClose();
       }}
@@ -41,25 +41,6 @@ const Popup: React.FC<Props> = (props: Props) => {
         </View>
       }
     />
-    // <GestureRecognizer
-    //   onSwipeDown={() => {
-    //     onClose();
-    //   }}
-    // >
-    //   <Modal animationType={"slide"} transparent={true} visible={visible}>
-    //     <View style={styles.container}>
-    //       <TouchableOpacity
-    //         style={styles.closeButtonContainer}
-    //         onPress={() => {
-    //           onClose();
-    //         }}
-    //       >
-    //         <View style={styles.closeButton} />
-    //       </TouchableOpacity>
-    //       {contentElement}
-    //     </View>
-    //   </Modal>
-    // </GestureRecognizer>
   );
 };
 export default Popup;

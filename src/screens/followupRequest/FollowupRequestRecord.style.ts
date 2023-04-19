@@ -12,6 +12,7 @@ interface Style {
   listContainer: ViewStyle;
   profilePicImageStyle: ImageStyle;
   headerText: TextStyle;
+  tite: TextStyle;
 }
 
 export default (theme: ExtendedTheme) => {
@@ -21,7 +22,6 @@ export default (theme: ExtendedTheme) => {
       flex: 1,
       alignItems: "center",
       backgroundColor: colors.secondaryBackground,
-      
     },
     titleTextStyle: {
       fontSize: 32,
@@ -71,6 +71,13 @@ export default (theme: ExtendedTheme) => {
       height: 50,
       width: 50,
       borderRadius: 30,
+    },
+    title: {
+      fontWeight: "bold",
+      fontSize: 22,
+      color: "#383D39",
+      textAlign: "center",
+      paddingHorizontal: 45,
     },
   });
 };

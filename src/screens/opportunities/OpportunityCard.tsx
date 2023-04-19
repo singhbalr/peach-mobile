@@ -90,6 +90,7 @@ const OpportunityCard: React.FC<OpportunityProps> = (opportunityData) => {
             }}
           >
             <Text
+              numberOfLines={2}
               style={{
                 fontSize: 18,
                 fontWeight: "600",

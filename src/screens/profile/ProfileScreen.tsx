@@ -502,7 +502,6 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                   color: "#383D39",
                 }}
               >
-                {opportunityData.opportunity_name}{" "}
                 {opportunityData.opportunity_name}
               </Text>
               <View

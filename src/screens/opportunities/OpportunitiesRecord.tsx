@@ -875,6 +875,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                 }}
               >
                 <Text
+                  numberOfLines={2}
                   style={{
                     width: 200,
                     fontWeight: "700",

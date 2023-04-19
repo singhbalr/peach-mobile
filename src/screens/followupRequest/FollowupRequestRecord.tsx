@@ -15,6 +15,7 @@ import * as NavigationService from "react-navigation-helpers";
 import RNBounceable from "@freakycoder/react-native-bounceable";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import { t } from "i18next";
+
 /**
  * ? Local Imports
  */
@@ -176,6 +177,7 @@ const FollowupRequestRecordScreen: React.FC<
               }}
             >
               <Text
+                numberOfLines={2}
                 style={{
                   fontSize: 16,
                   fontWeight: "600",
@@ -956,22 +958,13 @@ const FollowupRequestRecordScreen: React.FC<
       </View>
       <Popup
         visible={popupVisible}
-        title={"Thank you for your contribution!"}
         contentElement={
           <View
             style={{
               flex: 1,
             }}
           >
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 22,
-                color: "#383D39",
-                textAlign: "center",
-                paddingHorizontal: 45,
-              }}
-            >
+            <Text style={styles.title}>
               {t("OpportunitiesRecord.thanks-contribution")}
             </Text>
             <View
@@ -1034,6 +1027,7 @@ const FollowupRequestRecordScreen: React.FC<
                 }}
               >
                 <Text
+                  numberOfLines={2}
                   style={{
                     width: 200,
                     fontWeight: "700",
@@ -1091,13 +1085,13 @@ const FollowupRequestRecordScreen: React.FC<
                     <View
                       key={index}
                       style={{
-                        width: 100,
+                        width: 90,
                         // backgroundColor: "red",
                         display: "flex",
                         flexDirection: "column",
                         // marginRight: 10,
                         marginBottom: 10,
-                        marginRight: 20,
+                        marginRight: 10,
                       }}
                     >
                       <Text
@@ -1145,7 +1139,7 @@ const FollowupRequestRecordScreen: React.FC<
                   alignItems: "center",
                 }}
               />
-              <Text>
+              <Text style={{ flex: 1 }}>
                 {t("OpportunitiesRecord.text12")}{" "}
                 <Text
                   style={{
@@ -1170,7 +1164,6 @@ const FollowupRequestRecordScreen: React.FC<
             />
           </View>
         }
-        onPressList={() => {}}
         onClose={() => {
           setPopupVisible(false);
         }}
