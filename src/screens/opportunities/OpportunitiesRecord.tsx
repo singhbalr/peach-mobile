@@ -64,6 +64,8 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
   };
   const [popupVisible, setPopupVisible] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isThisOpportunityApplied, setIsThisOpportunityApplied] =
+    useState<boolean>(false);
   const [createTransactionOrganizationMutation] = useMutation(
     CREATE_TRANSACTION_ORGANIZATION,
   );
@@ -743,6 +745,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         },
       });
       if (data) {
+        setIsThisOpportunityApplied(true);
         dispatch(toggleRewardNotificationState(true));
         if (
           detail.opportunity_type_id._id === PROMOTION_OPP_ID &&
@@ -776,13 +779,14 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
       <View>
         <ScrollView
           style={{
-            paddingBottom: isAppliedPatient() ? 20 : 100,
+            paddingBottom:
+              isAppliedPatient() || isThisOpportunityApplied ? 20 : 100,
           }}
           showsVerticalScrollIndicator={false}
         >
           <OpportunityCard />
         </ScrollView>
-        {isAppliedPatient() ? null : (
+        {isAppliedPatient() || isThisOpportunityApplied ? null : (
           <View
             style={{
               position: "absolute",

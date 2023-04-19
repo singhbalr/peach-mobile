@@ -480,6 +480,9 @@ export const GET_FOLLOW_UP_REQUEST_BY_PATIENT_ID = gql`
         deleted_at
         applied_patient {
           _id
+          patient {
+            _id
+          }
         }
         opportunity_data_accesibility_duration
         opportunity_description

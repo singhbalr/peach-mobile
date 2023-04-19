@@ -64,8 +64,11 @@ const FollowupRequestRecordScreen: React.FC<
     CREATE_TRANSACTION_ORGANIZATION,
   );
   const patientId = useSelector((state: RootState) => state.auth.patientId);
-
+  const [isThisOpportunityApplied, setIsThisOpportunityApplied] =
+    useState<boolean>(false);
   const detail: any = props.route.params.followupRequestData.opportunity;
+  console.log("Followup Opportunityy");
+  console.log(JSON.stringify(detail));
   const dispatch = useDispatch();
   const isAppliedPatient = () => {
     // detail.applied_patient.map((item: any) => {
@@ -80,7 +83,7 @@ const FollowupRequestRecordScreen: React.FC<
     return typeof found === "object" ? true : false;
   };
 
-  console.log(isAppliedPatient(), "isAppliedPatient");
+  console.log(isAppliedPatient(), "isFollowUpAppliedPatient");
 
   const dataSharPrivacyPolicy = () => {
     switch (detail.opportunity_type_id.opportunity_type) {
@@ -857,6 +860,7 @@ const FollowupRequestRecordScreen: React.FC<
       });
 
       if (data) {
+        setIsThisOpportunityApplied(true);
         dispatch(toggleRewardNotificationState(true));
       }
     } catch (err) {
@@ -927,14 +931,15 @@ const FollowupRequestRecordScreen: React.FC<
       <View>
         <ScrollView
           style={{
-            paddingBottom: isAppliedPatient() ? 20 : 100,
+            paddingBottom:
+              isAppliedPatient() || isThisOpportunityApplied ? 20 : 100,
             marginBottom: 120,
           }}
           showsVerticalScrollIndicator={false}
         >
           <OpportunityCard />
         </ScrollView>
-        {isAppliedPatient() ? null : (
+        {isAppliedPatient() || isThisOpportunityApplied ? null : (
           <View
             style={{
               position: "absolute",
