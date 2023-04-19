@@ -129,8 +129,8 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
 
   const onRefreshScreen2 = async () => {
     setIsRefreshing(true);
-    setOpportunities([]);
-    fethAllOpportunities();
+    setFollowUpRequest([]);
+    fetchFollowUpRequest();
     setIsRefreshing(false);
   };
 
@@ -344,6 +344,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                   marginTop: 10,
                   marginBottom: 20,
                   color: "#383D39",
+                  fontFamily: "TitilliumWeb-Regular",
                 }}
               >
                 {opportunity?.opportunity_name}
@@ -376,7 +377,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                       color: "#D1AE6C",
                     }}
                   >
-                    Additional Reward{" "}
+                    Additional Rewards{" "}
                   </Text>
                 </View>
               </View>
@@ -533,7 +534,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                       color: "#D1AE6C",
                     }}
                   >
-                    {opportunityData.reward ? "Reward" : "Additional Reward"}
+                    {opportunityData.reward ? "Rewards" : "Additional Rewards"}
                   </Text>
                 </View>
               </View>
@@ -850,6 +851,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
               >
                 <Text
                   style={{
+                    fontFamily: "TitilliumWeb-Regular",
                     fontWeight: "600",
                     color:
                       activeTab === item.screenName ? "#7BA040" : "#BABCB7",

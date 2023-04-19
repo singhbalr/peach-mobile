@@ -18,7 +18,7 @@ import { t } from "i18next";
 /**
  * ? Local Imports
  */
-import Popup from "../../components/PopupContribute";
+import Popup from "components/Popup";
 
 import createStyles from "./FollowupRequestRecord.style";
 import PIbutton from "@shared-components/buttons/Pbutton";
@@ -38,10 +38,11 @@ import {
 } from "./privacyPoliceData";
 import { useMutation } from "@apollo/client";
 import { CREATE_TRANSACTION_ORGANIZATION } from "connection/mutation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import Button from "components/button";
 import FollowupRequestRecord from "@screens/followupRequest/FollowupRequestRecord";
+import { toggleRewardNotificationState } from "redux/reducer";
 
 interface FollowupRequestRecordProps {
   navigation: any;
@@ -64,7 +65,7 @@ const FollowupRequestRecordScreen: React.FC<
   const patientId = useSelector((state: RootState) => state.auth.patientId);
 
   const detail: any = props.route.params.followupRequestData.opportunity;
-
+  const dispatch = useDispatch();
   const isAppliedPatient = () => {
     // detail.applied_patient.map((item: any) => {
     //   if (item.patient._id == patientId) {
@@ -213,7 +214,7 @@ const FollowupRequestRecordScreen: React.FC<
                       color: "#D1AE6C",
                     }}
                   >
-                    {opportunity?.reward ? "Reward" : "Additional Reward"}
+                    {opportunity?.reward ? "Rewards" : "Additional Rewards"}
                   </Text>
                 </View>
               </View>
@@ -344,6 +345,7 @@ const FollowupRequestRecordScreen: React.FC<
               color: "#383D39",
               marginLeft: 10,
               marginRight: 10,
+              fontFamily: "TitilliumWeb-Bold",
             }}
           >
             {detail.opportunity_name}
@@ -492,7 +494,7 @@ const FollowupRequestRecordScreen: React.FC<
                   lineHeight: 21,
                 }}
               >
-                {item.reward_type_description.reward_type_text}
+                {item.reward_name}
               </Text>
             </View>
           ))}
@@ -851,6 +853,10 @@ const FollowupRequestRecordScreen: React.FC<
           },
         },
       });
+
+      if (data) {
+        dispatch(toggleRewardNotificationState(true));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -875,7 +881,7 @@ const FollowupRequestRecordScreen: React.FC<
       if (rewardTypeDescription === "Medical Service") {
         medicalServiceRewards.push(`${rewardAmount} ${rewardName}`);
       } else if (rewardTypeDescription === "Cash Coupon") {
-        cashCouponRewards.push(`${rewardAmount} ${rewardName}`);
+        cashCouponRewards.push(`HK$${rewardAmount} ${rewardName}`);
       }
     });
 
@@ -951,7 +957,7 @@ const FollowupRequestRecordScreen: React.FC<
       <Popup
         visible={popupVisible}
         title={"Thank you for your contribution!"}
-        element={
+        contentElement={
           <View
             style={{
               flex: 1,
@@ -1004,7 +1010,7 @@ const FollowupRequestRecordScreen: React.FC<
                       fontWeight: "900",
                     }}
                   >
-                    {/*{countDaysLeft(detail.opportunity_expiration)}{" "}*/}
+                    {countDaysLeft(detail.opportunity_expiration)}{" "}
                     {t("OpportunitiesRecord.days-left")}
                   </Text>
                 </View>
@@ -1021,6 +1027,7 @@ const FollowupRequestRecordScreen: React.FC<
                     fontWeight: "700",
                     fontSize: 16,
                     color: "#383D39",
+                    fontFamily: "TitilliumWeb-Regular",
                   }}
                 >
                   {detail.opportunity_name}
@@ -1084,20 +1091,26 @@ const FollowupRequestRecordScreen: React.FC<
                       <Text
                         style={{
                           fontWeight: "600",
-                          fontSize: 10,
+                          fontSize: 14,
                           color: "#606461",
+                          lineHeight: 21,
                         }}
                       >
+                        {item.reward_type_description.reward_type ===
+                        "CASH_COUPON"
+                          ? "HK$"
+                          : ""}
                         {item.reward_amount}
                       </Text>
                       <Text
                         style={{
                           fontWeight: "600",
-                          fontSize: 13,
+                          fontSize: 10,
                           color: "#888B88",
+                          marginRight: 5,
                         }}
                       >
-                        {item.reward_type_description.reward_type_text}
+                        {item.reward_name}
                       </Text>
                     </View>
                   ))}

@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useMemo, useEffect, useState, useRef } from "react";
 import {
   View,
   ScrollView,
@@ -41,7 +41,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import Button from "components/button";
 import Navigation from "components/Navigation";
-import { toggleNotificationIconState } from "redux/reducer";
+import {
+  toggleNotificationIconState,
+  toggleRewardNotificationState,
+} from "redux/reducer";
 
 interface OpportunityRecordScreenProps {
   navigation: any;
@@ -66,16 +69,10 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
   );
   const dispatch = useDispatch();
   const patientId = useSelector((state: RootState) => state.auth.patientId);
-
+  const timeoutRef = useRef(null);
   const detail: any = props.route.params.OpportunityRecord;
 
   const isAppliedPatient = () => {
-    // detail.applied_patient.map((item: any) => {
-    //   if (item.patient._id == patientId) {
-    //     return true;
-    //   }
-    // });
-    // return false;
     const found = detail.applied_patient.find(
       (item: any) => item.patient._id == patientId,
     );
@@ -131,7 +128,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
       if (rewardTypeDescription === "Medical Service") {
         medicalServiceRewards.push(`${rewardAmount} ${rewardName}`);
       } else if (rewardTypeDescription === "Cash Coupon") {
-        cashCouponRewards.push(`${rewardAmount} ${rewardName}`);
+        cashCouponRewards.push(`HK$${rewardAmount} ${rewardName}`);
       }
     });
 
@@ -150,6 +147,22 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
     }
 
     return sentence;
+  };
+
+  const startTimeout = () => {
+    timeoutRef.current = setTimeout(() => {
+      dispatch(toggleNotificationIconState(true));
+      setPopupVisible(false);
+      NavigationService.push(PRIVATESCREENS.HEALTH_INFO_DETAIL, {
+        opportunityData: detail,
+        index: 0,
+        showMoreOpportunities: false,
+      });
+    }, 3000);
+  };
+
+  const cancelTimeout = () => {
+    clearTimeout(timeoutRef.current);
   };
 
   /* -------------------------------------------------------------------------- */
@@ -385,7 +398,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                   lineHeight: 21,
                 }}
               >
-                {item.reward_type_description.reward_type_text}{" "}
+                {item.reward_name}{" "}
               </Text>
             </View>
           ))}
@@ -730,37 +743,24 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         },
       });
       if (data) {
-        console.log(data);
+        dispatch(toggleRewardNotificationState(true));
         if (
           detail.opportunity_type_id._id === PROMOTION_OPP_ID &&
-          detail.medical_health_info.length
+          detail.medical_health_info.length > 0
         ) {
-          setTimeout(() => {
-            dispatch(toggleNotificationIconState(true));
-            NavigationService.push(PRIVATESCREENS.HEALTH_INFO_DETAIL, {
-              opportunityData: detail,
-              index: 0,
-              showMoreOpportunities: false,
-            });
-          }, 3000);
+          startTimeout();
         }
       }
     } catch (err) {
       console.log(err);
 
-      if (
-        detail.opportunity_type_id._id === PROMOTION_OPP_ID &&
-        detail.medical_health_info.length > 0
-      ) {
-        console.log(JSON.stringify(detail));
-        setTimeout(() => {
-          NavigationService.push(PRIVATESCREENS.HEALTH_INFO_DETAIL, {
-            opportunityData: detail,
-            index: 0,
-            showMoreOpportunities: false,
-          });
-        }, 3000);
-      }
+      // if (
+      //   detail.opportunity_type_id._id === PROMOTION_OPP_ID &&
+      //   detail.medical_health_info.length > 0
+      // ) {
+      //   console.log(JSON.stringify(detail));
+      //   startTimeout();
+      // }
     }
     setIsLoading(false);
   };
@@ -879,6 +879,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                     fontWeight: "700",
                     fontSize: 16,
                     color: "#383D39",
+                    fontFamily: "TitilliumWeb-Regular",
                   }}
                 >
                   {detail.opportunity_name}
@@ -942,20 +943,25 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
                       <Text
                         style={{
                           fontWeight: "600",
-                          fontSize: 10,
+                          fontSize: 14,
                           color: "#606461",
+                          lineHeight: 21,
                         }}
                       >
+                        {item.reward_type_description.reward_type ===
+                        "CASH_COUPON"
+                          ? "HK$"
+                          : ""}
                         {item.reward_amount}
                       </Text>
                       <Text
                         style={{
                           fontWeight: "600",
-                          fontSize: 13,
+                          fontSize: 10,
                           color: "#888B88",
+                          marginRight: 5,
                         }}
                       >
-                        {item.reward_type_description.reward_type_text}{" "}
                         {item.reward_name}
                       </Text>
                     </View>
@@ -994,6 +1000,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               isLoading={isLoading}
               onPress={() => {
                 setPopupVisible(false);
+                cancelTimeout();
                 NavigationService.push(PRIVATESCREENS.MY_SHARE_DATA, {
                   screen: "Screen1",
                 });

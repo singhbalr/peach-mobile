@@ -187,6 +187,7 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
               }}
             >
               <Text
+                numberOfLines={2}
                 style={{
                   fontSize: 16,
                   fontWeight: "700",
@@ -194,6 +195,7 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
                   marginBottom: 15,
                   color: "#383D39",
                   marginTop: 10,
+                  fontFamily: "TitilliumWeb-Bold",
                 }}
               >
                 {patientReward.opportunity.opportunity_name}
@@ -254,7 +256,11 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
                         lineHeight: 21,
                       }}
                     >
-                      {item.reward_name}
+                      {item.reward_type_description.reward_type ===
+                      "CASH_COUPON"
+                        ? "HK$"
+                        : ""}
+                      {item.reward_amount}
                     </Text>
                     <Text
                       style={{
@@ -264,7 +270,7 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
                         marginRight: 5,
                       }}
                     >
-                      {item.reward_amount}
+                      {item.reward_name}
                     </Text>
                   </View>
                 ))}
@@ -425,6 +431,7 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
                       activeTab === item.screenName ? "#7BA040" : "#BABCB7",
                     fontSize: 13,
                     lineHeight: 20,
+                    fontFamily: "TitilliumWeb-Regular",
                   }}
                 >
                   {item.title}

@@ -114,7 +114,7 @@ export const FollowUpRequestCard = (followupRequest) => {
                     color: "#D1AE6C",
                   }}
                 >
-                  {opportunity?.reward ? "Reward" : "Additional Reward"}
+                  {opportunity?.reward ? "Rewards" : "Additional Rewards"}
                 </Text>
               </View>
             </View>

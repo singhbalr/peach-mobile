@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ScreenWidth } from "@freakycoder/react-native-helpers";
 import countDaysLeft from "../../components/countDayLeft";
 import React from "react";
@@ -127,7 +127,7 @@ const OpportunityCard: React.FC<OpportunityProps> = (opportunityData) => {
                     color: "#D1AE6C",
                   }}
                 >
-                  {opportunityData.reward ? "Reward" : "Additional Reward"}
+                  {opportunityData.reward ? "Rewards" : "Additional Rewards"}
                 </Text>
               </View>
             </View>
@@ -151,9 +151,13 @@ const OpportunityCard: React.FC<OpportunityProps> = (opportunityData) => {
                       fontSize: 14,
                       color: "#606461",
                       lineHeight: 21,
+                      fontFamily: "TitilliumWeb-SemiBold",
                     }}
                   >
-                    HK${item.reward_amount}
+                    {item.reward_type_description.reward_type === "CASH_COUPON"
+                      ? "HK$"
+                      : ""}
+                    {item.reward_amount}
                   </Text>
                   <Text
                     style={{
