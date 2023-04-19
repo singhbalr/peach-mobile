@@ -114,7 +114,7 @@ const DataReceiver: React.FC = () => {
         backgroundColor: "white",
       }}
     >
-      <HeaderNavigation title="Prenetics Limited" />
+      <HeaderNavigation title="Postnetics Limited" />
       <ScrollView>
         <View
           style={{
@@ -124,11 +124,12 @@ const DataReceiver: React.FC = () => {
           }}
         >
           <Image
-            source={require("../../assets/data-receiver/prenetics-logo-full-color.png")}
+            source={require("../../assets/data-receiver/prenetics-logo-full-colour.png")}
             style={{
               width: 281,
               height: 61,
             }}
+            resizeMode={"contain"}
           />
           <Text
             style={{
@@ -144,7 +145,6 @@ const DataReceiver: React.FC = () => {
             style={{
               alignSelf: "flex-start",
             }}
-            onPress={() => Linking.openURL("https://www.prenetics.com")}
           >
             <Text
               style={{

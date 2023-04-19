@@ -300,24 +300,6 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
   };
 
   const Screen1 = () => {
-    const availableData: AvailableDataProps[] = [
-      {
-        img: require("../../assets/contribute-data/sample-image-list-1.png"),
-        daysLeft: "10 Days left",
-        title: "Support colorectal screening to save lives",
-        reward: [
-          {
-            title: "2 doses",
-            detail: "Shingrix Vaccine",
-          },
-          {
-            title: "HK$100",
-            detail: "K11 Musea cash coupon",
-          },
-        ],
-      },
-    ];
-
     return (
       <View
         style={{
@@ -334,24 +316,6 @@ const RewardsScreen: React.FC<RewardsScreenProps> = () => {
   };
 
   const Screen2 = () => {
-    const availableData: AvailableDataProps[] = [
-      {
-        img: require("../../assets/contribute-data/sample-image-list-1.png"),
-        daysLeft: "10 Days left",
-        title: "Support colorectal screening to save lives",
-        reward: [
-          {
-            title: "2 doses",
-            detail: "Shingrix Vaccine",
-          },
-          {
-            title: "HK$100",
-            detail: "K11 Musea cash coupon",
-          },
-        ],
-      },
-    ];
-
     return (
       <View
         style={{

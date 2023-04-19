@@ -103,7 +103,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
   const getDataReceiver = () => {
     switch (detail.opportunity_type_id.opportunity_type) {
       case "PRODUCT_DEVELOPMENT":
-        return "Prenetics Limited";
+        return "Postnetics Limited";
       case "PROMOTION":
         return "McCann Health";
       case "PHARMA_RWD":
@@ -111,9 +111,9 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
       case "INSURANCE":
         return "McCann Health";
       case "PRODUCT_DEVELOPMENT_FOLLOW_UP_OPPORTUNITY":
-        return "Prenetics Limited";
+        return "Postnetics Limited";
       default:
-        return "Prenetics Limited";
+        return "Postnetics Limited";
     }
   };
 
@@ -460,7 +460,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
           </Text>
           <TouchableOpacity
             onPress={() => {
-              if (getDataReceiver() === "Prenetics Limited") {
+              if (getDataReceiver() === "Postnetics Limited") {
                 NavigationService.push(PRIVATESCREENS.DATA_RECEIVER);
               }
             }}
@@ -775,7 +775,9 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
         backgroundColor: "white",
       }}
     >
-      <Navigation titleText={t("RewardDetails.title")}></Navigation>
+      <Navigation
+        titleText={detail.opportunity_type_id.opportunity_type_text}
+      ></Navigation>
       <View>
         <ScrollView
           style={{

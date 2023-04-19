@@ -44,6 +44,7 @@ import { RootState } from "redux/store";
 import Button from "components/button";
 import FollowupRequestRecord from "@screens/followupRequest/FollowupRequestRecord";
 import { toggleRewardNotificationState } from "redux/reducer";
+import Navigation from "components/Navigation";
 
 interface FollowupRequestRecordProps {
   navigation: any;
@@ -915,19 +916,9 @@ const FollowupRequestRecordScreen: React.FC<
         backgroundColor: "white",
       }}
     >
-      <View style={styles.header}>
-        <MenuButton />
-        <Text
-          style={{
-            ...styles.headerText,
-            textAlign: "center",
-            flex: 1,
-            marginRight: 20,
-          }}
-        >
-          Colorectal Screening
-        </Text>
-      </View>
+      <Navigation
+        titleText={detail.opportunity_type_id.opportunity_type_text}
+      ></Navigation>
       <View>
         <ScrollView
           style={{
