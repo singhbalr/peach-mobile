@@ -831,6 +831,7 @@ const OpportunityRecordScreen: React.FC<OpportunityRecordScreenProps> = (
               <View
                 style={{
                   position: "relative",
+                  height: 155,
                 }}
               >
                 <Image

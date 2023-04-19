@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode } from "react";
 import {
   View,
   StyleSheet,
@@ -7,23 +7,27 @@ import {
   Dimensions,
 } from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
+import SwipeUpDownModal from "react-native-swipe-modal-up-down";
+
 const { height } = Dimensions.get("window");
 
 type Props = {
-  visible: boolean
-  contentElement: ReactNode
-  onClose: () => void
-}
+  visible: boolean;
+  contentElement: ReactNode;
+  onClose: () => void;
+};
 
 const Popup: React.FC<Props> = (props: Props) => {
-  const { visible, contentElement, onClose} = props
+  const { visible, contentElement, onClose } = props;
   return (
-    <GestureRecognizer
-      onSwipeDown={() => {
+    <SwipeUpDownModal
+      modalVisible={visible}
+      HeaderStyle={{ marginTop: 0 }}
+      MainContainerModal={{ backgroundColor: "transparent" }}
+      onClose={() => {
         onClose();
       }}
-    >
-      <Modal animationType={"slide"} transparent={true} visible={visible}>
+      ContentModal={
         <View style={styles.container}>
           <TouchableOpacity
             style={styles.closeButtonContainer}
@@ -35,11 +39,30 @@ const Popup: React.FC<Props> = (props: Props) => {
           </TouchableOpacity>
           {contentElement}
         </View>
-      </Modal>
-    </GestureRecognizer>
-  )
-}
-export default Popup
+      }
+    />
+    // <GestureRecognizer
+    //   onSwipeDown={() => {
+    //     onClose();
+    //   }}
+    // >
+    //   <Modal animationType={"slide"} transparent={true} visible={visible}>
+    //     <View style={styles.container}>
+    //       <TouchableOpacity
+    //         style={styles.closeButtonContainer}
+    //         onPress={() => {
+    //           onClose();
+    //         }}
+    //       >
+    //         <View style={styles.closeButton} />
+    //       </TouchableOpacity>
+    //       {contentElement}
+    //     </View>
+    //   </Modal>
+    // </GestureRecognizer>
+  );
+};
+export default Popup;
 
 const styles = StyleSheet.create({
   container: {
