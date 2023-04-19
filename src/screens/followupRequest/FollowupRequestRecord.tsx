@@ -963,6 +963,17 @@ const FollowupRequestRecordScreen: React.FC<
               flex: 1,
             }}
           >
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 22,
+                color: "#383D39",
+                textAlign: "center",
+                paddingHorizontal: 45,
+              }}
+            >
+              {t("OpportunitiesRecord.thanks-contribution")}
+            </Text>
             <View
               style={{
                 padding: 10,
@@ -979,6 +990,7 @@ const FollowupRequestRecordScreen: React.FC<
               <View
                 style={{
                   position: "relative",
+                  height: 155,
                 }}
               >
                 <Image
